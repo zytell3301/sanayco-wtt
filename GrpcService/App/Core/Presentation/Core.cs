@@ -30,6 +30,9 @@ public class Core
         this.OperationSuccessful = new OperationSuccessful(configs.OperationsuccessfulMessage);
     }
 
+    /*
+     * This method records given user's presentation time 
+     */
     public Status RecordPresentation(User user)
     {
         try
