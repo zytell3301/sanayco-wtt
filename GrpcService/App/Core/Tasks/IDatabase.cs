@@ -9,4 +9,6 @@ public interface IDatabase
     public void DeleteTask(Task task);
 
     public void EditTask(Task task);
+
+    public void ChangeTaskStatus(Task task, string status);
 }
