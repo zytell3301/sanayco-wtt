@@ -74,6 +74,20 @@ public class Core
         return OperationSuccessful;
     }
 
+    public Status RemoveMember(Project project, User user)
+    {
+        try
+        {
+            Database.RemoveUserFromProject(project, user);
+        }
+        catch (Exception e)
+        {
+            return InternalError;
+        }
+
+        return OperationSuccessful;
+    }
+
     public Status DeleteProject(Project project)
     {
         try
