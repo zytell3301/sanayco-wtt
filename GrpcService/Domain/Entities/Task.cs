@@ -6,6 +6,6 @@ public class Task
     public string ProjectId;
     public string WorkLocation;
     public DateTime TaskTime;
-    public DateTime TaskEndtime;
+    public DateTime TaskEndTime;
     public string TaskDescription;
 }
