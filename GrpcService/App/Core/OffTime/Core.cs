@@ -95,4 +95,18 @@ public class Core
 
         return OperationSuccessful;
     }
+
+    public Status RejectOffTime(Domain.Entities.OffTime offTime)
+    {
+        try
+        {
+            Database.ChangeOffTimeStatus(offTime, RejectedOffTimeCode);
+        }
+        catch (Exception e)
+        {
+            return InternalError;
+        }
+
+        return OperationSuccessful;
+    }
 }
