@@ -6,6 +6,7 @@ public class Core
 {
     private InternalError InternalError;
     private OperationSuccessful OperationSuccessful;
+    private IDatabase Database;
 
     public class ProjectsCoreConfigs
     {
@@ -15,11 +16,14 @@ public class Core
 
     public class ProjectsCoreDependencies
     {
+        public IDatabase Database;
     }
 
     public Core(ProjectsCoreDependencies dependencies, ProjectsCoreConfigs configs)
     {
         InternalError = new InternalError(configs.InternalErrorMessage);
         OperationSuccessful = new OperationSuccessful(configs.OperationSuccessfulMessage);
+
+        Database = dependencies.Database;
     }
 }
