@@ -72,6 +72,7 @@ public class Core
 
         try
         {
+            offTime.Status = WaitingOffTimeCode;
             Database.RecordOffTime(offTime);
         }
         catch (Exception e)
