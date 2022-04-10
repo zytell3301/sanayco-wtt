@@ -10,4 +10,5 @@ namespace GrpcService1.App.Core.Presentation;
 public interface IDatabase
 {
     public void RecordPresentation(User user);
+    public void RecordPresentationEnd(User user);
 }
