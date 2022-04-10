@@ -10,6 +10,13 @@ public class Core
     private OperationSuccessful OperationSuccessful;
     private OffTimeRestrictionExceeded OffTimeRestrictionExceeded;
 
+    /*
+     * These are the constants that will be used to demonstrate the off time status.
+     */
+    public string ApprovedOffTimeCode;
+    public string RejectedOffTimeCode;
+    public string WaitingOffTimeCode;
+
     private IDatabase Database;
 
     /*
@@ -24,6 +31,10 @@ public class Core
         public string InternalErrorMessage;
         public string OffTimeRestrictionExceededMessage;
         public int OffTimeRestriction;
+
+        public string ApprovedOffTimeCode;
+        public string RejectedOffTimeCode;
+        public string WaitingOffTimeCode;
     }
 
     public class OffTimeDependencies
@@ -62,6 +73,20 @@ public class Core
         try
         {
             Database.RecordOffTime(offTime);
+        }
+        catch (Exception e)
+        {
+            return InternalError;
+        }
+
+        return OperationSuccessful;
+    }
+
+    public Status ApproveOffTime(User user, Domain.Entities.OffTime offTime)
+    {
+        try
+        {
+            Database.ChangeOffTimeStatus(offTime, ApprovedOffTimeCode);
         }
         catch (Exception e)
         {
