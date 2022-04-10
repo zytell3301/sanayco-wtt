@@ -82,7 +82,7 @@ public class Core
         return OperationSuccessful;
     }
 
-    public Status ApproveOffTime(User user, Domain.Entities.OffTime offTime)
+    public Status ApproveOffTime(Domain.Entities.OffTime offTime)
     {
         try
         {
