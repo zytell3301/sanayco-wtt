@@ -9,10 +9,18 @@ public class Core
     private InternalError InternalError;
     private IDatabase Database;
 
+    public string ApprovedTaskCode;
+    public string WaitingTaskCode;
+    public string UnApprovedTaskCode;
+
     public class TasksCoreConfigs
     {
         public string OperationSuccessfulmessage;
         public string InternalErrorMessage;
+
+        public string ApprovedTaskCode;
+        public string WaitingTaskCode;
+        public string UnApprovedTaskCode;
     }
 
     public class TasksCoreDependencies
@@ -24,6 +32,10 @@ public class Core
     {
         OperationSuccessful = new OperationSuccessful(configs.OperationSuccessfulmessage);
         InternalError = new InternalError(configs.InternalErrorMessage);
+        ApprovedTaskCode = configs.ApprovedTaskCode;
+        WaitingTaskCode = configs.WaitingTaskCode;
+        UnApprovedTaskCode = configs.UnApprovedTaskCode;
+
         Database = dependencies.Database;
     }
 
