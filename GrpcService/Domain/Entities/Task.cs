@@ -8,4 +8,5 @@ public class Task
     public DateTime TaskTime;
     public DateTime TaskEndTime;
     public string TaskDescription;
+    public string TaskStatus;
 }
