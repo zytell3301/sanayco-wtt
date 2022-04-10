@@ -11,7 +11,7 @@ public class Core
 
     public string ApprovedTaskCode;
     public string WaitingTaskCode;
-    public string UnApprovedTaskCode;
+    public string RejectedTaskCode;
 
     public class TasksCoreConfigs
     {
@@ -34,7 +34,7 @@ public class Core
         InternalError = new InternalError(configs.InternalErrorMessage);
         ApprovedTaskCode = configs.ApprovedTaskCode;
         WaitingTaskCode = configs.WaitingTaskCode;
-        UnApprovedTaskCode = configs.UnApprovedTaskCode;
+        RejectedTaskCode = configs.UnApprovedTaskCode;
 
         Database = dependencies.Database;
     }
