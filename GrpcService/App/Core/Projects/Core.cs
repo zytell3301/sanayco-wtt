@@ -55,4 +55,22 @@ public class Core
 
         return OperationSuccessful;
     }
+
+    public Status AddMember(Project project, User user)
+    {
+        try
+        {
+            Database.AddMemberToProject(project, user);
+        }
+        catch (EntityNotFound e)
+        {
+            return new EntityNotFound("User not found");
+        }
+        catch (Exception e)
+        {
+            return InternalError;
+        }
+
+        return OperationSuccessful;
+    }
 }
