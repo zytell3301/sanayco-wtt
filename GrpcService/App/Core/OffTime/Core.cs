@@ -55,7 +55,7 @@ public class Core
     /*
      * @TODO Add extra checking for off time availability 
      */
-    public Status RecordOffTime(User user, Domain.Entities.OffTime offTime)
+    public Domain.Errors.Status RecordOffTime(User user, Domain.Entities.OffTime offTime)
     {
         long totalOffTimeDuration = 0;
         Domain.Entities.OffTime[] history = Database.GetOffTimeHistory(user, DateTime.Now.AddMonths(-1), DateTime.Now);
@@ -83,7 +83,7 @@ public class Core
         return OperationSuccessful;
     }
 
-    public Status ApproveOffTime(Domain.Entities.OffTime offTime)
+    public Domain.Errors.Status ApproveOffTime(Domain.Entities.OffTime offTime)
     {
         try
         {
@@ -97,7 +97,7 @@ public class Core
         return OperationSuccessful;
     }
 
-    public Status RejectOffTime(Domain.Entities.OffTime offTime)
+    public Domain.Errors.Status RejectOffTime(Domain.Entities.OffTime offTime)
     {
         try
         {

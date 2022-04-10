@@ -33,7 +33,7 @@ public class Core
     /*
      * This method records given user's presentation time 
      */
-    public Status RecordPresentation(User user)
+    public Domain.Errors.Status RecordPresentation(User user)
     {
         try
         {
@@ -50,7 +50,7 @@ public class Core
     /*
      * This method records the end of a user's presentation time
      */
-    public Status RecordPresentationEnd(User user)
+    public Domain.Errors.Status RecordPresentationEnd(User user)
     {
         try
         {

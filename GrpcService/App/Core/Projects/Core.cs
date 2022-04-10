@@ -28,7 +28,7 @@ public class Core
         Database = dependencies.Database;
     }
 
-    public Status RecordProject(Project project)
+    public Domain.Errors.Status RecordProject(Project project)
     {
         try
         {
@@ -42,7 +42,7 @@ public class Core
         return OperationSuccessful;
     }
 
-    public Status UpdateProject(Project project)
+    public Domain.Errors.Status UpdateProject(Project project)
     {
         try
         {
@@ -56,7 +56,7 @@ public class Core
         return OperationSuccessful;
     }
 
-    public Status AddMember(Project project, User user)
+    public Domain.Errors.Status AddMember(Project project, User user)
     {
         try
         {
@@ -74,7 +74,7 @@ public class Core
         return OperationSuccessful;
     }
 
-    public Status RemoveMember(Project project, User user)
+    public Domain.Errors.Status RemoveMember(Project project, User user)
     {
         try
         {
@@ -88,7 +88,7 @@ public class Core
         return OperationSuccessful;
     }
 
-    public Status DeleteProject(Project project)
+    public Domain.Errors.Status DeleteProject(Project project)
     {
         try
         {

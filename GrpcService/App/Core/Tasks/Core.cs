@@ -42,7 +42,7 @@ public class Core
     /*
      * This method records the given task. 
      */
-    public Status RecordTask(Task task)
+    public Domain.Errors.Status RecordTask(Domain.Entities.Task task)
     {
         try
         {
@@ -57,7 +57,7 @@ public class Core
         return OperationSuccessful;
     }
 
-    public Status DeleteTask(Task task)
+    public Domain.Errors.Status DeleteTask(Domain.Entities.Task task)
     {
         try
         {
@@ -71,7 +71,7 @@ public class Core
         return OperationSuccessful;
     }
 
-    public Status EditTask(Task task)
+    public Domain.Errors.Status EditTask(Domain.Entities.Task task)
     {
         try
         {
@@ -85,7 +85,7 @@ public class Core
         return OperationSuccessful;
     }
 
-    public Status ApproveTask(Task task)
+    public Domain.Errors.Status ApproveTask(Domain.Entities.Task task)
     {
         try
         {
@@ -99,7 +99,7 @@ public class Core
         return OperationSuccessful;
     }
 
-    public Status RejectTask(Task task)
+    public Domain.Errors.Status RejectTask(Domain.Entities.Task task)
     {
         try
         {
