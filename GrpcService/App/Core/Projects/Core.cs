@@ -1,0 +1,25 @@
+﻿using GrpcService1.Domain.Errors;
+
+namespace GrpcService1.App.Core.Projects;
+
+public class Core
+{
+    private InternalError InternalError;
+    private OperationSuccessful OperationSuccessful;
+
+    public class ProjectsCoreConfigs
+    {
+        public string InternalErrorMessage;
+        public string OperationSuccessfulMessage;
+    }
+
+    public class ProjectsCoreDependencies
+    {
+    }
+
+    public Core(ProjectsCoreDependencies dependencies, ProjectsCoreConfigs configs)
+    {
+        InternalError = new InternalError(configs.InternalErrorMessage);
+        OperationSuccessful = new OperationSuccessful(configs.OperationSuccessfulMessage);
+    }
+}
