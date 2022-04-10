@@ -8,18 +8,23 @@ public class Core
     private IDatabase database;
     private InternalError InternalError;
 
-    public class PresentationCoreConfig
+    public class PresentationCoreConfigs
     {
         public string InternalErrorMessage;
     }
 
-    public Core(IDatabase database, PresentationCoreConfig config)
+    public class PresentationCoreDependencies
     {
-        this.database = database;
+        public IDatabase Database;
+    }
+
+    public Core(PresentationCoreDependencies dependencies, PresentationCoreConfigs configs)
+    {
+        this.database = dependencies.Database;
         /*
          * Initiate the error instance once and use it forever.
          */
-        InternalError = new InternalError(config.InternalErrorMessage);
+        InternalError = new InternalError(configs.InternalErrorMessage);
     }
 
     public Status RecordPresentation(User user)
