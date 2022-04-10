@@ -41,4 +41,18 @@ public class Core
 
         return OperationSuccessful;
     }
+
+    public Status UpdateProject(Project project)
+    {
+        try
+        {
+            Database.UpdateProject(project);
+        }
+        catch (Exception e)
+        {
+            return InternalError;
+        }
+
+        return OperationSuccessful;
+    }
 }
