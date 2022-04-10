@@ -46,4 +46,21 @@ public class Core
 
         return this.OperationSuccessful;
     }
+
+    /*
+     * This method records the end of a user's presentation time
+     */
+    public Status RecordPresentationEnd(User user)
+    {
+        try
+        {
+            this.database.RecordPresentationEnd(user);
+        }
+        catch (InternalError e)
+        {
+            return InternalError;
+        }
+
+        return OperationSuccessful;
+    }
 }
