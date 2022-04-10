@@ -57,4 +57,18 @@ public class Core
 
         return OperationSuccessful;
     }
+
+    public Status EditTask(Task task)
+    {
+        try
+        {
+            Database.EditTask(task);
+        }
+        catch (Exception e)
+        {
+            return InternalError;
+        }
+
+        return OperationSuccessful;
+    }
 }
