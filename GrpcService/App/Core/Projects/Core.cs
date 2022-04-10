@@ -73,4 +73,18 @@ public class Core
 
         return OperationSuccessful;
     }
+
+    public Status DeleteProject(Project project)
+    {
+        try
+        {
+            Database.DeleteProject(project);
+        }
+        catch (Exception e)
+        {
+            return InternalError;
+        }
+
+        return OperationSuccessful;
+    }
 }
