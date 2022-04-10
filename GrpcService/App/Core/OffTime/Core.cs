@@ -6,6 +6,7 @@ public class Core
 {
     private InternalError InternalError;
     private OperationSuccessful OperationSuccessful;
+    private IDatabase Database;
 
     public class OffTimeCoreConfigs
     {
@@ -15,11 +16,14 @@ public class Core
 
     public class OffTimeDependencies
     {
+        public IDatabase Database;
     }
 
     public Core(OffTimeDependencies dependencies, OffTimeCoreConfigs configs)
     {
         InternalError = new InternalError(configs.InternalErrorMessage);
         OperationSuccessful = new OperationSuccessful(configs.OperationsuccessfulMessage);
+
+        Database = dependencies.Database;
     }
 }
