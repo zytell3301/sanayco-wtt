@@ -63,4 +63,24 @@ public class Core
 
         return OperationSuccessful;
     }
+
+    /*
+     * This method gets the latest representation time of the supplied user.
+     * It is used for calculating users representation time or maybe other
+     * feature updates.
+     */
+    public DateTime GetPresentationTime(User user)
+    {
+        DateTime presentationTime;
+        try
+        {
+            presentationTime = database.GetPresentationTime(user);
+        }
+        catch (Exception e)
+        {
+            throw InternalError;
+        }
+
+        return presentationTime;
+    }
 }
