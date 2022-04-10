@@ -1,4 +1,5 @@
 ﻿using GrpcService1.Domain.Errors;
+using Task = GrpcService1.Domain.Entities.Task;
 
 namespace GrpcService1.App.Core.Tasks;
 
@@ -24,5 +25,22 @@ public class Core
         OperationSuccessful = new OperationSuccessful(configs.OperationSuccessfulmessage);
         InternalError = new InternalError(configs.InternalErrorMessage);
         Database = dependencies.Database;
+    }
+
+    /*
+     * This method records the given task. 
+     */
+    public Status RecordTask(Task task)
+    {
+        try
+        {
+            Database.RecordTask(task);
+        }
+        catch (Exception e)
+        {
+            return InternalError;
+        }
+
+        return OperationSuccessful;
     }
 }
