@@ -43,4 +43,18 @@ public class Core
 
         return OperationSuccessful;
     }
+
+    public Status DeleteTask(Task task)
+    {
+        try
+        {
+            Database.DeleteTask(task);
+        }
+        catch (Exception e)
+        {
+            return InternalError;
+        }
+
+        return OperationSuccessful;
+    }
 }
