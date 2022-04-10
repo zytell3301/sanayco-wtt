@@ -83,4 +83,18 @@ public class Core
 
         return OperationSuccessful;
     }
+
+    public Status ApproveTask(Task task)
+    {
+        try
+        {
+            Database.ChangeTaskStatus(task, ApprovedTaskCode);
+        }
+        catch (Exception e)
+        {
+            return InternalError;
+        }
+
+        return OperationSuccessful;
+    }
 }
