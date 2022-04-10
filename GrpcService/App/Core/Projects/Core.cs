@@ -1,4 +1,5 @@
-﻿using GrpcService1.Domain.Errors;
+﻿using GrpcService1.Domain.Entities;
+using GrpcService1.Domain.Errors;
 
 namespace GrpcService1.App.Core.Projects;
 
@@ -25,5 +26,19 @@ public class Core
         OperationSuccessful = new OperationSuccessful(configs.OperationSuccessfulMessage);
 
         Database = dependencies.Database;
+    }
+
+    public Status RecordProject(Project project)
+    {
+        try
+        {
+            Database.RecordProject(project);
+        }
+        catch (Exception e)
+        {
+            return InternalError;
+        }
+
+        return OperationSuccessful;
     }
 }
