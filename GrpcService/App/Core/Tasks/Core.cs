@@ -97,4 +97,18 @@ public class Core
 
         return OperationSuccessful;
     }
+
+    public Status RejectTask(Task task)
+    {
+        try
+        {
+            Database.ChangeTaskStatus(task, RejectedTaskCode);
+        }
+        catch (Exception e)
+        {
+            return InternalError;
+        }
+
+        return OperationSuccessful;
+    }
 }
