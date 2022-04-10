@@ -7,10 +7,12 @@ public class Core
 {
     private IDatabase database;
     private InternalError InternalError;
+    private OperationSuccessful OperationSuccessful;
 
     public class PresentationCoreConfigs
     {
         public string InternalErrorMessage;
+        public string OperationsuccessfulMessage;
     }
 
     public class PresentationCoreDependencies
@@ -25,6 +27,7 @@ public class Core
          * Initiate the error instance once and use it forever.
          */
         InternalError = new InternalError(configs.InternalErrorMessage);
+        this.OperationSuccessful = new OperationSuccessful(configs.OperationsuccessfulMessage);
     }
 
     public Status RecordPresentation(User user)
@@ -37,5 +40,7 @@ public class Core
         {
             return new InternalError("");
         }
+
+        return this.OperationSuccessful;
     }
 }
