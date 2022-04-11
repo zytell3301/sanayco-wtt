@@ -1,5 +1,6 @@
 ﻿#region
 
+using Google.Protobuf.WellKnownTypes;
 using GrpcService1.Domain.Entities;
 using GrpcService1.Domain.Errors;
 
@@ -45,7 +46,8 @@ public class Core
         long totalOffTimeDuration = 0;
         var history = Database.GetOffTimeHistory(user, DateTime.Now.AddMonths(-1), DateTime.Now);
         foreach (var offTimeHistory in history)
-            totalOffTimeDuration += offTimeHistory.to.ToTimestamp().Seconds - offTime.@from.ToTimestamp().Seconds;
+            totalOffTimeDuration +=
+                offTimeHistory.ToDate.ToTimestamp().Seconds - offTime.FromDate.ToTimestamp().Seconds;
 
         switch (totalOffTimeDuration >= OffTimeRestriction)
         {
