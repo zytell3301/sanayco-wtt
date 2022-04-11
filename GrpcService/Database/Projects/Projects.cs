@@ -1,5 +1,6 @@
 ﻿using GrpcService1.App.Core.Projects;
 using GrpcService1.Domain.Entities;
+using GrpcService1.Domain.Errors;
 using GrpcService1.ErrorReporter;
 
 namespace GrpcService1.Database.Projects;
@@ -22,7 +23,19 @@ public class Projects : IDatabase
 
     public void UpdateProject(Project project)
     {
-        throw new NotImplementedException();
+        try
+        {
+            Connection.Projects.Update(new Project()
+            {
+                Description = project.Description,
+                Name = project.Name,
+            });
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
     }
 
     public void AddMemberToProject(Project project, User user)
