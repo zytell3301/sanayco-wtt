@@ -39,7 +39,19 @@ public class Tasks : IDatabase
 
     public void DeleteTask(Domain.Entities.Task task)
     {
-        throw new NotImplementedException();
+        try
+        {
+            Connection.Remove(new Domain.Entities.Task()
+            {
+                // Since id is pk of tasks entity ,any other field can be discarded
+                Id = task.Id,
+            });
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
     }
 
     public void EditTask(Domain.Entities.Task task)
