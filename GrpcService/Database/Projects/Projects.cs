@@ -74,6 +74,17 @@ public class Projects : IDatabase
 
     public void DeleteProject(Project project)
     {
-        throw new NotImplementedException();
+        try
+        {
+            Connection.Projects.Remove(new Project()
+            {
+                Id = project.Id,
+            });
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
     }
 }
