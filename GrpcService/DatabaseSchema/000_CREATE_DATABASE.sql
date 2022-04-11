@@ -1,2 +1,4 @@
-USE master;
-CREATE DATABASE wtt;
+USE
+master;
+CREATE
+DATABASE wtt;
