@@ -82,6 +82,18 @@ public class Tasks : IDatabase
 
     public void ChangeTaskStatus(Domain.Entities.Task task, string status)
     {
-        throw new NotImplementedException();
+        try
+        {
+            UpdateTask(new Domain.Entities.Task()
+            {
+                Id = task.Id,
+                Status = task.Status,
+            });
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
     }
 }
