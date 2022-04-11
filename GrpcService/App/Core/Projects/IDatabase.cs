@@ -11,7 +11,7 @@ public interface IDatabase
     public IRecordProjectBatch RecordProject(Project project);
     public void UpdateProject(Project project);
     public void AddMemberToProject(ProjectMember projectMember);
-    public void RemoveUserFromProject(Project project, User user);
+    public void RemoveUserFromProject(ProjectMember projectMember);
     public void DeleteProject(Project project);
 }
 
