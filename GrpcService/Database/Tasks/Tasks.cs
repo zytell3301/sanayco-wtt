@@ -9,7 +9,7 @@ public class Tasks : IDatabase
     private Connection Connection;
     private IErrorReporter ErrorReporter;
 
-    public Tasks(Connection connection)
+    public Tasks(GrpcService1.Database.Tasks.Connection connection)
     {
         Connection = connection;
     }
