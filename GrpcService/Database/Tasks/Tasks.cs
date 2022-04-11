@@ -56,7 +56,28 @@ public class Tasks : IDatabase
 
     public void EditTask(Domain.Entities.Task task)
     {
-        throw new NotImplementedException();
+        try
+        {
+            UpdateTask(new Domain.Entities.Task()
+            {
+                Id = task.Id,
+                Description = task.Description,
+                Title = task.Title,
+                EndTime = task.EndTime,
+                WorkLocation = task.WorkLocation,
+            });
+            Connection.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
+    }
+
+    private void UpdateTask(Domain.Entities.Task task)
+    {
+        Connection.Tasks.Update(task);
     }
 
     public void ChangeTaskStatus(Domain.Entities.Task task, string status)
