@@ -7,12 +7,16 @@ public class Core
 {
     private InternalError InternalError;
     private OperationSuccessful OperationSuccessful;
+    private string CreatorProjectMemberCode;
+
     private IDatabase Database;
 
     public class ProjectsCoreConfigs
     {
         public string InternalErrorMessage;
         public string OperationSuccessfulMessage;
+
+        public string CreatorProjectMemberCode;
     }
 
     public class ProjectsCoreDependencies
@@ -28,11 +32,20 @@ public class Core
         Database = dependencies.Database;
     }
 
-    public Domain.Errors.Status RecordProject(Project project)
+    public Domain.Errors.Status RecordProject(Project project, User creator)
     {
         try
         {
-            Database.RecordProject(project);
+            var batch = Database.RecordProject(project);
+            /*
+             * Since every user that creates a project is a member of it, so we must
+             * add the creator as the creator role of project to database
+             */
+            var member = new ProjectMember();
+            member.MemberLevel = CreatorProjectMemberCode;
+            member.UserId = creator.Id;
+            batch.AddProjectMember(member);
+            batch.ExecuteOperation();
         }
         catch (Exception e)
         {
