@@ -6,7 +6,7 @@ ALTER TABLE tasks
 ALTER TABLE tasks
     ADD CONSTRAINT FK_TASKS_PROJECTS_PROJECT_ID_ID FOREIGN KEY (project_id) REFERENCES projects (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
-/** 
+/**
   * Relation definitions for project_members table
  */
 ALTER TABLE project_members
