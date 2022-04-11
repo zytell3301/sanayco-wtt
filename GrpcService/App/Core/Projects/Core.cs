@@ -42,7 +42,7 @@ public class Core
              * add the creator as the creator role of project to database
              */
             var member = new ProjectMember();
-            member.MemberLevel = CreatorProjectMemberCode;
+            member.Level = CreatorProjectMemberCode;
             member.UserId = creator.Id;
             batch.AddProjectMember(member);
             batch.ExecuteOperation();

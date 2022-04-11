@@ -1,9 +1,12 @@
-﻿namespace GrpcService1.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
+namespace GrpcService1.Domain.Entities;
+
+[Table("projects", Schema = "wtt")]
 public class Project
 {
-    public int Id;
-    public string Name;
-    public string Description;
-    public User[] Members;
+    [Column("id")] public int Id;
+    [Column("name")] public string Name;
+    [Column("description")] public string Description;
+    public ICollection<ProjectMember> Members;
 }

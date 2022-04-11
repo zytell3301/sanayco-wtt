@@ -46,7 +46,7 @@ public class Core
     {
         try
         {
-            task.TaskStatus = WaitingTaskCode;
+            task.Status = WaitingTaskCode;
             Database.RecordTask(task);
         }
         catch (Exception e)
