@@ -9,9 +9,10 @@ public class Tasks : IDatabase
     private Connection Connection;
     private IErrorReporter ErrorReporter;
 
-    public Tasks(GrpcService1.Database.Tasks.Connection connection)
+    public Tasks(GrpcService1.Database.Tasks.Connection connection, IErrorReporter errorReporter)
     {
         Connection = connection;
+        ErrorReporter = errorReporter;
     }
 
     public void RecordTask(Domain.Entities.Task task)
