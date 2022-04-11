@@ -7,9 +7,6 @@ public class Connection : DbContext
 {
     private string ConnectionString;
 
-    public DbSet<Domain.Entities.Task> Tasks { get; set; }
-    public DbSet<Domain.Entities.Project> Projects { get; set; }
-
     public Connection(string connectionString)
     {
         ConnectionString = connectionString;
