@@ -60,11 +60,11 @@ public class Core
         return OperationSuccessful;
     }
 
-    public Domain.Errors.Status AddMember(Project project, User user)
+    public Domain.Errors.Status AddMember(ProjectMember projectMember)
     {
         try
         {
-            Database.AddMemberToProject(project, user);
+            Database.AddMemberToProject(projectMember);
         }
         catch (EntityNotFound e)
         {
