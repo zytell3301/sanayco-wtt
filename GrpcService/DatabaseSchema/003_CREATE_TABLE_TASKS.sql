@@ -8,4 +8,5 @@ CREATE TABLE tasks
     end_time      DATETIME,
     description   VARCHAR,
     status        CHAR,
+    PRIMARY KEY (id),
 )
