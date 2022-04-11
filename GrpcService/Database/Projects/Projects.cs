@@ -38,9 +38,22 @@ public class Projects : IDatabase
         }
     }
 
-    public void AddMemberToProject(Project project, User user)
+    public void AddMemberToProject(ProjectMember projectMember)
     {
-        throw new NotImplementedException();
+        try
+        {
+            Connection.ProjectMembers.Add(new ProjectMember()
+            {
+                Level = projectMember.Level,
+                ProjectId = projectMember.ProjectId,
+                UserId = projectMember.UserId,
+            });
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
     }
 
     public void RemoveUserFromProject(Project project, User user)
