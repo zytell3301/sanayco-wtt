@@ -8,8 +8,8 @@
  */
 public class Status : Exception
 {
-    protected int StatusCode;
     protected string Message;
+    protected int StatusCode;
 
     public Status(string message)
     {

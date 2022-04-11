@@ -7,6 +7,6 @@ public class OperationSuccessful : Status
         /*
          * Status code 0 for successful call
          */
-        this.StatusCode = 0;
+        StatusCode = 0;
     }
 }

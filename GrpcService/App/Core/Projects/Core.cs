@@ -1,28 +1,19 @@
-﻿using GrpcService1.Domain.Entities;
+﻿#region
+
+using GrpcService1.Domain.Entities;
 using GrpcService1.Domain.Errors;
+
+#endregion
 
 namespace GrpcService1.App.Core.Projects;
 
 public class Core
 {
-    private InternalError InternalError;
-    private OperationSuccessful OperationSuccessful;
     private string CreatorProjectMemberCode;
 
-    private IDatabase Database;
-
-    public class ProjectsCoreConfigs
-    {
-        public string InternalErrorMessage;
-        public string OperationSuccessfulMessage;
-
-        public string CreatorProjectMemberCode;
-    }
-
-    public class ProjectsCoreDependencies
-    {
-        public IDatabase Database;
-    }
+    private readonly IDatabase Database;
+    private readonly InternalError InternalError;
+    private readonly OperationSuccessful OperationSuccessful;
 
     public Core(ProjectsCoreDependencies dependencies, ProjectsCoreConfigs configs)
     {
@@ -113,5 +104,17 @@ public class Core
         }
 
         return OperationSuccessful;
+    }
+
+    public class ProjectsCoreConfigs
+    {
+        public string CreatorProjectMemberCode;
+        public string InternalErrorMessage;
+        public string OperationSuccessfulMessage;
+    }
+
+    public class ProjectsCoreDependencies
+    {
+        public IDatabase Database;
     }
 }

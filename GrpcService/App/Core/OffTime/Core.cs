@@ -1,46 +1,31 @@
-﻿using Google.Protobuf.WellKnownTypes;
+﻿#region
+
 using GrpcService1.Domain.Entities;
 using GrpcService1.Domain.Errors;
+
+#endregion
 
 namespace GrpcService1.App.Core.OffTime;
 
 public class Core
 {
-    private InternalError InternalError;
-    private OperationSuccessful OperationSuccessful;
-    private OffTimeRestrictionExceeded OffTimeRestrictionExceeded;
-
     /*
      * These are the constants that will be used to demonstrate the off time status.
      */
     public string ApprovedOffTimeCode;
-    public string RejectedOffTimeCode;
-    public string WaitingOffTimeCode;
 
-    private IDatabase Database;
+    private readonly IDatabase Database;
+    private readonly InternalError InternalError;
 
     /*
      * Number of seconds that if exceeded, the manager must approve the
      * off time.
      */
-    private int OffTimeRestriction;
-
-    public class OffTimeCoreConfigs
-    {
-        public string OperationsuccessfulMessage;
-        public string InternalErrorMessage;
-        public string OffTimeRestrictionExceededMessage;
-        public int OffTimeRestriction;
-
-        public string ApprovedOffTimeCode;
-        public string RejectedOffTimeCode;
-        public string WaitingOffTimeCode;
-    }
-
-    public class OffTimeDependencies
-    {
-        public IDatabase Database;
-    }
+    private readonly int OffTimeRestriction;
+    private readonly OffTimeRestrictionExceeded OffTimeRestrictionExceeded;
+    private readonly OperationSuccessful OperationSuccessful;
+    public string RejectedOffTimeCode;
+    public string WaitingOffTimeCode;
 
     public Core(OffTimeDependencies dependencies, OffTimeCoreConfigs configs)
     {
@@ -58,11 +43,9 @@ public class Core
     public Domain.Errors.Status RecordOffTime(User user, Domain.Entities.OffTime offTime)
     {
         long totalOffTimeDuration = 0;
-        Domain.Entities.OffTime[] history = Database.GetOffTimeHistory(user, DateTime.Now.AddMonths(-1), DateTime.Now);
+        var history = Database.GetOffTimeHistory(user, DateTime.Now.AddMonths(-1), DateTime.Now);
         foreach (var offTimeHistory in history)
-        {
             totalOffTimeDuration += offTimeHistory.to.ToTimestamp().Seconds - offTime.@from.ToTimestamp().Seconds;
-        }
 
         switch (totalOffTimeDuration >= OffTimeRestriction)
         {
@@ -109,5 +92,21 @@ public class Core
         }
 
         return OperationSuccessful;
+    }
+
+    public class OffTimeCoreConfigs
+    {
+        public string ApprovedOffTimeCode;
+        public string InternalErrorMessage;
+        public int OffTimeRestriction;
+        public string OffTimeRestrictionExceededMessage;
+        public string OperationsuccessfulMessage;
+        public string RejectedOffTimeCode;
+        public string WaitingOffTimeCode;
+    }
+
+    public class OffTimeDependencies
+    {
+        public IDatabase Database;
     }
 }

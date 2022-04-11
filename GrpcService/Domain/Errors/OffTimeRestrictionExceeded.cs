@@ -7,6 +7,6 @@ public class OffTimeRestrictionExceeded : Status
         /*
          * Status code 0 for successful call
          */
-        this.StatusCode = 2;
+        StatusCode = 2;
     }
 }

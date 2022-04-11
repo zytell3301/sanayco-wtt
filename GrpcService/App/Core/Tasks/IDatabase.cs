@@ -1,6 +1,4 @@
-﻿using Task = GrpcService1.Domain.Entities.Task;
-
-namespace GrpcService1.App.Core.Tasks;
+﻿namespace GrpcService1.App.Core.Tasks;
 
 public interface IDatabase
 {

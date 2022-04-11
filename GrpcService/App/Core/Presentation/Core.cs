@@ -1,33 +1,26 @@
-﻿using GrpcService1.Domain.Entities;
+﻿#region
+
+using GrpcService1.Domain.Entities;
 using GrpcService1.Domain.Errors;
+
+#endregion
 
 namespace GrpcService1.App.Core.Presentation;
 
 public class Core
 {
-    private IDatabase database;
-    private InternalError InternalError;
-    private OperationSuccessful OperationSuccessful;
-
-    public class PresentationCoreConfigs
-    {
-        public string InternalErrorMessage;
-        public string OperationsuccessfulMessage;
-    }
-
-    public class PresentationCoreDependencies
-    {
-        public IDatabase Database;
-    }
+    private readonly IDatabase database;
+    private readonly InternalError InternalError;
+    private readonly OperationSuccessful OperationSuccessful;
 
     public Core(PresentationCoreDependencies dependencies, PresentationCoreConfigs configs)
     {
-        this.database = dependencies.Database;
+        database = dependencies.Database;
         /*
          * Initiate the error instance once and use it forever.
          */
         InternalError = new InternalError(configs.InternalErrorMessage);
-        this.OperationSuccessful = new OperationSuccessful(configs.OperationsuccessfulMessage);
+        OperationSuccessful = new OperationSuccessful(configs.OperationsuccessfulMessage);
     }
 
     /*
@@ -44,7 +37,7 @@ public class Core
             return new InternalError("");
         }
 
-        return this.OperationSuccessful;
+        return OperationSuccessful;
     }
 
     /*
@@ -54,7 +47,7 @@ public class Core
     {
         try
         {
-            this.database.RecordPresentationEnd(user);
+            database.RecordPresentationEnd(user);
         }
         catch (InternalError e)
         {
@@ -82,5 +75,16 @@ public class Core
         }
 
         return presentationTime;
+    }
+
+    public class PresentationCoreConfigs
+    {
+        public string InternalErrorMessage;
+        public string OperationsuccessfulMessage;
+    }
+
+    public class PresentationCoreDependencies
+    {
+        public IDatabase Database;
     }
 }

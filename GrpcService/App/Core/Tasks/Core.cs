@@ -1,32 +1,19 @@
-﻿using GrpcService1.Domain.Errors;
-using Task = GrpcService1.Domain.Entities.Task;
+﻿#region
+
+using GrpcService1.Domain.Errors;
+
+#endregion
 
 namespace GrpcService1.App.Core.Tasks;
 
 public class Core
 {
-    private OperationSuccessful OperationSuccessful;
-    private InternalError InternalError;
-    private IDatabase Database;
-
     public string ApprovedTaskCode;
-    public string WaitingTaskCode;
+    private readonly IDatabase Database;
+    private readonly InternalError InternalError;
+    private readonly OperationSuccessful OperationSuccessful;
     public string RejectedTaskCode;
-
-    public class TasksCoreConfigs
-    {
-        public string OperationSuccessfulmessage;
-        public string InternalErrorMessage;
-
-        public string ApprovedTaskCode;
-        public string WaitingTaskCode;
-        public string UnApprovedTaskCode;
-    }
-
-    public class TasksCoreDependencies
-    {
-        public IDatabase Database;
-    }
+    public string WaitingTaskCode;
 
     public Core(TasksCoreDependencies dependencies, TasksCoreConfigs configs)
     {
@@ -111,5 +98,19 @@ public class Core
         }
 
         return OperationSuccessful;
+    }
+
+    public class TasksCoreConfigs
+    {
+        public string ApprovedTaskCode;
+        public string InternalErrorMessage;
+        public string OperationSuccessfulmessage;
+        public string UnApprovedTaskCode;
+        public string WaitingTaskCode;
+    }
+
+    public class TasksCoreDependencies
+    {
+        public IDatabase Database;
     }
 }
