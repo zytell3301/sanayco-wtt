@@ -78,11 +78,11 @@ public class Core
         return OperationSuccessful;
     }
 
-    public Domain.Errors.Status RemoveMember(Project project, User user)
+    public Domain.Errors.Status RemoveMember(ProjectMember projectMember)
     {
         try
         {
-            Database.RemoveUserFromProject(project, user);
+            Database.RemoveUserFromProject(projectMember);
         }
         catch (Exception e)
         {
