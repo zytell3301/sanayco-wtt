@@ -5,5 +5,6 @@ CREATE TABLE users
     lastname      CHAR,
     skill_level   CHAR,
     company_level CHAR,
+    created_at    DATETIME,
     PRIMARY KEY (id),
 )
