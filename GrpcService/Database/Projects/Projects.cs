@@ -56,9 +56,20 @@ public class Projects : IDatabase
         }
     }
 
-    public void RemoveUserFromProject(Project project, User user)
+    public void RemoveUserFromProject(ProjectMember projectMember)
     {
-        throw new NotImplementedException();
+        try
+        {
+            Connection.ProjectMembers.Remove(new ProjectMember()
+            {
+                Id = projectMember.Id
+            });
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
     }
 
     public void DeleteProject(Project project)
