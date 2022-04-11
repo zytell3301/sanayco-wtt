@@ -1,8 +1,8 @@
 CREATE TABLE tokens
 (
-    id              INT,
+    id              INT IDENTITY (1,1),
     user_id         INT,
-    token           CHAR,
+    token           CHAR(64), /* This value is variable depends on the length of the tokens that are being inserted */
     expiration_date DATETIME,
     created_at      DATETIME,
     PRIMARY KEY (id),

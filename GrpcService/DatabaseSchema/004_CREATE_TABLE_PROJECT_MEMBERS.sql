@@ -1,9 +1,9 @@
 CREATE TABLE project_members
 (
-    id         INT,
+    id         INT IDENTITY (1,1),
     user_id    INT,
     project_id INT,
-    user_level CHAR,
+    level      CHAR(16),
     created_at DATETIME,
     PRIMARY KEY (id),
 )
