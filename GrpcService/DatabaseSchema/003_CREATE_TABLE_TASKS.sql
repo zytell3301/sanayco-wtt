@@ -2,6 +2,7 @@ CREATE TABLE tasks
 (
     id            INT,
     title         CHAR,
+    user_id       INT,
     project_id    INT,
     work_location CHAR,
     created_at    DATETIME,
