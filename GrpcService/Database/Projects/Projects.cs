@@ -30,6 +30,7 @@ public class Projects : IDatabase
                 Description = project.Description,
                 Name = project.Name,
             });
+            Connection.SaveChanges();
         }
         catch (Exception e)
         {
@@ -48,6 +49,7 @@ public class Projects : IDatabase
                 ProjectId = projectMember.ProjectId,
                 UserId = projectMember.UserId,
             });
+            Connection.SaveChanges();
         }
         catch (Exception e)
         {
@@ -64,6 +66,7 @@ public class Projects : IDatabase
             {
                 Id = projectMember.Id
             });
+            Connection.SaveChanges();
         }
         catch (Exception e)
         {
@@ -80,6 +83,7 @@ public class Projects : IDatabase
             {
                 Id = project.Id,
             });
+            Connection.SaveChanges();
         }
         catch (Exception e)
         {
