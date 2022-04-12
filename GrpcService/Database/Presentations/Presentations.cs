@@ -50,6 +50,14 @@ public class Presentations : IDatabase
 
     public DateTime GetPresentationTime(User user)
     {
-        throw new NotImplementedException();
+        try
+        {
+            return Connection.Presentations.Last(p => p.UserId == user.Id).Start;
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
     }
 }
