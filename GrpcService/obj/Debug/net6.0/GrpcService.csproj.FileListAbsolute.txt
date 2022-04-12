@@ -1,0 +1,6 @@
+S:\wtt\Solution1\GrpcService\obj\Debug\net6.0\GrpcService.csproj.AssemblyReference.cache
+S:\wtt\Solution1\GrpcService\obj\Debug\net6.0\GrpcService.GeneratedMSBuildEditorConfig.editorconfig
+S:\wtt\Solution1\GrpcService\obj\Debug\net6.0\GrpcService.AssemblyInfoInputs.cache
+S:\wtt\Solution1\GrpcService\obj\Debug\net6.0\GrpcService.AssemblyInfo.cs
+S:\wtt\Solution1\GrpcService\obj\Debug\net6.0\GrpcService.csproj.CoreCompileInputs.cache
+S:\wtt\Solution1\GrpcService\obj\Debug\net6.0\GrpcService.MvcApplicationPartsAssemblyInfo.cache
