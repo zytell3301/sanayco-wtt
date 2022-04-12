@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\GrpcService\GrpcService.csproj" />
+    </ItemGroup>
+
 </Project>
