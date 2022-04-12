@@ -7,20 +7,22 @@ namespace GrpcService1.Database.Projects;
 
 public class RecordProjectBatch : IRecordProjectBatch
 {
-    private GrpcService1.Database.Connection Connection;
+    private GrpcService1.Database.Projects.Connection Connection;
     private IErrorReporter ErrorReporter;
 
-    public RecordProjectBatch(GrpcService1.Database.Projects.Connection connection, IErrorReporter errorReporter)
+    public RecordProjectBatch(GrpcService1.Database.Projects.Connection connection, IErrorReporter errorReporter,
+        Project project)
     {
         Connection = connection;
         ErrorReporter = errorReporter;
+        Connection.Projects.Add(project);
     }
 
     public void AddProjectMember(ProjectMember projectMember)
     {
         try
         {
-            Connection.Add(new ProjectMember()
+            Connection.ProjectMembers.Add(new ProjectMember()
             {
                 Level = projectMember.Level,
                 ProjectId = projectMember.ProjectId,
