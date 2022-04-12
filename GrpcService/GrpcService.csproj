@@ -24,6 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="ErrorReporter" />
       <Folder Include="Services" />
 	  <ProjectReference Include="..\ErrorReporter\ErrorReporter.csproj" />
     </ItemGroup>

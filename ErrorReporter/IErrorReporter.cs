@@ -1,4 +1,4 @@
-﻿namespace GrpcService1.ErrorReporter;
+﻿namespace ErrorReporter;
 
 public interface IErrorReporter
 {

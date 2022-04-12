@@ -1,6 +1,6 @@
 ﻿using GrpcService1.App.Core.Tasks;
 using GrpcService1.Domain.Errors;
-using GrpcService1.ErrorReporter;
+using ErrorReporter;
 
 namespace GrpcService1.App.Database.Tasks;
 

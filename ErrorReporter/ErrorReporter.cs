@@ -1,6 +1,4 @@
-﻿using GrpcService1.ErrorReporter;
-
-namespace ErrorReporter;
+﻿namespace ErrorReporter;
 
 public class Reporter : IErrorReporter
 {

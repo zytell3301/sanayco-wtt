@@ -1,7 +1,7 @@
 ﻿using GrpcService1.App.Core.Projects;
 using GrpcService1.Domain.Entities;
 using GrpcService1.Domain.Errors;
-using GrpcService1.ErrorReporter;
+using ErrorReporter;
 
 namespace GrpcService1.App.Database.Projects;
 
