@@ -1,6 +1,8 @@
 ﻿#region
 
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 
 #endregion
 
@@ -11,10 +13,13 @@ public class Task
 {
     [Column("created_at")] public DateTime CreatedAt;
     [Column("description")] public string Description;
-    [Column("end_time")] public DateTime EndTime;
+    [Column("end_time")] [Required] [Timestamp] public DateTime EndTime;
     [Column("id")] public int Id;
-    [Column("project_id")] public string ProjectId;
+    [Column("project_id")] [Required] public int ProjectId;
     [Column("status")] public string Status;
-    [Column("title")] public string Title;
-    [Column("work_location")] public string WorkLocation;
+
+    [Column("title")] [Required, MaxLength(32)]
+    public string Title;
+
+    [Column("work_location")] [Required] public string WorkLocation;
 }
