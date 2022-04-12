@@ -24,7 +24,7 @@ public class Handler : ControllerBase
         switch (ModelState.IsValid)
         {
             case false:
-                // A proper error must be returned to the client
+                // @TODO A proper error must be returned to the client
                 return "internal error";
                 break;
         }
@@ -36,6 +36,32 @@ public class Handler : ControllerBase
                 Description = Description,
                 Title = Ttitle,
                 EndTime = DateTime.UnixEpoch.AddSeconds(Int32.Parse(EndTime)),
+            });
+        }
+        catch (Exception e)
+        {
+            // @TODO A proper error must be returned to the client
+            return "internal error";
+        }
+
+        return "operation successful";
+    }
+
+    public string DeleteTask(IFormCollection formCollection)
+    {
+        formCollection.TryGetValue("task_id", out var taskId);
+        switch (ModelState.IsValid)
+        {
+            case false:
+                // @TODO A proper error must be returned to the client
+                break;
+        }
+
+        try
+        {
+            Core.DeleteTask(new Domain.Entities.Task()
+            {
+                Id = Int32.Parse(taskId)
             });
         }
         catch (Exception e)
