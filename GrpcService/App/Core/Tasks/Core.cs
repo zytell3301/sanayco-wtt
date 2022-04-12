@@ -17,7 +17,7 @@ public class Core
 
     public Core(TasksCoreDependencies dependencies, TasksCoreConfigs configs)
     {
-        OperationSuccessful = new OperationSuccessful(configs.OperationSuccessfulmessage);
+        OperationSuccessful = new OperationSuccessful(configs.OperationSuccessfulMessage);
         InternalError = new InternalError(configs.InternalErrorMessage);
         ApprovedTaskCode = configs.ApprovedTaskCode;
         WaitingTaskCode = configs.WaitingTaskCode;
@@ -104,7 +104,7 @@ public class Core
     {
         public string ApprovedTaskCode;
         public string InternalErrorMessage;
-        public string OperationSuccessfulmessage;
+        public string OperationSuccessfulMessage;
         public string UnApprovedTaskCode;
         public string WaitingTaskCode;
     }
