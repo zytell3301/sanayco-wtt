@@ -36,9 +36,25 @@ public class OffTime : IDatabase
         }
     }
 
-    public Domain.Entities.OffTime[] GetOffTimeHistory(User user, DateTime @from, DateTime to)
+    public List<Domain.Entities.OffTime> GetOffTimeHistory(User user, DateTime @from, DateTime to)
     {
-        throw new NotImplementedException();
+        List<Domain.Entities.OffTime> offTimes = new List<Domain.Entities.OffTime>();
+        try
+        {
+            var enumerator = Connection.OffTimes.Where(o => o.UserId == user.Id).Where(o => o.CreatedAt > from)
+                .Where(o => o.CreatedAt < to).GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                offTimes.Add(enumerator.Current);
+            }
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
+
+        return offTimes;
     }
 
     public void ChangeOffTimeStatus(Domain.Entities.OffTime offTime, string status)
