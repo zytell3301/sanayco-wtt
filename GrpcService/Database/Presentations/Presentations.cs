@@ -36,7 +36,16 @@ public class Presentations : IDatabase
 
     public void RecordPresentationEnd(User user)
     {
-        throw new NotImplementedException();
+        try
+        {
+            Connection.Presentations.Last(p => p.UserId == user.Id).End = DateTime.Now;
+            Connection.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
     }
 
     public DateTime GetPresentationTime(User user)
