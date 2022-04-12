@@ -15,7 +15,15 @@ public class RecordProjectBatch : IRecordProjectBatch
     {
         Connection = connection;
         ErrorReporter = errorReporter;
-        Connection.Projects.Add(project);
+        try
+        {
+            Connection.Projects.Add(project);
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
     }
 
     public void AddProjectMember(ProjectMember projectMember)
