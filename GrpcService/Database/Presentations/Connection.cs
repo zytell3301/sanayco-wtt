@@ -5,7 +5,7 @@ namespace GrpcService1.Database.Presentations;
 
 public class Connection : GrpcService1.Database.Connection
 {
-    public DbSet<Presentation> Presentations;
+    public DbSet<Domain.Entities.Presentation> Presentations;
 
     public Connection(string connectionString) : base(connectionString)
     {
