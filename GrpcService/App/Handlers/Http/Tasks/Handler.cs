@@ -14,13 +14,18 @@ public class Handler : ControllerBase
     }
 
     [HttpPost("submit-task")]
-    public string RecordTask(IFormCollection formCollection)
+    public string RecordTask([FromForm] string description, [FromForm] int project_id, [FromForm] int end_time,
+        [FromForm] string title, [FromForm] string work_location)
     {
-        formCollection.TryGetValue("description", out var Description);
-        formCollection.TryGetValue("project_id", out var DrojectId);
-        formCollection.TryGetValue("end_time", out var EndTime);
-        formCollection.TryGetValue("title", out var Ttitle);
-        formCollection.TryGetValue("work_location", out var WorkLocation);
+        Domain.Entities.Task task = new Domain.Entities.Task()
+        {
+            Description = description,
+            Title = title,
+            EndTime = DateTime.UnixEpoch.AddSeconds(end_time),
+            ProjectId = project_id,
+            WorkLocation = work_location,
+        };
+
         switch (ModelState.IsValid)
         {
             case false:
@@ -31,12 +36,7 @@ public class Handler : ControllerBase
 
         try
         {
-            Core.RecordTask(new Domain.Entities.Task()
-            {
-                Description = Description,
-                Title = Ttitle,
-                EndTime = DateTime.UnixEpoch.AddSeconds(Int32.Parse(EndTime)),
-            });
+            Core.RecordTask(task);
         }
         catch (Exception e)
         {
@@ -47,9 +47,8 @@ public class Handler : ControllerBase
         return "operation successful";
     }
 
-    public string DeleteTask(IFormCollection formCollection)
+    public string DeleteTask([FromForm] int task_id)
     {
-        formCollection.TryGetValue("task_id", out var taskId);
         switch (ModelState.IsValid)
         {
             case false:
@@ -61,7 +60,7 @@ public class Handler : ControllerBase
         {
             Core.DeleteTask(new Domain.Entities.Task()
             {
-                Id = Int32.Parse(taskId)
+                Id = task_id,
             });
         }
         catch (Exception e)
