@@ -1,5 +1,6 @@
 ﻿using GrpcService1.App.Core.Presentation;
 using GrpcService1.Domain.Entities;
+using GrpcService1.Domain.Errors;
 using GrpcService1.ErrorReporter;
 
 namespace GrpcService1.Database.Presentations;
@@ -17,7 +18,20 @@ public class Presentations : IDatabase
 
     public void RecordPresentation(User user)
     {
-        throw new NotImplementedException();
+        try
+        {
+            Connection.Presentations.Add(new Presentation()
+            {
+                UserId = user.Id,
+                Start = DateTime.Now,
+            });
+            Connection.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
     }
 
     public void RecordPresentationEnd(User user)
