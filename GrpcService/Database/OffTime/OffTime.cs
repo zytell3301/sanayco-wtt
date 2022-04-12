@@ -59,6 +59,15 @@ public class OffTime : IDatabase
 
     public void ChangeOffTimeStatus(Domain.Entities.OffTime offTime, string status)
     {
-        throw new NotImplementedException();
+        try
+        {
+            offTime.Status = status;
+            Connection.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
     }
 }
