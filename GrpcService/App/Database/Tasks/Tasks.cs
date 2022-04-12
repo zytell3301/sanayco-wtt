@@ -2,14 +2,14 @@
 using GrpcService1.Domain.Errors;
 using GrpcService1.ErrorReporter;
 
-namespace GrpcService1.Database.Tasks;
+namespace GrpcService1.App.Database.Tasks;
 
 public class Tasks : IDatabase
 {
     private Connection Connection;
     private IErrorReporter ErrorReporter;
 
-    public Tasks(GrpcService1.Database.Tasks.Connection connection, IErrorReporter errorReporter)
+    public Tasks(Connection connection, IErrorReporter errorReporter)
     {
         Connection = connection;
         ErrorReporter = errorReporter;

@@ -1,7 +1,7 @@
 ﻿using GrpcService1.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace GrpcService1.Database;
+namespace GrpcService1.App.Database;
 
 public class Connection : DbContext
 {

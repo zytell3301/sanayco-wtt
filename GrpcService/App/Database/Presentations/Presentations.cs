@@ -3,7 +3,7 @@ using GrpcService1.Domain.Entities;
 using GrpcService1.Domain.Errors;
 using GrpcService1.ErrorReporter;
 
-namespace GrpcService1.Database.Presentations;
+namespace GrpcService1.App.Database.Presentations;
 
 public class Presentations : IDatabase
 {

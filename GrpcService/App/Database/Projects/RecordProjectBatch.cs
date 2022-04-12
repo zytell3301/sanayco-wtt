@@ -3,14 +3,14 @@ using GrpcService1.Domain.Entities;
 using GrpcService1.Domain.Errors;
 using GrpcService1.ErrorReporter;
 
-namespace GrpcService1.Database.Projects;
+namespace GrpcService1.App.Database.Projects;
 
 public class RecordProjectBatch : IRecordProjectBatch
 {
-    private GrpcService1.Database.Projects.Connection Connection;
+    private Connection Connection;
     private IErrorReporter ErrorReporter;
 
-    public RecordProjectBatch(GrpcService1.Database.Projects.Connection connection, IErrorReporter errorReporter,
+    public RecordProjectBatch(Connection connection, IErrorReporter errorReporter,
         Project project)
     {
         Connection = connection;

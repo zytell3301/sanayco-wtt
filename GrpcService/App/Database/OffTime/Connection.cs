@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace GrpcService1.Database.OffTime;
+namespace GrpcService1.App.Database.OffTime;
 
-public class Connection : GrpcService1.Database.Connection
+public class Connection : Database.Connection
 {
     public DbSet<Domain.Entities.OffTime> OffTimes;
 

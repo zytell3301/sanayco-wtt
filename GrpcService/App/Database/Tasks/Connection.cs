@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace GrpcService1.Database.Tasks;
+namespace GrpcService1.App.Database.Tasks;
 
-public class Connection : GrpcService1.Database.Connection
+public class Connection : Database.Connection
 {
     public DbSet<Domain.Entities.Task> Tasks;
 

@@ -2,7 +2,7 @@
 using GrpcService1.Domain.Entities;
 using GrpcService1.Domain.Errors;
 
-namespace GrpcService1.Database.OffTime;
+namespace GrpcService1.App.Database.OffTime;
 
 public class OffTime : IDatabase
 {

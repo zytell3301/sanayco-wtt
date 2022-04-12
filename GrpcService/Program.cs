@@ -1,5 +1,5 @@
 using GrpcService1.App.Core.Tasks;
-using GrpcService1.Database.Tasks;
+using GrpcService1.App.Database.Tasks;
 
 var builder = WebApplication.CreateBuilder(args);
 

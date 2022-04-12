@@ -1,9 +1,9 @@
 ﻿using GrpcService1.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace GrpcService1.Database.Projects;
+namespace GrpcService1.App.Database.Projects;
 
-public class Connection : GrpcService1.Database.Connection
+public class Connection : Database.Connection
 {
     public DbSet<Project> Projects;
     public DbSet<ProjectMember> ProjectMembers;
