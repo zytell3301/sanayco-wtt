@@ -18,7 +18,11 @@ public class Projects : IDatabase
 
     public IRecordProjectBatch RecordProject(Project project)
     {
-        throw new NotImplementedException();
+        return new RecordProjectBatch(Connection, ErrorReporter, new Project()
+        {
+            Description = project.Description,
+            Name = project.Name,
+        });
     }
 
     public void UpdateProject(Project project)
