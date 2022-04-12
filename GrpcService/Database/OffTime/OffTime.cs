@@ -1,5 +1,6 @@
 ﻿using GrpcService1.App.Core.OffTime;
 using GrpcService1.Domain.Entities;
+using GrpcService1.Domain.Errors;
 
 namespace GrpcService1.Database.OffTime;
 
@@ -16,7 +17,23 @@ public class OffTime : IDatabase
 
     public void RecordOffTime(Domain.Entities.OffTime offTime)
     {
-        throw new NotImplementedException();
+        try
+        {
+            Connection.OffTimes.Add(new Domain.Entities.OffTime()
+            {
+                Description = offTime.Description,
+                Status = offTime.Status,
+                FromDate = offTime.FromDate,
+                ToDate = offTime.ToDate,
+                UserId = offTime.UserId,
+            });
+            Connection.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
     }
 
     public Domain.Entities.OffTime[] GetOffTimeHistory(User user, DateTime @from, DateTime to)
