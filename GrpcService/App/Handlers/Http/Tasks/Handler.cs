@@ -77,4 +77,44 @@ public class Handler : ControllerBase
 
         return "operation successful";
     }
+
+    [Route("edit-task")]
+    public string EditTask([FromForm] int task_id, [FromForm] string description, [FromForm] int end_time,
+        [FromForm] string title, [FromForm] string work_location, [FromForm] int user_id)
+    {
+        EditTaskValidation validation = new EditTaskValidation()
+        {
+            Description = description,
+            EndTime = end_time,
+            Title = title,
+            WorkLocation = work_location,
+            UserId = user_id,
+            Id = task_id,
+        };
+        switch (ModelState.IsValid)
+        {
+            case false:
+                // @TODO A proper response must be returned to the user because of invalid data
+                return "Form validation failed";
+        }
+
+        try
+        {
+            Core.EditTask(new Domain.Entities.Task()
+            {
+                Id = task_id,
+                Description = validation.Description,
+                WorkLocation = validation.WorkLocation,
+                UserId = validation.UserId,
+                Title = validation.Title,
+                EndTime = DateTime.UnixEpoch.AddSeconds(validation.EndTime),
+            });
+        }
+        catch (Exception e)
+        {
+            return "an internal error occurred";
+        }
+
+        return "operation successful";
+    }
 }
