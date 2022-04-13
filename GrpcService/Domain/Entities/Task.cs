@@ -11,19 +11,22 @@ namespace GrpcService1.Domain.Entities;
 [Table("tasks", Schema = "wtt")]
 public class Task
 {
-    [Column("created_at")] public DateTime CreatedAt;
-    [Column("description")] public string Description;
+    [Column("created_at")] public DateTime CreatedAt { get; set; }
+    [Column("description")] public string Description { get; set; }
 
-    [Column("end_time")] [Required] [Timestamp]
-    public DateTime EndTime;
+    [Column("end_time")]
+    [Required]
+    [Timestamp]
+    public DateTime EndTime { get; set; }
 
-    [Column("id")] public int Id;
-    [Column("project_id")] [Required] public int ProjectId;
-    [Column("status")] public string Status;
+    [Column("id")] public int Id { get; set; }
+    [Column("project_id")] [Required] public int ProjectId { get; set; }
+    [Column("status")] public string Status { get; set; }
 
-    [Column("title")] [Required, MaxLength(32)]
-    public string Title;
+    [Column("title")]
+    [Required, MaxLength(32)]
+    public string Title { get; set; }
 
-    [Column("work_location")] [Required] public string WorkLocation;
-    [Column("user_id")] public int UserId;
+    [Column("work_location")] [Required] public string WorkLocation { get; set; }
+    [Column("user_id")] public int UserId { get; set; }
 }
