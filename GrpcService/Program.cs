@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 Connection connection =
     new Connection("Server=localhost,50296;Database=wtt;Trusted_Connection=True;MultipleActiveResultSets=true;");
-IDatabase tasksDB = new Tasks(connection, new Reporter());
+IDatabase tasksDB = new Tasks(connection, new FakeReporter());
 builder.Services.AddSingleton<Core>(new Core(new Core.TasksCoreDependencies()
 {
     Database = tasksDB,
