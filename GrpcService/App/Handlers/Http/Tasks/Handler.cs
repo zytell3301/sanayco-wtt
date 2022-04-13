@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GrpcService1.App.Handlers.Http.tasks.Validations;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 
 namespace GrpcService1.App.Handlers.Http.tasks;
@@ -26,7 +27,7 @@ public class Handler : ControllerBase
             WorkLocation = work_location,
             UserId = user_id,
         };
-        
+
         switch (ModelState.IsValid)
         {
             case false:
@@ -47,8 +48,13 @@ public class Handler : ControllerBase
         return "operation successful";
     }
 
+    [Route("delete-task")]
     public string DeleteTask([FromForm] int task_id)
     {
+        DeleteTaskValidation validation = new DeleteTaskValidation()
+        {
+            Id = task_id,
+        };
         switch (ModelState.IsValid)
         {
             case false:
