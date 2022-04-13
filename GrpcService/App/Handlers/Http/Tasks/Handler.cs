@@ -15,7 +15,7 @@ public class Handler : ControllerBase
 
     [HttpPost("submit-task")]
     public string RecordTask([FromForm] string description, [FromForm] int project_id, [FromForm] int end_time,
-        [FromForm] string title, [FromForm] string work_location)
+        [FromForm] string title, [FromForm] string work_location, [FromForm] int user_id)
     {
         Domain.Entities.Task task = new Domain.Entities.Task()
         {
@@ -24,14 +24,14 @@ public class Handler : ControllerBase
             EndTime = DateTime.UnixEpoch.AddSeconds(end_time),
             ProjectId = project_id,
             WorkLocation = work_location,
+            UserId = user_id,
         };
-
+        
         switch (ModelState.IsValid)
         {
             case false:
                 // @TODO A proper error must be returned to the client
-                return "internal error";
-                break;
+                return "Data validation failed";
         }
 
         try
