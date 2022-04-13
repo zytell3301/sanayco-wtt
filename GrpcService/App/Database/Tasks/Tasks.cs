@@ -43,11 +43,12 @@ public class Tasks : IDatabase
     {
         try
         {
-            Connection.Remove(new Domain.Entities.Task()
+            Connection.Remove(new Model()
             {
                 // Since id is pk of tasks entity ,any other field can be discarded
                 Id = task.Id,
             });
+            Connection.SaveChanges();
         }
         catch (Exception e)
         {
