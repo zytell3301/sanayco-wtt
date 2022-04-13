@@ -8,10 +8,10 @@ using System.Runtime.CompilerServices;
 
 namespace GrpcService1.Domain.Entities;
 
-[Table("tasks", Schema = "wtt")]
+[Table("tasks")]
 public class Task
 {
-    [Column("created_at")] public DateTime CreatedAt { get; set; }
+    [Column("created_at")] public DateTime? CreatedAt { get; set; }
     [Column("description")] public string Description { get; set; }
 
     [Column("end_time")]
