@@ -80,4 +80,37 @@ public class Handler : ControllerBase
 
         return "operation successful";
     }
+
+    public string AddMember([FromForm] int user_id, [FromForm] int project_id, [FromForm] string level)
+    {
+        AddMemberValidation validation = new AddMemberValidation()
+        {
+            ProjectId = project_id,
+            UserId = user_id,
+            Level = level,
+        };
+
+        switch (ModelState.IsValid)
+        {
+            case false:
+                // @TODO A proper error must returned to user for invalid data 
+                return "data validation failed";
+        }
+
+        try
+        {
+            Core.AddMember(new ProjectMember()
+            {
+                ProjectId = project_id,
+                UserId = user_id,
+                Level = level,
+            });
+        }
+        catch (Exception e)
+        {
+            return "Internal error occurred";
+        }
+
+        return "operation successful";
+    }
 }
