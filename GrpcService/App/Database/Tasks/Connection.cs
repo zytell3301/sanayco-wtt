@@ -9,4 +9,13 @@ public class Connection : Database.Connection
     public Connection(string connectionString) : base(connectionString)
     {
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Model>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+        });
+        base.OnModelCreating(modelBuilder);
+    }
 }
