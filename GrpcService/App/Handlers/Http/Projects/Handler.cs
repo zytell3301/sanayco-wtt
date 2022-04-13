@@ -49,4 +49,35 @@ public class Handler : ControllerBase
 
         return "operation successful";
     }
+
+    public string UpdateProject([FromForm] string description, [FromForm] string name)
+    {
+        UpdateProjectValidation validation = new UpdateProjectValidation()
+        {
+            Description = description,
+            Name = name,
+        };
+
+        switch (ModelState.IsValid)
+        {
+            case false:
+                // @TODO A proper error must be returned to user for invalid data
+                return "data validation failed";
+        }
+
+        try
+        {
+            Core.UpdateProject(new Project()
+            {
+                Description = validation.Description,
+                Name = validation.Name,
+            });
+        }
+        catch (Exception e)
+        {
+            return "internal error occurred";
+        }
+
+        return "operation successful";
+    }
 }
