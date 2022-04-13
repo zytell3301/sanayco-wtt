@@ -13,7 +13,10 @@ public class Task
 {
     [Column("created_at")] public DateTime CreatedAt;
     [Column("description")] public string Description;
-    [Column("end_time")] [Required] [Timestamp] public DateTime EndTime;
+
+    [Column("end_time")] [Required] [Timestamp]
+    public DateTime EndTime;
+
     [Column("id")] public int Id;
     [Column("project_id")] [Required] public int ProjectId;
     [Column("status")] public string Status;
@@ -22,4 +25,5 @@ public class Task
     public string Title;
 
     [Column("work_location")] [Required] public string WorkLocation;
+    [Column("user_id")] public int UserId;
 }
