@@ -29,7 +29,7 @@ public class Core
     /*
      * This method records the given task. 
      */
-    public Domain.Errors.Status RecordTask(Domain.Entities.Task task)
+    public void RecordTask(Domain.Entities.Task task)
     {
         try
         {
@@ -38,10 +38,8 @@ public class Core
         }
         catch (Exception e)
         {
-            return InternalError;
+            throw InternalError;
         }
-
-        return OperationSuccessful;
     }
 
     public Domain.Errors.Status DeleteTask(Domain.Entities.Task task)
