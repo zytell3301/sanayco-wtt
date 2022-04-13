@@ -19,15 +19,16 @@ public class Tasks : IDatabase
     {
         try
         {
-            Connection.Tasks.Add(new Domain.Entities.Task()
+            Connection.Tasks.Add(new Model()
             {
                 // CreatedAt is not initialized because it will be evaluated in database
                 Description = task.Description,
                 Status = task.Status,
                 Title = task.Title,
-                EndTime = task.EndTime,
+                EndTime = task.EndTime.Second,
                 ProjectId = task.ProjectId,
                 WorkLocation = task.WorkLocation,
+                UserId = task.UserId,
             });
             Connection.SaveChanges();
         }
@@ -59,12 +60,12 @@ public class Tasks : IDatabase
     {
         try
         {
-            UpdateTask(new Domain.Entities.Task()
+            UpdateTask(new Model()
             {
                 Id = task.Id,
                 Description = task.Description,
                 Title = task.Title,
-                EndTime = task.EndTime,
+                EndTime = task.EndTime.Second,
                 WorkLocation = task.WorkLocation,
             });
             Connection.SaveChanges();
@@ -76,7 +77,7 @@ public class Tasks : IDatabase
         }
     }
 
-    private void UpdateTask(Domain.Entities.Task task)
+    private void UpdateTask(Model task)
     {
         Connection.Tasks.Update(task);
     }
@@ -85,7 +86,7 @@ public class Tasks : IDatabase
     {
         try
         {
-            UpdateTask(new Domain.Entities.Task()
+            UpdateTask(new Model()
             {
                 Id = task.Id,
                 Status = task.Status,
