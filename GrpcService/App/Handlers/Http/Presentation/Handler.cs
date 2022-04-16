@@ -42,4 +42,34 @@ public class Handler : ControllerBase
 
         return "operation successful";
     }
+
+    public string RecordPresentationEnd([FromForm] int user_id)
+    {
+        RecordPresentationEndValidation validation = new RecordPresentationEndValidation()
+        {
+            UserId = user_id,
+        };
+
+        switch (ModelState.IsValid)
+        {
+            case false:
+                // @TODO A proper error must be returned for invalid data
+                return "data validation failed";
+        }
+
+        try
+        {
+            Core.RecordPresentationEnd(new User()
+            {
+                Id = validation.UserId,
+            });
+        }
+        catch (Exception e)
+        {
+            // @TODO A proper error must be returned for internal failure
+            return "operation failed";
+        }
+
+        return "operation successful";
+    }
 }
