@@ -33,7 +33,7 @@ public class Handler : ControllerBase
 
         try
         {
-            Core.RecordOffTime(new User(){Id = validation.UserId},new Domain.Entities.OffTime()
+            Core.RecordOffTime(new User() {Id = validation.UserId}, new Domain.Entities.OffTime()
             {
                 Description = validation.Description,
                 FromDate = DateTime.UnixEpoch.AddSeconds(validation.FromDate),
@@ -44,6 +44,32 @@ public class Handler : ControllerBase
         catch (Exception e)
         {
             // @TODO A proper error must be returned to client because of internal failure
+            return "operation failed";
+        }
+
+        return "operation successful";
+    }
+
+    public string ApproveOffTime([FromForm] int off_time_id)
+    {
+        ApproveOffTimeValidation validation = new ApproveOffTimeValidation()
+        {
+            OffTimeId = off_time_id,
+        };
+
+        switch (ModelState.IsValid)
+        {
+            case true:
+                // @TODO A proper error must be returned to client for invalid data
+                return "data validation failed";
+        }
+
+        try
+        {
+        }
+        catch (Exception e)
+        {
+            // @TODO A proper error must be returned to user because of internal failure
             return "operation failed";
         }
 
