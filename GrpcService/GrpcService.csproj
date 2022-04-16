@@ -24,6 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="App\Handlers\Http\Presentation\Validations" />
       <Folder Include="ErrorReporter" />
       <Folder Include="Services" />
 	  <ProjectReference Include="..\ErrorReporter\ErrorReporter.csproj" />
