@@ -75,4 +75,34 @@ public class Handler : ControllerBase
 
         return "operation successful";
     }
+
+    public string RejectOffTime([FromForm] int off_time_id)
+    {
+        RejectOffTimeValidation validation = new RejectOffTimeValidation()
+        {
+            OffTimeId = off_time_id,
+        };
+
+        switch (ModelState.IsValid)
+        {
+            case true:
+                // @TODO A proper error must be returned to client because of invalid data
+                return "data validation failed";
+        }
+
+        try
+        {
+            Core.ApproveOffTime(new Domain.Entities.OffTime()
+            {
+                Id = validation.OffTimeId,
+            });
+        }
+        catch (Exception e)
+        {
+            // @TODO A proper error must be returned to client because of internal failure
+            return "operation failed";
+        }
+
+        return "operation successful";
+    }
 }
