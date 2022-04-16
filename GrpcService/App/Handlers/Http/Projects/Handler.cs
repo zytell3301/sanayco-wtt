@@ -145,4 +145,34 @@ public class Handler : ControllerBase
 
         return "operation successful";
     }
+
+    public string DeleteProject([FromForm] int project_id)
+    {
+        DeleteMemberValidation validation = new DeleteMemberValidation()
+        {
+            ProjectId = project_id,
+        };
+
+        switch (ModelState.IsValid)
+        {
+            case false:
+                // @TODO A proper error must be returned for invalid data
+                return "data validation failed";
+        }
+
+        try
+        {
+            Core.DeleteProject(new Project()
+            {
+                Id = validation.ProjectId,
+            });
+        }
+        catch (Exception e)
+        {
+            // @TODO A proper error must be returned to user
+            return "operation failed";
+        }
+
+        return "operation successful";
+    }
 }
