@@ -72,4 +72,34 @@ public class Handler : ControllerBase
 
         return "operation successful";
     }
+
+    public string GetPresentationTime([FromForm] int user_id)
+    {
+        GetPresentationTimeValidation validation = new GetPresentationTimeValidation()
+        {
+            UserId = user_id,
+        };
+
+        switch (ModelState.IsValid)
+        {
+            case false:
+                // @TODO A proper error must be returned to user because of invalid data
+                return "data validation failed";
+        }
+
+        try
+        {
+            Core.GetPresentationTime(new User()
+            {
+                Id = validation.UserId,
+            });
+        }
+        catch (Exception e)
+        {
+            // @TODO A proper error must be returned because of internal failure
+            return "operation failed";
+        }
+
+        return "operation successful";
+    }
 }
