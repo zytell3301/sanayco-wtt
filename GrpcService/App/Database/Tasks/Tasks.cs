@@ -99,4 +99,33 @@ public class Tasks : IDatabase
             throw new InternalError("");
         }
     }
+
+    public Domain.Entities.Task GetTask(int taskId)
+    {
+        var task = Connection.Tasks.First(p => p.Id == taskId);
+        return ConvertModelToTask(task);
+    }
+
+    private Domain.Entities.Task ConvertModelToTask(Model model)
+    {
+        var task = new Domain.Entities.Task()
+        {
+            Id = model.Id,
+            Description = model.Description,
+            Status = model.Status,
+            Title = model.Title,
+            EndTime = DateTime.UnixEpoch.AddSeconds(model.EndTime),
+            ProjectId = model.ProjectId,
+            UserId = model.UserId,
+            WorkLocation = model.WorkLocation,
+        };
+        switch (task.CreatedAt.HasValue)
+        {
+            case true:
+                task.CreatedAt = DateTime.UnixEpoch.AddSeconds(model.CreatedAt.Value);
+                break;
+        }
+
+        return task;
+    }
 }
