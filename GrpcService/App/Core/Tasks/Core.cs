@@ -98,6 +98,18 @@ public class Core
         return OperationSuccessful;
     }
 
+    public Domain.Entities.Task GetTask(Domain.Entities.Task task)
+    {
+        try
+        {
+            return Database.GetTask(task.Id);
+        }
+        catch (Exception e)
+        {
+            throw InternalError;
+        }
+    }
+
     public class TasksCoreConfigs
     {
         public string ApprovedTaskCode;
