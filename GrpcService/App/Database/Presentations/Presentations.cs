@@ -38,7 +38,7 @@ public class Presentations : IDatabase
     {
         try
         {
-            Connection.Presentations.Last(p => p.UserId == user.Id).End = DateTime.Now;
+            Connection.Presentations.OrderBy(p => p.Id).Last(p => p.UserId == user.Id).End = DateTime.Now;
             Connection.SaveChanges();
         }
         catch (Exception e)
