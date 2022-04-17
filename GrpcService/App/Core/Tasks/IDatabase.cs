@@ -9,4 +9,6 @@ public interface IDatabase
     public void EditTask(Domain.Entities.Task task);
 
     public void ChangeTaskStatus(Domain.Entities.Task task, string status);
+
+    public Domain.Entities.Task GetTask(int taskId);
 }
