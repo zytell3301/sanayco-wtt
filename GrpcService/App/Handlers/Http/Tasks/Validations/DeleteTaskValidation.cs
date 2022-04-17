@@ -4,5 +4,5 @@ namespace GrpcService1.App.Handlers.Http.tasks.Validations;
 
 public class DeleteTaskValidation
 {
-    [Required] public int Id;
+    [Required] public int task_id { get; set; }
 }
