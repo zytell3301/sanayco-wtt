@@ -20,7 +20,7 @@ public class Core
          * Initiate the error instance once and use it forever.
          */
         InternalError = new InternalError(configs.InternalErrorMessage);
-        OperationSuccessful = new OperationSuccessful(configs.OperationsuccessfulMessage);
+        OperationSuccessful = new OperationSuccessful(configs.OperationSuccessfulMessage);
     }
 
     /*
@@ -80,7 +80,7 @@ public class Core
     public class PresentationCoreConfigs
     {
         public string InternalErrorMessage;
-        public string OperationsuccessfulMessage;
+        public string OperationSuccessfulMessage;
     }
 
     public class PresentationCoreDependencies
