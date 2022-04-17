@@ -1,4 +1,6 @@
-﻿using GrpcService1.App.Handlers.Http.Presentation.Validations;
+﻿using System.Text.Json;
+using System.Text.Json.Nodes;
+using GrpcService1.App.Handlers.Http.Presentation.Validations;
 using GrpcService1.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,13 +16,20 @@ public class Handler : ControllerBase
         Core = core;
     }
 
-    [HttpPost("record")]
-    public string RecordPresentation([FromForm] int user_id)
+    private string ParsePayload()
     {
-        RecordPresentationValidation validation = new RecordPresentationValidation()
-        {
-            UserId = user_id,
-        };
+        return new StreamReader(Request.BodyReader.AsStream()).ReadToEnd();
+    }
+
+    private T DecodePayloadJson<T>()
+    {
+        return JsonSerializer.Deserialize<T>(ParsePayload());
+    }
+
+    [HttpPost("record")]
+    public string RecordPresentation()
+    {
+        var req = DecodePayloadJson<RecordPresentationValidation>();
 
         switch (ModelState.IsValid)
         {
@@ -33,7 +42,7 @@ public class Handler : ControllerBase
         {
             Core.RecordPresentation(new User()
             {
-                Id = validation.UserId,
+                Id = req.user_id,
             });
         }
         catch (Exception e)
