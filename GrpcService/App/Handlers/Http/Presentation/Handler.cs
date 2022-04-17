@@ -7,23 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace GrpcService1.App.Handlers.Http.Presentation;
 
 [Route("/presentation")]
-public class Handler : ControllerBase
+public class Handler : BaseHandler
 {
     private Core.Presentation.Core Core;
 
     public Handler(Core.Presentation.Core core)
     {
         Core = core;
-    }
-
-    private string ParsePayload()
-    {
-        return new StreamReader(Request.BodyReader.AsStream()).ReadToEnd();
-    }
-
-    private T DecodePayloadJson<T>()
-    {
-        return JsonSerializer.Deserialize<T>(ParsePayload());
     }
 
     [HttpPost("record")]
