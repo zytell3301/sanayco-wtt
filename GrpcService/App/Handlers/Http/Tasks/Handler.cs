@@ -47,13 +47,11 @@ public class Handler : BaseHandler
         return "operation successful";
     }
 
-    [Route("delete-task")]
-    public string DeleteTask([FromForm] int task_id)
+    [HttpPost("delete-task")]
+    public string DeleteTask()
     {
-        DeleteTaskValidation validation = new DeleteTaskValidation()
-        {
-            Id = task_id,
-        };
+        var body = DecodePayloadJson<DeleteTaskValidation>();
+
         switch (ModelState.IsValid)
         {
             case false:
@@ -65,7 +63,7 @@ public class Handler : BaseHandler
         {
             Core.DeleteTask(new Domain.Entities.Task()
             {
-                Id = task_id,
+                Id = body.task_id,
             });
         }
         catch (Exception e)
