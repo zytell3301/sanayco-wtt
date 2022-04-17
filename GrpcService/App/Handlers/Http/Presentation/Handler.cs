@@ -85,10 +85,7 @@ public class Handler : ControllerBase
     [HttpPost("get-presentation-time")]
     public string GetPresentationTime([FromForm] int user_id)
     {
-        GetPresentationTimeValidation validation = new GetPresentationTimeValidation()
-        {
-            UserId = user_id,
-        };
+        var body = DecodePayloadJson<GetPresentationTimeValidation>();
 
         switch (ModelState.IsValid)
         {
@@ -101,7 +98,7 @@ public class Handler : ControllerBase
         {
             Core.GetPresentationTime(new User()
             {
-                Id = validation.UserId,
+                Id = body.user_id,
             });
         }
         catch (Exception e)
