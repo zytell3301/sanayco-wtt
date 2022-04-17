@@ -2,11 +2,10 @@
 
 namespace GrpcService1.Domain.Entities;
 
-[Table("presentations", Schema = "wtt")]
 public class Presentation
 {
-    [Column("id")] public int Id;
-    [Column("user_id")] public int UserId;
-    [Column("start")] public DateTime Start;
-    [Column("end")] public DateTime End;
+    public int Id { get; set; }
+    public int UserId { get; set; }
+    public DateTime? Start { get; set; }
+    public DateTime? End { get; set; }
 }

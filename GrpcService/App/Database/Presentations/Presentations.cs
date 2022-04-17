@@ -20,7 +20,7 @@ public class Presentations : IDatabase
     {
         try
         {
-            Connection.Presentations.Add(new Presentation()
+            Connection.Presentations.Add(new Model()
             {
                 UserId = user.Id,
                 Start = DateTime.Now,
@@ -52,7 +52,7 @@ public class Presentations : IDatabase
     {
         try
         {
-            return Connection.Presentations.Last(p => p.UserId == user.Id).Start;
+            return (DateTime) Connection.Presentations.Last(p => p.UserId == user.Id).Start;
         }
         catch (Exception e)
         {
