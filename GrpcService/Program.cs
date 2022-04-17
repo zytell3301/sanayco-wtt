@@ -25,6 +25,11 @@ builder.Services.AddSingleton<Core>(new Core(new Core.TasksCoreDependencies()
 // Add services to the container.
 var app = builder.Build();
 
+app.UseHttpsRedirection();
+
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200", "https://localhost:4200"));
+
+
 // Configure the HTTP request pipeline.
 // app.MapGet("/",
 // () =>
