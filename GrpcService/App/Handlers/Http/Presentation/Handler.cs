@@ -57,10 +57,7 @@ public class Handler : ControllerBase
     [HttpPost("record-end")]
     public string RecordPresentationEnd([FromForm] int user_id)
     {
-        RecordPresentationEndValidation validation = new RecordPresentationEndValidation()
-        {
-            UserId = user_id,
-        };
+        var req = DecodePayloadJson<RecordPresentationEndValidation>();
 
         switch (ModelState.IsValid)
         {
@@ -73,7 +70,7 @@ public class Handler : ControllerBase
         {
             Core.RecordPresentationEnd(new User()
             {
-                Id = validation.UserId,
+                Id = req.user_id,
             });
         }
         catch (Exception e)
