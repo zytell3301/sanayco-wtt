@@ -5,7 +5,7 @@ using Microsoft.Extensions.Primitives;
 namespace GrpcService1.App.Handlers.Http.tasks;
 
 [Route("/tasks")]
-public class Handler : ControllerBase
+public class Handler : BaseHandler
 {
     private Core.Tasks.Core Core;
 
@@ -15,18 +15,9 @@ public class Handler : ControllerBase
     }
 
     [HttpPost("submit-task")]
-    public string RecordTask([FromForm] string description, [FromForm] int project_id, [FromForm] int end_time,
-        [FromForm] string title, [FromForm] string work_location, [FromForm] int user_id)
+    public string RecordTask()
     {
-        Domain.Entities.Task task = new Domain.Entities.Task()
-        {
-            Description = description,
-            Title = title,
-            EndTime = DateTime.UnixEpoch.AddSeconds(end_time),
-            ProjectId = project_id,
-            WorkLocation = work_location,
-            UserId = user_id,
-        };
+        var body = DecodePayloadJson<RecordTaskValidaion>();
 
         switch (ModelState.IsValid)
         {
@@ -37,7 +28,15 @@ public class Handler : ControllerBase
 
         try
         {
-            Core.RecordTask(task);
+            Core.RecordTask(new Domain.Entities.Task()
+            {
+                Description = body.description,
+                Title = body.title,
+                EndTime = DateTime.UnixEpoch.AddSeconds(body.end_time),
+                ProjectId = body.project_id,
+                WorkLocation = body.work_location,
+                UserId = body.user_id,
+            });
         }
         catch (Exception e)
         {
