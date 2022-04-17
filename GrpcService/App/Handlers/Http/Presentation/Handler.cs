@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GrpcService1.App.Handlers.Http.Presentation;
 
+[Route("/presentation")]
 public class Handler : ControllerBase
 {
     private Core.Presentation.Core Core;
@@ -13,6 +14,7 @@ public class Handler : ControllerBase
         Core = core;
     }
 
+    [HttpPost("record")]
     public string RecordPresentation([FromForm] int user_id)
     {
         RecordPresentationValidation validation = new RecordPresentationValidation()
@@ -43,6 +45,7 @@ public class Handler : ControllerBase
         return "operation successful";
     }
 
+    [HttpPost("record-end")]
     public string RecordPresentationEnd([FromForm] int user_id)
     {
         RecordPresentationEndValidation validation = new RecordPresentationEndValidation()
@@ -73,6 +76,7 @@ public class Handler : ControllerBase
         return "operation successful";
     }
 
+    [HttpPost("get-presentation-time")]
     public string GetPresentationTime([FromForm] int user_id)
     {
         GetPresentationTimeValidation validation = new GetPresentationTimeValidation()
