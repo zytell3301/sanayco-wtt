@@ -28,6 +28,7 @@ public class Tasks : IDatabase
                 EndTime = task.EndTime,
                 ProjectId = task.ProjectId,
                 WorkLocation = task.WorkLocation,
+                CreatedAt = task.CreatedAt,
                 UserId = task.UserId,
             });
             Connection.SaveChanges();
@@ -43,11 +44,8 @@ public class Tasks : IDatabase
     {
         try
         {
-            Connection.Remove(new Database.Model.Task()
-            {
-                // Since id is pk of tasks entity ,any other field can be discarded
-                Id = task.Id,
-            });
+            var model = Connection.Tasks.First(t => t.Id == task.Id);
+            Connection.Remove(model);
             Connection.SaveChanges();
         }
         catch (Exception e)
