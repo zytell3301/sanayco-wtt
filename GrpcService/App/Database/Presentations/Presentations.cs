@@ -7,10 +7,10 @@ namespace GrpcService1.App.Database.Presentations;
 
 public class Presentations : IDatabase
 {
-    private Database.Presentations.Connection Connection;
+    private App.Database.Model.wttContext Connection;
     private ErrorReporter.IErrorReporter ErrorReporter;
 
-    public Presentations(Database.Presentations.Connection connection, IErrorReporter errorReporter)
+    public Presentations(App.Database.Model.wttContext connection, IErrorReporter errorReporter)
     {
         Connection = connection;
         ErrorReporter = errorReporter;
@@ -20,7 +20,7 @@ public class Presentations : IDatabase
     {
         try
         {
-            Connection.Presentations.Add(new Model()
+            Connection.Presentations.Add(new App.Database.Model.Presentation()
             {
                 UserId = user.Id,
                 Start = DateTime.Now,
