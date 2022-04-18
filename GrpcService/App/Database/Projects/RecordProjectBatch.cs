@@ -7,11 +7,11 @@ namespace GrpcService1.App.Database.Projects;
 
 public class RecordProjectBatch : IRecordProjectBatch
 {
-    private Connection Connection;
+    private Model.wttContext Connection;
     private IErrorReporter ErrorReporter;
 
-    public RecordProjectBatch(Connection connection, IErrorReporter errorReporter,
-        Project project)
+    public RecordProjectBatch(Model.wttContext connection, IErrorReporter errorReporter,
+        Model.Project project)
     {
         Connection = connection;
         ErrorReporter = errorReporter;
@@ -26,11 +26,11 @@ public class RecordProjectBatch : IRecordProjectBatch
         }
     }
 
-    public void AddProjectMember(ProjectMember projectMember)
+    public void AddProjectMember(Domain.Entities.ProjectMember projectMember)
     {
         try
         {
-            Connection.ProjectMembers.Add(new ProjectMember()
+            Connection.ProjectMembers.Add(new Model.ProjectMember()
             {
                 Level = projectMember.Level,
                 ProjectId = projectMember.ProjectId,

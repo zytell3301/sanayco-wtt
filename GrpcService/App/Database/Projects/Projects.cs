@@ -7,10 +7,10 @@ namespace GrpcService1.App.Database.Projects;
 
 public class Projects : IDatabase
 {
-    private Connection Connection;
+    private Database.Model.wttContext Connection;
     private IErrorReporter ErrorReporter;
 
-    public Projects(Connection connection, IErrorReporter errorReporter)
+    public Projects(Model.wttContext connection, IErrorReporter errorReporter)
     {
         Connection = connection;
         ErrorReporter = errorReporter;
@@ -18,7 +18,7 @@ public class Projects : IDatabase
 
     public IRecordProjectBatch RecordProject(Project project)
     {
-        return new RecordProjectBatch(Connection, ErrorReporter, new Project()
+        return new RecordProjectBatch(Connection, ErrorReporter, new Model.Project()
         {
             Description = project.Description,
             Name = project.Name,
@@ -29,7 +29,7 @@ public class Projects : IDatabase
     {
         try
         {
-            Connection.Projects.Update(new Project()
+            Connection.Projects.Update(new Model.Project()
             {
                 Description = project.Description,
                 Name = project.Name,
@@ -47,7 +47,7 @@ public class Projects : IDatabase
     {
         try
         {
-            Connection.ProjectMembers.Add(new ProjectMember()
+            Connection.ProjectMembers.Add(new Model.ProjectMember()
             {
                 Level = projectMember.Level,
                 ProjectId = projectMember.ProjectId,
@@ -66,7 +66,7 @@ public class Projects : IDatabase
     {
         try
         {
-            Connection.ProjectMembers.Remove(new ProjectMember()
+            Connection.ProjectMembers.Remove(new Model.ProjectMember()
             {
                 Id = projectMember.Id
             });
@@ -83,7 +83,7 @@ public class Projects : IDatabase
     {
         try
         {
-            Connection.Projects.Remove(new Project()
+            Connection.Projects.Remove(new Model.Project()
             {
                 Id = project.Id,
             });
