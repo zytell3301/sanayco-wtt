@@ -100,8 +100,16 @@ public class Tasks : IDatabase
 
     public Domain.Entities.Task GetTask(int taskId)
     {
-        var task = Connection.Tasks.First(p => p.Id == taskId);
-        return ConvertModelToTask(task);
+        try
+        {
+            var task = Connection.Tasks.First(p => p.Id == taskId);
+            return ConvertModelToTask(task);
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
     }
 
     private Domain.Entities.Task ConvertModelToTask(Database.Model.Task model)
