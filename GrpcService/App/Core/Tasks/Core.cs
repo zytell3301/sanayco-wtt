@@ -71,7 +71,7 @@ public class Core
         return OperationSuccessful;
     }
 
-    public Domain.Errors.Status ApproveTask(Domain.Entities.Task task)
+    public void ApproveTask(Domain.Entities.Task task)
     {
         try
         {
@@ -79,10 +79,8 @@ public class Core
         }
         catch (Exception e)
         {
-            return InternalError;
+            throw InternalError;
         }
-
-        return OperationSuccessful;
     }
 
     public Domain.Errors.Status RejectTask(Domain.Entities.Task task)
