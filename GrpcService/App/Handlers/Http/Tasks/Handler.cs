@@ -86,7 +86,7 @@ public class Handler : BaseHandler
                 // @TODO A proper response must be returned to the user because of invalid data
                 return "Form validation failed";
         }
-        
+
         try
         {
             Core.EditTask(new Domain.Entities.Task()
@@ -137,5 +137,32 @@ public class Handler : BaseHandler
                 Code = 1,
             });
         }
+    }
+
+    [HttpPost("approve-task")]
+    public string ApproveTask()
+    {
+        var body = DecodePayloadJson<UpdateTaskStatusValidation>();
+        switch (ModelState.IsValid)
+        {
+            case false:
+                // @TODO A proper error must be returned to user because of invalid data.
+                return "data validation failed";
+        }
+
+        try
+        {
+            Core.ApproveTask(new Domain.Entities.Task()
+            {
+                Id = body.task_id,
+            });
+        }
+        catch (Exception e)
+        {
+            // @TODO A proper error must be returned to user because of internal error
+            return "operation failed";
+        }
+
+        return "operation successful";
     }
 }
