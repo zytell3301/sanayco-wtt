@@ -1,8 +1,9 @@
 using ErrorReporter;
 using GrpcService1.App.Core.Tasks;
+using GrpcService1.App.Database.Model;
 using GrpcService1.App.Database.Presentations;
 using GrpcService1.App.Database.Tasks;
-using Connection = GrpcService1.App.Database.Tasks.Connection;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,12 +13,9 @@ builder.Services.AddControllers();
 
 string connectionString = "Server=localhost,50296;Database=wtt;Trusted_Connection=True;MultipleActiveResultSets=true;";
 IErrorReporter reporter = new FakeReporter();
-Connection tasksConnection =
-    new Connection(connectionString);
-GrpcService1.App.Database.Presentations.Connection
-    presentationConnection = new GrpcService1.App.Database.Presentations.Connection(connectionString);
-IDatabase tasksDB = new Tasks(tasksConnection, reporter);
-GrpcService1.App.Core.Presentation.IDatabase presentationDB = new Presentations(presentationConnection, reporter);
+wttContext connection = new wttContext(new DbContextOptions<wttContext>());
+IDatabase tasksDB = new Tasks(connection, reporter);
+GrpcService1.App.Core.Presentation.IDatabase presentationDB = new Presentations(connection, reporter);
 builder.Services.AddSingleton<Core>(new Core(new Core.TasksCoreDependencies()
 {
     Database = tasksDB,
