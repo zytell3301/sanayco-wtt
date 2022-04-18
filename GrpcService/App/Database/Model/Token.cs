@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GrpcService1.Model
+namespace GrpcService1.App.Database.Model
 {
     public partial class Token
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace GrpcService1.Model
+namespace GrpcService1.App.Database.Model
 {
     public partial class wttContext : DbContext
     {
