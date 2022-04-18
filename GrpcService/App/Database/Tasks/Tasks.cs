@@ -83,11 +83,9 @@ public class Tasks : IDatabase
     {
         try
         {
-            UpdateTask(new Database.Model.Task()
-            {
-                Id = task.Id,
-                Status = task.Status,
-            });
+            var model = Connection.Tasks.First(t => t.Id == task.Id);
+            model.Status = status;
+            Connection.SaveChanges();
         }
         catch (Exception e)
         {
