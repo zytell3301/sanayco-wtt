@@ -6,10 +6,10 @@ namespace GrpcService1.App.Database.Tasks;
 
 public class Tasks : IDatabase
 {
-    private Connection Connection;
+    private Database.Model.wttContext Connection;
     private IErrorReporter ErrorReporter;
 
-    public Tasks(Connection connection, IErrorReporter errorReporter)
+    public Tasks(Database.Model.wttContext connection, IErrorReporter errorReporter)
     {
         Connection = connection;
         ErrorReporter = errorReporter;
@@ -19,13 +19,13 @@ public class Tasks : IDatabase
     {
         try
         {
-            Connection.Tasks.Add(new Model()
+            Connection.Tasks.Add(new Database.Model.Task()
             {
                 // CreatedAt is not initialized because it will be evaluated in database
                 Description = task.Description,
                 Status = task.Status,
                 Title = task.Title,
-                EndTime = task.EndTime.Second,
+                EndTime = task.EndTime,
                 ProjectId = task.ProjectId,
                 WorkLocation = task.WorkLocation,
                 UserId = task.UserId,
@@ -43,7 +43,7 @@ public class Tasks : IDatabase
     {
         try
         {
-            Connection.Remove(new Model()
+            Connection.Remove(new Database.Model.Task()
             {
                 // Since id is pk of tasks entity ,any other field can be discarded
                 Id = task.Id,
@@ -61,12 +61,12 @@ public class Tasks : IDatabase
     {
         try
         {
-            UpdateTask(new Model()
+            UpdateTask(new Database.Model.Task()
             {
                 Id = task.Id,
                 Description = task.Description,
                 Title = task.Title,
-                EndTime = task.EndTime.Second,
+                EndTime = task.EndTime,
                 WorkLocation = task.WorkLocation,
             });
             Connection.SaveChanges();
@@ -78,7 +78,7 @@ public class Tasks : IDatabase
         }
     }
 
-    private void UpdateTask(Model task)
+    private void UpdateTask(Database.Model.Task task)
     {
         Connection.Tasks.Update(task);
     }
@@ -87,7 +87,7 @@ public class Tasks : IDatabase
     {
         try
         {
-            UpdateTask(new Model()
+            UpdateTask(new Database.Model.Task()
             {
                 Id = task.Id,
                 Status = task.Status,
@@ -106,7 +106,7 @@ public class Tasks : IDatabase
         return ConvertModelToTask(task);
     }
 
-    private Domain.Entities.Task ConvertModelToTask(Model model)
+    private Domain.Entities.Task ConvertModelToTask(Database.Model.Task model)
     {
         var task = new Domain.Entities.Task()
         {
@@ -114,15 +114,34 @@ public class Tasks : IDatabase
             Description = model.Description,
             Status = model.Status,
             Title = model.Title,
-            EndTime = DateTime.UnixEpoch.AddSeconds(model.EndTime),
-            ProjectId = model.ProjectId,
-            UserId = model.UserId,
             WorkLocation = model.WorkLocation,
         };
         switch (task.CreatedAt.HasValue)
         {
             case true:
-                task.CreatedAt = DateTime.UnixEpoch.AddSeconds(model.CreatedAt.Value);
+                task.CreatedAt = model.CreatedAt.Value;
+                break;
+        }
+
+        switch (model.EndTime.HasValue)
+        {
+            case true:
+                task.EndTime = model.EndTime.Value;
+                break;
+        }
+
+        switch (model.ProjectId.HasValue)
+        {
+            case true:
+                task.ProjectId = model.ProjectId.Value;
+                break;
+        }
+
+        // Since it MAY be required in future updates that a task can be added without an assignee, we must check for null value
+        switch (model.UserId.HasValue)
+        {
+            case true:
+                task.UserId = model.UserId.Value;
                 break;
         }
 
