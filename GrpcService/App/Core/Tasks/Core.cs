@@ -34,6 +34,7 @@ public class Core
         try
         {
             task.Status = WaitingTaskCode;
+            task.CreatedAt = DateTime.Now;
             Database.RecordTask(task);
         }
         catch (Exception e)
