@@ -26,7 +26,7 @@ public class Core
     /*
      * This method records given user's presentation time 
      */
-    public Domain.Errors.Status RecordPresentation(User user)
+    public void RecordPresentation(User user)
     {
         try
         {
@@ -34,16 +34,14 @@ public class Core
         }
         catch (InternalError e)
         {
-            return new InternalError("");
+            throw InternalError;
         }
-
-        return OperationSuccessful;
     }
 
     /*
      * This method records the end of a user's presentation time
      */
-    public Domain.Errors.Status RecordPresentationEnd(User user)
+    public void RecordPresentationEnd(User user)
     {
         try
         {
@@ -51,10 +49,8 @@ public class Core
         }
         catch (InternalError e)
         {
-            return InternalError;
+            throw InternalError;
         }
-
-        return OperationSuccessful;
     }
 
     /*

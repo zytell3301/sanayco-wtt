@@ -23,7 +23,7 @@ public class Core
         Database = dependencies.Database;
     }
 
-    public Domain.Errors.Status RecordProject(Project project, User creator)
+    public void RecordProject(Project project, User creator)
     {
         try
         {
@@ -40,13 +40,11 @@ public class Core
         }
         catch (Exception e)
         {
-            return InternalError;
+            throw InternalError;
         }
-
-        return OperationSuccessful;
     }
 
-    public Domain.Errors.Status UpdateProject(Project project)
+    public void UpdateProject(Project project)
     {
         try
         {
@@ -54,10 +52,8 @@ public class Core
         }
         catch (Exception e)
         {
-            return InternalError;
+            throw InternalError;
         }
-
-        return OperationSuccessful;
     }
 
     public Domain.Errors.Status AddMember(ProjectMember projectMember)
@@ -78,7 +74,7 @@ public class Core
         return OperationSuccessful;
     }
 
-    public Domain.Errors.Status RemoveMember(ProjectMember projectMember)
+    public void RemoveMember(ProjectMember projectMember)
     {
         try
         {
@@ -86,13 +82,11 @@ public class Core
         }
         catch (Exception e)
         {
-            return InternalError;
+            throw InternalError;
         }
-
-        return OperationSuccessful;
     }
 
-    public Domain.Errors.Status DeleteProject(Project project)
+    public void DeleteProject(Project project)
     {
         try
         {
@@ -100,10 +94,8 @@ public class Core
         }
         catch (Exception e)
         {
-            return InternalError;
+            throw InternalError;
         }
-
-        return OperationSuccessful;
     }
 
     public class ProjectsCoreConfigs

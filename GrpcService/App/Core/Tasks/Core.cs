@@ -43,7 +43,7 @@ public class Core
         }
     }
 
-    public Domain.Errors.Status DeleteTask(Domain.Entities.Task task)
+    public void DeleteTask(Domain.Entities.Task task)
     {
         try
         {
@@ -51,13 +51,11 @@ public class Core
         }
         catch (Exception e)
         {
-            return InternalError;
+            throw InternalError;
         }
-
-        return OperationSuccessful;
     }
 
-    public Domain.Errors.Status EditTask(Domain.Entities.Task task)
+    public void EditTask(Domain.Entities.Task task)
     {
         try
         {
@@ -65,10 +63,8 @@ public class Core
         }
         catch (Exception e)
         {
-            return InternalError;
+            throw InternalError;
         }
-
-        return OperationSuccessful;
     }
 
     public void ApproveTask(Domain.Entities.Task task)
@@ -83,7 +79,7 @@ public class Core
         }
     }
 
-    public Domain.Errors.Status RejectTask(Domain.Entities.Task task)
+    public void RejectTask(Domain.Entities.Task task)
     {
         try
         {
@@ -91,10 +87,8 @@ public class Core
         }
         catch (Exception e)
         {
-            return InternalError;
+            throw InternalError;
         }
-
-        return OperationSuccessful;
     }
 
     public Domain.Entities.Task GetTask(Domain.Entities.Task task)

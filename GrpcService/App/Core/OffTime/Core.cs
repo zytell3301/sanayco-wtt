@@ -68,7 +68,7 @@ public class Core
         return OperationSuccessful;
     }
 
-    public Domain.Errors.Status ApproveOffTime(Domain.Entities.OffTime offTime)
+    public void ApproveOffTime(Domain.Entities.OffTime offTime)
     {
         try
         {
@@ -76,13 +76,11 @@ public class Core
         }
         catch (Exception e)
         {
-            return InternalError;
+            throw InternalError;
         }
-
-        return OperationSuccessful;
     }
 
-    public Domain.Errors.Status RejectOffTime(Domain.Entities.OffTime offTime)
+    public void RejectOffTime(Domain.Entities.OffTime offTime)
     {
         try
         {
@@ -90,10 +88,8 @@ public class Core
         }
         catch (Exception e)
         {
-            return InternalError;
+            throw InternalError;
         }
-
-        return OperationSuccessful;
     }
 
     public class OffTimeCoreConfigs
