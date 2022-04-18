@@ -59,14 +59,12 @@ public class Tasks : IDatabase
     {
         try
         {
-            UpdateTask(new Database.Model.Task()
-            {
-                Id = task.Id,
-                Description = task.Description,
-                Title = task.Title,
-                EndTime = task.EndTime,
-                WorkLocation = task.WorkLocation,
-            });
+            var model = Connection.Tasks.First(t => t.Id == task.Id);
+            model.Description = task.Description;
+            model.Title = task.Title;
+            model.EndTime = task.EndTime;
+            model.WorkLocation = task.WorkLocation;
+            UpdateTask(model);
             Connection.SaveChanges();
         }
         catch (Exception e)
