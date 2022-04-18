@@ -77,35 +77,25 @@ public class Handler : BaseHandler
     }
 
     [Route("edit-task")]
-    public string EditTask([FromForm] int task_id, [FromForm] string description, [FromForm] int end_time,
-        [FromForm] string title, [FromForm] string work_location, [FromForm] int user_id)
+    public string EditTask()
     {
-        EditTaskValidation validation = new EditTaskValidation()
-        {
-            Description = description,
-            EndTime = end_time,
-            Title = title,
-            WorkLocation = work_location,
-            UserId = user_id,
-            Id = task_id,
-        };
+        var body = DecodePayloadJson<EditTaskValidation>();
         switch (ModelState.IsValid)
         {
             case false:
                 // @TODO A proper response must be returned to the user because of invalid data
                 return "Form validation failed";
         }
-
+        
         try
         {
             Core.EditTask(new Domain.Entities.Task()
             {
-                Id = task_id,
-                Description = validation.Description,
-                WorkLocation = validation.WorkLocation,
-                UserId = validation.UserId,
-                Title = validation.Title,
-                EndTime = DateTime.UnixEpoch.AddSeconds(validation.EndTime),
+                Id = body.task_id,
+                Description = body.description,
+                WorkLocation = body.work_location,
+                Title = body.title,
+                EndTime = DateTime.UnixEpoch.AddSeconds(body.end_time),
             });
         }
         catch (Exception e)

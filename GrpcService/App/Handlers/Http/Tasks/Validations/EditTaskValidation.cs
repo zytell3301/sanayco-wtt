@@ -4,10 +4,9 @@ namespace GrpcService1.App.Handlers.Http.tasks.Validations;
 
 public class EditTaskValidation
 {
-    public int Id;
-    [MaxLength(1024)] public string Description;
-    [Timestamp] public int EndTime;
-    [MaxLength(32)] public string Title;
-    public string WorkLocation;
-    public int UserId;
+    public int task_id { get; set; }
+    [MaxLength(1024)] public string description { get; set; }
+    [Timestamp] public int end_time { get; set; }
+    [MaxLength(32)] public string title { get; set; }
+    public string work_location { get; set; }
 }
