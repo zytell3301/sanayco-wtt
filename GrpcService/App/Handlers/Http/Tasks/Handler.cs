@@ -1,4 +1,5 @@
-﻿using GrpcService1.App.Handlers.Http.tasks.Validations;
+﻿using System.Text.Json;
+using GrpcService1.App.Handlers.Http.tasks.Validations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 
@@ -113,5 +114,38 @@ public class Handler : BaseHandler
         }
 
         return "operation successful";
+    }
+
+    class GetTaskResponse
+    {
+        public Domain.Entities.Task Task { get; set; }
+
+        // This is the status code that indicates the response status.
+        // Status code 0 is always for successful operation.
+        public int Code { get; set; }
+    }
+
+    [HttpGet("get-task/{id}")]
+    public string GetTask(int id)
+    {
+        try
+        {
+            var task = Core.GetTask(new Domain.Entities.Task()
+            {
+                Id = id,
+            });
+            return JsonSerializer.Serialize(new GetTaskResponse()
+            {
+                Code = 0,
+                Task = task,
+            });
+        }
+        catch (Exception e)
+        {
+            return JsonSerializer.Serialize(new GetTaskResponse()
+            {
+                Code = 1,
+            });
+        }
     }
 }
