@@ -6,10 +6,10 @@ namespace GrpcService1.App.Database.OffTime;
 
 public class OffTime : IDatabase
 {
-    private Database.OffTime.Connection Connection;
+    private App.Database.Model.wttContext Connection;
     private ErrorReporter.IErrorReporter ErrorReporter;
 
-    public OffTime(Database.OffTime.Connection connection, ErrorReporter.IErrorReporter errorReporter)
+    public OffTime(App.Database.Model.wttContext connection, ErrorReporter.IErrorReporter errorReporter)
     {
         Connection = connection;
         ErrorReporter = errorReporter;
@@ -19,7 +19,7 @@ public class OffTime : IDatabase
     {
         try
         {
-            Connection.OffTimes.Add(new Domain.Entities.OffTime()
+            Connection.OffTimes.Add(new App.Database.Model.OffTime()
             {
                 Description = offTime.Description,
                 Status = offTime.Status,
@@ -42,10 +42,10 @@ public class OffTime : IDatabase
         try
         {
             var enumerator = Connection.OffTimes.Where(o => o.UserId == user.Id).Where(o => o.CreatedAt > from)
-                .Where(o => o.CreatedAt < to).GetEnumerator();
-            while (enumerator.MoveNext())
+                .Where(o => o.CreatedAt < to).ToList();
+            foreach (var offTime in enumerator)
             {
-                offTimes.Add(enumerator.Current);
+                offTimes.Add(ConvertModelToOffTime(offTime));
             }
         }
         catch (Exception e)
@@ -61,7 +61,8 @@ public class OffTime : IDatabase
     {
         try
         {
-            offTime.Status = status;
+            var record = Connection.OffTimes.First(o => o.Id == offTime.Id);
+            record.Status = status;
             Connection.SaveChanges();
         }
         catch (Exception e)
@@ -69,5 +70,23 @@ public class OffTime : IDatabase
             ErrorReporter.ReportException(e);
             throw new InternalError("");
         }
+    }
+
+    private Domain.Entities.OffTime ConvertModelToOffTime(Database.Model.OffTime model)
+    {
+        // Database offers the feature of null foreign key value but we always supply values to user_id,from_date and to_date fields.
+        // So it is not needed to check for null reference
+        var offTime = new Domain.Entities.OffTime()
+        {
+            Id = model.Id,
+            Status = model.Status,
+            Description = model.Description,
+            CreatedAt = model.CreatedAt,
+            UserId = model.UserId.Value,
+            FromDate = model.FromDate.Value,
+            ToDate = model.ToDate.Value,
+        };
+
+        return offTime;
     }
 }
