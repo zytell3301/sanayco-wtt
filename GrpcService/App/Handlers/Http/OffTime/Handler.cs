@@ -164,4 +164,40 @@ public class Handler : BaseHandler
 
         return "operation successful";
     }
+
+    [HttpPost("cancel-off-time")]
+    public string CancelOffTime()
+    {
+        CancelOffTimeValidation body;
+        try
+        {
+            body = DecodePayloadJson<CancelOffTimeValidation>();
+        }
+        catch (Exception e)
+        {
+            return InvalidRequestResponse;
+        }
+
+        switch (ModelState.IsValid)
+        {
+            case false:
+                // @TODO A proper error must be returned to client for invalid data
+                return "data validation failed";
+        }
+
+        try
+        {
+            Core.CancelOffTime(new Domain.Entities.OffTime()
+            {
+                Id = body.off_time_id,
+            });
+        }
+        catch (Exception e)
+        {
+            // @TODO A proper error must be returned to client for internal failure
+            return "operation failed";
+        }
+
+        return "operation successful";
+    }
 }
