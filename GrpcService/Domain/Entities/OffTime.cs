@@ -6,18 +6,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GrpcService1.Domain.Entities;
 
-[Table("off_time", Schema = "wtt")]
 public class OffTime
 {
-    [Column("created_at")] public DateTime? CreatedAt;
-    [Column("Description")] public string Description;
-    [Column("from_date")] public DateTime FromDate;
-    [Column("id")] public int Id;
+    public DateTime? CreatedAt { get; set; }
+    public string Description { get; set; }
+    public DateTime FromDate { get; set; }
+    public int Id { get; set; }
 
     /*
      * Every off time has three statuses. Approved,Rejected and Waiting. 
      */
-    [Column("status")] public string Status;
-    [Column("to_date")] public DateTime ToDate;
-    [Column("user_id")] public int UserId;
+    public string Status { get; set; }
+    public DateTime ToDate { get; set; }
+    public int UserId { get; set; }
 }
