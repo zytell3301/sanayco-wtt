@@ -11,4 +11,6 @@ public interface IDatabase
     public void RecordOffTime(Domain.Entities.OffTime offTime);
     public List<Domain.Entities.OffTime> GetOffTimeHistory(User user, DateTime @from, DateTime to);
     public void ChangeOffTimeStatus(Domain.Entities.OffTime offTime, string status);
+
+    public void DeleteOffTime(Domain.Entities.OffTime offTime);
 }
