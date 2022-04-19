@@ -123,4 +123,16 @@ public class Core
             throw InternalError;
         }
     }
+
+    public void CancelOffTime(Domain.Entities.OffTime offTime)
+    {
+        try
+        {
+            Database.DeleteOffTime(offTime);
+        }
+        catch (Exception e)
+        {
+            throw InternalError;
+        }
+    }
 }
