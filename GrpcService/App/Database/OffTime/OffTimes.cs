@@ -4,12 +4,12 @@ using GrpcService1.Domain.Errors;
 
 namespace GrpcService1.App.Database.OffTime;
 
-public class OffTime : IDatabase
+public class OffTimes : IDatabase
 {
     private App.Database.Model.wttContext Connection;
     private ErrorReporter.IErrorReporter ErrorReporter;
 
-    public OffTime(App.Database.Model.wttContext connection, ErrorReporter.IErrorReporter errorReporter)
+    public OffTimes(App.Database.Model.wttContext connection, ErrorReporter.IErrorReporter errorReporter)
     {
         Connection = connection;
         ErrorReporter = errorReporter;
