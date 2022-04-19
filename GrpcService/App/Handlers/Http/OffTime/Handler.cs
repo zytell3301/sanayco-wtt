@@ -1,4 +1,5 @@
 ﻿using GrpcService1.App.Handlers.Http.OffTime.Validations;
+using GrpcService1.App.Handlers.Http.tasks.Validations;
 using GrpcService1.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -122,6 +123,42 @@ public class Handler : BaseHandler
         catch (Exception e)
         {
             // @TODO A proper error must be returned to client because of internal failure
+            return "operation failed";
+        }
+
+        return "operation successful";
+    }
+
+    [HttpPost("set-off-time-waiting")]
+    public string SetOffTimeWaiting()
+    {
+        UpdateOffTimeStatusValidation body;
+        try
+        {
+            body = DecodePayloadJson<UpdateOffTimeStatusValidation>();
+        }
+        catch (Exception e)
+        {
+            return InvalidRequestResponse;
+        }
+
+        switch (ModelState.IsValid)
+        {
+            case false:
+                // @TODO A proper error must be returned to client for invalid data
+                return "data validation failed";
+        }
+
+        try
+        {
+            Core.SetOffTimeStatusWaiting(new Domain.Entities.OffTime()
+            {
+                Id = body.off_time_id,
+            });
+        }
+        catch (Exception e)
+        {
+            // @TODO A proper error must be returned to client for internal failure
             return "operation failed";
         }
 
