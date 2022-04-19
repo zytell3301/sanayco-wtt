@@ -2,10 +2,10 @@ CREATE TABLE off_time
 (
     id          INT IDENTITY (1,1),
     user_id     INT,
-    status      CHAR(16),
+    status      CHAR(32),
     from_date   DATETIME,
     to_date     DATETIME,
-    description VARCHAR,
+    description VARCHAR(1024),
     created_at  DATETIME,
     PRIMARY KEY (id),
 )
