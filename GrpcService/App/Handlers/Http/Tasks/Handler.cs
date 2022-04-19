@@ -165,4 +165,31 @@ public class Handler : BaseHandler
 
         return "operation successful";
     }
+
+    [HttpPost("reject-task")]
+    public string RejectTask()
+    {
+        var body = DecodePayloadJson<UpdateTaskStatusValidation>();
+        switch (ModelState.IsValid)
+        {
+            case false:
+                // @TODO A proper error must returned to user for invalid data
+                return "data validation failed";
+        }
+
+        try
+        {
+            Core.RejectTask(new Domain.Entities.Task()
+            {
+                Id = body.task_id,
+            });
+        }
+        catch (Exception e)
+        {
+            // @TODO A proper error must be returned to user for internal error
+            return "operation failed";
+        }
+
+        return "operation successful";
+    }
 }
