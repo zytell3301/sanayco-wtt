@@ -91,6 +91,18 @@ public class Core
         }
     }
 
+    public void SetTaskWaiting(Domain.Entities.Task task)
+    {
+        try
+        {
+            Database.ChangeTaskStatus(task, WaitingTaskCode);
+        }
+        catch (Exception e)
+        {
+            throw InternalError;
+        }
+    }
+
     public Domain.Entities.Task GetTask(Domain.Entities.Task task)
     {
         try
