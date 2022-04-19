@@ -192,4 +192,31 @@ public class Handler : BaseHandler
 
         return "operation successful";
     }
+
+    [HttpPost("set-task-waiting")]
+    public string SetTaskWaiting()
+    {
+        var body = DecodePayloadJson<UpdateTaskStatusValidation>();
+        switch (ModelState.IsValid)
+        {
+            case false:
+                // @TODO A proper error must be returned to user for invalid data
+                return "data validation failed";
+        }
+
+        try
+        {
+            Core.SetTaskWaiting(new Domain.Entities.Task()
+            {
+                Id = body.task_id,
+            });
+        }
+        catch (Exception e)
+        {
+            //@TODO A proper error must be returned to user for internal failure
+            return "operation failed";
+        }
+
+        return "operation successful";
+    }
 }
