@@ -91,25 +91,32 @@ public class Handler : BaseHandler
         return "operation successful";
     }
 
-    public string RejectOffTime([FromForm] int off_time_id)
+    [HttpPost("reject-off-time")]
+    public string RejectOffTime()
     {
-        RejectOffTimeValidation validation = new RejectOffTimeValidation()
+        UpdateOffTimeStatusValidation body;
+        try
         {
-            OffTimeId = off_time_id,
-        };
+            // @TODO Since this exception happens when client is sending invalid data, we can store current request data for ip blacklist analysis
+            body = DecodePayloadJson<UpdateOffTimeStatusValidation>();
+        }
+        catch (Exception e)
+        {
+            return InvalidRequestResponse;
+        }
 
         switch (ModelState.IsValid)
         {
-            case true:
+            case false:
                 // @TODO A proper error must be returned to client because of invalid data
                 return "data validation failed";
         }
 
         try
         {
-            Core.ApproveOffTime(new Domain.Entities.OffTime()
+            Core.RejectOffTime(new Domain.Entities.OffTime()
             {
-                Id = validation.OffTimeId,
+                Id = body.off_time_id,
             });
         }
         catch (Exception e)
