@@ -31,7 +31,7 @@ public class Core
     public Core(OffTimeDependencies dependencies, OffTimeCoreConfigs configs)
     {
         InternalError = new InternalError(configs.InternalErrorMessage);
-        OperationSuccessful = new OperationSuccessful(configs.OperationsuccessfulMessage);
+        OperationSuccessful = new OperationSuccessful(configs.OperationSuccessfulMessage);
         OffTimeRestrictionExceeded = new OffTimeRestrictionExceeded(configs.OffTimeRestrictionExceededMessage);
         OffTimeRestriction = configs.OffTimeRestriction;
 
@@ -98,7 +98,7 @@ public class Core
         public string InternalErrorMessage;
         public int OffTimeRestriction;
         public string OffTimeRestrictionExceededMessage;
-        public string OperationsuccessfulMessage;
+        public string OperationSuccessfulMessage;
         public string RejectedOffTimeCode;
         public string WaitingOffTimeCode;
     }
