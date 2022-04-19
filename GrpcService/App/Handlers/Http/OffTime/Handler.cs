@@ -140,6 +140,7 @@ public class Handler : BaseHandler
         }
         catch (Exception e)
         {
+            // @TODO Since this exception happens when client is sending invalid data, we can store current request data for ip blacklist analysis
             return InvalidRequestResponse;
         }
 
@@ -176,6 +177,7 @@ public class Handler : BaseHandler
         }
         catch (Exception e)
         {
+            // @TODO Since this exception happens when client is sending invalid data, we can store current request data for ip blacklist analysis
             return InvalidRequestResponse;
         }
 
@@ -233,5 +235,45 @@ public class Handler : BaseHandler
             StatusCode = 0,
             OffTime = offTime
         });
+    }
+
+    [HttpPost("edit-off-time")]
+    public string EditOffTime()
+    {
+        EditOffTimeValidation body;
+        try
+        {
+            body = DecodePayloadJson<EditOffTimeValidation>();
+        }
+        catch (Exception e)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store current request data for ip blacklist analysis.
+            return InvalidRequestResponse;
+        }
+
+        switch (ModelState.IsValid)
+        {
+            case false:
+                // @TODO A proper error must be returned to user for invalid data
+                return "operation failed";
+        }
+
+        try
+        {
+            Core.EditOffTime(new Domain.Entities.OffTime()
+            {
+                Id = body.off_time_id,
+                Description = body.description,
+                FromDate = DateTime.UnixEpoch.AddSeconds(body.from_date),
+                ToDate = DateTime.UnixEpoch.AddSeconds(body.to_date),
+            });
+        }
+        catch (Exception e)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store current request data for ip blacklist analysis
+            return "operation failed";
+        }
+
+        return "operation successful";
     }
 }
