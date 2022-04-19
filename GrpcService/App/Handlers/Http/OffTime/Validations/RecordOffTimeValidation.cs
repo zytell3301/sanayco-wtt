@@ -4,8 +4,8 @@ namespace GrpcService1.App.Handlers.Http.OffTime.Validations;
 
 public class RecordOffTimeValidation
 {
-    [Required] public int FromDate;
-    [Required] public int ToDate;
-    [Required] public int UserId;
-    public string Description;
+    [Required] public int from_date { get; set; }
+    [Required] public int to_date { get; set; }
+    [Required] public int user_id { get; set; }
+    public string description { get; set; }
 }
