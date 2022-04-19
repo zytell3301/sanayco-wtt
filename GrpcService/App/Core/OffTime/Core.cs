@@ -135,4 +135,16 @@ public class Core
             throw InternalError;
         }
     }
+
+    public Domain.Entities.OffTime GetOffTime(Domain.Entities.OffTime offTime)
+    {
+        try
+        {
+            return Database.GetOffTime(offTime);
+        }
+        catch (Exception e)
+        {
+            throw InternalError;
+        }
+    }
 }
