@@ -87,6 +87,23 @@ public class OffTimes : IDatabase
         }
     }
 
+    public void EditOffTime(Domain.Entities.OffTime offTime)
+    {
+        try
+        {
+            Model.OffTime model = Connection.OffTimes.First(o => o.Id == offTime.Id);
+            model.FromDate = offTime.FromDate;
+            model.ToDate = offTime.ToDate;
+            model.Description = offTime.Description;
+            Connection.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
+    }
+
     private Domain.Entities.OffTime ConvertModelToOffTime(Database.Model.OffTime model)
     {
         // Database offers the feature of null foreign key value but we always supply values to user_id,from_date and to_date fields.
