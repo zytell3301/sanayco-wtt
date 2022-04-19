@@ -1,6 +1,7 @@
 using ErrorReporter;
 using GrpcService1.App.Core.Tasks;
 using GrpcService1.App.Database.Model;
+using GrpcService1.App.Database.OffTime;
 using GrpcService1.App.Database.Presentations;
 using GrpcService1.App.Database.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +12,19 @@ var builder = WebApplication.CreateBuilder(args);
 // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
 builder.Services.AddControllers();
 
+// Database connection string
 string connectionString = "Server=localhost,50296;Database=wtt;Trusted_Connection=True;MultipleActiveResultSets=true;";
+
+// Error reporter instance tha will be passed to all classes for reporting errors
 IErrorReporter reporter = new FakeReporter();
+
+// Database connection and database instances for core classes
 wttContext connection = new wttContext(new DbContextOptions<wttContext>());
 IDatabase tasksDB = new Tasks(connection, reporter);
 GrpcService1.App.Core.Presentation.IDatabase presentationDB = new Presentations(connection, reporter);
+GrpcService1.App.Core.OffTime.IDatabase offTimesDB = new OffTimes(connection, reporter);
+
+// Adding core classes to container
 builder.Services.AddSingleton<Core>(new Core(new Core.TasksCoreDependencies()
 {
     Database = tasksDB,
@@ -37,8 +46,21 @@ builder.Services.AddSingleton<GrpcService1.App.Core.Presentation.Core>(new GrpcS
         OperationSuccessfulMessage = "OperationSuccessfulMessage",
         InternalErrorMessage = "InternalErrorMessage",
     }));
+builder.Services.AddSingleton<GrpcService1.App.Core.OffTime.Core>(new GrpcService1.App.Core.OffTime.Core(
+    new GrpcService1.App.Core.OffTime.Core.OffTimeDependencies()
+    {
+        Database = offTimesDB
+    }, new GrpcService1.App.Core.OffTime.Core.OffTimeCoreConfigs()
+    {
+        OperationSuccessfulMessage = "OperationSuccessfulMessage",
+        InternalErrorMessage = "InternalErrorMessage",
+        OffTimeRestriction = 1000000000,
+        ApprovedOffTimeCode = "ApprovedOffTimeCode",
+        RejectedOffTimeCode = "RejectedOffTimeCode",
+        WaitingOffTimeCode = "WaitingOffTimeCode",
+        OffTimeRestrictionExceededMessage = "OffTimeRestrictionExceededMessage",
+    }));
 
-// Add services to the container.
 var app = builder.Build();
 
 app.UseHttpsRedirection();
