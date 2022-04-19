@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GrpcService1.App.Handlers.Http.OffTime;
 
-public class Handler : ControllerBase
+[Route("off-times")]
+public class Handler : BaseHandler
 {
     private Core.OffTime.Core Core;
 
@@ -13,16 +14,19 @@ public class Handler : ControllerBase
         Core = core;
     }
 
-    public string RecordOffTime([FromForm] int from_date, [FromForm] int to_date, [FromForm] string description,
-        [FromForm] int user_id)
+    [HttpPost("record-off-time")]
+    public string RecordOffTime()
     {
-        RecordOffTimeValidation validation = new RecordOffTimeValidation()
+        RecordOffTimeValidation body;
+        try
         {
-            Description = description,
-            FromDate = from_date,
-            ToDate = to_date,
-            UserId = user_id,
-        };
+            body = DecodePayloadJson<RecordOffTimeValidation>();
+        }
+        catch (Exception e)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
 
         switch (ModelState.IsValid)
         {
@@ -33,12 +37,12 @@ public class Handler : ControllerBase
 
         try
         {
-            Core.RecordOffTime(new User() {Id = validation.UserId}, new Domain.Entities.OffTime()
+            Core.RecordOffTime(new User() {Id = body.user_id}, new Domain.Entities.OffTime()
             {
-                Description = validation.Description,
-                FromDate = DateTime.UnixEpoch.AddSeconds(validation.FromDate),
-                ToDate = DateTime.UnixEpoch.AddSeconds(validation.ToDate),
-                UserId = validation.UserId,
+                Description = body.description,
+                FromDate = DateTime.UnixEpoch.AddSeconds(body.from_date),
+                ToDate = DateTime.UnixEpoch.AddSeconds(body.to_date),
+                UserId = body.user_id,
             });
         }
         catch (Exception e)
