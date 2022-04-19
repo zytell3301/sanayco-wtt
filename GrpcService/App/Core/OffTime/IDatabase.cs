@@ -13,4 +13,6 @@ public interface IDatabase
     public void ChangeOffTimeStatus(Domain.Entities.OffTime offTime, string status);
 
     public void DeleteOffTime(Domain.Entities.OffTime offTime);
+
+    public void EditOffTime(Domain.Entities.OffTime offTime);
 }
