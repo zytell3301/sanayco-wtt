@@ -111,4 +111,16 @@ public class Core
     {
         public IDatabase Database;
     }
+
+    public void SetOffTimeStatusWaiting(Domain.Entities.OffTime offTime)
+    {
+        try
+        {
+            Database.ChangeOffTimeStatus(offTime, WaitingOffTimeCode);
+        }
+        catch (Exception e)
+        {
+            throw InternalError;
+        }
+    }
 }
