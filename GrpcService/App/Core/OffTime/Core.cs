@@ -147,4 +147,16 @@ public class Core
             throw InternalError;
         }
     }
+
+    public void EditOffTime(Domain.Entities.OffTime offTime)
+    {
+        try
+        {
+            Database.EditOffTime(offTime);
+        }
+        catch (Exception e)
+        {
+            throw InternalError;
+        }
+    }
 }
