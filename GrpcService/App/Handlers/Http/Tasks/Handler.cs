@@ -18,7 +18,16 @@ public class Handler : BaseHandler
     [HttpPost("submit-task")]
     public string RecordTask()
     {
-        var body = DecodePayloadJson<RecordTaskValidaion>();
+        RecordTaskValidaion body;
+        try
+        {
+            body = DecodePayloadJson<RecordTaskValidaion>();
+        }
+        catch (Exception e)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
 
         switch (ModelState.IsValid)
         {
@@ -51,7 +60,16 @@ public class Handler : BaseHandler
     [HttpPost("delete-task")]
     public string DeleteTask()
     {
-        var body = DecodePayloadJson<DeleteTaskValidation>();
+        DeleteTaskValidation body;
+        try
+        {
+            body = DecodePayloadJson<DeleteTaskValidation>();
+        }
+        catch (Exception e)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
 
         switch (ModelState.IsValid)
         {
@@ -79,7 +97,17 @@ public class Handler : BaseHandler
     [Route("edit-task")]
     public string EditTask()
     {
-        var body = DecodePayloadJson<EditTaskValidation>();
+        EditTaskValidation body;
+        try
+        {
+            body = DecodePayloadJson<EditTaskValidation>();
+        }
+        catch (Exception e)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
+
         switch (ModelState.IsValid)
         {
             case false:
@@ -142,7 +170,17 @@ public class Handler : BaseHandler
     [HttpPost("approve-task")]
     public string ApproveTask()
     {
-        var body = DecodePayloadJson<UpdateTaskStatusValidation>();
+        UpdateTaskStatusValidation body;
+        try
+        {
+            body = DecodePayloadJson<UpdateTaskStatusValidation>();
+        }
+        catch (Exception e)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
+
         switch (ModelState.IsValid)
         {
             case false:
@@ -169,7 +207,17 @@ public class Handler : BaseHandler
     [HttpPost("reject-task")]
     public string RejectTask()
     {
-        var body = DecodePayloadJson<UpdateTaskStatusValidation>();
+        UpdateTaskStatusValidation body;
+        try
+        {
+            body = DecodePayloadJson<UpdateTaskStatusValidation>();
+        }
+        catch (Exception e)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
+
         switch (ModelState.IsValid)
         {
             case false:
@@ -196,7 +244,17 @@ public class Handler : BaseHandler
     [HttpPost("set-task-waiting")]
     public string SetTaskWaiting()
     {
-        var body = DecodePayloadJson<UpdateTaskStatusValidation>();
+        UpdateTaskStatusValidation body;
+        try
+        {
+            body = DecodePayloadJson<UpdateTaskStatusValidation>();
+        }
+        catch (Exception e)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
+
         switch (ModelState.IsValid)
         {
             case false:
