@@ -1,4 +1,5 @@
-﻿using GrpcService1.App.Handlers.Http.OffTime.Validations;
+﻿using System.Text.Json;
+using GrpcService1.App.Handlers.Http.OffTime.Validations;
 using GrpcService1.App.Handlers.Http.tasks.Validations;
 using GrpcService1.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -199,5 +200,38 @@ public class Handler : BaseHandler
         }
 
         return "operation successful";
+    }
+
+    private class GetOffTimeResponse
+    {
+        public int StatusCode { get; set; }
+        public Domain.Entities.OffTime OffTime { get; set; }
+    }
+
+    [HttpGet("get-off-time/{id}")]
+    public string GetOffTime(int id)
+    {
+        Domain.Entities.OffTime offTime = new Domain.Entities.OffTime()
+        {
+            Id = id,
+        };
+
+        try
+        {
+            offTime = Core.GetOffTime(offTime);
+        }
+        catch (Exception e)
+        {
+            return JsonSerializer.Serialize(new GetOffTimeResponse()
+            {
+                StatusCode = 1,
+            });
+        }
+
+        return JsonSerializer.Serialize(new GetOffTimeResponse()
+        {
+            StatusCode = 0,
+            OffTime = offTime
+        });
     }
 }
