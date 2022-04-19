@@ -2,7 +2,7 @@
 
 namespace GrpcService1.App.Handlers.Http.OffTime.Validations;
 
-public class ApproveOffTimeValidation
+public class UpdateOffTimeStatusValidation
 {
     [Required] public int off_time_id { get; set; }
 }

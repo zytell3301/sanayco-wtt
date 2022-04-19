@@ -57,10 +57,10 @@ public class Handler : BaseHandler
     [HttpPost("approve-off-time")]
     public string ApproveOffTime()
     {
-        ApproveOffTimeValidation body;
+        UpdateOffTimeStatusValidation body;
         try
         {
-            body = DecodePayloadJson<ApproveOffTimeValidation>();
+            body = DecodePayloadJson<UpdateOffTimeStatusValidation>();
         }
         catch (Exception e)
         {
