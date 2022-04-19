@@ -8,6 +8,6 @@ CREATE TABLE tasks
     created_at    DATETIME,
     end_time      DATETIME,
     description   VARCHAR,
-    status        CHAR(16),
+    status        CHAR(32),
     PRIMARY KEY (id),
 )
