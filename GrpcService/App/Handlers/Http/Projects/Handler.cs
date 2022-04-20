@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GrpcService1.App.Handlers.Http.Projects;
 
 [Route("/projects")]
-public class Handler : ControllerBase
+public class Handler : BaseHandler
 {
     private Core.Projects.Core Core;
 
@@ -14,15 +14,19 @@ public class Handler : ControllerBase
         Core = core;
     }
 
-    [Route("new-project")]
-    public string RecordProject([FromForm] string description, [FromForm] string name, [FromForm] int user_id)
+    [Route("record-project")]
+    public string RecordProject()
     {
-        RecordProjectValidation validation = new RecordProjectValidation()
+        RecordProjectValidation body;
+        try
         {
-            Description = description,
-            Name = name,
-            UserId = user_id,
-        };
+            body = DecodePayloadJson<RecordProjectValidation>();
+        }
+        catch (Exception e)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
 
         switch (ModelState.IsValid)
         {
@@ -35,11 +39,11 @@ public class Handler : ControllerBase
         {
             Core.RecordProject(new Project()
             {
-                Description = validation.Description,
-                Name = validation.Name,
+                Description = body.description,
+                Name = body.name,
             }, new User()
             {
-                Id = validation.UserId
+                Id = body.creator_id
             });
         }
         catch (Exception e)
