@@ -7,6 +7,7 @@ public class Core
 {
     private IDatabase Database;
     private IHash Hash;
+    private ITokenGenerator TokenGenerator;
 
     private readonly InvalidCredentials InvalidCredentials;
     private readonly InternalError InternalError;
@@ -21,12 +22,14 @@ public class Core
     {
         public IDatabase Database;
         public IHash Hash;
+        public ITokenGenerator TokenGenerator;
     }
 
     public Core(UsersCoreConfigs configs, UsersCoreDependencies dependencies)
     {
         Database = dependencies.Database;
         Hash = dependencies.Hash;
+        TokenGenerator = dependencies.TokenGenerator;
 
         InvalidCredentials = new InvalidCredentials(configs.InvalidCredentialsMessage);
         InternalError = new InternalError(configs.InternalErrorMessage);
