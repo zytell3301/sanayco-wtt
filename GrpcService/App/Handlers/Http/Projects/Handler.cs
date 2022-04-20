@@ -1,4 +1,5 @@
-﻿using GrpcService1.App.Handlers.Http.Projects.Validations;
+﻿using System.Text.Json;
+using GrpcService1.App.Handlers.Http.Projects.Validations;
 using GrpcService1.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -90,6 +91,37 @@ public class Handler : BaseHandler
         }
 
         return "operation successful";
+    }
+
+    private class GetProjectResponse
+    {
+        public int StatusCode { get; set; }
+        public Domain.Entities.Project Project { get; set; }
+    }
+
+    [HttpGet("get-project/{id}")]
+    public string GetProject(int id)
+    {
+        try
+        {
+            var project = Core.GetProject(new Project()
+            {
+                Id = id,
+            });
+
+            return JsonSerializer.Serialize(new GetProjectResponse()
+            {
+                StatusCode = 0,
+                Project = project
+            });
+        }
+        catch (Exception e)
+        {
+            return JsonSerializer.Serialize(new GetProjectResponse()
+            {
+                StatusCode = 1,
+            });
+        }
     }
 
     public string AddMember([FromForm] int user_id, [FromForm] int project_id, [FromForm] string level)
