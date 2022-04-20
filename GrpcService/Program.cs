@@ -3,6 +3,7 @@ using GrpcService1.App.Core.Tasks;
 using GrpcService1.App.Database.Model;
 using GrpcService1.App.Database.OffTime;
 using GrpcService1.App.Database.Presentations;
+using GrpcService1.App.Database.Projects;
 using GrpcService1.App.Database.Tasks;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,7 @@ wttContext connection = new wttContext(new DbContextOptions<wttContext>());
 IDatabase tasksDB = new Tasks(connection, reporter);
 GrpcService1.App.Core.Presentation.IDatabase presentationDB = new Presentations(connection, reporter);
 GrpcService1.App.Core.OffTime.IDatabase offTimesDB = new OffTimes(connection, reporter);
+GrpcService1.App.Core.Projects.IDatabase projectsDB = new Projects(connection, reporter);
 
 // Adding core classes to container
 builder.Services.AddSingleton<Core>(new Core(new Core.TasksCoreDependencies()
@@ -59,6 +61,16 @@ builder.Services.AddSingleton<GrpcService1.App.Core.OffTime.Core>(new GrpcServic
         RejectedOffTimeCode = "RejectedOffTimeCode",
         WaitingOffTimeCode = "WaitingOffTimeCode",
         OffTimeRestrictionExceededMessage = "OffTimeRestrictionExceededMessage",
+    }));
+builder.Services.AddSingleton<GrpcService1.App.Core.Projects.Core>(new GrpcService1.App.Core.Projects.Core(
+    new GrpcService1.App.Core.Projects.Core.ProjectsCoreDependencies()
+    {
+        Database = projectsDB,
+    }, new GrpcService1.App.Core.Projects.Core.ProjectsCoreConfigs()
+    {
+        InternalErrorMessage = "InternalErrorMessage",
+        OperationSuccessfulMessage = "OperationSuccessfulMessage",
+        CreatorProjectMemberCode = "CreatorProjectMemberCode",
     }));
 
 var app = builder.Build();
