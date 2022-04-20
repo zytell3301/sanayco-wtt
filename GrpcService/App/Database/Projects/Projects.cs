@@ -82,10 +82,8 @@ public class Projects : IDatabase
     {
         try
         {
-            Connection.Projects.Remove(new Model.Project()
-            {
-                Id = project.Id,
-            });
+            Model.Project model = Connection.Projects.First(p => p.Id == project.Id);
+            Connection.Projects.Remove(model);
             Connection.SaveChanges();
         }
         catch (Exception e)
