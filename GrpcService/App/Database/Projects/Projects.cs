@@ -94,4 +94,27 @@ public class Projects : IDatabase
             throw new InternalError("");
         }
     }
+
+    public Project GetProject(Project project)
+    {
+        try
+        {
+            return ConvertModelToProject(Connection.Projects.First(p => p.Id == project.Id));
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
+    }
+
+    private Domain.Entities.Project ConvertModelToProject(Model.Project model)
+    {
+        return new Domain.Entities.Project()
+        {
+            Id = model.Id,
+            Description = model.Description,
+            Name = model.Name,
+        };
+    }
 }
