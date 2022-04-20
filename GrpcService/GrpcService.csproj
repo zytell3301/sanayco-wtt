@@ -8,14 +8,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="Protos\Tasks.proto"/>
-        <Protobuf Include="Protos\Tasks.proto" GrpcServices="Server"/>
+        <None Remove="Protos\Tasks.proto" />
+        <Protobuf Include="Protos\Tasks.proto" GrpcServices="Server" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Google.Protobuf" Version="3.20.1-rc1"/>
-        <PackageReference Include="Grpc.AspNetCore" Version="2.40.0"/>
-        <PackageReference Include="Grpc.Net.Client" Version="2.45.0-pre1"/>
+        <PackageReference Include="Google.Protobuf" Version="3.20.1-rc1" />
+        <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
+        <PackageReference Include="Grpc.Net.Client" Version="2.45.0-pre1" />
         <PackageReference Include="Grpc.Tools" Version="2.45.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -24,13 +24,13 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.3"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.3" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="ErrorReporter"/>
-        <Folder Include="Services"/>
-        <ProjectReference Include="..\ErrorReporter\ErrorReporter.csproj"/>
+        <Folder Include="ErrorReporter" />
+        <Folder Include="Services" />
+        <ProjectReference Include="..\ErrorReporter\ErrorReporter.csproj" />
     </ItemGroup>
 
 </Project>
