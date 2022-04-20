@@ -9,10 +9,11 @@ namespace GrpcService1.Domain.Entities;
 [Table("users", Schema = "wtt")]
 public class User
 {
-    [Column("company_level")] public string CompanyLevel;
-    [Column("created_at")] public DateTime? CreatedAt;
-    [Column("id")] public int Id;
-    [Column("lastname")] public string LastName;
-    [Column("name")] public string Name;
-    [Column("skill_level")] public string SkillLevel;
+    public string CompanyLevel;
+    public DateTime? CreatedAt;
+    public int Id;
+    public string LastName;
+    public string Name;
+    public string SkillLevel;
+    public string Password;
 }
