@@ -65,10 +65,9 @@ public class Projects : IDatabase
     {
         try
         {
-            Connection.ProjectMembers.Remove(new Model.ProjectMember()
-            {
-                Id = projectMember.Id
-            });
+            Model.ProjectMember model = Connection.ProjectMembers.Where(p => p.UserId == projectMember.UserId)
+                .First(p => p.ProjectId == projectMember.ProjectId);
+            Connection.ProjectMembers.Remove(model);
             Connection.SaveChanges();
         }
         catch (Exception e)
