@@ -9,15 +9,18 @@ public class RecordProjectBatch : IRecordProjectBatch
 {
     private Model.wttContext Connection;
     private IErrorReporter ErrorReporter;
+    private Model.Project Project;
 
     public RecordProjectBatch(Model.wttContext connection, IErrorReporter errorReporter,
         Model.Project project)
     {
+        Project = project;
         Connection = connection;
         ErrorReporter = errorReporter;
         try
         {
-            Connection.Projects.Add(project);
+            Connection.Projects.Add(Project);
+            connection.SaveChanges();
         }
         catch (Exception e)
         {
@@ -33,7 +36,7 @@ public class RecordProjectBatch : IRecordProjectBatch
             Connection.ProjectMembers.Add(new Model.ProjectMember()
             {
                 Level = projectMember.Level,
-                ProjectId = projectMember.ProjectId,
+                ProjectId = Project.Id,
                 UserId = projectMember.UserId,
             });
         }
