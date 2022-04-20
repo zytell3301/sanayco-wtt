@@ -54,13 +54,19 @@ public class Handler : BaseHandler
         return "operation successful";
     }
 
-    public string UpdateProject([FromForm] string description, [FromForm] string name)
+    [HttpPost("edit-project")]
+    public string UpdateProject()
     {
-        UpdateProjectValidation validation = new UpdateProjectValidation()
+        UpdateProjectValidation body;
+        try
         {
-            Description = description,
-            Name = name,
-        };
+            body = DecodePayloadJson<UpdateProjectValidation>();
+        }
+        catch (Exception e)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
 
         switch (ModelState.IsValid)
         {
@@ -73,8 +79,9 @@ public class Handler : BaseHandler
         {
             Core.UpdateProject(new Project()
             {
-                Description = validation.Description,
-                Name = validation.Name,
+                Id = body.project_id,
+                Description = body.description,
+                Name = body.name,
             });
         }
         catch (Exception e)
