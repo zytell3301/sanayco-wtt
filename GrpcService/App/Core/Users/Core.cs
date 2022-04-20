@@ -7,12 +7,14 @@ public class Core
 {
     private IDatabase Database;
     private IHash Hash;
-    
+
     private readonly InvalidCredentials InvalidCredentials;
+    private readonly InternalError InternalError;
 
     public class UsersCoreConfigs
     {
         public string InvalidCredentialsMessage;
+        public string InternalErrorMessage;
     }
 
     public class UsersCoreDependencies
@@ -27,5 +29,6 @@ public class Core
         Hash = dependencies.Hash;
 
         InvalidCredentials = new InvalidCredentials(configs.InvalidCredentialsMessage);
+        InternalError = new InternalError(configs.InternalErrorMessage);
     }
 }
