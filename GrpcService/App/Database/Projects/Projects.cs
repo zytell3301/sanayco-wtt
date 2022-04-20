@@ -92,6 +92,23 @@ public class Projects : IDatabase
         }
     }
 
+    public void UpdateProjectMember(ProjectMember projectMember)
+    {
+        try
+        {
+            Model.ProjectMember model = Connection.ProjectMembers.Where(m => m.UserId == projectMember.UserId)
+                .First(m => m.ProjectId == projectMember.ProjectId);
+            model.Level = projectMember.Level;
+            Connection.Update(model);
+            Connection.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
+    }
+
     public Project GetProject(Project project)
     {
         try
