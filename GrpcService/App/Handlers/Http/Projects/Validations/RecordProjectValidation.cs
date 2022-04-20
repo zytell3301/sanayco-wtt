@@ -4,7 +4,7 @@ namespace GrpcService1.App.Handlers.Http.Projects.Validations;
 
 public class RecordProjectValidation
 {
-    [MaxLength(1024)] public string Description;
-    [MaxLength(32)] public string Name;
-    [Required] public int UserId;
+    [MaxLength(1024)] public string description { get; set; }
+    [MaxLength(32)] public string name { get; set; }
+    [Required] public int creator_id { get; set; }
 }
