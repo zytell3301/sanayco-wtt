@@ -34,7 +34,15 @@ public class HashGenerator : IHash
 
     public string Hash(string expression)
     {
-        throw new NotImplementedException();
+        try
+        {
+            return BCrypt.Net.BCrypt.HashPassword(expression, HashCost);
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
     }
 
     public bool VerifyHash(string hash, string original)
