@@ -43,10 +43,11 @@ namespace GrpcService1.App.Database.Model
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")
-                    .HasColumnName("created_at");
+                    .HasColumnName("created_at")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Description)
-                    .HasMaxLength(1)
+                    .HasMaxLength(1024)
                     .IsUnicode(false)
                     .HasColumnName("description");
 
@@ -55,7 +56,7 @@ namespace GrpcService1.App.Database.Model
                     .HasColumnName("from_date");
 
                 entity.Property(e => e.Status)
-                    .HasMaxLength(16)
+                    .HasMaxLength(32)
                     .IsUnicode(false)
                     .HasColumnName("status")
                     .IsFixedLength();
@@ -129,7 +130,7 @@ namespace GrpcService1.App.Database.Model
                     .HasColumnName("created_at");
 
                 entity.Property(e => e.Level)
-                    .HasMaxLength(16)
+                    .HasMaxLength(32)
                     .IsUnicode(false)
                     .HasColumnName("level")
                     .IsFixedLength();
@@ -147,7 +148,8 @@ namespace GrpcService1.App.Database.Model
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")
-                    .HasColumnName("created_at");
+                    .HasColumnName("created_at")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Description)
                     .HasMaxLength(1024)
@@ -161,7 +163,7 @@ namespace GrpcService1.App.Database.Model
                 entity.Property(e => e.ProjectId).HasColumnName("project_id");
 
                 entity.Property(e => e.Status)
-                    .HasMaxLength(16)
+                    .HasMaxLength(32)
                     .IsUnicode(false)
                     .HasColumnName("status")
                     .IsFixedLength();
@@ -244,6 +246,11 @@ namespace GrpcService1.App.Database.Model
                     .IsUnicode(false)
                     .HasColumnName("name")
                     .IsFixedLength();
+
+                entity.Property(e => e.Password)
+                    .HasMaxLength(128)
+                    .IsUnicode(false)
+                    .HasColumnName("password");
 
                 entity.Property(e => e.SkillLevel)
                     .HasMaxLength(10)

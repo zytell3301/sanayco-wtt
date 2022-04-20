@@ -19,6 +19,7 @@ namespace GrpcService1.App.Database.Model
         public string? SkillLevel { get; set; }
         public string? CompanyLevel { get; set; }
         public DateTime? CreatedAt { get; set; }
+        public string? Password { get; set; }
 
         public virtual ICollection<OffTime> OffTimes { get; set; }
         public virtual ICollection<Presentation> Presentations { get; set; }
