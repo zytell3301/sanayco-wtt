@@ -20,7 +20,7 @@ public class Core
         InternalError = new InternalError(configs.InternalErrorMessage);
         OperationSuccessful = new OperationSuccessful(configs.OperationSuccessfulMessage);
         CreatorProjectMemberCode = configs.CreatorProjectMemberCode;
-        
+
         Database = dependencies.Database;
     }
 
@@ -38,6 +38,18 @@ public class Core
             member.UserId = creator.Id;
             batch.AddProjectMember(member);
             batch.ExecuteOperation();
+        }
+        catch (Exception e)
+        {
+            throw InternalError;
+        }
+    }
+
+    public Domain.Entities.Project GetProject(Domain.Entities.Project project)
+    {
+        try
+        {
+            return Database.GetProject(project);
         }
         catch (Exception e)
         {
