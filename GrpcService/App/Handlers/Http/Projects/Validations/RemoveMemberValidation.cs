@@ -4,6 +4,6 @@ namespace GrpcService1.App.Handlers.Http.Projects.Validations;
 
 public class RemoveMemberValidation
 {
-    [Required] public int UserId;
-    [Required] public int ProjectId;
+    [Required] public int user_id { get; set; }
+    [Required] public int project_id { get; set; }
 }
