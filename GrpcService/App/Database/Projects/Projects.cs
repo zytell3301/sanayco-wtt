@@ -27,13 +27,12 @@ public class Projects : IDatabase
 
     public void UpdateProject(Project project)
     {
+        Model.Project model = Connection.Projects.First(p => p.Id == project.Id);
         try
         {
-            Connection.Projects.Update(new Model.Project()
-            {
-                Description = project.Description,
-                Name = project.Name,
-            });
+            model.Description = project.Description;
+            model.Name = project.Name;
+            Connection.Projects.Update(model);
             Connection.SaveChanges();
         }
         catch (Exception e)
