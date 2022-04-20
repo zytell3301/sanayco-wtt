@@ -239,4 +239,43 @@ public class Handler : BaseHandler
 
         return "operation successful";
     }
+
+    [HttpPost("edit-member")]
+    public string EditProjectMember()
+    {
+        AddMemberValidation body;
+        try
+        {
+            body = DecodePayloadJson<AddMemberValidation>();
+        }
+        catch (Exception e)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
+
+        switch (ModelState.IsValid)
+        {
+            case false:
+                // @TODO A proper error must be returned to client for invalid data
+                return "data validation failed";
+        }
+
+        try
+        {
+            Core.UpdateProjectMember(new ProjectMember()
+            {
+                Level = body.level,
+                ProjectId = body.project_id,
+                UserId = body.user_id,
+            });
+        }
+        catch (Exception e)
+        {
+            // @TODO A proper error must be be returned to client for because of internal failure
+            return "operation failed";
+        }
+
+        return "operation successful";
+    }
 }
