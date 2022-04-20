@@ -1,15 +1,20 @@
-﻿using GrpcService1.App.Core.Tasks;
-using GrpcService1.Domain.Errors;
+﻿#region
+
 using ErrorReporter;
+using GrpcService1.App.Core.Tasks;
+using GrpcService1.App.Database.Model;
+using GrpcService1.Domain.Errors;
+
+#endregion
 
 namespace GrpcService1.App.Database.Tasks;
 
 public class Tasks : IDatabase
 {
-    private Database.Model.wttContext Connection;
-    private IErrorReporter ErrorReporter;
+    private readonly wttContext Connection;
+    private readonly IErrorReporter ErrorReporter;
 
-    public Tasks(Database.Model.wttContext connection, IErrorReporter errorReporter)
+    public Tasks(wttContext connection, IErrorReporter errorReporter)
     {
         Connection = connection;
         ErrorReporter = errorReporter;
@@ -19,7 +24,7 @@ public class Tasks : IDatabase
     {
         try
         {
-            Connection.Tasks.Add(new Database.Model.Task()
+            Connection.Tasks.Add(new Model.Task
             {
                 // CreatedAt is not initialized because it will be evaluated in database
                 Description = task.Description,
@@ -29,7 +34,7 @@ public class Tasks : IDatabase
                 ProjectId = task.ProjectId,
                 WorkLocation = task.WorkLocation,
                 CreatedAt = task.CreatedAt,
-                UserId = task.UserId,
+                UserId = task.UserId
             });
             Connection.SaveChanges();
         }
@@ -74,11 +79,6 @@ public class Tasks : IDatabase
         }
     }
 
-    private void UpdateTask(Database.Model.Task task)
-    {
-        Connection.Tasks.Update(task);
-    }
-
     public void ChangeTaskStatus(Domain.Entities.Task task, string status)
     {
         try
@@ -108,15 +108,20 @@ public class Tasks : IDatabase
         }
     }
 
-    private Domain.Entities.Task ConvertModelToTask(Database.Model.Task model)
+    private void UpdateTask(Model.Task task)
     {
-        var task = new Domain.Entities.Task()
+        Connection.Tasks.Update(task);
+    }
+
+    private Domain.Entities.Task ConvertModelToTask(Model.Task model)
+    {
+        var task = new Domain.Entities.Task
         {
             Id = model.Id,
             Description = model.Description,
             Status = model.Status,
             Title = model.Title,
-            WorkLocation = model.WorkLocation,
+            WorkLocation = model.WorkLocation
         };
         switch (task.CreatedAt.HasValue)
         {

@@ -1,2 +1,4 @@
-USE wtt;
-ALTER TABLE users ADD password VARCHAR(128);
+USE
+wtt;
+ALTER TABLE users
+    ADD password VARCHAR(128);

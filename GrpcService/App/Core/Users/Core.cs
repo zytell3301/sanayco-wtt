@@ -1,33 +1,21 @@
-﻿using GrpcService1.Domain.Entities;
+﻿#region
+
+using GrpcService1.Domain.Entities;
 using GrpcService1.Domain.Errors;
+
+#endregion
 
 namespace GrpcService1.App.Core.Users;
 
 public class Core
 {
-    private IDatabase Database;
-    private IHash Hash;
-    private ITokenGenerator TokenGenerator;
-
-    private readonly InvalidCredentials InvalidCredentials;
+    private readonly int ExpirationWindow;
     private readonly InternalError InternalError;
 
-    private readonly int ExpirationWindow;
-
-    public class UsersCoreConfigs
-    {
-        public string InvalidCredentialsMessage;
-        public string InternalErrorMessage;
-
-        public int ExpirationWindow;
-    }
-
-    public class UsersCoreDependencies
-    {
-        public IDatabase Database;
-        public IHash Hash;
-        public ITokenGenerator TokenGenerator;
-    }
+    private readonly InvalidCredentials InvalidCredentials;
+    private readonly IDatabase Database;
+    private readonly IHash Hash;
+    private readonly ITokenGenerator TokenGenerator;
 
     public Core(UsersCoreConfigs configs, UsersCoreDependencies dependencies)
     {
@@ -41,7 +29,7 @@ public class Core
         ExpirationWindow = configs.ExpirationWindow;
     }
 
-    public Domain.Entities.Token Login(User user, string password)
+    public Token Login(User user, string password)
     {
         try
         {
@@ -54,11 +42,11 @@ public class Core
                     throw InvalidCredentials;
             }
 
-            var token = new Token()
+            var token = new Token
             {
                 Token1 = TokenGenerator.GenerateToken(),
                 UserId = user.Id,
-                ExpirationDate = DateTime.Now.AddSeconds(ExpirationWindow),
+                ExpirationDate = DateTime.Now.AddSeconds(ExpirationWindow)
             };
 
             Database.RecordToken(token);
@@ -71,22 +59,36 @@ public class Core
         }
     }
 
-    public void Register(Domain.Entities.User user)
+    public void Register(User user)
     {
         try
         {
-            Database.RecordUser(new User()
+            Database.RecordUser(new User
             {
                 Name = user.Name,
                 Password = Hash.Hash(user.Password),
                 CompanyLevel = user.CompanyLevel,
                 LastName = user.LastName,
-                SkillLevel = user.SkillLevel,
+                SkillLevel = user.SkillLevel
             });
         }
         catch (Exception e)
         {
             throw InternalError;
         }
+    }
+
+    public class UsersCoreConfigs
+    {
+        public int ExpirationWindow;
+        public string InternalErrorMessage;
+        public string InvalidCredentialsMessage;
+    }
+
+    public class UsersCoreDependencies
+    {
+        public IDatabase Database;
+        public IHash Hash;
+        public ITokenGenerator TokenGenerator;
     }
 }

@@ -1,15 +1,21 @@
-﻿using GrpcService1.App.Core.OffTime;
-using GrpcService1.Domain.Entities;
+﻿#region
+
+using ErrorReporter;
+using GrpcService1.App.Core.OffTime;
+using GrpcService1.App.Database.Model;
 using GrpcService1.Domain.Errors;
+using User = GrpcService1.Domain.Entities.User;
+
+#endregion
 
 namespace GrpcService1.App.Database.OffTime;
 
 public class OffTimes : IDatabase
 {
-    private App.Database.Model.wttContext Connection;
-    private ErrorReporter.IErrorReporter ErrorReporter;
+    private readonly wttContext Connection;
+    private readonly IErrorReporter ErrorReporter;
 
-    public OffTimes(App.Database.Model.wttContext connection, ErrorReporter.IErrorReporter errorReporter)
+    public OffTimes(wttContext connection, IErrorReporter errorReporter)
     {
         Connection = connection;
         ErrorReporter = errorReporter;
@@ -19,13 +25,13 @@ public class OffTimes : IDatabase
     {
         try
         {
-            Connection.OffTimes.Add(new App.Database.Model.OffTime()
+            Connection.OffTimes.Add(new Model.OffTime
             {
                 Description = offTime.Description,
                 Status = offTime.Status,
                 FromDate = offTime.FromDate,
                 ToDate = offTime.ToDate,
-                UserId = offTime.UserId,
+                UserId = offTime.UserId
             });
             Connection.SaveChanges();
         }
@@ -36,17 +42,14 @@ public class OffTimes : IDatabase
         }
     }
 
-    public List<Domain.Entities.OffTime> GetOffTimeHistory(User user, DateTime @from, DateTime to)
+    public List<Domain.Entities.OffTime> GetOffTimeHistory(User user, DateTime from, DateTime to)
     {
-        List<Domain.Entities.OffTime> offTimes = new List<Domain.Entities.OffTime>();
+        var offTimes = new List<Domain.Entities.OffTime>();
         try
         {
             var enumerator = Connection.OffTimes.Where(o => o.UserId == user.Id).Where(o => o.CreatedAt > from)
                 .Where(o => o.CreatedAt < to).ToList();
-            foreach (var offTime in enumerator)
-            {
-                offTimes.Add(ConvertModelToOffTime(offTime));
-            }
+            foreach (var offTime in enumerator) offTimes.Add(ConvertModelToOffTime(offTime));
         }
         catch (Exception e)
         {
@@ -76,7 +79,7 @@ public class OffTimes : IDatabase
     {
         try
         {
-            Model.OffTime model = Connection.OffTimes.First(o => o.Id == offTime.Id);
+            var model = Connection.OffTimes.First(o => o.Id == offTime.Id);
             Connection.OffTimes.Remove(model);
             Connection.SaveChanges();
         }
@@ -91,7 +94,7 @@ public class OffTimes : IDatabase
     {
         try
         {
-            Model.OffTime model = Connection.OffTimes.First(o => o.Id == offTime.Id);
+            var model = Connection.OffTimes.First(o => o.Id == offTime.Id);
             model.FromDate = offTime.FromDate;
             model.ToDate = offTime.ToDate;
             model.Description = offTime.Description;
@@ -117,11 +120,11 @@ public class OffTimes : IDatabase
         }
     }
 
-    private Domain.Entities.OffTime ConvertModelToOffTime(Database.Model.OffTime model)
+    private Domain.Entities.OffTime ConvertModelToOffTime(Model.OffTime model)
     {
         // Database offers the feature of null foreign key value but we always supply values to user_id,from_date and to_date fields.
         // So it is not needed to check for null reference
-        var offTime = new Domain.Entities.OffTime()
+        var offTime = new Domain.Entities.OffTime
         {
             Id = model.Id,
             Status = model.Status,
@@ -129,7 +132,7 @@ public class OffTimes : IDatabase
             CreatedAt = model.CreatedAt,
             UserId = model.UserId.Value,
             FromDate = model.FromDate.Value,
-            ToDate = model.ToDate.Value,
+            ToDate = model.ToDate.Value
         };
 
         return offTime;

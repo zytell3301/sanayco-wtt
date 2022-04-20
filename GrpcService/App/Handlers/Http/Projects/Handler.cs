@@ -1,14 +1,18 @@
-﻿using System.Text.Json;
+﻿#region
+
+using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Projects.Validations;
 using GrpcService1.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+
+#endregion
 
 namespace GrpcService1.App.Handlers.Http.Projects;
 
 [Route("/projects")]
 public class Handler : BaseHandler
 {
-    private Core.Projects.Core Core;
+    private readonly Core.Projects.Core Core;
 
     public Handler(Core.Projects.Core core)
     {
@@ -38,11 +42,11 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.RecordProject(new Project()
+            Core.RecordProject(new Project
             {
                 Description = body.description,
-                Name = body.name,
-            }, new User()
+                Name = body.name
+            }, new User
             {
                 Id = body.creator_id
             });
@@ -78,11 +82,11 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.UpdateProject(new Project()
+            Core.UpdateProject(new Project
             {
                 Id = body.project_id,
                 Description = body.description,
-                Name = body.name,
+                Name = body.name
             });
         }
         catch (Exception e)
@@ -93,23 +97,17 @@ public class Handler : BaseHandler
         return "operation successful";
     }
 
-    private class GetProjectResponse
-    {
-        public int StatusCode { get; set; }
-        public Domain.Entities.Project Project { get; set; }
-    }
-
     [HttpGet("get-project/{id}")]
     public string GetProject(int id)
     {
         try
         {
-            var project = Core.GetProject(new Project()
+            var project = Core.GetProject(new Project
             {
-                Id = id,
+                Id = id
             });
 
-            return JsonSerializer.Serialize(new GetProjectResponse()
+            return JsonSerializer.Serialize(new GetProjectResponse
             {
                 StatusCode = 0,
                 Project = project
@@ -117,9 +115,9 @@ public class Handler : BaseHandler
         }
         catch (Exception e)
         {
-            return JsonSerializer.Serialize(new GetProjectResponse()
+            return JsonSerializer.Serialize(new GetProjectResponse
             {
-                StatusCode = 1,
+                StatusCode = 1
             });
         }
     }
@@ -147,11 +145,11 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.AddMember(new ProjectMember()
+            Core.AddMember(new ProjectMember
             {
                 ProjectId = body.project_id,
                 UserId = body.user_id,
-                Level = body.level,
+                Level = body.level
             });
         }
         catch (Exception e)
@@ -188,10 +186,10 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.RemoveMember(new ProjectMember()
+            Core.RemoveMember(new ProjectMember
             {
                 ProjectId = body.project_id,
-                UserId = body.user_id,
+                UserId = body.user_id
             });
         }
         catch (Exception e)
@@ -226,9 +224,9 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.DeleteProject(new Project()
+            Core.DeleteProject(new Project
             {
-                Id = body.project_id,
+                Id = body.project_id
             });
         }
         catch (Exception e)
@@ -263,11 +261,11 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.UpdateProjectMember(new ProjectMember()
+            Core.UpdateProjectMember(new ProjectMember
             {
                 Level = body.level,
                 ProjectId = body.project_id,
-                UserId = body.user_id,
+                UserId = body.user_id
             });
         }
         catch (Exception e)
@@ -277,5 +275,11 @@ public class Handler : BaseHandler
         }
 
         return "operation successful";
+    }
+
+    private class GetProjectResponse
+    {
+        public int StatusCode { get; set; }
+        public Project Project { get; set; }
     }
 }

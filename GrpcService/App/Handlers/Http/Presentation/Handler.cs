@@ -1,15 +1,17 @@
-﻿using System.Text.Json;
-using System.Text.Json.Nodes;
+﻿#region
+
 using GrpcService1.App.Handlers.Http.Presentation.Validations;
 using GrpcService1.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+
+#endregion
 
 namespace GrpcService1.App.Handlers.Http.Presentation;
 
 [Route("/presentation")]
 public class Handler : BaseHandler
 {
-    private Core.Presentation.Core Core;
+    private readonly Core.Presentation.Core Core;
 
     public Handler(Core.Presentation.Core core)
     {
@@ -30,9 +32,9 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.RecordPresentation(new User()
+            Core.RecordPresentation(new User
             {
-                Id = req.user_id,
+                Id = req.user_id
             });
         }
         catch (Exception e)
@@ -58,9 +60,9 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.RecordPresentationEnd(new User()
+            Core.RecordPresentationEnd(new User
             {
-                Id = req.user_id,
+                Id = req.user_id
             });
         }
         catch (Exception e)
@@ -86,9 +88,9 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.GetPresentationTime(new User()
+            Core.GetPresentationTime(new User
             {
-                Id = body.user_id,
+                Id = body.user_id
             });
         }
         catch (Exception e)

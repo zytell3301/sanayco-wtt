@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace GrpcService1.Domain.Entities;
+﻿namespace GrpcService1.Domain.Entities;
 
 public class Presentation
 {

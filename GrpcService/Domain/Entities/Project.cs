@@ -1,7 +1,5 @@
 ﻿#region
 
-using System.ComponentModel.DataAnnotations.Schema;
-
 #endregion
 
 namespace GrpcService1.Domain.Entities;

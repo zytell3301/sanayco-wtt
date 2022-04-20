@@ -8,10 +8,10 @@ namespace GrpcService1.App.Core.Tasks;
 
 public class Core
 {
-    public string ApprovedTaskCode;
     private readonly IDatabase Database;
     private readonly InternalError InternalError;
     private readonly OperationSuccessful OperationSuccessful;
+    public string ApprovedTaskCode;
     public string RejectedTaskCode;
     public string WaitingTaskCode;
 

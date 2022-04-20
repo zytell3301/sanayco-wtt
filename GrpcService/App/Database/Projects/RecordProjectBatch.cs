@@ -1,18 +1,23 @@
-﻿using GrpcService1.App.Core.Projects;
-using GrpcService1.Domain.Entities;
-using GrpcService1.Domain.Errors;
+﻿#region
+
 using ErrorReporter;
+using GrpcService1.App.Core.Projects;
+using GrpcService1.App.Database.Model;
+using GrpcService1.Domain.Errors;
+using ProjectMember = GrpcService1.Domain.Entities.ProjectMember;
+
+#endregion
 
 namespace GrpcService1.App.Database.Projects;
 
 public class RecordProjectBatch : IRecordProjectBatch
 {
-    private Model.wttContext Connection;
-    private IErrorReporter ErrorReporter;
-    private Model.Project Project;
+    private readonly wttContext Connection;
+    private readonly IErrorReporter ErrorReporter;
+    private readonly Project Project;
 
-    public RecordProjectBatch(Model.wttContext connection, IErrorReporter errorReporter,
-        Model.Project project)
+    public RecordProjectBatch(wttContext connection, IErrorReporter errorReporter,
+        Project project)
     {
         Project = project;
         Connection = connection;
@@ -29,15 +34,15 @@ public class RecordProjectBatch : IRecordProjectBatch
         }
     }
 
-    public void AddProjectMember(Domain.Entities.ProjectMember projectMember)
+    public void AddProjectMember(ProjectMember projectMember)
     {
         try
         {
-            Connection.ProjectMembers.Add(new Model.ProjectMember()
+            Connection.ProjectMembers.Add(new Model.ProjectMember
             {
                 Level = projectMember.Level,
                 ProjectId = Project.Id,
-                UserId = projectMember.UserId,
+                UserId = projectMember.UserId
             });
         }
         catch (Exception e)

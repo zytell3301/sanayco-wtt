@@ -9,11 +9,10 @@ namespace GrpcService1.App.Core.Projects;
 
 public class Core
 {
-    private string CreatorProjectMemberCode;
-
     private readonly IDatabase Database;
     private readonly InternalError InternalError;
     private readonly OperationSuccessful OperationSuccessful;
+    private readonly string CreatorProjectMemberCode;
 
     public Core(ProjectsCoreDependencies dependencies, ProjectsCoreConfigs configs)
     {
@@ -45,7 +44,7 @@ public class Core
         }
     }
 
-    public Domain.Entities.Project GetProject(Domain.Entities.Project project)
+    public Project GetProject(Project project)
     {
         try
         {
@@ -111,7 +110,7 @@ public class Core
         }
     }
 
-    public void UpdateProjectMember(Domain.Entities.ProjectMember projectMember)
+    public void UpdateProjectMember(ProjectMember projectMember)
     {
         try
         {

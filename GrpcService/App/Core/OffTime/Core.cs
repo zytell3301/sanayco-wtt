@@ -14,8 +14,6 @@ public class Core
      * These are the constants that will be used to demonstrate the off time status.
      */
     private readonly string ApprovedOffTimeCode;
-    private readonly string RejectedOffTimeCode;
-    private readonly string WaitingOffTimeCode;
 
     private readonly IDatabase Database;
     private readonly InternalError InternalError;
@@ -27,6 +25,8 @@ public class Core
     private readonly int OffTimeRestriction;
     private readonly OffTimeRestrictionExceeded OffTimeRestrictionExceeded;
     private readonly OperationSuccessful OperationSuccessful;
+    private readonly string RejectedOffTimeCode;
+    private readonly string WaitingOffTimeCode;
 
     public Core(OffTimeDependencies dependencies, OffTimeCoreConfigs configs)
     {
@@ -96,22 +96,6 @@ public class Core
         }
     }
 
-    public class OffTimeCoreConfigs
-    {
-        public string ApprovedOffTimeCode;
-        public string InternalErrorMessage;
-        public int OffTimeRestriction;
-        public string OffTimeRestrictionExceededMessage;
-        public string OperationSuccessfulMessage;
-        public string RejectedOffTimeCode;
-        public string WaitingOffTimeCode;
-    }
-
-    public class OffTimeDependencies
-    {
-        public IDatabase Database;
-    }
-
     public void SetOffTimeStatusWaiting(Domain.Entities.OffTime offTime)
     {
         try
@@ -158,5 +142,21 @@ public class Core
         {
             throw InternalError;
         }
+    }
+
+    public class OffTimeCoreConfigs
+    {
+        public string ApprovedOffTimeCode;
+        public string InternalErrorMessage;
+        public int OffTimeRestriction;
+        public string OffTimeRestrictionExceededMessage;
+        public string OperationSuccessfulMessage;
+        public string RejectedOffTimeCode;
+        public string WaitingOffTimeCode;
+    }
+
+    public class OffTimeDependencies
+    {
+        public IDatabase Database;
     }
 }

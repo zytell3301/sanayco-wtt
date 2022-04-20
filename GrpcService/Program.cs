@@ -1,3 +1,5 @@
+#region
+
 using ErrorReporter;
 using GrpcService1.App.Core.Tasks;
 using GrpcService1.App.Database.Model;
@@ -7,6 +9,8 @@ using GrpcService1.App.Database.Projects;
 using GrpcService1.App.Database.Tasks;
 using Microsoft.EntityFrameworkCore;
 
+#endregion
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Additional configuration is required to successfully run gRPC on macOS.
@@ -14,45 +18,45 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Database connection string
-string connectionString = "Server=localhost,50296;Database=wtt;Trusted_Connection=True;MultipleActiveResultSets=true;";
+var connectionString = "Server=localhost,50296;Database=wtt;Trusted_Connection=True;MultipleActiveResultSets=true;";
 
 // Error reporter instance tha will be passed to all classes for reporting errors
 IErrorReporter reporter = new FakeReporter();
 
 // Database connection and database instances for core classes
-wttContext connection = new wttContext(new DbContextOptions<wttContext>());
+var connection = new wttContext(new DbContextOptions<wttContext>());
 IDatabase tasksDB = new Tasks(connection, reporter);
 GrpcService1.App.Core.Presentation.IDatabase presentationDB = new Presentations(connection, reporter);
 GrpcService1.App.Core.OffTime.IDatabase offTimesDB = new OffTimes(connection, reporter);
 GrpcService1.App.Core.Projects.IDatabase projectsDB = new Projects(connection, reporter);
 
 // Adding core classes to container
-builder.Services.AddSingleton<Core>(new Core(new Core.TasksCoreDependencies()
+builder.Services.AddSingleton(new Core(new Core.TasksCoreDependencies
 {
-    Database = tasksDB,
-}, new Core.TasksCoreConfigs()
+    Database = tasksDB
+}, new Core.TasksCoreConfigs
 {
     OperationSuccessfulMessage = "OperationSuccessfulMessage",
     InternalErrorMessage = "InternalErrorMessage",
 
     ApprovedTaskCode = "ApprovedTaskCode",
     UnApprovedTaskCode = "UnApprovedTaskCode",
-    WaitingTaskCode = "WaitingTaskCode",
+    WaitingTaskCode = "WaitingTaskCode"
 }));
-builder.Services.AddSingleton<GrpcService1.App.Core.Presentation.Core>(new GrpcService1.App.Core.Presentation.Core(
-    new GrpcService1.App.Core.Presentation.Core.PresentationCoreDependencies()
+builder.Services.AddSingleton(new GrpcService1.App.Core.Presentation.Core(
+    new GrpcService1.App.Core.Presentation.Core.PresentationCoreDependencies
     {
-        Database = presentationDB,
-    }, new GrpcService1.App.Core.Presentation.Core.PresentationCoreConfigs()
+        Database = presentationDB
+    }, new GrpcService1.App.Core.Presentation.Core.PresentationCoreConfigs
     {
         OperationSuccessfulMessage = "OperationSuccessfulMessage",
-        InternalErrorMessage = "InternalErrorMessage",
+        InternalErrorMessage = "InternalErrorMessage"
     }));
-builder.Services.AddSingleton<GrpcService1.App.Core.OffTime.Core>(new GrpcService1.App.Core.OffTime.Core(
-    new GrpcService1.App.Core.OffTime.Core.OffTimeDependencies()
+builder.Services.AddSingleton(new GrpcService1.App.Core.OffTime.Core(
+    new GrpcService1.App.Core.OffTime.Core.OffTimeDependencies
     {
         Database = offTimesDB
-    }, new GrpcService1.App.Core.OffTime.Core.OffTimeCoreConfigs()
+    }, new GrpcService1.App.Core.OffTime.Core.OffTimeCoreConfigs
     {
         OperationSuccessfulMessage = "OperationSuccessfulMessage",
         InternalErrorMessage = "InternalErrorMessage",
@@ -60,17 +64,17 @@ builder.Services.AddSingleton<GrpcService1.App.Core.OffTime.Core>(new GrpcServic
         ApprovedOffTimeCode = "ApprovedOffTimeCode",
         RejectedOffTimeCode = "RejectedOffTimeCode",
         WaitingOffTimeCode = "WaitingOffTimeCode",
-        OffTimeRestrictionExceededMessage = "OffTimeRestrictionExceededMessage",
+        OffTimeRestrictionExceededMessage = "OffTimeRestrictionExceededMessage"
     }));
-builder.Services.AddSingleton<GrpcService1.App.Core.Projects.Core>(new GrpcService1.App.Core.Projects.Core(
-    new GrpcService1.App.Core.Projects.Core.ProjectsCoreDependencies()
+builder.Services.AddSingleton(new GrpcService1.App.Core.Projects.Core(
+    new GrpcService1.App.Core.Projects.Core.ProjectsCoreDependencies
     {
-        Database = projectsDB,
-    }, new GrpcService1.App.Core.Projects.Core.ProjectsCoreConfigs()
+        Database = projectsDB
+    }, new GrpcService1.App.Core.Projects.Core.ProjectsCoreConfigs
     {
         InternalErrorMessage = "InternalErrorMessage",
         OperationSuccessfulMessage = "OperationSuccessfulMessage",
-        CreatorProjectMemberCode = "CreatorProjectMemberCode",
+        CreatorProjectMemberCode = "CreatorProjectMemberCode"
     }));
 
 var app = builder.Build();

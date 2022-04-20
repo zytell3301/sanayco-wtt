@@ -1,15 +1,18 @@
-﻿using System.Text.Json;
+﻿#region
+
+using System.Text.Json;
 using GrpcService1.App.Handlers.Http.OffTime.Validations;
-using GrpcService1.App.Handlers.Http.tasks.Validations;
 using GrpcService1.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+
+#endregion
 
 namespace GrpcService1.App.Handlers.Http.OffTime;
 
 [Route("off-times")]
 public class Handler : BaseHandler
 {
-    private Core.OffTime.Core Core;
+    private readonly Core.OffTime.Core Core;
 
     public Handler(Core.OffTime.Core core)
     {
@@ -39,12 +42,12 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.RecordOffTime(new User() {Id = body.user_id}, new Domain.Entities.OffTime()
+            Core.RecordOffTime(new User {Id = body.user_id}, new Domain.Entities.OffTime
             {
                 Description = body.description,
                 FromDate = DateTime.UnixEpoch.AddSeconds(body.from_date),
                 ToDate = DateTime.UnixEpoch.AddSeconds(body.to_date),
-                UserId = body.user_id,
+                UserId = body.user_id
             });
         }
         catch (Exception e)
@@ -79,9 +82,9 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.ApproveOffTime(new Domain.Entities.OffTime()
+            Core.ApproveOffTime(new Domain.Entities.OffTime
             {
-                Id = body.off_time_id,
+                Id = body.off_time_id
             });
         }
         catch (Exception e)
@@ -116,9 +119,9 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.RejectOffTime(new Domain.Entities.OffTime()
+            Core.RejectOffTime(new Domain.Entities.OffTime
             {
-                Id = body.off_time_id,
+                Id = body.off_time_id
             });
         }
         catch (Exception e)
@@ -153,9 +156,9 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.SetOffTimeStatusWaiting(new Domain.Entities.OffTime()
+            Core.SetOffTimeStatusWaiting(new Domain.Entities.OffTime
             {
-                Id = body.off_time_id,
+                Id = body.off_time_id
             });
         }
         catch (Exception e)
@@ -190,9 +193,9 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.CancelOffTime(new Domain.Entities.OffTime()
+            Core.CancelOffTime(new Domain.Entities.OffTime
             {
-                Id = body.off_time_id,
+                Id = body.off_time_id
             });
         }
         catch (Exception e)
@@ -204,18 +207,12 @@ public class Handler : BaseHandler
         return "operation successful";
     }
 
-    private class GetOffTimeResponse
-    {
-        public int StatusCode { get; set; }
-        public Domain.Entities.OffTime OffTime { get; set; }
-    }
-
     [HttpGet("get-off-time/{id}")]
     public string GetOffTime(int id)
     {
-        Domain.Entities.OffTime offTime = new Domain.Entities.OffTime()
+        var offTime = new Domain.Entities.OffTime
         {
-            Id = id,
+            Id = id
         };
 
         try
@@ -224,13 +221,13 @@ public class Handler : BaseHandler
         }
         catch (Exception e)
         {
-            return JsonSerializer.Serialize(new GetOffTimeResponse()
+            return JsonSerializer.Serialize(new GetOffTimeResponse
             {
-                StatusCode = 1,
+                StatusCode = 1
             });
         }
 
-        return JsonSerializer.Serialize(new GetOffTimeResponse()
+        return JsonSerializer.Serialize(new GetOffTimeResponse
         {
             StatusCode = 0,
             OffTime = offTime
@@ -260,12 +257,12 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.EditOffTime(new Domain.Entities.OffTime()
+            Core.EditOffTime(new Domain.Entities.OffTime
             {
                 Id = body.off_time_id,
                 Description = body.description,
                 FromDate = DateTime.UnixEpoch.AddSeconds(body.from_date),
-                ToDate = DateTime.UnixEpoch.AddSeconds(body.to_date),
+                ToDate = DateTime.UnixEpoch.AddSeconds(body.to_date)
             });
         }
         catch (Exception e)
@@ -275,5 +272,11 @@ public class Handler : BaseHandler
         }
 
         return "operation successful";
+    }
+
+    private class GetOffTimeResponse
+    {
+        public int StatusCode { get; set; }
+        public Domain.Entities.OffTime OffTime { get; set; }
     }
 }

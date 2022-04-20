@@ -1,16 +1,21 @@
-﻿using GrpcService1.App.Core.Presentation;
-using GrpcService1.Domain.Entities;
-using GrpcService1.Domain.Errors;
+﻿#region
+
 using ErrorReporter;
+using GrpcService1.App.Core.Presentation;
+using GrpcService1.App.Database.Model;
+using GrpcService1.Domain.Errors;
+using User = GrpcService1.Domain.Entities.User;
+
+#endregion
 
 namespace GrpcService1.App.Database.Presentations;
 
 public class Presentations : IDatabase
 {
-    private App.Database.Model.wttContext Connection;
-    private ErrorReporter.IErrorReporter ErrorReporter;
+    private readonly wttContext Connection;
+    private readonly IErrorReporter ErrorReporter;
 
-    public Presentations(App.Database.Model.wttContext connection, IErrorReporter errorReporter)
+    public Presentations(wttContext connection, IErrorReporter errorReporter)
     {
         Connection = connection;
         ErrorReporter = errorReporter;
@@ -20,10 +25,10 @@ public class Presentations : IDatabase
     {
         try
         {
-            Connection.Presentations.Add(new App.Database.Model.Presentation()
+            Connection.Presentations.Add(new Presentation
             {
                 UserId = user.Id,
-                Start = DateTime.Now,
+                Start = DateTime.Now
             });
             Connection.SaveChanges();
         }

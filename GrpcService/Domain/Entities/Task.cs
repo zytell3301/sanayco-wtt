@@ -1,8 +1,6 @@
 ﻿#region
 
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.CompilerServices;
 
 #endregion
 
@@ -19,7 +17,7 @@ public class Task
     [Required] public int ProjectId { get; set; }
     public string Status { get; set; }
 
-    [Required, MaxLength(32)] public string Title { get; set; }
+    [Required] [MaxLength(32)] public string Title { get; set; }
 
     [Required] public string WorkLocation { get; set; }
     public int UserId { get; set; }

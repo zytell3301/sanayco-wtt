@@ -1,14 +1,17 @@
-﻿using System.Text.Json;
+﻿#region
+
+using System.Text.Json;
 using GrpcService1.App.Handlers.Http.tasks.Validations;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
+
+#endregion
 
 namespace GrpcService1.App.Handlers.Http.tasks;
 
 [Route("/tasks")]
 public class Handler : BaseHandler
 {
-    private Core.Tasks.Core Core;
+    private readonly Core.Tasks.Core Core;
 
     public Handler(Core.Tasks.Core core)
     {
@@ -38,14 +41,14 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.RecordTask(new Domain.Entities.Task()
+            Core.RecordTask(new Domain.Entities.Task
             {
                 Description = body.description,
                 Title = body.title,
                 EndTime = DateTime.UnixEpoch.AddSeconds(body.end_time),
                 ProjectId = body.project_id,
                 WorkLocation = body.work_location,
-                UserId = body.user_id,
+                UserId = body.user_id
             });
         }
         catch (Exception e)
@@ -80,9 +83,9 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.DeleteTask(new Domain.Entities.Task()
+            Core.DeleteTask(new Domain.Entities.Task
             {
-                Id = body.task_id,
+                Id = body.task_id
             });
         }
         catch (Exception e)
@@ -117,13 +120,13 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.EditTask(new Domain.Entities.Task()
+            Core.EditTask(new Domain.Entities.Task
             {
                 Id = body.task_id,
                 Description = body.description,
                 WorkLocation = body.work_location,
                 Title = body.title,
-                EndTime = DateTime.UnixEpoch.AddSeconds(body.end_time),
+                EndTime = DateTime.UnixEpoch.AddSeconds(body.end_time)
             });
         }
         catch (Exception e)
@@ -134,35 +137,26 @@ public class Handler : BaseHandler
         return "operation successful";
     }
 
-    class GetTaskResponse
-    {
-        public Domain.Entities.Task Task { get; set; }
-
-        // This is the status code that indicates the response status.
-        // Status code 0 is always for successful operation.
-        public int Code { get; set; }
-    }
-
     [HttpGet("get-task/{id}")]
     public string GetTask(int id)
     {
         try
         {
-            var task = Core.GetTask(new Domain.Entities.Task()
+            var task = Core.GetTask(new Domain.Entities.Task
             {
-                Id = id,
+                Id = id
             });
-            return JsonSerializer.Serialize(new GetTaskResponse()
+            return JsonSerializer.Serialize(new GetTaskResponse
             {
                 Code = 0,
-                Task = task,
+                Task = task
             });
         }
         catch (Exception e)
         {
-            return JsonSerializer.Serialize(new GetTaskResponse()
+            return JsonSerializer.Serialize(new GetTaskResponse
             {
-                Code = 1,
+                Code = 1
             });
         }
     }
@@ -190,9 +184,9 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.ApproveTask(new Domain.Entities.Task()
+            Core.ApproveTask(new Domain.Entities.Task
             {
-                Id = body.task_id,
+                Id = body.task_id
             });
         }
         catch (Exception e)
@@ -227,9 +221,9 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.RejectTask(new Domain.Entities.Task()
+            Core.RejectTask(new Domain.Entities.Task
             {
-                Id = body.task_id,
+                Id = body.task_id
             });
         }
         catch (Exception e)
@@ -264,9 +258,9 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.SetTaskWaiting(new Domain.Entities.Task()
+            Core.SetTaskWaiting(new Domain.Entities.Task
             {
-                Id = body.task_id,
+                Id = body.task_id
             });
         }
         catch (Exception e)
@@ -276,5 +270,14 @@ public class Handler : BaseHandler
         }
 
         return "operation successful";
+    }
+
+    private class GetTaskResponse
+    {
+        public Domain.Entities.Task Task { get; set; }
+
+        // This is the status code that indicates the response status.
+        // Status code 0 is always for successful operation.
+        public int Code { get; set; }
     }
 }
