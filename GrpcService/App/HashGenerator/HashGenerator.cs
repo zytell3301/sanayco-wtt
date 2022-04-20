@@ -45,8 +45,16 @@ public class HashGenerator : IHash
         }
     }
 
-    public bool VerifyHash(string hash, string original)
+    public bool VerifyHash(string original, string hash)
     {
-        throw new NotImplementedException();
+        try
+        {
+            return BCrypt.Net.BCrypt.Verify(original, hash);
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
     }
 }
