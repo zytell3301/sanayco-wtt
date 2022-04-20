@@ -1,4 +1,5 @@
 ﻿using GrpcService1.Domain.Entities;
+using GrpcService1.Domain.Errors;
 
 namespace GrpcService1.App.Core.Users;
 
@@ -6,9 +7,12 @@ public class Core
 {
     private IDatabase Database;
     private IHash Hash;
+    
+    private readonly InvalidCredentials InvalidCredentials;
 
     public class UsersCoreConfigs
     {
+        public string InvalidCredentialsMessage;
     }
 
     public class UsersCoreDependencies
@@ -21,5 +25,7 @@ public class Core
     {
         Database = dependencies.Database;
         Hash = dependencies.Hash;
+
+        InvalidCredentials = new InvalidCredentials(configs.InvalidCredentialsMessage);
     }
 }
