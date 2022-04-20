@@ -189,12 +189,19 @@ public class Handler : BaseHandler
         return "operation successful";
     }
 
-    public string DeleteProject([FromForm] int project_id)
+    [HttpPost("delete-project")]
+    public string DeleteProject()
     {
-        DeleteMemberValidation validation = new DeleteMemberValidation()
+        DeleteProjectValidation body;
+        try
         {
-            ProjectId = project_id,
-        };
+            body = DecodePayloadJson<DeleteProjectValidation>();
+        }
+        catch (Exception e)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
 
         switch (ModelState.IsValid)
         {
@@ -207,7 +214,7 @@ public class Handler : BaseHandler
         {
             Core.DeleteProject(new Project()
             {
-                Id = validation.ProjectId,
+                Id = body.project_id,
             });
         }
         catch (Exception e)
