@@ -4,7 +4,7 @@ namespace GrpcService1.App.Handlers.Http.Projects.Validations;
 
 public class AddMemberValidation
 {
-    [Required] public int ProjectId;
-    [Required] public int UserId;
-    [Required] public string Level;
+    [Required] public int project_id { get; set; }
+    [Required] public int user_id { get; set; }
+    [Required] public string level { get; set; }
 }
