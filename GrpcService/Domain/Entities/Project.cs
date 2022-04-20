@@ -6,11 +6,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GrpcService1.Domain.Entities;
 
-[Table("projects", Schema = "wtt")]
 public class Project
 {
-    [Column("description")] public string Description;
-    [Column("id")] public int Id;
-    public ICollection<ProjectMember> Members;
-    [Column("name")] public string Name;
+    public string Description { get; set; }
+    public int Id { get; set; }
+    public ICollection<ProjectMember> Members { get; set; }
+    public string Name { get; set; }
 }
