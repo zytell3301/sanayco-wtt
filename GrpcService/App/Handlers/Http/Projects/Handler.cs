@@ -124,14 +124,19 @@ public class Handler : BaseHandler
         }
     }
 
-    public string AddMember([FromForm] int user_id, [FromForm] int project_id, [FromForm] string level)
+    [HttpPost("add-member")]
+    public string AddMember()
     {
-        AddMemberValidation validation = new AddMemberValidation()
+        AddMemberValidation body;
+        try
         {
-            ProjectId = project_id,
-            UserId = user_id,
-            Level = level,
-        };
+            body = DecodePayloadJson<AddMemberValidation>();
+        }
+        catch (Exception e)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
 
         switch (ModelState.IsValid)
         {
@@ -144,9 +149,9 @@ public class Handler : BaseHandler
         {
             Core.AddMember(new ProjectMember()
             {
-                ProjectId = project_id,
-                UserId = user_id,
-                Level = level,
+                ProjectId = body.project_id,
+                UserId = body.user_id,
+                Level = body.level,
             });
         }
         catch (Exception e)
