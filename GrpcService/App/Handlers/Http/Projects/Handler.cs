@@ -162,13 +162,22 @@ public class Handler : BaseHandler
         return "operation successful";
     }
 
-    public string RemoveMember([FromForm] int project_id, [FromForm] int user_id)
+    [HttpPost("remove-member")]
+    public string RemoveMember()
     {
-        RemoveMemberValidation validation = new RemoveMemberValidation()
+        RemoveMemberValidation body;
+        try
         {
-            ProjectId = project_id,
-            UserId = user_id,
-        };
+            body = DecodePayloadJson<RemoveMemberValidation>();
+        }
+        catch (Exception e)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
+
+        Console.WriteLine(body.project_id);
+        Console.WriteLine(body.user_id);
 
         switch (ModelState.IsValid)
         {
@@ -181,8 +190,8 @@ public class Handler : BaseHandler
         {
             Core.RemoveMember(new ProjectMember()
             {
-                ProjectId = validation.ProjectId,
-                UserId = validation.UserId,
+                ProjectId = body.project_id,
+                UserId = body.user_id,
             });
         }
         catch (Exception e)
