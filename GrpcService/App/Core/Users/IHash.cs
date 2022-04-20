@@ -3,5 +3,5 @@
 public interface IHash
 {
     public string Hash(string expression);
-    public bool VerifyHash(string hash, string original);
+    public bool VerifyHash(string original, string hash);
 }
