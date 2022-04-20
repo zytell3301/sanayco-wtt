@@ -2,7 +2,7 @@
 
 namespace GrpcService1.App.Handlers.Http.Projects.Validations;
 
-public class DeleteMemberValidation
+public class DeleteProjectValidation
 {
-    [Required] public int ProjectId;
+    [Required] public int project_id { get; set; }
 }
