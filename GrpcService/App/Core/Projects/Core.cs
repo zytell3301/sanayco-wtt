@@ -19,7 +19,8 @@ public class Core
     {
         InternalError = new InternalError(configs.InternalErrorMessage);
         OperationSuccessful = new OperationSuccessful(configs.OperationSuccessfulMessage);
-
+        CreatorProjectMemberCode = configs.CreatorProjectMemberCode;
+        
         Database = dependencies.Database;
     }
 
