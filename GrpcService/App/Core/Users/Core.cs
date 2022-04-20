@@ -70,4 +70,23 @@ public class Core
             throw InternalError;
         }
     }
+
+    public void Register(Domain.Entities.User user)
+    {
+        try
+        {
+            Database.RecordUser(new User()
+            {
+                Name = user.Name,
+                Password = Hash.Hash(user.Password),
+                CompanyLevel = user.CompanyLevel,
+                LastName = user.LastName,
+                SkillLevel = user.SkillLevel,
+            });
+        }
+        catch (Exception e)
+        {
+            throw InternalError;
+        }
+    }
 }
