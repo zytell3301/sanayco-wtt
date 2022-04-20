@@ -111,6 +111,18 @@ public class Core
         }
     }
 
+    public void UpdateProjectMember(Domain.Entities.ProjectMember projectMember)
+    {
+        try
+        {
+            Database.UpdateProjectMember(projectMember);
+        }
+        catch (Exception e)
+        {
+            throw InternalError;
+        }
+    }
+
     public class ProjectsCoreConfigs
     {
         public string CreatorProjectMemberCode;
