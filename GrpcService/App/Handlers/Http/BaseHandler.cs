@@ -17,14 +17,12 @@ public class BaseHandler : ControllerBase
     private readonly ITokenSource TokenSource;
     private IPermissionsSource PermissionsSource;
 
-    public BaseHandler(ITokenSource tokenSource, IPermissionsSource permissionsSource,
-        AuthenticationFailed authenticationFailed,
-        AuthorizationFailed authorizationFailed)
+    public BaseHandler(BaseHandlerDependencies baseHandlerDependencies)
     {
-        TokenSource = tokenSource;
-        AuthenticationFailed = authenticationFailed;
-        AuthorizationFailed = authorizationFailed;
-        PermissionsSource = permissionsSource;
+        TokenSource = baseHandlerDependencies.TokenSource;
+        AuthenticationFailed = baseHandlerDependencies.AuthenticationFailed;
+        AuthorizationFailed = baseHandlerDependencies.AuthorizationFailed;
+        PermissionsSource = baseHandlerDependencies.PermissionsSource;
     }
 
     private string ParsePayload()
