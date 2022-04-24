@@ -14,9 +14,8 @@ public class Handler : BaseHandler
 {
     private readonly Core.Presentation.Core Core;
 
-    public Handler(Core.Presentation.Core core, ITokenSource tokenSource,
-        AuthenticationFailed authenticationFailed) : base(
-        tokenSource, authenticationFailed)
+    public Handler(Core.Presentation.Core core, BaseHandlerDependencies baseHandlerDependencies) : base(
+        baseHandlerDependencies)
     {
         Core = core;
     }
