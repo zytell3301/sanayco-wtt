@@ -12,6 +12,9 @@ public class BaseHandler : ControllerBase
 {
     // This is the response that will be returned if the client is sending invalid data
     protected const string InvalidRequestResponse = "";
+    protected const string AuthorizationFailedResponse = "";
+    protected const string AuthenticationFailedResponse = "";
+    
     private readonly AuthenticationFailed AuthenticationFailed;
     private readonly AuthorizationFailed AuthorizationFailed;
     private readonly ITokenSource TokenSource;
