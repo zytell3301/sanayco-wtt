@@ -8,6 +8,7 @@ using GrpcService1.App.Database.Presentations;
 using GrpcService1.App.Database.Projects;
 using GrpcService1.App.Database.Tasks;
 using GrpcService1.App.Handlers.Http;
+using GrpcService1.App.PermissionsSource;
 using GrpcService1.App.TokenSource;
 using GrpcService1.Domain.Errors;
 using Microsoft.EntityFrameworkCore;
@@ -82,7 +83,13 @@ builder.Services.AddSingleton(new GrpcService1.App.Core.Projects.Core(
 
 builder.Services.AddSingleton<ITokenSource>(new TokenSource(connection));
 builder.Services.AddSingleton(new AuthenticationFailed("Authentication failed"));
-
+builder.Services.AddSingleton<BaseHandlerDependencies>(new BaseHandlerDependencies()
+{
+    AuthenticationFailed = new AuthenticationFailed("Authentication failed"),
+    AuthorizationFailed = new AuthorizationFailed("Authorization failed"),
+    PermissionsSource = new PermissionsSource(connection),
+    TokenSource = new TokenSource(connection),
+});
 var app = builder.Build();
 
 app.UseHttpsRedirection();
