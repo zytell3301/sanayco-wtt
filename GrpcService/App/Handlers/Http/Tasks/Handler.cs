@@ -2,6 +2,7 @@
 
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.tasks.Validations;
+using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -13,7 +14,8 @@ public class Handler : BaseHandler
 {
     private readonly Core.Tasks.Core Core;
 
-    public Handler(Core.Tasks.Core core)
+    public Handler(Core.Tasks.Core core, ITokenSource tokenSource, AuthenticationFailed authenticationFailed) : base(tokenSource,
+        authenticationFailed)
     {
         Core = core;
     }
@@ -279,5 +281,12 @@ public class Handler : BaseHandler
         // This is the status code that indicates the response status.
         // Status code 0 is always for successful operation.
         public int Code { get; set; }
+    }
+
+    [HttpGet("/test")]
+    public string Test()
+    {
+        Console.WriteLine(Authenticate());
+        return ":D";
     }
 }

@@ -3,6 +3,7 @@
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.OffTime.Validations;
 using GrpcService1.Domain.Entities;
+using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -14,7 +15,9 @@ public class Handler : BaseHandler
 {
     private readonly Core.OffTime.Core Core;
 
-    public Handler(Core.OffTime.Core core)
+    public Handler(Core.OffTime.Core core, AuthenticationFailed authenticationFailed, ITokenSource tokenSource) : base(
+        tokenSource,
+        authenticationFailed)
     {
         Core = core;
     }
