@@ -17,6 +17,8 @@ public class BaseHandler : ControllerBase
     private readonly ITokenSource TokenSource;
     private IPermissionsSource PermissionsSource;
 
+    private int? UserId;
+
     public BaseHandler(BaseHandlerDependencies baseHandlerDependencies)
     {
         TokenSource = baseHandlerDependencies.TokenSource;
@@ -35,11 +37,23 @@ public class BaseHandler : ControllerBase
         return JsonSerializer.Deserialize<T>(ParsePayload());
     }
 
-    protected int Authenticate()
+    protected int GetUserId()
+    {
+        switch (UserId.HasValue)
+        {
+            case false:
+                Authenticate();
+                break;
+        }
+
+        return UserId.Value;
+    }
+
+    protected void Authenticate()
     {
         try
         {
-            return TokenSource.GetTokenUserId(Request.Headers["auth-token"]);
+            UserId = TokenSource.GetTokenUserId(Request.Headers["auth-token"]);
         }
         catch (Exception e)
         {
@@ -47,18 +61,15 @@ public class BaseHandler : ControllerBase
         }
     }
 
-    protected int Authorize(string permission)
+    protected void Authorize(string permission)
     {
         try
         {
-            int userId = Authenticate();
-            switch (PermissionsSource.CheckPermission(userId, permission))
+            switch (PermissionsSource.CheckPermission(GetUserId(), permission))
             {
                 case false:
                     throw AuthorizationFailed;
             }
-
-            return userId;
         }
         catch (AuthenticationFailed e)
         {
