@@ -9,10 +9,10 @@ namespace GrpcService1.App.Core.Projects;
 
 public class Core
 {
+    private readonly string CreatorProjectMemberCode;
     private readonly IDatabase Database;
     private readonly InternalError InternalError;
     private readonly OperationSuccessful OperationSuccessful;
-    private readonly string CreatorProjectMemberCode;
 
     public Core(ProjectsCoreDependencies dependencies, ProjectsCoreConfigs configs)
     {

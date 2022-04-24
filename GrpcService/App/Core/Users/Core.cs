@@ -9,12 +9,12 @@ namespace GrpcService1.App.Core.Users;
 
 public class Core
 {
+    private readonly IDatabase Database;
     private readonly int ExpirationWindow;
+    private readonly IHash Hash;
     private readonly InternalError InternalError;
 
     private readonly InvalidCredentials InvalidCredentials;
-    private readonly IDatabase Database;
-    private readonly IHash Hash;
     private readonly ITokenGenerator TokenGenerator;
 
     public Core(UsersCoreConfigs configs, UsersCoreDependencies dependencies)

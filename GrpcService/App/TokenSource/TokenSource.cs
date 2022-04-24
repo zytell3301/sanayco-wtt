@@ -1,13 +1,17 @@
-﻿using GrpcService1.App.Database.Model;
+﻿#region
+
+using GrpcService1.App.Database.Model;
 using GrpcService1.App.Handlers.Http;
+
+#endregion
 
 namespace GrpcService1.App.TokenSource;
 
 public class TokenSource : ITokenSource
 {
-    private wttContext Connection;
+    private readonly wttContext Connection;
 
-    public TokenSource(Database.Model.wttContext connection)
+    public TokenSource(wttContext connection)
     {
         Connection = connection;
     }

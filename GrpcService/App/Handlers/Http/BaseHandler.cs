@@ -10,17 +10,16 @@ namespace GrpcService1.App.Handlers.Http;
 
 public class BaseHandler : ControllerBase
 {
-    private ITokenSource TokenSource;
-    private AuthenticationFailed AuthenticationFailed;
+    // This is the response that will be returned if the client is sending invalid data
+    protected const string InvalidRequestResponse = "";
+    private readonly AuthenticationFailed AuthenticationFailed;
+    private readonly ITokenSource TokenSource;
 
     public BaseHandler(ITokenSource tokenSource, AuthenticationFailed authenticationFailed)
     {
         TokenSource = tokenSource;
         AuthenticationFailed = authenticationFailed;
     }
-
-    // This is the response that will be returned if the client is sending invalid data
-    protected const string InvalidRequestResponse = "";
 
     private string ParsePayload()
     {

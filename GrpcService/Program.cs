@@ -8,7 +8,6 @@ using GrpcService1.App.Database.Presentations;
 using GrpcService1.App.Database.Projects;
 using GrpcService1.App.Database.Tasks;
 using GrpcService1.App.Handlers.Http;
-using GrpcService1.App.Handlers.Http.tasks;
 using GrpcService1.App.TokenSource;
 using GrpcService1.Domain.Errors;
 using Microsoft.EntityFrameworkCore;

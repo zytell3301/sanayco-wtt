@@ -1,6 +1,10 @@
-﻿using ErrorReporter;
+﻿#region
+
+using ErrorReporter;
 using GrpcService1.App.Core.Users;
 using GrpcService1.Domain.Errors;
+
+#endregion
 
 namespace GrpcService1.App.HashGenerator;
 
@@ -8,20 +12,9 @@ public class HashGenerator : IHash
 {
     private readonly int HashCost;
 
-    private InternalError InternalError;
+    private readonly IErrorReporter ErrorReporter;
 
-    private IErrorReporter ErrorReporter;
-
-    public class HashGeneratorConfigs
-    {
-        public int HashCost;
-        public string InternalErrorMessage;
-    }
-
-    public class HashGeneratorDependencies
-    {
-        public IErrorReporter ErrorReporter;
-    }
+    private readonly InternalError InternalError;
 
     public HashGenerator(HashGeneratorConfigs configs, HashGeneratorDependencies dependencies)
     {
@@ -56,5 +49,16 @@ public class HashGenerator : IHash
             ErrorReporter.ReportException(e);
             throw InternalError;
         }
+    }
+
+    public class HashGeneratorConfigs
+    {
+        public int HashCost;
+        public string InternalErrorMessage;
+    }
+
+    public class HashGeneratorDependencies
+    {
+        public IErrorReporter ErrorReporter;
     }
 }
