@@ -24,6 +24,15 @@ public class Handler : BaseHandler
     [Route("record-project")]
     public string RecordProject()
     {
+        try
+        {
+            Authorize("create-project");
+        }
+        catch (Exception e)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
         RecordProjectValidation body;
         try
         {
@@ -38,8 +47,7 @@ public class Handler : BaseHandler
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper message must be returned to user for invalid data
-                return "data validation failed";
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -50,20 +58,30 @@ public class Handler : BaseHandler
                 Name = body.name
             }, new User
             {
-                Id = body.creator_id
+                Id = GetUserId(),
             });
         }
         catch (Exception e)
         {
-            return "internal error";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [HttpPost("edit-project")]
     public string UpdateProject()
     {
+        try
+        {
+            Authorize("edit-project");
+        }
+        catch (Exception e)
+        {
+            // @TODO It must be checked that if the client is the owner of the current entity
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
         UpdateProjectValidation body;
         try
         {
@@ -78,8 +96,7 @@ public class Handler : BaseHandler
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper error must be returned to user for invalid data
-                return "data validation failed";
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -93,15 +110,24 @@ public class Handler : BaseHandler
         }
         catch (Exception e)
         {
-            return "internal error occurred";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [HttpGet("get-project/{id}")]
     public string GetProject(int id)
     {
+        try
+        {
+            Authenticate();
+        }
+        catch (Exception e)
+        {
+            return ResponseToJson(AuthenticationFailedResponse());
+        }
+
         try
         {
             var project = Core.GetProject(new Project
@@ -111,7 +137,7 @@ public class Handler : BaseHandler
 
             return JsonSerializer.Serialize(new GetProjectResponse
             {
-                StatusCode = 0,
+                status_code = 0,
                 Project = project
             });
         }
@@ -119,7 +145,7 @@ public class Handler : BaseHandler
         {
             return JsonSerializer.Serialize(new GetProjectResponse
             {
-                StatusCode = 1
+                status_code = 1
             });
         }
     }
@@ -141,8 +167,7 @@ public class Handler : BaseHandler
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper error must returned to user for invalid data 
-                return "data validation failed";
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -156,10 +181,10 @@ public class Handler : BaseHandler
         }
         catch (Exception e)
         {
-            return "Internal error occurred";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [HttpPost("remove-member")]
@@ -176,14 +201,10 @@ public class Handler : BaseHandler
             return InvalidRequestResponse;
         }
 
-        Console.WriteLine(body.project_id);
-        Console.WriteLine(body.user_id);
-
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper error must be returned for invalid data
-                return "data validation failed";
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -196,11 +217,10 @@ public class Handler : BaseHandler
         }
         catch (Exception e)
         {
-            // @TODO A proper error must be returned to user for invalid data
-            return "Internal error occurred";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [HttpPost("delete-project")]
@@ -220,8 +240,7 @@ public class Handler : BaseHandler
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper error must be returned for invalid data
-                return "data validation failed";
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -233,11 +252,10 @@ public class Handler : BaseHandler
         }
         catch (Exception e)
         {
-            // @TODO A proper error must be returned to user
-            return "operation failed";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [HttpPost("edit-member")]
@@ -257,8 +275,7 @@ public class Handler : BaseHandler
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper error must be returned to client for invalid data
-                return "data validation failed";
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -272,16 +289,14 @@ public class Handler : BaseHandler
         }
         catch (Exception e)
         {
-            // @TODO A proper error must be be returned to client for because of internal failure
-            return "operation failed";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
-    private class GetProjectResponse
+    private class GetProjectResponse : Response
     {
-        public int StatusCode { get; set; }
         public Project Project { get; set; }
     }
 }
