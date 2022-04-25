@@ -42,7 +42,7 @@ public class HashGenerator : IHash
     {
         try
         {
-            return BCrypt.Net.BCrypt.Verify(original, hash);
+            return BCrypt.Net.BCrypt.Verify(hash, original);
         }
         catch (Exception e)
         {
