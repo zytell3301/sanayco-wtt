@@ -64,9 +64,28 @@ public class Users : IDatabase
         }
     }
 
-    public void RecordUser(User user)
+    public int RecordUser(User user)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var model = new Model.User()
+            {
+                Lastname = user.LastName,
+                Name = user.Name,
+                Password = user.Password,
+                Username = user.Username,
+                CompanyLevel = user.CompanyLevel,
+                SkillLevel = user.SkillLevel,
+            };
+            Connection.Add(model);
+            Connection.SaveChanges();
+            return model.Id;
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
     }
 
     public User GetUserByUsername(User user)

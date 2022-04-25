@@ -10,6 +10,7 @@ public interface IDatabase
 {
     public User GetUser(User user);
     public void RecordToken(Token token);
-    public void RecordUser(User user);
+    public int RecordUser(User user);
     public User GetUserByUsername(User user);
+    public void NewPermissionBatch();
 }
