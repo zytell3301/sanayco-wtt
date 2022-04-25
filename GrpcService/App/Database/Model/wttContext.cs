@@ -258,6 +258,9 @@ namespace GrpcService1.App.Database.Model
             {
                 entity.ToTable("users");
 
+                entity.HasIndex(e => e.Username, "U_USERS_USERNAME")
+                    .IsUnique();
+
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.CompanyLevel)
@@ -293,6 +296,11 @@ namespace GrpcService1.App.Database.Model
                     .IsUnicode(false)
                     .HasColumnName("skill_level")
                     .IsFixedLength();
+
+                entity.Property(e => e.Username)
+                    .HasMaxLength(32)
+                    .IsUnicode(false)
+                    .HasColumnName("username");
             });
 
             OnModelCreatingPartial(modelBuilder);
