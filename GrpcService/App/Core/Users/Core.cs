@@ -33,7 +33,7 @@ public class Core
     {
         try
         {
-            user = Database.GetUser(user);
+            user = Database.GetUserByUsername(user);
             switch (Hash.VerifyHash(user.Password, password))
             {
                 // Password hashes does not match. So the password is incorrect.
