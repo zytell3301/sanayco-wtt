@@ -7,8 +7,11 @@ using GrpcService1.App.Database.OffTime;
 using GrpcService1.App.Database.Presentations;
 using GrpcService1.App.Database.Projects;
 using GrpcService1.App.Database.Tasks;
+using GrpcService1.App.Database.Users;
 using GrpcService1.App.Handlers.Http;
+using GrpcService1.App.HashGenerator;
 using GrpcService1.App.PermissionsSource;
+using GrpcService1.App.TokenGenerator;
 using GrpcService1.App.TokenSource;
 using GrpcService1.Domain.Errors;
 using Microsoft.EntityFrameworkCore;
@@ -33,20 +36,27 @@ IDatabase tasksDB = new Tasks(connection, reporter);
 GrpcService1.App.Core.Presentation.IDatabase presentationDB = new Presentations(connection, reporter);
 GrpcService1.App.Core.OffTime.IDatabase offTimesDB = new OffTimes(connection, reporter);
 GrpcService1.App.Core.Projects.IDatabase projectsDB = new Projects(connection, reporter);
+GrpcService1.App.Core.Users.IDatabase usersDB = new Users(new Users.UsersDatabaseDependencies()
+{
+    Connection = connection,
+    ErrorReporter = reporter,
+    InternalError = new InternalError("internal error"),
+});
 
 // Adding core classes to container
 builder.Services.AddSingleton(new Core(new Core.TasksCoreDependencies
-{
-    Database = tasksDB
-}, new Core.TasksCoreConfigs
-{
-    OperationSuccessfulMessage = "OperationSuccessfulMessage",
-    InternalErrorMessage = "InternalErrorMessage",
+    {
+        Database = tasksDB
+    }, new Core.TasksCoreConfigs
+    {
+        OperationSuccessfulMessage = "OperationSuccessfulMessage",
+        InternalErrorMessage = "InternalErrorMessage",
 
-    ApprovedTaskCode = "ApprovedTaskCode",
-    UnApprovedTaskCode = "UnApprovedTaskCode",
-    WaitingTaskCode = "WaitingTaskCode"
-}));
+        ApprovedTaskCode = "ApprovedTaskCode",
+        UnApprovedTaskCode = "UnApprovedTaskCode",
+        WaitingTaskCode = "WaitingTaskCode"
+    })
+);
 builder.Services.AddSingleton(new GrpcService1.App.Core.Presentation.Core(
     new GrpcService1.App.Core.Presentation.Core.PresentationCoreDependencies
     {
@@ -55,7 +65,8 @@ builder.Services.AddSingleton(new GrpcService1.App.Core.Presentation.Core(
     {
         OperationSuccessfulMessage = "OperationSuccessfulMessage",
         InternalErrorMessage = "InternalErrorMessage"
-    }));
+    })
+);
 builder.Services.AddSingleton(new GrpcService1.App.Core.OffTime.Core(
     new GrpcService1.App.Core.OffTime.Core.OffTimeDependencies
     {
@@ -69,7 +80,8 @@ builder.Services.AddSingleton(new GrpcService1.App.Core.OffTime.Core(
         RejectedOffTimeCode = "RejectedOffTimeCode",
         WaitingOffTimeCode = "WaitingOffTimeCode",
         OffTimeRestrictionExceededMessage = "OffTimeRestrictionExceededMessage"
-    }));
+    })
+);
 builder.Services.AddSingleton(new GrpcService1.App.Core.Projects.Core(
     new GrpcService1.App.Core.Projects.Core.ProjectsCoreDependencies
     {
@@ -79,7 +91,8 @@ builder.Services.AddSingleton(new GrpcService1.App.Core.Projects.Core(
         InternalErrorMessage = "InternalErrorMessage",
         OperationSuccessfulMessage = "OperationSuccessfulMessage",
         CreatorProjectMemberCode = "CreatorProjectMemberCode"
-    }));
+    })
+);
 
 builder.Services.AddSingleton<ITokenSource>(new TokenSource(connection));
 builder.Services.AddSingleton(new AuthenticationFailed("Authentication failed"));
@@ -90,6 +103,31 @@ builder.Services.AddSingleton<BaseHandlerDependencies>(new BaseHandlerDependenci
     PermissionsSource = new PermissionsSource(connection),
     TokenSource = new TokenSource(connection),
 });
+builder.Services.AddSingleton<GrpcService1.App.Core.Users.Core>(new GrpcService1.App.Core.Users.Core(
+    new GrpcService1.App.Core.Users.Core.UsersCoreConfigs()
+    {
+        ExpirationWindow = 1000000,
+        InternalErrorMessage = "InternalErrorMessage",
+        InvalidCredentialsMessage = "InvalidCredentialsMessage",
+    },
+    new GrpcService1.App.Core.Users.Core.UsersCoreDependencies()
+    {
+        TokenGenerator = new TokenGenerator(new TokenGenerator.TokenGeneratorConfigs()
+        {
+            TokenLength = 32,
+            ValidaCharacters = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        }),
+        Database = usersDB,
+        Hash = new HashGenerator(new HashGenerator.HashGeneratorConfigs()
+        {
+            HashCost = 12,
+            InternalErrorMessage = "InternalErrorMessage",
+        }, new HashGenerator.HashGeneratorDependencies()
+        {
+            ErrorReporter = reporter,
+        })
+    })
+);
 var app = builder.Build();
 
 app.UseHttpsRedirection();
