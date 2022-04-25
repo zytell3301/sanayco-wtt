@@ -12,7 +12,6 @@ public class BaseHandler : ControllerBase
 {
     // This is the response that will be returned if the client is sending invalid data
     protected const string InvalidRequestResponse = "";
-    protected const string AuthorizationFailedResponse = "";
     protected const string AuthenticationFailedResponse = "";
 
     private readonly AuthenticationFailed AuthenticationFailed;
@@ -40,6 +39,14 @@ public class BaseHandler : ControllerBase
         return new Response()
         {
             status_code = 1,
+        };
+    }
+
+    protected Response AuthorizationFailedResponse()
+    {
+        return new Response()
+        {
+            status_code = 3,
         };
     }
 
@@ -90,7 +97,7 @@ public class BaseHandler : ControllerBase
     {
         try
         {
-            UserId = TokenSource.GetTokenUserId(Request.Headers["auth-token"]);
+            UserId = TokenSource.GetTokenUserId(Request.Headers["_token"]);
         }
         catch (Exception e)
         {
