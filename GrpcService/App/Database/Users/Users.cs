@@ -54,7 +54,15 @@ public class Users : IDatabase
 
     public User GetUserByUsername(User user)
     {
-        throw new NotImplementedException();
+        try
+        {
+            return ConvertModelToUser(Connection.Users.First(u => u.Username == user.Username));
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
     }
 
     private Domain.Entities.User ConvertModelToUser(Model.User model)
@@ -67,6 +75,7 @@ public class Users : IDatabase
             CompanyLevel = model.CompanyLevel,
             LastName = model.Lastname,
             SkillLevel = model.SkillLevel,
+            Username = model.Username,
         };
 
         switch (model.CreatedAt.HasValue)
