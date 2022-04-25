@@ -23,84 +23,81 @@ public class Handler : BaseHandler
     [HttpPost("record")]
     public string RecordPresentation()
     {
-        var req = DecodePayloadJson<RecordPresentationValidation>();
-
-        switch (ModelState.IsValid)
+        try
         {
-            case false:
-                // @TODO A proper error must be returned because of invalid data
-                return "data validation failed";
+            Authenticate();
+        }
+        catch (Exception e)
+        {
+            return ResponseToJson(AuthenticationFailedResponse());
         }
 
         try
         {
             Core.RecordPresentation(new User
             {
-                Id = req.user_id
+                Id = GetUserId(),
             });
         }
         catch (Exception e)
         {
-            // @TODO A proper error must be returned  to user for internal failure
-            return "operation failed";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [HttpPost("record-end")]
-    public string RecordPresentationEnd([FromForm] int user_id)
+    public string RecordPresentationEnd()
     {
-        var req = DecodePayloadJson<RecordPresentationEndValidation>();
-
-        switch (ModelState.IsValid)
+        try
         {
-            case false:
-                // @TODO A proper error must be returned for invalid data
-                return "data validation failed";
+            Authenticate();
+        }
+        catch (Exception e)
+        {
+            return ResponseToJson(AuthenticationFailedResponse());
         }
 
         try
         {
             Core.RecordPresentationEnd(new User
             {
-                Id = req.user_id
+                Id = GetUserId(),
             });
         }
         catch (Exception e)
         {
-            // @TODO A proper error must be returned for internal failure
-            return "operation failed";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [HttpPost("get-presentation-time")]
-    public string GetPresentationTime([FromForm] int user_id)
+    public string GetPresentationTime()
     {
-        var body = DecodePayloadJson<GetPresentationTimeValidation>();
-
-        switch (ModelState.IsValid)
+        try
         {
-            case false:
-                // @TODO A proper error must be returned to user because of invalid data
-                return "data validation failed";
+            Authenticate();
+        }
+        catch (Exception e)
+        {
+            return ResponseToJson(AuthenticationFailedResponse());
         }
 
         try
         {
             Core.GetPresentationTime(new User
             {
-                Id = body.user_id
+                Id = GetUserId(),
             });
         }
         catch (Exception e)
         {
-            // @TODO A proper error must be returned because of internal failure
-            return "operation failed";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 }
