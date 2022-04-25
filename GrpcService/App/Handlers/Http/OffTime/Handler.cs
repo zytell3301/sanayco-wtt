@@ -15,7 +15,8 @@ public class Handler : BaseHandler
 {
     private readonly Core.OffTime.Core Core;
 
-    public Handler(Core.OffTime.Core core, BaseHandlerDependencies baseHandlerDependencies) : base(baseHandlerDependencies)
+    public Handler(Core.OffTime.Core core, BaseHandlerDependencies baseHandlerDependencies) : base(
+        baseHandlerDependencies)
     {
         Core = core;
     }
@@ -23,6 +24,15 @@ public class Handler : BaseHandler
     [HttpPost("record-off-time")]
     public string RecordOffTime()
     {
+        try
+        {
+            Authorize("record-off-time");
+        }
+        catch (Exception e)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
         RecordOffTimeValidation body;
         try
         {
@@ -37,8 +47,7 @@ public class Handler : BaseHandler
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper error must be returned to user because of invalid data
-                return "data validation failed";
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -53,16 +62,24 @@ public class Handler : BaseHandler
         }
         catch (Exception e)
         {
-            // @TODO A proper error must be returned to client because of internal failure
-            return "operation failed";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [HttpPost("approve-off-time")]
     public string ApproveOffTime()
     {
+        try
+        {
+            Authorize("change-off-time-status");
+        }
+        catch (Exception e)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
         UpdateOffTimeStatusValidation body;
         try
         {
@@ -77,8 +94,7 @@ public class Handler : BaseHandler
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper error must be returned to client for invalid data
-                return "data validation failed";
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -90,16 +106,24 @@ public class Handler : BaseHandler
         }
         catch (Exception e)
         {
-            // @TODO A proper error must be returned to user because of internal failure
-            return "operation failed";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [HttpPost("reject-off-time")]
     public string RejectOffTime()
     {
+        try
+        {
+            Authorize("change-off-time-status");
+        }
+        catch (Exception e)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
         UpdateOffTimeStatusValidation body;
         try
         {
@@ -114,8 +138,7 @@ public class Handler : BaseHandler
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper error must be returned to client because of invalid data
-                return "data validation failed";
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -127,16 +150,24 @@ public class Handler : BaseHandler
         }
         catch (Exception e)
         {
-            // @TODO A proper error must be returned to client because of internal failure
-            return "operation failed";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [HttpPost("set-off-time-waiting")]
     public string SetOffTimeWaiting()
     {
+        try
+        {
+            Authorize("change-off-time-status");
+        }
+        catch (Exception e)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
         UpdateOffTimeStatusValidation body;
         try
         {
@@ -151,8 +182,7 @@ public class Handler : BaseHandler
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper error must be returned to client for invalid data
-                return "data validation failed";
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -164,11 +194,10 @@ public class Handler : BaseHandler
         }
         catch (Exception e)
         {
-            // @TODO A proper error must be returned to client for internal failure
-            return "operation failed";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [HttpPost("cancel-off-time")]
@@ -188,8 +217,7 @@ public class Handler : BaseHandler
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper error must be returned to client for invalid data
-                return "data validation failed";
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -201,11 +229,10 @@ public class Handler : BaseHandler
         }
         catch (Exception e)
         {
-            // @TODO A proper error must be returned to client for internal failure
-            return "operation failed";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [HttpGet("get-off-time/{id}")]
@@ -222,10 +249,7 @@ public class Handler : BaseHandler
         }
         catch (Exception e)
         {
-            return JsonSerializer.Serialize(new GetOffTimeResponse
-            {
-                StatusCode = 1
-            });
+            return ResponseToJson(InternalErrorResponse());
         }
 
         return JsonSerializer.Serialize(new GetOffTimeResponse
@@ -252,8 +276,7 @@ public class Handler : BaseHandler
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper error must be returned to user for invalid data
-                return "operation failed";
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -268,11 +291,10 @@ public class Handler : BaseHandler
         }
         catch (Exception e)
         {
-            // @TODO Since this exception happens when client is sending invalid data, we can store current request data for ip blacklist analysis
-            return "operation failed";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     private class GetOffTimeResponse
