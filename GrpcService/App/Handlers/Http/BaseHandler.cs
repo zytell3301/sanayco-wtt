@@ -12,7 +12,6 @@ public class BaseHandler : ControllerBase
 {
     // This is the response that will be returned if the client is sending invalid data
     protected const string InvalidRequestResponse = "";
-    protected const string AuthenticationFailedResponse = "";
 
     private readonly AuthenticationFailed AuthenticationFailed;
     private readonly AuthorizationFailed AuthorizationFailed;
@@ -47,6 +46,14 @@ public class BaseHandler : ControllerBase
         return new Response()
         {
             status_code = 3,
+        };
+    }
+
+    protected Response AuthenticationFailedResponse()
+    {
+        return new Response()
+        {
+            status_code = 4,
         };
     }
 
