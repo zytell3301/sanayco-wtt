@@ -4,6 +4,7 @@ using System.Text.Json;
 using GrpcService1.App.Handlers.Http.tasks.Validations;
 using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 
 #endregion
 
@@ -23,12 +24,21 @@ public class Handler : BaseHandler
     [HttpPost("submit-task")]
     public string RecordTask()
     {
+        try
+        {
+            Authenticate();
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthenticationFailedResponse());
+        }
+
         RecordTaskValidaion body;
         try
         {
             body = DecodePayloadJson<RecordTaskValidaion>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
             return InvalidRequestResponse;
@@ -37,8 +47,7 @@ public class Handler : BaseHandler
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper error must be returned to the client
-                return "Data validation failed";
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -50,16 +59,15 @@ public class Handler : BaseHandler
                 EndTime = DateTime.UnixEpoch.AddSeconds(body.end_time),
                 ProjectId = body.project_id,
                 WorkLocation = body.work_location,
-                UserId = body.user_id
+                UserId = GetUserId()
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            // @TODO A proper error must be returned to the client
-            return "internal error";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [HttpPost("delete-task")]
@@ -70,7 +78,7 @@ public class Handler : BaseHandler
         {
             body = DecodePayloadJson<DeleteTaskValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
             return InvalidRequestResponse;
@@ -79,8 +87,7 @@ public class Handler : BaseHandler
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper error must be returned to the client
-                break;
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -90,13 +97,12 @@ public class Handler : BaseHandler
                 Id = body.task_id
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            // @TODO A proper error must be returned to the client
-            return "internal error";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [Route("edit-task")]
@@ -107,7 +113,7 @@ public class Handler : BaseHandler
         {
             body = DecodePayloadJson<EditTaskValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
             return InvalidRequestResponse;
@@ -116,8 +122,7 @@ public class Handler : BaseHandler
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper response must be returned to the user because of invalid data
-                return "Form validation failed";
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -131,17 +136,25 @@ public class Handler : BaseHandler
                 EndTime = DateTime.UnixEpoch.AddSeconds(body.end_time)
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            return "an internal error occurred";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [HttpGet("get-task/{id}")]
     public string GetTask(int id)
     {
+        try
+        {
+            Authenticate();
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthenticationFailedResponse());
+        }
         try
         {
             var task = Core.GetTask(new Domain.Entities.Task
@@ -150,15 +163,15 @@ public class Handler : BaseHandler
             });
             return JsonSerializer.Serialize(new GetTaskResponse
             {
-                Code = 0,
+                status_code = 0,
                 Task = task
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return JsonSerializer.Serialize(new GetTaskResponse
             {
-                Code = 1
+                status_code = 1
             });
         }
     }
@@ -171,7 +184,7 @@ public class Handler : BaseHandler
         {
             body = DecodePayloadJson<UpdateTaskStatusValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
             return InvalidRequestResponse;
@@ -180,8 +193,7 @@ public class Handler : BaseHandler
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper error must be returned to user because of invalid data.
-                return "data validation failed";
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -191,13 +203,12 @@ public class Handler : BaseHandler
                 Id = body.task_id
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            // @TODO A proper error must be returned to user because of internal error
-            return "operation failed";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [HttpPost("reject-task")]
@@ -208,7 +219,7 @@ public class Handler : BaseHandler
         {
             body = DecodePayloadJson<UpdateTaskStatusValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
             return InvalidRequestResponse;
@@ -217,8 +228,7 @@ public class Handler : BaseHandler
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper error must returned to user for invalid data
-                return "data validation failed";
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -228,13 +238,12 @@ public class Handler : BaseHandler
                 Id = body.task_id
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            // @TODO A proper error must be returned to user for internal error
-            return "operation failed";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [HttpPost("set-task-waiting")]
@@ -254,8 +263,7 @@ public class Handler : BaseHandler
         switch (ModelState.IsValid)
         {
             case false:
-                // @TODO A proper error must be returned to user for invalid data
-                return "data validation failed";
+                return ResponseToJson(DataValidationFailedResponse());
         }
 
         try
@@ -265,21 +273,16 @@ public class Handler : BaseHandler
                 Id = body.task_id
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            //@TODO A proper error must be returned to user for internal failure
-            return "operation failed";
+            return ResponseToJson(InternalErrorResponse());
         }
 
-        return "operation successful";
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
-    private class GetTaskResponse
+    private class GetTaskResponse : Response
     {
         public Domain.Entities.Task Task { get; set; }
-
-        // This is the status code that indicates the response status.
-        // Status code 0 is always for successful operation.
-        public int Code { get; set; }
     }
 }
