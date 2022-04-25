@@ -44,7 +44,24 @@ public class Users : IDatabase
 
     public void RecordToken(Token token)
     {
-        throw new NotImplementedException();
+        try
+        {
+            Connection.Tokens.Add(new Model.Token()
+            {
+                Token1 = token.Token1,
+                UserId = token.UserId,
+                ExpirationDate =
+                    DateTime.Now
+                        .AddSeconds(
+                            1000000), // @TODO For test purposes expiration time is set almost permanent. Change it in production
+            });
+            Connection.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
     }
 
     public void RecordUser(User user)
