@@ -16,4 +16,5 @@ public class User
     public string Name;
     public string Password;
     public string SkillLevel;
+    public string Username;
 }
