@@ -1,7 +1,7 @@
 /* It is recommended to log every permission. Maybe we want trace that who granted the permission to current user*/
 CREATE TABLE permissions
 (
-    id         INT IDENTITY (1,1),
+    id         INT IDENTITY (1,1) PRIMARY KEY,
     user_id    INT, /* The id of the user that has the permission*/
     title      VARCHAR(32),
     granted_by INT, /* The if of the user that granted the permission */
