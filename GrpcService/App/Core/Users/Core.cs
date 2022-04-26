@@ -70,7 +70,7 @@ public class Core
                 CompanyLevel = user.CompanyLevel,
                 LastName = user.LastName,
                 SkillLevel = user.SkillLevel,
-                Username = user.Username,
+                Username = user.Username
             });
             var permissionsBatch = Database.NewPermissionBatch();
             foreach (var permission in permissions)

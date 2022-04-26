@@ -1,13 +1,17 @@
-﻿using GrpcService1.App.Core.Users;
+﻿#region
+
+using GrpcService1.App.Core.Users;
 using GrpcService1.App.Database.Model;
 using GrpcService1.Domain.Errors;
 using Permission = GrpcService1.Domain.Entities.Permission;
+
+#endregion
 
 namespace GrpcService1.App.Database.Users;
 
 public class RecordPermissionsBatch : IRecordPermissionsBatch
 {
-    private wttContext Connection;
+    private readonly wttContext Connection;
 
     public RecordPermissionsBatch(wttContext connection)
     {
@@ -18,11 +22,11 @@ public class RecordPermissionsBatch : IRecordPermissionsBatch
     {
         try
         {
-            Connection.Permissions.Add(new Model.Permission()
+            Connection.Permissions.Add(new Model.Permission
             {
                 Title = permission.Title,
                 GrantedBy = permission.GrantedBy,
-                UserId = permission.UserId,
+                UserId = permission.UserId
             });
         }
         catch (Exception)

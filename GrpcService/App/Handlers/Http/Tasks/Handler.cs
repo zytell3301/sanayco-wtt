@@ -2,9 +2,7 @@
 
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.tasks.Validations;
-using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 
 #endregion
 
@@ -155,6 +153,7 @@ public class Handler : BaseHandler
         {
             return ResponseToJson(AuthenticationFailedResponse());
         }
+
         try
         {
             var task = Core.GetTask(new Domain.Entities.Task

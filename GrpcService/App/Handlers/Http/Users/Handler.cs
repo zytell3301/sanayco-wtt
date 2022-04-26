@@ -1,25 +1,22 @@
-﻿using System.Text.Json;
+﻿#region
+
+using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Users.Validations;
 using GrpcService1.Domain.Entities;
-using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
+
+#endregion
 
 namespace GrpcService1.App.Handlers.Http.Users;
 
 public class Handler : BaseHandler
 {
-    private Core.Users.Core Core;
+    private readonly Core.Users.Core Core;
 
     public Handler(Core.Users.Core core, BaseHandlerDependencies baseHandlerDependencies) : base(
         baseHandlerDependencies)
     {
         Core = core;
-    }
-
-    private class LoginResponse : Response
-    {
-        public string token { get; set; }
-        public DateTime expiration_date { get; set; }
     }
 
     [HttpPost("/login")]
@@ -44,16 +41,16 @@ public class Handler : BaseHandler
 
         try
         {
-            var token = Core.Login(new User()
+            var token = Core.Login(new User
             {
-                Username = body.username,
+                Username = body.username
             }, body.password);
 
-            return JsonSerializer.Serialize(new LoginResponse()
+            return JsonSerializer.Serialize(new LoginResponse
             {
                 status_code = 0,
                 token = token.Token1,
-                expiration_date = token.ExpirationDate.Value,
+                expiration_date = token.ExpirationDate.Value
             });
         }
         catch (Exception e)
@@ -93,14 +90,14 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.Register(new User()
+            Core.Register(new User
             {
                 Name = body.name,
                 Password = body.password,
                 Username = body.username,
                 CompanyLevel = body.company_level,
                 LastName = body.lastname,
-                SkillLevel = body.skill_level,
+                SkillLevel = body.skill_level
             }, ParsePermissionsArray(body.permissions));
         }
         catch (Exception)
@@ -115,14 +112,18 @@ public class Handler : BaseHandler
     {
         var permissions = new List<Permission>();
         foreach (var title in titles)
-        {
-            permissions.Add(new Permission()
+            permissions.Add(new Permission
             {
                 Title = title,
-                GrantedBy = GetUserId(), // User id field will be set in core
+                GrantedBy = GetUserId() // User id field will be set in core
             });
-        }
 
         return permissions;
+    }
+
+    private class LoginResponse : Response
+    {
+        public string token { get; set; }
+        public DateTime expiration_date { get; set; }
     }
 }

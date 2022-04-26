@@ -16,59 +16,9 @@ public class BaseHandler : ControllerBase
     private readonly AuthenticationFailed AuthenticationFailed;
     private readonly AuthorizationFailed AuthorizationFailed;
     private readonly ITokenSource TokenSource;
-    private IPermissionsSource PermissionsSource;
+    private readonly IPermissionsSource PermissionsSource;
 
     private int? UserId;
-
-    protected class Response
-    {
-        public int status_code { get; set; }
-    }
-
-    protected Response DataValidationFailedResponse()
-    {
-        return new Response()
-        {
-            status_code = 2,
-        };
-    }
-
-    protected Response InternalErrorResponse()
-    {
-        return new Response()
-        {
-            status_code = 1,
-        };
-    }
-
-    protected Response AuthorizationFailedResponse()
-    {
-        return new Response()
-        {
-            status_code = 3,
-        };
-    }
-
-    protected Response AuthenticationFailedResponse()
-    {
-        return new Response()
-        {
-            status_code = 4,
-        };
-    }
-
-    protected Response OperationSuccessfulResponse()
-    {
-        return new Response()
-        {
-            status_code = 0,
-        };
-    }
-
-    protected string ResponseToJson(Response response)
-    {
-        return JsonSerializer.Serialize(response);
-    }
 
     public BaseHandler(BaseHandlerDependencies baseHandlerDependencies)
     {
@@ -76,6 +26,51 @@ public class BaseHandler : ControllerBase
         AuthenticationFailed = baseHandlerDependencies.AuthenticationFailed;
         AuthorizationFailed = baseHandlerDependencies.AuthorizationFailed;
         PermissionsSource = baseHandlerDependencies.PermissionsSource;
+    }
+
+    protected Response DataValidationFailedResponse()
+    {
+        return new Response
+        {
+            status_code = 2
+        };
+    }
+
+    protected Response InternalErrorResponse()
+    {
+        return new Response
+        {
+            status_code = 1
+        };
+    }
+
+    protected Response AuthorizationFailedResponse()
+    {
+        return new Response
+        {
+            status_code = 3
+        };
+    }
+
+    protected Response AuthenticationFailedResponse()
+    {
+        return new Response
+        {
+            status_code = 4
+        };
+    }
+
+    protected Response OperationSuccessfulResponse()
+    {
+        return new Response
+        {
+            status_code = 0
+        };
+    }
+
+    protected string ResponseToJson(Response response)
+    {
+        return JsonSerializer.Serialize(response);
     }
 
     private string ParsePayload()
@@ -130,5 +125,10 @@ public class BaseHandler : ControllerBase
         {
             throw AuthorizationFailed;
         }
+    }
+
+    protected class Response
+    {
+        public int status_code { get; set; }
     }
 }

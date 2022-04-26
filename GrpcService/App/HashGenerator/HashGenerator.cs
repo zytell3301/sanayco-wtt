@@ -10,9 +10,8 @@ namespace GrpcService1.App.HashGenerator;
 
 public class HashGenerator : IHash
 {
-    private readonly int HashCost;
-
     private readonly IErrorReporter ErrorReporter;
+    private readonly int HashCost;
 
     private readonly InternalError InternalError;
 

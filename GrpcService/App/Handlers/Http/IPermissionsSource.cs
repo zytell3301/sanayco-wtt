@@ -1,6 +1,4 @@
-﻿using GrpcService1.App.Database.Model;
-
-namespace GrpcService1.App.Handlers.Http;
+﻿namespace GrpcService1.App.Handlers.Http;
 
 public interface IPermissionsSource
 {

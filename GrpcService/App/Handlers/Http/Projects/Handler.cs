@@ -3,7 +3,6 @@
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Projects.Validations;
 using GrpcService1.Domain.Entities;
-using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -58,7 +57,7 @@ public class Handler : BaseHandler
                 Name = body.name
             }, new User
             {
-                Id = GetUserId(),
+                Id = GetUserId()
             });
         }
         catch (Exception e)

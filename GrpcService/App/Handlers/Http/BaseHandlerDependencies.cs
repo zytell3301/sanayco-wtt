@@ -1,4 +1,8 @@
-﻿using GrpcService1.Domain.Errors;
+﻿#region
+
+using GrpcService1.Domain.Errors;
+
+#endregion
 
 namespace GrpcService1.App.Handlers.Http;
 

@@ -36,11 +36,11 @@ IDatabase tasksDB = new Tasks(connection, reporter);
 GrpcService1.App.Core.Presentation.IDatabase presentationDB = new Presentations(connection, reporter);
 GrpcService1.App.Core.OffTime.IDatabase offTimesDB = new OffTimes(connection, reporter);
 GrpcService1.App.Core.Projects.IDatabase projectsDB = new Projects(connection, reporter);
-GrpcService1.App.Core.Users.IDatabase usersDB = new Users(new Users.UsersDatabaseDependencies()
+GrpcService1.App.Core.Users.IDatabase usersDB = new Users(new Users.UsersDatabaseDependencies
 {
     Connection = connection,
     ErrorReporter = reporter,
-    InternalError = new InternalError("internal error"),
+    InternalError = new InternalError("internal error")
 });
 
 // Adding core classes to container
@@ -96,35 +96,35 @@ builder.Services.AddSingleton(new GrpcService1.App.Core.Projects.Core(
 
 builder.Services.AddSingleton<ITokenSource>(new TokenSource(connection));
 builder.Services.AddSingleton(new AuthenticationFailed("Authentication failed"));
-builder.Services.AddSingleton<BaseHandlerDependencies>(new BaseHandlerDependencies()
+builder.Services.AddSingleton(new BaseHandlerDependencies
 {
     AuthenticationFailed = new AuthenticationFailed("Authentication failed"),
     AuthorizationFailed = new AuthorizationFailed("Authorization failed"),
     PermissionsSource = new PermissionsSource(connection),
-    TokenSource = new TokenSource(connection),
+    TokenSource = new TokenSource(connection)
 });
-builder.Services.AddSingleton<GrpcService1.App.Core.Users.Core>(new GrpcService1.App.Core.Users.Core(
-    new GrpcService1.App.Core.Users.Core.UsersCoreConfigs()
+builder.Services.AddSingleton(new GrpcService1.App.Core.Users.Core(
+    new GrpcService1.App.Core.Users.Core.UsersCoreConfigs
     {
         ExpirationWindow = 1000000,
         InternalErrorMessage = "InternalErrorMessage",
-        InvalidCredentialsMessage = "InvalidCredentialsMessage",
+        InvalidCredentialsMessage = "InvalidCredentialsMessage"
     },
-    new GrpcService1.App.Core.Users.Core.UsersCoreDependencies()
+    new GrpcService1.App.Core.Users.Core.UsersCoreDependencies
     {
-        TokenGenerator = new TokenGenerator(new TokenGenerator.TokenGeneratorConfigs()
+        TokenGenerator = new TokenGenerator(new TokenGenerator.TokenGeneratorConfigs
         {
             TokenLength = 32,
-            ValidaCharacters = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+            ValidaCharacters = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         }),
         Database = usersDB,
-        Hash = new HashGenerator(new HashGenerator.HashGeneratorConfigs()
+        Hash = new HashGenerator(new HashGenerator.HashGeneratorConfigs
         {
             HashCost = 12,
-            InternalErrorMessage = "InternalErrorMessage",
-        }, new HashGenerator.HashGeneratorDependencies()
+            InternalErrorMessage = "InternalErrorMessage"
+        }, new HashGenerator.HashGeneratorDependencies
         {
-            ErrorReporter = reporter,
+            ErrorReporter = reporter
         })
     })
 );

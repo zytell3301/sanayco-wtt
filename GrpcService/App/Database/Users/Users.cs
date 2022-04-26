@@ -1,25 +1,21 @@
-﻿using ErrorReporter;
+﻿#region
+
+using ErrorReporter;
 using GrpcService1.App.Core.Users;
 using GrpcService1.App.Database.Model;
 using GrpcService1.Domain.Errors;
 using Token = GrpcService1.Domain.Entities.Token;
 using User = GrpcService1.Domain.Entities.User;
 
+#endregion
+
 namespace GrpcService1.App.Database.Users;
 
 public class Users : IDatabase
 {
-    private wttContext Connection;
-    private IErrorReporter ErrorReporter;
     private readonly InternalError InternalError;
-
-    public class UsersDatabaseDependencies
-    {
-        public wttContext Connection;
-        public IErrorReporter ErrorReporter;
-
-        public InternalError InternalError;
-    }
+    private readonly wttContext Connection;
+    private readonly IErrorReporter ErrorReporter;
 
     public Users(UsersDatabaseDependencies dependencies)
     {
@@ -46,14 +42,14 @@ public class Users : IDatabase
     {
         try
         {
-            Connection.Tokens.Add(new Model.Token()
+            Connection.Tokens.Add(new Model.Token
             {
                 Token1 = token.Token1,
                 UserId = token.UserId,
                 ExpirationDate =
                     DateTime.Now
                         .AddSeconds(
-                            1000000), // @TODO For test purposes expiration time is set almost permanent. Change it in production
+                            1000000) // @TODO For test purposes expiration time is set almost permanent. Change it in production
             });
             Connection.SaveChanges();
         }
@@ -68,14 +64,14 @@ public class Users : IDatabase
     {
         try
         {
-            var model = new Model.User()
+            var model = new Model.User
             {
                 Lastname = user.LastName,
                 Name = user.Name,
                 Password = user.Password,
                 Username = user.Username,
                 CompanyLevel = user.CompanyLevel,
-                SkillLevel = user.SkillLevel,
+                SkillLevel = user.SkillLevel
             };
             Connection.Add(model);
             Connection.SaveChanges();
@@ -106,9 +102,9 @@ public class Users : IDatabase
         return new RecordPermissionsBatch(Connection);
     }
 
-    private Domain.Entities.User ConvertModelToUser(Model.User model)
+    private User ConvertModelToUser(Model.User model)
     {
-        var user = new Domain.Entities.User()
+        var user = new User
         {
             Id = model.Id,
             Name = model.Name,
@@ -116,7 +112,7 @@ public class Users : IDatabase
             CompanyLevel = model.CompanyLevel,
             LastName = model.Lastname,
             SkillLevel = model.SkillLevel,
-            Username = model.Username,
+            Username = model.Username
         };
 
         switch (model.CreatedAt.HasValue)
@@ -127,5 +123,13 @@ public class Users : IDatabase
         }
 
         return user;
+    }
+
+    public class UsersDatabaseDependencies
+    {
+        public wttContext Connection;
+        public IErrorReporter ErrorReporter;
+
+        public InternalError InternalError;
     }
 }

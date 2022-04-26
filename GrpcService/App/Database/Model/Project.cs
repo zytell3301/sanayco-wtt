@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace GrpcService1.App.Database.Model;
 
-namespace GrpcService1.App.Database.Model
+public class Project
 {
-    public partial class Project
-    {
-        public int Id { get; set; }
-        public string? Name { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public string? Description { get; set; }
-    }
+    public int Id { get; set; }
+    public string? Name { get; set; }
+    public DateTime? CreatedAt { get; set; }
+    public string? Description { get; set; }
 }

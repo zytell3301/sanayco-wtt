@@ -1,12 +1,17 @@
-﻿using GrpcService1.App.Handlers.Http;
+﻿#region
+
+using GrpcService1.App.Database.Model;
+using GrpcService1.App.Handlers.Http;
+
+#endregion
 
 namespace GrpcService1.App.PermissionsSource;
 
 public class PermissionsSource : IPermissionsSource
 {
-    private Database.Model.wttContext Connection;
+    private readonly wttContext Connection;
 
-    public PermissionsSource(Database.Model.wttContext connection)
+    public PermissionsSource(wttContext connection)
     {
         Connection = connection;
     }

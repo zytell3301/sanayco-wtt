@@ -1,8 +1,6 @@
 ﻿#region
 
-using GrpcService1.App.Handlers.Http.Presentation.Validations;
 using GrpcService1.Domain.Entities;
-using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -36,7 +34,7 @@ public class Handler : BaseHandler
         {
             Core.RecordPresentation(new User
             {
-                Id = GetUserId(),
+                Id = GetUserId()
             });
         }
         catch (Exception e)
@@ -63,7 +61,7 @@ public class Handler : BaseHandler
         {
             Core.RecordPresentationEnd(new User
             {
-                Id = GetUserId(),
+                Id = GetUserId()
             });
         }
         catch (Exception e)
@@ -90,7 +88,7 @@ public class Handler : BaseHandler
         {
             Core.GetPresentationTime(new User
             {
-                Id = GetUserId(),
+                Id = GetUserId()
             });
         }
         catch (Exception e)
