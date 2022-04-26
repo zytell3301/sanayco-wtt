@@ -77,9 +77,9 @@ namespace GrpcService1.App.Database.Model
 
             modelBuilder.Entity<Permission>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("permissions");
+
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")
@@ -87,10 +87,6 @@ namespace GrpcService1.App.Database.Model
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.GrantedBy).HasColumnName("granted_by");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("id");
 
                 entity.Property(e => e.Title)
                     .HasMaxLength(32)
@@ -100,12 +96,12 @@ namespace GrpcService1.App.Database.Model
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
                 entity.HasOne(d => d.GrantedByNavigation)
-                    .WithMany()
+                    .WithMany(p => p.PermissionGrantedByNavigations)
                     .HasForeignKey(d => d.GrantedBy)
                     .HasConstraintName("FK_PERMISSIONS_USERS_GRANTED_BY_ID");
 
                 entity.HasOne(d => d.User)
-                    .WithMany()
+                    .WithMany(p => p.PermissionUsers)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_PERMISSIONS_USERS_USER_ID_ID");

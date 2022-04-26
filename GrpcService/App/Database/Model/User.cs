@@ -8,6 +8,8 @@ namespace GrpcService1.App.Database.Model
         public User()
         {
             OffTimes = new HashSet<OffTime>();
+            PermissionGrantedByNavigations = new HashSet<Permission>();
+            PermissionUsers = new HashSet<Permission>();
             Presentations = new HashSet<Presentation>();
             Tasks = new HashSet<Task>();
             Tokens = new HashSet<Token>();
@@ -23,6 +25,8 @@ namespace GrpcService1.App.Database.Model
         public string? Username { get; set; }
 
         public virtual ICollection<OffTime> OffTimes { get; set; }
+        public virtual ICollection<Permission> PermissionGrantedByNavigations { get; set; }
+        public virtual ICollection<Permission> PermissionUsers { get; set; }
         public virtual ICollection<Presentation> Presentations { get; set; }
         public virtual ICollection<Task> Tasks { get; set; }
         public virtual ICollection<Token> Tokens { get; set; }
