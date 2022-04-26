@@ -2,5 +2,5 @@
 
 public interface IDatabase
 {
-    
+    public void RecordMission(Domain.Entities.Mission mission);
 }
