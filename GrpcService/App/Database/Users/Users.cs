@@ -136,6 +136,19 @@ public class Users : IDatabase
         }
     }
 
+    public Core.Users.UpdateUserBatch NewUpdateUserBatch(User user)
+    {
+        try
+        {
+            return new UpdateUserBatch(Connection, user, ErrorReporter, InternalError);
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
+    }
+
     private User ConvertModelToUser(Model.User model)
     {
         var user = new User
