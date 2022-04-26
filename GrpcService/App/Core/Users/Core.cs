@@ -59,20 +59,29 @@ public class Core
         }
     }
 
-    public void Register(User user)
+    public void Register(User user, List<Permission> permissions)
     {
         try
         {
-            Database.RecordUser(new User
+            var UserId = Database.RecordUser(new User
             {
                 Name = user.Name,
                 Password = Hash.Hash(user.Password),
                 CompanyLevel = user.CompanyLevel,
                 LastName = user.LastName,
-                SkillLevel = user.SkillLevel
+                SkillLevel = user.SkillLevel,
+                Username = user.Username,
             });
+            var permissionsBatch = Database.NewPermissionBatch();
+            foreach (var permission in permissions)
+            {
+                permission.UserId = UserId;
+                permissionsBatch.AddPermissionToBatch(permission);
+            }
+
+            permissionsBatch.SaveChanges();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
