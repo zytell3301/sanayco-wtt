@@ -13,6 +13,7 @@ public interface IDatabase
     public int RecordUser(User user);
     public User GetUserByUsername(User user);
     public IRecordPermissionsBatch NewPermissionBatch();
+    public void DeleteUserByUsername(User user);
 }
 
 public interface IRecordPermissionsBatch
