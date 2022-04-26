@@ -14,6 +14,7 @@ public interface IDatabase
     public User GetUserByUsername(User user);
     public IRecordPermissionsBatch NewPermissionBatch();
     public void DeleteUserByUsername(User user);
+    public List<Permission> GetUserPermissions(User user);
 }
 
 public interface IRecordPermissionsBatch
