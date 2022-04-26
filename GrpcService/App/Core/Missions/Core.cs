@@ -22,4 +22,16 @@ public class Core
         Database = dependencies.Database;
         InternalError = new InternalError(configs.InternalErrorMessage);
     }
+
+    public void RecordMission(Domain.Entities.Mission mission)
+    {
+        try
+        {
+            Database.RecordMission(mission);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
 }
