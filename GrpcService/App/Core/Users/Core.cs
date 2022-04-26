@@ -87,6 +87,18 @@ public class Core
         }
     }
 
+    public void DeleteUser(User user)
+    {
+        try
+        {
+            Database.DeleteUserByUsername(user);
+        }
+        catch (Exception e)
+        {
+            throw InternalError;
+        }
+    }
+
     public class UsersCoreConfigs
     {
         public int ExpirationWindow;
