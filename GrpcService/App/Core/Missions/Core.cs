@@ -58,4 +58,16 @@ public class Core
             throw InternalError;
         }
     }
+
+    public Domain.Entities.Mission GetMission(Domain.Entities.Mission mission)
+    {
+        try
+        {
+            return Database.GetMission(mission);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
 }
