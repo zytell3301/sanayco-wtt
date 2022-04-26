@@ -77,4 +77,29 @@ public class Database : IDatabase
             ErrorReporter.ReportException(e);
         }
     }
+
+    public Domain.Entities.Mission GetMission(Domain.Entities.Mission mission)
+    {
+        try
+        {
+            return ConvertModelToMissionEntity(Connection.Missions.First(m => m.Id == mission.Id));
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
+    private Domain.Entities.Mission ConvertModelToMissionEntity(Model.Mission mission)
+    {
+        return new Mission()
+        {
+            Id = mission.Id,
+            Description = mission.Description,
+            FromDate = mission.FromDate,
+            MemberId = mission.MemberId,
+            ProjectId = mission.ProjectId,
+            ToDate = mission.ToDate,
+        };
+    }
 }
