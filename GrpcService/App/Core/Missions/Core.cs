@@ -46,4 +46,16 @@ public class Core
             throw InternalError;
         }
     }
+
+    public void UpdateMission(Domain.Entities.Mission mission)
+    {
+        try
+        {
+            Database.DeleteMission(mission);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
 }
