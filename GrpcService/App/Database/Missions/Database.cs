@@ -64,4 +64,17 @@ public class Database : IDatabase
             ErrorReporter.ReportException(e);
         }
     }
+
+    public void UpdateMission(Mission mission)
+    {
+        try
+        {
+            var model = Connection.Missions.First(m => m.Id == mission.Id);
+            model.Description = mission.Description; // Other fields are not included because it is not reasonable
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+        }
+    }
 }
