@@ -108,6 +108,45 @@ public class Handler : BaseHandler
         return ResponseToJson(OperationSuccessfulResponse());
     }
 
+    [HttpPost("/delete-user")]
+    public string DeleteUser()
+    {
+        try
+        {
+            Authorize("delete-user");
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
+        DeleteUserValidation body;
+
+        try
+        {
+            body = DecodePayloadJson<DeleteUserValidation>();
+        }
+        catch (Exception)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
+
+        try
+        {
+            Core.DeleteUser(new User()
+            {
+                Username = body.username
+            });
+        }
+        catch (Exception)
+        {
+            ResponseToJson(InternalErrorResponse());
+        }
+
+        return ResponseToJson(OperationSuccessfulResponse());
+    }
+
     private List<Permission> ParsePermissionsArray(string[] titles)
     {
         var permissions = new List<Permission>();
