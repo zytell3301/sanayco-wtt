@@ -4,6 +4,7 @@ using ErrorReporter;
 using GrpcService1.App.Core.Users;
 using GrpcService1.App.Database.Model;
 using GrpcService1.Domain.Errors;
+using Permission = GrpcService1.Domain.Entities.Permission;
 using Token = GrpcService1.Domain.Entities.Token;
 using User = GrpcService1.Domain.Entities.User;
 
@@ -117,6 +118,24 @@ public class Users : IDatabase
         }
     }
 
+    public List<Permission> GetUserPermissions(User user)
+    {
+        List<Permission> permissions = new List<Permission>();
+        try
+        {
+            foreach (var permission in Connection.Permissions.Where(u => u.UserId == user.Id).ToList())
+            {
+                permissions.Add(ConverModelToPermission(permission));
+            }
+
+            return permissions;
+        }
+        catch (Exception e)
+        {
+            throw InternalError;
+        }
+    }
+
     private User ConvertModelToUser(Model.User model)
     {
         var user = new User
@@ -138,6 +157,18 @@ public class Users : IDatabase
         }
 
         return user;
+    }
+
+    private Permission ConverModelToPermission(Model.Permission model)
+    {
+        return new Permission()
+        {
+            Id = model.Id,
+            Title = model.Title,
+            UserId = model.UserId.Value,
+            GrantedBy = model.GrantedBy.Value,
+            CreatedAt = model.CreatedAt.Value,
+        };
     }
 
     public class UsersDatabaseDependencies
