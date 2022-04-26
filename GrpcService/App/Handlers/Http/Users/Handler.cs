@@ -3,6 +3,7 @@
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Users.Validations;
 using GrpcService1.Domain.Entities;
+using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -145,6 +146,74 @@ public class Handler : BaseHandler
         }
 
         return ResponseToJson(OperationSuccessfulResponse());
+    }
+
+    [HttpGet("/get-user/{username}")]
+    public string GetUser(string username)
+    {
+        try
+        {
+            Authorize("edit-user");
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
+        try
+        {
+            var user = Core.GetUserByUsername(new User()
+            {
+                Username = username,
+            });
+            var permissions = Core.GetUserPermissions(user);
+            return JsonSerializer.Serialize(new GetUserResponse(user, permissions));
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(InternalErrorResponse());
+        }
+    }
+
+    private class GetUserResponse : Response
+    {
+        public User user { get; set; }
+        public List<Permission> permissions { get; set; } = new List<Permission>();
+
+        public GetUserResponse(Domain.Entities.User user, List<Domain.Entities.Permission> permissions)
+        {
+            this.user = new User()
+            {
+                id = user.Id,
+                company_level = user.CompanyLevel,
+                lastname = user.LastName,
+                name = user.LastName,
+                skill_level = user.SkillLevel,
+                username = user.SkillLevel,
+            };
+            foreach (var permission in permissions)
+            {
+                this.permissions.Add(new Permission()
+                {
+                    title = permission.Title,
+                });
+            }
+        }
+
+        public class User
+        {
+            public int id { get; set; }
+            public string company_level { get; set; }
+            public string lastname { get; set; }
+            public string name { get; set; }
+            public string skill_level { get; set; }
+            public string username { get; set; }
+        }
+
+        public class Permission
+        {
+            public string title { get; set; }
+        }
     }
 
     private List<Permission> ParsePermissionsArray(string[] titles)
