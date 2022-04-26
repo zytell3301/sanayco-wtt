@@ -101,6 +101,11 @@ public class Users : IDatabase
         }
     }
 
+    public IRecordPermissionsBatch NewPermissionBatch()
+    {
+        return new RecordPermissionsBatch(Connection);
+    }
+
     private Domain.Entities.User ConvertModelToUser(Model.User model)
     {
         var user = new Domain.Entities.User()
