@@ -123,6 +123,24 @@ public class Core
         }
     }
 
+    public void UpdateUser(User user, List<Permission> permissions)
+    {
+        try
+        {
+            var batch = Database.NewUpdateUserBatch(user);
+            batch.RevokeAllPermissions(); // Since we are receiving a new list of permissions, it is required to revoke all permissions first and then insert new ones.
+            batch.SaveChanges();
+
+            batch.UpdateUser(user);
+            batch.AddPermission(permissions);
+            batch.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            throw InternalError;
+        }
+    }
+
     public class UsersCoreConfigs
     {
         public int ExpirationWindow;
