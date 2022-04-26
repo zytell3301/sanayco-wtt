@@ -99,6 +99,30 @@ public class Core
         }
     }
 
+    public User GetUserByUsername(User user)
+    {
+        try
+        {
+            return Database.GetUserByUsername(user);
+        }
+        catch (Exception e)
+        {
+            throw InternalError;
+        }
+    }
+
+    public List<Permission> GetUserPermissions(User user)
+    {
+        try
+        {
+            return Database.GetUserPermissions(user);
+        }
+        catch (Exception e)
+        {
+            throw InternalError;
+        }
+    }
+
     public class UsersCoreConfigs
     {
         public int ExpirationWindow;
