@@ -12,5 +12,11 @@ public interface IDatabase
     public void RecordToken(Token token);
     public int RecordUser(User user);
     public User GetUserByUsername(User user);
-    public void NewPermissionBatch();
+    public IRecordPermissionsBatch NewPermissionBatch();
+}
+
+public interface IRecordPermissionsBatch
+{
+    public void AddPermissionToBatch(Permission permission);
+    public void SaveChanges();
 }
