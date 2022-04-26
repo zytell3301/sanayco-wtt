@@ -3,4 +3,5 @@
 public interface IDatabase
 {
     public void RecordMission(Domain.Entities.Mission mission);
+    public void DeleteMission(Domain.Entities.Mission mission);
 }
