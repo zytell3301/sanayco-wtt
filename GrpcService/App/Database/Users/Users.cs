@@ -102,6 +102,21 @@ public class Users : IDatabase
         return new RecordPermissionsBatch(Connection);
     }
 
+    public void DeleteUserByUsername(User user)
+    {
+        try
+        {
+            var model = Connection.Users.First(u => u.Username == user.Username);
+            Connection.Users.Remove(model);
+            Connection.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
+    }
+
     private User ConvertModelToUser(Model.User model)
     {
         var user = new User
