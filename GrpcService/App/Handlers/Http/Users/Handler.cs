@@ -175,6 +175,49 @@ public class Handler : BaseHandler
         }
     }
 
+    [HttpPost("/update-user")]
+    public string UpdateUser()
+    {
+        try
+        {
+            Authorize("edit-user");
+        }
+        catch (Exception e)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
+        UpdateUserValidation body;
+        try
+        {
+            body = DecodePayloadJson<UpdateUserValidation>();
+        }
+        catch (Exception)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
+
+        try
+        {
+            Core.UpdateUser(new User()
+            {
+                Id = body.user_id,
+                Name = body.name,
+                Username = body.username,
+                CompanyLevel = body.company_level,
+                LastName = body.lastname,
+                SkillLevel = body.skill_level,
+            }, ParseEditPermissionArray(body.permissions, body.user_id));
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(InternalErrorResponse());
+        }
+
+        return ResponseToJson(OperationSuccessfulResponse());
+    }
+
     private class GetUserResponse : Response
     {
         public User user { get; set; }
@@ -187,9 +230,9 @@ public class Handler : BaseHandler
                 id = user.Id,
                 company_level = user.CompanyLevel,
                 lastname = user.LastName,
-                name = user.LastName,
+                name = user.Name,
                 skill_level = user.SkillLevel,
-                username = user.SkillLevel,
+                username = user.Username,
             };
             foreach (var permission in permissions)
             {
@@ -214,6 +257,17 @@ public class Handler : BaseHandler
         {
             public string title { get; set; }
         }
+    }
+
+    private List<Permission> ParseEditPermissionArray(string[] titles, int userId)
+    {
+        var permissions = ParsePermissionsArray(titles);
+        foreach (var permission in permissions)
+        {
+            permission.UserId = userId;
+        }
+
+        return permissions;
     }
 
     private List<Permission> ParsePermissionsArray(string[] titles)
