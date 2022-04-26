@@ -51,4 +51,17 @@ public class Database : IDatabase
             ErrorReporter.ReportException(e);
         }
     }
+
+    public void DeleteMission(Mission mission)
+    {
+        try
+        {
+            Connection.Remove(Connection.Missions.First(m => m.Id == mission.Id));
+            Connection.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+        }
+    }
 }
