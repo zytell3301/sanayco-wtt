@@ -111,4 +111,53 @@ public class Handler : BaseHandler
 
         return ResponseToJson(OperationSuccessfulResponse());
     }
+
+    public string UpdateMission()
+    {
+        try
+        {
+            // @TODO We must check that if the requesting client is the owner of current entity or not
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
+        UpdateMissionValidation body;
+        try
+        {
+            body = DecodePayloadJson<UpdateMissionValidation>();
+        }
+        catch (Exception)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
+
+        switch (ModelState.IsValid)
+        {
+            case false:
+                return ResponseToJson(DataValidationFailedResponse());
+        }
+
+        try
+        {
+            Core.UpdateMission(new Mission()
+            {
+                Id = body.mission_id,
+                Description = body.description,
+                Location = body.location,
+                FromDate = DateTime.UnixEpoch.AddSeconds(body.from_date),
+                ToDate = DateTime.UnixEpoch.AddSeconds(body.to_date),
+                Title = body.title,
+                ProjectId = body.project_id,
+            });
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(InternalErrorResponse());
+        }
+
+        return ResponseToJson(OperationSuccessfulResponse());
+    }
 }
