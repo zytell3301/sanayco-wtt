@@ -28,7 +28,7 @@ public class Handler : BaseHandler
         }
         catch (Exception)
         {
-            return ResponseToJson(AuthenticationFailedResponse());
+            return ResponseToJson(AuthorizationFailedResponse());
         }
 
         RecordMissionsValidation body;
