@@ -19,7 +19,7 @@ public class Handler : BaseHandler
         Core = core;
     }
 
-    [HttpPost("record-missions")]
+    [HttpPost("record-mission")]
     public string RecordMission()
     {
         try
