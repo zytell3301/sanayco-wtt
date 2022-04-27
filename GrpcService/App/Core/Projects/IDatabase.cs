@@ -24,7 +24,7 @@ public interface IDatabase
  * 
  * If the process of creating a batch is not directly part of business logic, this process must
  * be moved to an intermediate layer called DatabaseController that is interacting with core and the
- * underling database layer to isolate the batching process with database interaction process.
+ * underlying database layer to isolate the batching process with database interaction process.
  */
 public interface IRecordProjectBatch
 {
