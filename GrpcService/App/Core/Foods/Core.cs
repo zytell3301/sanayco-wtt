@@ -124,6 +124,18 @@ public class Core
         }
     }
 
+    public void CancelOrder(FoodOrder order)
+    {
+        try
+        {
+            Database.DeleteOrder(order);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
     private class FoodNotAvailable : Domain.Errors.Status
     {
         public FoodNotAvailable(string message) : base(message)
