@@ -91,6 +91,21 @@ public class Database : IDatabase
         }
     }
 
+    public void ChangeMissionStatus(Mission mission)
+    {
+        try
+        {
+            var model = Connection.Missions.First(m => m.Id == mission.Id);
+            model.IsVerified = mission.IsVerified;
+            Connection.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
+    }
+
     private Mission ConvertModelToMissionEntity(Model.Mission mission)
     {
         return new Mission
