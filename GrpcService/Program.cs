@@ -2,6 +2,7 @@
 
 using ErrorReporter;
 using GrpcService1.App.Core.Tasks;
+using GrpcService1.App.Database.Missions;
 using GrpcService1.App.Database.Model;
 using GrpcService1.App.Database.OffTime;
 using GrpcService1.App.Database.Presentations;
@@ -41,6 +42,15 @@ GrpcService1.App.Core.Users.IDatabase usersDB = new Users(new Users.UsersDatabas
     Connection = connection,
     ErrorReporter = reporter,
     InternalError = new InternalError("internal error")
+});
+
+GrpcService1.App.Core.Missions.IDatabase missionsDB = new Database(new Database.MissionsDatabaseDependencies()
+{
+    Connection = connection,
+    ErrorReporter = reporter,
+}, new Database.MissionsDatabaseConfigs()
+{
+    InternalErrorMessage = "InternalErrorMessage",
 });
 
 // Adding core classes to container
@@ -128,6 +138,15 @@ builder.Services.AddSingleton(new GrpcService1.App.Core.Users.Core(
         })
     })
 );
+builder.Services.AddSingleton<GrpcService1.App.Core.Missions.Core>(new GrpcService1.App.Core.Missions.Core(
+    new GrpcService1.App.Core.Missions.Core.MissionsCoreDependencies()
+    {
+        Database = missionsDB,
+    },
+    new GrpcService1.App.Core.Missions.Core.MissionsCoreConfigs()
+    {
+        InternalErrorMessage = "InternalErrorMessage",
+    }));
 var app = builder.Build();
 
 app.UseHttpsRedirection();
