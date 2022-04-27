@@ -1,0 +1,22 @@
+USE wtt;
+
+CREATE TABLE foods
+(
+    id           INT IDENTITY (1,1),
+    title        VARCHAR(64) NOT NULL,
+    price        INT         NOT NULL,
+    is_available BIT         NOT NULL,
+    CONSTRAINT PK_FOODS PRIMARY KEY (id),
+);
+
+CREATE TABLE food_orders
+(
+    id      INT IDENTITY (1,1),
+    food_id INT      NOT NULL,
+    user_id INT      NOT NULL,
+    price   INT      NOT NULL,
+    date    DATETIME NOT NULL,
+    CONSTRAINT PK_FOOD_ORDERS PRIMARY KEY (id),
+    CONSTRAINT FK_FOOD_ORDERS_FOODS_FOOD_ID_ID FOREIGN KEY (food_id) REFERENCES foods (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT FK_FOODS_ORDER_USERS_USER_ID_ID FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE,
+);
