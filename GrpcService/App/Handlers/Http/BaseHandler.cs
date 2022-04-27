@@ -17,6 +17,7 @@ public class BaseHandler : ControllerBase
     private readonly AuthorizationFailed AuthorizationFailed;
     private readonly IPermissionsSource PermissionsSource;
     private readonly ITokenSource TokenSource;
+    private Dictionary<string, Response> Responses = new Dictionary<string, Response>();
 
     private int? UserId;
 
@@ -26,51 +27,62 @@ public class BaseHandler : ControllerBase
         AuthenticationFailed = baseHandlerDependencies.AuthenticationFailed;
         AuthorizationFailed = baseHandlerDependencies.AuthorizationFailed;
         PermissionsSource = baseHandlerDependencies.PermissionsSource;
+
+        InitializeResponses();
     }
 
-    protected Response DataValidationFailedResponse()
+    private void InitializeResponses()
     {
-        return new Response
+        Responses["OperationSuccessfulResponse"] = new Response
         {
-            status_code = 2
+            status_code = 0
         };
-    }
-
-    protected Response InternalErrorResponse()
-    {
-        return new Response
+        Responses["InternalErrorResponse"] = new Response
         {
             status_code = 1
         };
-    }
-
-    protected Response AuthorizationFailedResponse()
-    {
-        return new Response
+        Responses["DataValidationFailedResponse"] = new Response
+        {
+            status_code = 2
+        };
+        Responses["AuthorizationFailedResponse"] = new Response
         {
             status_code = 3
         };
-    }
-
-    protected Response AuthenticationFailedResponse()
-    {
-        return new Response
+        Responses["AuthenticationFailedResponse"] = new Response
         {
             status_code = 4
         };
     }
 
+    protected Response DataValidationFailedResponse()
+    {
+        return Responses["DataValidationFailedResponse"];
+    }
+
+    protected Response InternalErrorResponse()
+    {
+        return Responses["InternalErrorResponse"];
+    }
+
+    protected Response AuthorizationFailedResponse()
+    {
+        return Responses["AuthorizationFailedResponse"];
+    }
+
+    protected Response AuthenticationFailedResponse()
+    {
+        return Responses["AuthenticationFailedResponse"];
+    }
+
     protected Response OperationSuccessfulResponse()
     {
-        return new Response
-        {
-            status_code = 0
-        };
+        return Responses["OperationSuccessfulResponse"];
     }
 
     protected string ResponseToJson(Response response)
     {
-        return JsonSerializer.Serialize(response);
+        return response.GetBufferedJson();
     }
 
     private string ParsePayload()
