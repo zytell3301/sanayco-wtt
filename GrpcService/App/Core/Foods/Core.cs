@@ -1,4 +1,5 @@
-﻿using GrpcService1.Domain.Errors;
+﻿using GrpcService1.Domain.Entities;
+using GrpcService1.Domain.Errors;
 
 namespace GrpcService1.App.Core.Foods;
 
@@ -23,5 +24,17 @@ public class Core
         InternalError = new InternalError(configs.InternalErrorMessage);
 
         Database = dependencies.Database;
+    }
+
+    public void RecordFood(Food food)
+    {
+        try
+        {
+            Database.RecordFood(food);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
     }
 }
