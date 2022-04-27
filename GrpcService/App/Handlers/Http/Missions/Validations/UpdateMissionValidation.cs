@@ -8,11 +8,11 @@ namespace GrpcService1.App.Handlers.Http.Missions.Validations;
 
 public class UpdateMissionValidation
 {
-    public string description;
-    public int from_date;
-    public string location;
-    [Required] public int mission_id;
-    public int project_id;
-    public string title;
-    public int to_date;
+    public string description { get; set; }
+    public int from_date { get; set; }
+    public string location { get; set; }
+    [Required] public int mission_id { get; set; }
+    public int project_id { get; set; }
+    public string title { get; set; }
+    public int to_date { get; set; }
 }

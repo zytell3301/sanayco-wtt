@@ -2,5 +2,5 @@
 
 public class DeleteMissionValidation
 {
-    public int mission_id;
+    public int mission_id { get; set; }
 }
