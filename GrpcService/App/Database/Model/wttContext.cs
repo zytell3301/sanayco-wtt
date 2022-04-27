@@ -52,9 +52,21 @@ namespace GrpcService1.App.Database.Model
                     .HasColumnType("datetime")
                     .HasColumnName("from_date");
 
+                entity.Property(e => e.IsVerified).HasColumnName("is_verified");
+
+                entity.Property(e => e.Location)
+                    .HasMaxLength(128)
+                    .IsUnicode(false)
+                    .HasColumnName("location");
+
                 entity.Property(e => e.MemberId).HasColumnName("member_id");
 
                 entity.Property(e => e.ProjectId).HasColumnName("project_id");
+
+                entity.Property(e => e.Title)
+                    .HasMaxLength(128)
+                    .IsUnicode(false)
+                    .HasColumnName("title");
 
                 entity.Property(e => e.ToDate)
                     .HasColumnType("datetime")
