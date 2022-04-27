@@ -9,4 +9,5 @@ public interface IDatabase
     public Food GetFoodInfo(Food food);
     public void ChangeFoodStatus(Food food);
     public void DeleteFood(Food food);
+    public void RecordOrder(FoodOrder order);
 }

@@ -6,6 +6,7 @@ namespace GrpcService1.App.Core.Foods;
 public class Core
 {
     private readonly InternalError InternalError;
+    private readonly FoodNotAvailable FoodNotAvailableError;
 
     private IDatabase Database;
 
@@ -22,6 +23,7 @@ public class Core
     public Core(FoodsCoreDependencies dependencies, FoodsCoreConfigs configs)
     {
         InternalError = new InternalError(configs.InternalErrorMessage);
+        FoodNotAvailableError = new FoodNotAvailable("FoodNotAvailableError");
 
         Database = dependencies.Database;
     }
@@ -97,6 +99,35 @@ public class Core
         catch (Exception)
         {
             throw InternalError;
+        }
+    }
+
+    public void OrderFood(FoodOrder order)
+    {
+        try
+        {
+            var food = Database.GetFoodInfo(new Food()
+            {
+                Id = order.FoodId,
+            });
+            switch (food.IsAvailable)
+            {
+                case false:
+                    throw FoodNotAvailableError;
+            }
+
+            Database.RecordOrder(order);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
+    private class FoodNotAvailable : Domain.Errors.Status
+    {
+        public FoodNotAvailable(string message) : base(message)
+        {
         }
     }
 }
