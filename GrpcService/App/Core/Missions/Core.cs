@@ -47,7 +47,7 @@ public class Core
     {
         try
         {
-            Database.DeleteMission(mission);
+            Database.UpdateMission(mission);
         }
         catch (Exception)
         {
