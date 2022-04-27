@@ -5,4 +5,5 @@ namespace GrpcService1.App.Core.Foods;
 public interface IDatabase
 {
     public void RecordFood(Food food);
+    public void UpdateFoodInfo(Food food);
 }

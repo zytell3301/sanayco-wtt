@@ -37,4 +37,16 @@ public class Core
             throw InternalError;
         }
     }
+
+    public void UpdateFoodInfo(Food food)
+    {
+        try
+        {
+            Database.UpdateFoodInfo(food);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
 }
