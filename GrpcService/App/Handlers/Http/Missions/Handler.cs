@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Missions.Validations;
 using GrpcService1.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -114,6 +115,66 @@ public class Handler : BaseHandler
         return ResponseToJson(OperationSuccessfulResponse());
     }
 
+    private class GetMissionResponse : Response
+    {
+        public Mission mission { get; set; }
+
+        public class Mission
+        {
+            public int id { get; set; }
+            public int member_id { get; set; }
+            public int project_id { get; set; }
+            public DateTime from_date { get; set; }
+            public DateTime to_date { get; set; }
+            public string description { get; set; }
+            public string title { get; set; }
+            public string location { get; set; }
+            public bool is_verified { get; set; }
+        }
+    }
+
+    [HttpGet("get-mission/{id}")]
+    public string GetMission(int id)
+    {
+        try
+        {
+            // @TODO We must check that if the requesting client is the owner of current entity or not
+        }
+        catch (Exception e)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
+        try
+        {
+            var mission = Core.GetMission(new Mission()
+            {
+                Id = id,
+            });
+            return JsonSerializer.Serialize(new GetMissionResponse()
+            {
+                status_code = 0,
+                mission = new GetMissionResponse.Mission()
+                {
+                    id = mission.Id,
+                    description = mission.Description,
+                    from_date = mission.FromDate,
+                    is_verified = mission.IsVerified,
+                    location = mission.Location,
+                    member_id = mission.MemberId,
+                    project_id = mission.ProjectId,
+                    title = mission.Title,
+                    to_date = mission.ToDate,
+                }
+            });
+        }
+        catch (Exception e)
+        {
+            return ResponseToJson(InternalErrorResponse());
+        }
+    }
+
+    [HttpPost("update-mission")]
     public string UpdateMission()
     {
         try
