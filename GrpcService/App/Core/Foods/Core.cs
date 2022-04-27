@@ -87,4 +87,16 @@ public class Core
             throw InternalError;
         }
     }
+
+    public void DeleteFood(Food food)
+    {
+        try
+        {
+            Database.DeleteFood(food);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
 }

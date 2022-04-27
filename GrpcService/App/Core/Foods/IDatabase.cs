@@ -8,4 +8,5 @@ public interface IDatabase
     public void UpdateFoodInfo(Food food);
     public Food GetFoodInfo(Food food);
     public void ChangeFoodStatus(Food food);
+    public void DeleteFood(Food food);
 }
