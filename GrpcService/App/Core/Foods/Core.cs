@@ -74,4 +74,17 @@ public class Core
             throw InternalError;
         }
     }
+
+    public void SetFoodUnavailable(Food food)
+    {
+        try
+        {
+            food.IsAvailable = false;
+            Database.ChangeFoodStatus(food);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
 }
