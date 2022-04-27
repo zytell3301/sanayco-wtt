@@ -8,7 +8,7 @@ CREATE TABLE missions
     project_id  INT      NOT NULL,
     from_date   DATETIME NOT NULL,
     to_date     DATETIME NOT NULL,
-    description VARCHAR  NOT NULL,
+    description VARCHAR(1024)  NOT NULL,
 );
 
 ALTER TABLE missions
