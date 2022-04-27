@@ -34,7 +34,10 @@ public class Database : IDatabase
                 MemberId = mission.MemberId,
                 ProjectId = mission.ProjectId,
                 FromDate = mission.FromDate,
-                ToDate = mission.ToDate
+                ToDate = mission.ToDate,
+                Location = mission.Location,
+                Title = mission.Title,
+                IsVerified = mission.IsVerified
             });
             Connection.SaveChanges();
         }
