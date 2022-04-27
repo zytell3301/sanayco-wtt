@@ -49,4 +49,16 @@ public class Core
             throw InternalError;
         }
     }
+
+    public Food GetFoodInfo(Food food)
+    {
+        try
+        {
+            return Database.GetFoodInfo(food);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
 }

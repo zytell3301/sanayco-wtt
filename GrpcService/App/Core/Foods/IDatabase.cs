@@ -6,4 +6,5 @@ public interface IDatabase
 {
     public void RecordFood(Food food);
     public void UpdateFoodInfo(Food food);
+    public Food GetFoodInfo(Food food);
 }
