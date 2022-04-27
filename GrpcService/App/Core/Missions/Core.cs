@@ -67,6 +67,19 @@ public class Core
         }
     }
 
+    public void ApproveMission(Mission mission)
+    {
+        try
+        {
+            mission.IsVerified = true;
+            Database.ChangeMissionStatus(mission);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
     public class MissionsCoreDependencies
     {
         public IDatabase Database;
