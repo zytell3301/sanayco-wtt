@@ -1,10 +1,14 @@
-﻿namespace GrpcService1.App.Database.Model;
+﻿using System;
+using System.Collections.Generic;
 
-public class ProjectMember
+namespace GrpcService1.App.Database.Model
 {
-    public int Id { get; set; }
-    public int? UserId { get; set; }
-    public int? ProjectId { get; set; }
-    public DateTime? CreatedAt { get; set; }
-    public string? Level { get; set; }
+    public partial class ProjectMember
+    {
+        public int Id { get; set; }
+        public int? UserId { get; set; }
+        public int? ProjectId { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public string? Level { get; set; }
+    }
 }
