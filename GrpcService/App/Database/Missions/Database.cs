@@ -65,7 +65,13 @@ public class Database : IDatabase
         try
         {
             var model = Connection.Missions.First(m => m.Id == mission.Id);
-            model.Description = mission.Description; // Other fields are not included because it is not reasonable
+            model.Description = mission.Description;
+            model.Location = mission.Location;
+            model.Title = mission.Title;
+            model.FromDate = mission.FromDate;
+            model.ToDate = mission.ToDate;
+            model.ProjectId = mission.ProjectId;
+            Connection.SaveChanges();
         }
         catch (Exception e)
         {
