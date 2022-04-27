@@ -24,7 +24,7 @@ public class Handler : BaseHandler
     {
         try
         {
-            Authorize("mission");
+            Authorize("submit-mission");
         }
         catch (Exception)
         {
