@@ -14,9 +14,9 @@ namespace GrpcService1.App.Database.Users;
 
 public class Users : IDatabase
 {
-    private readonly InternalError InternalError;
     private readonly wttContext Connection;
     private readonly IErrorReporter ErrorReporter;
+    private readonly InternalError InternalError;
 
     public Users(UsersDatabaseDependencies dependencies)
     {
@@ -120,13 +120,11 @@ public class Users : IDatabase
 
     public List<Permission> GetUserPermissions(User user)
     {
-        List<Permission> permissions = new List<Permission>();
+        var permissions = new List<Permission>();
         try
         {
             foreach (var permission in Connection.Permissions.Where(u => u.UserId == user.Id).ToList())
-            {
                 permissions.Add(ConverModelToPermission(permission));
-            }
 
             return permissions;
         }
@@ -174,13 +172,13 @@ public class Users : IDatabase
 
     private Permission ConverModelToPermission(Model.Permission model)
     {
-        return new Permission()
+        return new Permission
         {
             Id = model.Id,
             Title = model.Title,
             UserId = model.UserId.Value,
             GrantedBy = model.GrantedBy.Value,
-            CreatedAt = model.CreatedAt.Value,
+            CreatedAt = model.CreatedAt.Value
         };
     }
 

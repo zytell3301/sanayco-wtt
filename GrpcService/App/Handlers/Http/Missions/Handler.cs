@@ -1,15 +1,17 @@
-﻿using GrpcService1.App.Handlers.Http.Missions.Validations;
-using GrpcService1.App.Handlers.Http.Users.Validations;
+﻿#region
+
+using GrpcService1.App.Handlers.Http.Missions.Validations;
 using GrpcService1.Domain.Entities;
-using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
+
+#endregion
 
 namespace GrpcService1.App.Handlers.Http.Missions;
 
 [Route("/missions")]
 public class Handler : BaseHandler
 {
-    private Core.Missions.Core Core;
+    private readonly Core.Missions.Core Core;
 
     public Handler(Core.Missions.Core core, BaseHandlerDependencies baseHandlerDependencies) : base(
         baseHandlerDependencies)
@@ -48,7 +50,7 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.RecordMission(new Mission()
+            Core.RecordMission(new Mission
             {
                 Location = body.location,
                 Description = body.description,
@@ -57,7 +59,7 @@ public class Handler : BaseHandler
                 IsVerified = body.is_verified,
                 MemberId = GetUserId(),
                 ToDate = DateTime.UnixEpoch.AddSeconds(body.to_date),
-                ProjectId = body.project_id,
+                ProjectId = body.project_id
             });
         }
         catch (Exception)
@@ -99,9 +101,9 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.DeleteMission(new Mission()
+            Core.DeleteMission(new Mission
             {
-                Id = body.mission_id,
+                Id = body.mission_id
             });
         }
         catch (Exception)
@@ -142,7 +144,7 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.UpdateMission(new Mission()
+            Core.UpdateMission(new Mission
             {
                 Id = body.mission_id,
                 Description = body.description,
@@ -150,7 +152,7 @@ public class Handler : BaseHandler
                 FromDate = DateTime.UnixEpoch.AddSeconds(body.from_date),
                 ToDate = DateTime.UnixEpoch.AddSeconds(body.to_date),
                 Title = body.title,
-                ProjectId = body.project_id,
+                ProjectId = body.project_id
             });
         }
         catch (Exception)

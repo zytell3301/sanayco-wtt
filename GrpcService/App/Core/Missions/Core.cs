@@ -1,21 +1,16 @@
-﻿using GrpcService1.Domain.Errors;
+﻿#region
+
+using GrpcService1.Domain.Entities;
+using GrpcService1.Domain.Errors;
+
+#endregion
 
 namespace GrpcService1.App.Core.Missions;
 
 public class Core
 {
-    private IDatabase Database;
     private readonly InternalError InternalError;
-
-    public class MissionsCoreDependencies
-    {
-        public IDatabase Database;
-    }
-
-    public class MissionsCoreConfigs
-    {
-        public string InternalErrorMessage;
-    }
+    private readonly IDatabase Database;
 
     public Core(MissionsCoreDependencies dependencies, MissionsCoreConfigs configs)
     {
@@ -23,7 +18,7 @@ public class Core
         InternalError = new InternalError(configs.InternalErrorMessage);
     }
 
-    public void RecordMission(Domain.Entities.Mission mission)
+    public void RecordMission(Mission mission)
     {
         try
         {
@@ -35,7 +30,7 @@ public class Core
         }
     }
 
-    public void DeleteMission(Domain.Entities.Mission mission)
+    public void DeleteMission(Mission mission)
     {
         try
         {
@@ -47,7 +42,7 @@ public class Core
         }
     }
 
-    public void UpdateMission(Domain.Entities.Mission mission)
+    public void UpdateMission(Mission mission)
     {
         try
         {
@@ -59,7 +54,7 @@ public class Core
         }
     }
 
-    public Domain.Entities.Mission GetMission(Domain.Entities.Mission mission)
+    public Mission GetMission(Mission mission)
     {
         try
         {
@@ -69,5 +64,15 @@ public class Core
         {
             throw InternalError;
         }
+    }
+
+    public class MissionsCoreDependencies
+    {
+        public IDatabase Database;
+    }
+
+    public class MissionsCoreConfigs
+    {
+        public string InternalErrorMessage;
     }
 }

@@ -1,28 +1,20 @@
-﻿using ErrorReporter;
+﻿#region
+
+using ErrorReporter;
 using GrpcService1.App.Core.Missions;
 using GrpcService1.App.Database.Model;
 using GrpcService1.Domain.Errors;
 using Mission = GrpcService1.Domain.Entities.Mission;
 
+#endregion
+
 namespace GrpcService1.App.Database.Missions;
 
 public class Database : IDatabase
 {
-    private wttContext Connection;
-    private IErrorReporter ErrorReporter;
-
     private readonly InternalError InternalError;
-
-    public class MissionsDatabaseDependencies
-    {
-        public wttContext Connection;
-        public IErrorReporter ErrorReporter;
-    }
-
-    public class MissionsDatabaseConfigs
-    {
-        public string InternalErrorMessage;
-    }
+    private readonly wttContext Connection;
+    private readonly IErrorReporter ErrorReporter;
 
     public Database(MissionsDatabaseDependencies dependencies, MissionsDatabaseConfigs configs)
     {
@@ -36,13 +28,13 @@ public class Database : IDatabase
     {
         try
         {
-            Connection.Missions.Add(new Model.Mission()
+            Connection.Missions.Add(new Model.Mission
             {
                 Description = mission.Description,
                 MemberId = mission.MemberId,
                 ProjectId = mission.ProjectId,
                 FromDate = mission.FromDate,
-                ToDate = mission.ToDate,
+                ToDate = mission.ToDate
             });
             Connection.SaveChanges();
         }
@@ -78,7 +70,7 @@ public class Database : IDatabase
         }
     }
 
-    public Domain.Entities.Mission GetMission(Domain.Entities.Mission mission)
+    public Mission GetMission(Mission mission)
     {
         try
         {
@@ -90,16 +82,27 @@ public class Database : IDatabase
         }
     }
 
-    private Domain.Entities.Mission ConvertModelToMissionEntity(Model.Mission mission)
+    private Mission ConvertModelToMissionEntity(Model.Mission mission)
     {
-        return new Mission()
+        return new Mission
         {
             Id = mission.Id,
             Description = mission.Description,
             FromDate = mission.FromDate,
             MemberId = mission.MemberId,
             ProjectId = mission.ProjectId,
-            ToDate = mission.ToDate,
+            ToDate = mission.ToDate
         };
+    }
+
+    public class MissionsDatabaseDependencies
+    {
+        public wttContext Connection;
+        public IErrorReporter ErrorReporter;
+    }
+
+    public class MissionsDatabaseConfigs
+    {
+        public string InternalErrorMessage;
     }
 }

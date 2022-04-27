@@ -15,8 +15,8 @@ public class BaseHandler : ControllerBase
 
     private readonly AuthenticationFailed AuthenticationFailed;
     private readonly AuthorizationFailed AuthorizationFailed;
-    private readonly ITokenSource TokenSource;
     private readonly IPermissionsSource PermissionsSource;
+    private readonly ITokenSource TokenSource;
 
     private int? UserId;
 
@@ -131,6 +131,8 @@ public class BaseHandler : ControllerBase
     {
         private string JsonBuffer = "";
 
+        public int status_code { get; set; }
+
         // This method returns json serialized string of current instance. If you are serializing classes that are static like status responses, consider
         // using GetBufferedJson.
         public string FreshSerialize()
@@ -157,7 +159,5 @@ public class BaseHandler : ControllerBase
         {
             JsonBuffer = FreshSerialize();
         }
-
-        public int status_code { get; set; }
     }
 }

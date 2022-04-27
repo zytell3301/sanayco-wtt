@@ -1,20 +1,23 @@
-﻿using Confluent.Kafka;
+﻿#region
+
 using ErrorReporter;
 using GrpcService1.App.Database.Model;
 using GrpcService1.Domain.Errors;
 using Permission = GrpcService1.Domain.Entities.Permission;
-using User = GrpcService1.Domain.Entities.User;
+
+#endregion
 
 namespace GrpcService1.App.Database.Users;
 
 public class UpdateUserBatch : Core.Users.UpdateUserBatch
 {
-    private wttContext Connection;
-    private Model.User User;
     private readonly InternalError InternalError;
-    private IErrorReporter ErrorReporter;
+    private readonly wttContext Connection;
+    private readonly IErrorReporter ErrorReporter;
+    private readonly User User;
 
-    public UpdateUserBatch(wttContext connection, User user, IErrorReporter errorReporter, InternalError internalError)
+    public UpdateUserBatch(wttContext connection, Domain.Entities.User user, IErrorReporter errorReporter,
+        InternalError internalError)
     {
         Connection = connection;
         User = Connection.Users.First(u => u.Id == user.Id);
@@ -22,7 +25,7 @@ public class UpdateUserBatch : Core.Users.UpdateUserBatch
         ErrorReporter = errorReporter;
     }
 
-    public void UpdateUser(User user)
+    public void UpdateUser(Domain.Entities.User user)
     {
         try
         {
@@ -46,11 +49,11 @@ public class UpdateUserBatch : Core.Users.UpdateUserBatch
             foreach (var permission in permissions)
             {
                 Console.WriteLine(permission.UserId);
-                Connection.Permissions.Add(new Model.Permission()
+                Connection.Permissions.Add(new Model.Permission
                 {
                     Title = permission.Title,
                     GrantedBy = permission.GrantedBy,
-                    UserId = permission.UserId,
+                    UserId = permission.UserId
                 });
             }
         }

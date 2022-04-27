@@ -3,7 +3,6 @@
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Users.Validations;
 using GrpcService1.Domain.Entities;
-using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -135,7 +134,7 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.DeleteUser(new User()
+            Core.DeleteUser(new User
             {
                 Username = body.username
             });
@@ -162,9 +161,9 @@ public class Handler : BaseHandler
 
         try
         {
-            var user = Core.GetUserByUsername(new User()
+            var user = Core.GetUserByUsername(new User
             {
-                Username = username,
+                Username = username
             });
             var permissions = Core.GetUserPermissions(user);
             return JsonSerializer.Serialize(new GetUserResponse(user, permissions));
@@ -200,14 +199,14 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.UpdateUser(new User()
+            Core.UpdateUser(new User
             {
                 Id = body.user_id,
                 Name = body.name,
                 Username = body.username,
                 CompanyLevel = body.company_level,
                 LastName = body.lastname,
-                SkillLevel = body.skill_level,
+                SkillLevel = body.skill_level
             }, ParseEditPermissionArray(body.permissions, body.user_id));
         }
         catch (Exception)
@@ -218,54 +217,10 @@ public class Handler : BaseHandler
         return ResponseToJson(OperationSuccessfulResponse());
     }
 
-    private class GetUserResponse : Response
-    {
-        public User user { get; set; }
-        public List<Permission> permissions { get; set; } = new List<Permission>();
-
-        public GetUserResponse(Domain.Entities.User user, List<Domain.Entities.Permission> permissions)
-        {
-            this.user = new User()
-            {
-                id = user.Id,
-                company_level = user.CompanyLevel,
-                lastname = user.LastName,
-                name = user.Name,
-                skill_level = user.SkillLevel,
-                username = user.Username,
-            };
-            foreach (var permission in permissions)
-            {
-                this.permissions.Add(new Permission()
-                {
-                    title = permission.Title,
-                });
-            }
-        }
-
-        public class User
-        {
-            public int id { get; set; }
-            public string company_level { get; set; }
-            public string lastname { get; set; }
-            public string name { get; set; }
-            public string skill_level { get; set; }
-            public string username { get; set; }
-        }
-
-        public class Permission
-        {
-            public string title { get; set; }
-        }
-    }
-
     private List<Permission> ParseEditPermissionArray(string[] titles, int userId)
     {
         var permissions = ParsePermissionsArray(titles);
-        foreach (var permission in permissions)
-        {
-            permission.UserId = userId;
-        }
+        foreach (var permission in permissions) permission.UserId = userId;
 
         return permissions;
     }
@@ -281,6 +236,45 @@ public class Handler : BaseHandler
             });
 
         return permissions;
+    }
+
+    private class GetUserResponse : Response
+    {
+        public GetUserResponse(Domain.Entities.User user, List<Domain.Entities.Permission> permissions)
+        {
+            this.user = new User
+            {
+                id = user.Id,
+                company_level = user.CompanyLevel,
+                lastname = user.LastName,
+                name = user.Name,
+                skill_level = user.SkillLevel,
+                username = user.Username
+            };
+            foreach (var permission in permissions)
+                this.permissions.Add(new Permission
+                {
+                    title = permission.Title
+                });
+        }
+
+        public User user { get; }
+        public List<Permission> permissions { get; } = new();
+
+        public class User
+        {
+            public int id { get; set; }
+            public string company_level { get; set; }
+            public string lastname { get; set; }
+            public string name { get; set; }
+            public string skill_level { get; set; }
+            public string username { get; set; }
+        }
+
+        public class Permission
+        {
+            public string title { get; set; }
+        }
     }
 
     private class LoginResponse : Response

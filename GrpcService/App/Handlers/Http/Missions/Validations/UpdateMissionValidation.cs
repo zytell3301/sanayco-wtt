@@ -1,14 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿#region
+
+using System.ComponentModel.DataAnnotations;
+
+#endregion
 
 namespace GrpcService1.App.Handlers.Http.Missions.Validations;
 
 public class UpdateMissionValidation
 {
-    [Required] public int mission_id;
     public string description;
-    public int project_id;
     public int from_date;
-    public int to_date;
-    public string title;
     public string location;
+    [Required] public int mission_id;
+    public int project_id;
+    public string title;
+    public int to_date;
 }

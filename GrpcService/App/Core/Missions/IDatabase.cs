@@ -1,9 +1,15 @@
-﻿namespace GrpcService1.App.Core.Missions;
+﻿#region
+
+using GrpcService1.Domain.Entities;
+
+#endregion
+
+namespace GrpcService1.App.Core.Missions;
 
 public interface IDatabase
 {
-    public void RecordMission(Domain.Entities.Mission mission);
-    public void DeleteMission(Domain.Entities.Mission mission);
-    public void UpdateMission(Domain.Entities.Mission mission);
-    public Domain.Entities.Mission GetMission(Domain.Entities.Mission mission);
+    public void RecordMission(Mission mission);
+    public void DeleteMission(Mission mission);
+    public void UpdateMission(Mission mission);
+    public Mission GetMission(Mission mission);
 }
