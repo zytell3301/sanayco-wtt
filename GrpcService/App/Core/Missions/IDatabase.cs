@@ -12,4 +12,5 @@ public interface IDatabase
     public void DeleteMission(Mission mission);
     public void UpdateMission(Mission mission);
     public Mission GetMission(Mission mission);
+    public void ChangeMissionStatus(Mission mission);
 }
