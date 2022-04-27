@@ -94,7 +94,10 @@ public class Database : IDatabase
             FromDate = mission.FromDate,
             MemberId = mission.MemberId,
             ProjectId = mission.ProjectId,
-            ToDate = mission.ToDate
+            ToDate = mission.ToDate,
+            Location = mission.Location,
+            Title = mission.Title,
+            IsVerified = mission.IsVerified,
         };
     }
 
