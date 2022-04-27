@@ -3,6 +3,7 @@
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Missions.Validations;
 using GrpcService1.Domain.Entities;
+using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -214,6 +215,51 @@ public class Handler : BaseHandler
                 ToDate = DateTime.UnixEpoch.AddSeconds(body.to_date),
                 Title = body.title,
                 ProjectId = body.project_id
+            });
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(InternalErrorResponse());
+        }
+
+        return ResponseToJson(OperationSuccessfulResponse());
+    }
+
+    [HttpPost("approve")]
+    public string ApproveMission()
+    {
+        try
+        {
+            Authorize("change-mission-status");
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
+        ChangeMissionStatusValidation body;
+        try
+        {
+            body = DecodePayloadJson<ChangeMissionStatusValidation>();
+        }
+        catch (Exception)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
+
+        switch (ModelState.IsValid)
+        {
+            case false:
+                return ResponseToJson(DataValidationFailedResponse());
+        }
+
+        try
+        {
+            Core.ApproveMission(new Mission()
+            {
+                Id = body.mission_id,
+                IsVerified = true,
             });
         }
         catch (Exception)
