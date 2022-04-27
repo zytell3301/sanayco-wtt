@@ -22,6 +22,7 @@ public class Core
     {
         try
         {
+            mission.IsVerified = false;
             Database.RecordMission(mission);
         }
         catch (Exception)
