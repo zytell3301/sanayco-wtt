@@ -129,6 +129,35 @@ public class BaseHandler : ControllerBase
 
     protected class Response
     {
+        private string JsonBuffer = "";
+
+        // This method returns json serialized string of current instance. If you are serializing classes that are static like status responses, consider
+        // using GetBufferedJson.
+        public string FreshSerialize()
+        {
+            return JsonSerializer.Serialize(this);
+        }
+
+        // This method buffers the result json of class. So it is not reasonable to use it for classes that are going to be serialized once or changing constantly.
+        // In case that your class changed after serializing and again call this method, you will get previous class json. Consider using FreshSerialize method instead.
+        public string GetBufferedJson()
+        {
+            switch (JsonBuffer == "")
+            {
+                case true:
+                    JsonBuffer = FreshSerialize();
+                    break;
+            }
+
+            return JsonBuffer;
+        }
+
+        // Refreshes buffered json. Please read GetBufferedJson document before using these features.
+        public void RefreshBuffer()
+        {
+            JsonBuffer = FreshSerialize();
+        }
+
         public int status_code { get; set; }
     }
 }
