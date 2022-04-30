@@ -26,6 +26,12 @@ public class Core
         Database = dependencies.Database;
     }
 
+    public bool CheckTaskOwnership(int taskId, int userId)
+    {
+        var task = Database.GetTask(taskId);
+        return task.UserId == userId;
+    }
+
     /*
      * This method records the given task. 
      */
