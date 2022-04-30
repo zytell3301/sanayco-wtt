@@ -17,11 +17,12 @@ public class Handler : BaseHandler
         Core = core;
     }
 
+    [HttpPost("create-food")]
     public string RecordFood()
     {
         try
         {
-            Authorize("record-food");
+            Authorize("create-food");
         }
         catch (Exception)
         {
@@ -62,6 +63,7 @@ public class Handler : BaseHandler
         return ResponseToJson(OperationSuccessfulResponse());
     }
 
+    [HttpPost("update-food-info")]
     public string UpdateFoodInfo()
     {
         try
@@ -94,6 +96,7 @@ public class Handler : BaseHandler
         {
             Core.UpdateFoodInfo(new Food()
             {
+                Id = body.food_id,
                 Price = body.price,
                 Title = body.title,
             });
@@ -133,6 +136,7 @@ public class Handler : BaseHandler
         }
     }
 
+    [HttpPost("set-food-available")]
     public string SetFoodAvailable()
     {
         try
@@ -176,6 +180,7 @@ public class Handler : BaseHandler
         return ResponseToJson(OperationSuccessfulResponse());
     }
 
+    [HttpPost("set-food-unavailable")]
     public string SetFoodUnavailable()
     {
         try
@@ -219,6 +224,7 @@ public class Handler : BaseHandler
         return ResponseToJson(OperationSuccessfulResponse());
     }
 
+    [HttpPost("delete-food")]
     public string DeleteFood()
     {
         try
@@ -263,6 +269,7 @@ public class Handler : BaseHandler
     }
 
 
+    [HttpPost("record-order")]
     public string OrderFood()
     {
         try
@@ -307,6 +314,7 @@ public class Handler : BaseHandler
         return ResponseToJson(OperationSuccessfulResponse());
     }
 
+    [HttpPost("cancel-order")]
     public string CancelOrder()
     {
         CancelOrderValidation body;

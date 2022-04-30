@@ -2,6 +2,7 @@
 
 using ErrorReporter;
 using GrpcService1.App.Core.Tasks;
+using GrpcService1.App.Database.Foods;
 using GrpcService1.App.Database.Missions;
 using GrpcService1.App.Database.Model;
 using GrpcService1.App.Database.OffTime;
@@ -43,7 +44,7 @@ GrpcService1.App.Core.Users.IDatabase usersDB = new Users(new Users.UsersDatabas
     ErrorReporter = reporter,
     InternalError = new InternalError("internal error")
 });
-
+GrpcService1.App.Core.Foods.IDatabase foodsDB = new Foods(connection, reporter, new InternalError("internal occurred"));
 GrpcService1.App.Core.Missions.IDatabase missionsDB = new Database(new Database.MissionsDatabaseDependencies()
 {
     Connection = connection,
@@ -103,7 +104,14 @@ builder.Services.AddSingleton(new GrpcService1.App.Core.Projects.Core(
         CreatorProjectMemberCode = "CreatorProjectMemberCode"
     })
 );
-
+builder.Services.AddSingleton(new GrpcService1.App.Core.Foods.Core(
+    new GrpcService1.App.Core.Foods.Core.FoodsCoreDependencies()
+    {
+        Database = foodsDB,
+    }, new GrpcService1.App.Core.Foods.Core.FoodsCoreConfigs()
+    {
+        InternalErrorMessage = "InternalErrorMessage",
+    }));
 builder.Services.AddSingleton<ITokenSource>(new TokenSource(connection));
 builder.Services.AddSingleton(new AuthenticationFailed("Authentication failed"));
 builder.Services.AddSingleton(new BaseHandlerDependencies

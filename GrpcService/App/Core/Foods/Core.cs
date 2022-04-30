@@ -116,6 +116,8 @@ public class Core
                     throw FoodNotAvailableError;
             }
 
+            order.Price = food.Price;
+            order.Date = DateTime.Now;
             Database.RecordOrder(order);
         }
         catch (Exception)

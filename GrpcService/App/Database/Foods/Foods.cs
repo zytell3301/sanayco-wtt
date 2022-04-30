@@ -58,15 +58,15 @@ public class Foods : IDatabase
 
     public Food GetFoodInfo(Food food)
     {
-        try
-        {
-            return ConvertFoodModel(Connection.Foods.First(f => f.Id == food.Id));
-        }
-        catch (Exception e)
-        {
-            ErrorReporter.ReportException(e);
-            throw InternalError;
-        }
+        // try
+        // {
+        return ConvertFoodModel(Connection.Foods.First(f => f.Id == food.Id));
+        // }
+        // catch (Exception e)
+        // {
+        // ErrorReporter.ReportException(e);
+        // throw InternalError;
+        // }
     }
 
     public void ChangeFoodStatus(Food food)
@@ -89,7 +89,7 @@ public class Foods : IDatabase
         try
         {
             var model = Connection.Foods.First(f => f.Id == food.Id);
-            Connection.Remove(food);
+            Connection.Remove(model);
             Connection.SaveChanges();
         }
         catch (Exception e)
@@ -112,6 +112,7 @@ public class Foods : IDatabase
                 UserId = order.UserId,
             };
             Connection.FoodOrders.Add(model);
+            Connection.SaveChanges();
         }
         catch (Exception e)
         {
@@ -122,10 +123,12 @@ public class Foods : IDatabase
 
     public void DeleteOrder(FoodOrder order)
     {
+        Console.WriteLine(order.Id);
         try
         {
             var model = Connection.FoodOrders.First(o => o.Id == order.Id);
             Connection.FoodOrders.Remove(model);
+            Connection.SaveChanges();
         }
         catch (Exception e)
         {
