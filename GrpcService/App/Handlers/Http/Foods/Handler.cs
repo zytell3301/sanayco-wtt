@@ -1,15 +1,18 @@
-﻿using System.Text.Json;
+﻿#region
+
+using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Foods.Validations;
 using GrpcService1.Domain.Entities;
-using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
+
+#endregion
 
 namespace GrpcService1.App.Handlers.Http.Foods;
 
 [Route("foods")]
 public class Handler : BaseHandler
 {
-    private Core.Foods.Core Core;
+    private readonly Core.Foods.Core Core;
 
     public Handler(Core.Foods.Core core, BaseHandlerDependencies baseHandlerDependencies) : base(
         baseHandlerDependencies)
@@ -48,11 +51,11 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.RecordFood(new Food()
+            Core.RecordFood(new Food
             {
                 Price = body.price,
                 Title = body.title,
-                IsAvailable = body.is_available,
+                IsAvailable = body.is_available
             });
         }
         catch (Exception)
@@ -94,11 +97,11 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.UpdateFoodInfo(new Food()
+            Core.UpdateFoodInfo(new Food
             {
                 Id = body.food_id,
                 Price = body.price,
-                Title = body.title,
+                Title = body.title
             });
         }
         catch (Exception)
@@ -114,19 +117,19 @@ public class Handler : BaseHandler
     {
         try
         {
-            var food = Core.GetFoodInfo(new Food()
+            var food = Core.GetFoodInfo(new Food
             {
-                Id = id,
+                Id = id
             });
-            return JsonSerializer.Serialize(new GetFoodInfoResponse()
+            return JsonSerializer.Serialize(new GetFoodInfoResponse
             {
                 status_code = 0,
-                food = new GetFoodInfoResponse.Food()
+                food = new GetFoodInfoResponse.Food
                 {
                     id = food.Id,
                     is_available = food.IsAvailable,
                     price = food.Price,
-                    title = food.Title,
+                    title = food.Title
                 }
             });
         }
@@ -167,9 +170,9 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.SetFoodAvailable(new Food()
+            Core.SetFoodAvailable(new Food
             {
-                Id = body.food_id,
+                Id = body.food_id
             });
         }
         catch (Exception)
@@ -211,9 +214,9 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.SetFoodUnavailable(new Food()
+            Core.SetFoodUnavailable(new Food
             {
-                Id = body.food_id,
+                Id = body.food_id
             });
         }
         catch (Exception)
@@ -255,9 +258,9 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.DeleteFood(new Food()
+            Core.DeleteFood(new Food
             {
-                Id = body.food_id,
+                Id = body.food_id
             });
         }
         catch (Exception)
@@ -300,10 +303,10 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.OrderFood(new FoodOrder()
+            Core.OrderFood(new FoodOrder
             {
                 FoodId = body.food_id,
-                UserId = GetUserId(),
+                UserId = GetUserId()
             });
         }
         catch (Exception)
@@ -336,7 +339,7 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.CancelOrder(new FoodOrder()
+            Core.CancelOrder(new FoodOrder
             {
                 Id = body.order_id
             });

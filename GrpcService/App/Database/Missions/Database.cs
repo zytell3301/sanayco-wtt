@@ -12,9 +12,9 @@ namespace GrpcService1.App.Database.Missions;
 
 public class Database : IDatabase
 {
-    private readonly InternalError InternalError;
     private readonly wttContext Connection;
     private readonly IErrorReporter ErrorReporter;
+    private readonly InternalError InternalError;
 
     public Database(MissionsDatabaseDependencies dependencies, MissionsDatabaseConfigs configs)
     {
@@ -118,7 +118,7 @@ public class Database : IDatabase
             ToDate = mission.ToDate,
             Location = mission.Location,
             Title = mission.Title,
-            IsVerified = mission.IsVerified,
+            IsVerified = mission.IsVerified
         };
     }
 

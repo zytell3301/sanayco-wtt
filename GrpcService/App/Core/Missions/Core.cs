@@ -9,8 +9,8 @@ namespace GrpcService1.App.Core.Missions;
 
 public class Core
 {
-    private readonly InternalError InternalError;
     private readonly IDatabase Database;
+    private readonly InternalError InternalError;
 
     public Core(MissionsCoreDependencies dependencies, MissionsCoreConfigs configs)
     {

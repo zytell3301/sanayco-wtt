@@ -1,17 +1,21 @@
-﻿using ErrorReporter;
+﻿#region
+
+using ErrorReporter;
 using GrpcService1.App.Core.Foods;
 using GrpcService1.App.Database.Model;
 using GrpcService1.Domain.Errors;
 using Food = GrpcService1.Domain.Entities.Food;
 using FoodOrder = GrpcService1.Domain.Entities.FoodOrder;
 
+#endregion
+
 namespace GrpcService1.App.Database.Foods;
 
 public class Foods : IDatabase
 {
-    private wttContext Connection;
-    private IErrorReporter ErrorReporter;
     private readonly InternalError InternalError;
+    private readonly wttContext Connection;
+    private readonly IErrorReporter ErrorReporter;
 
     public Foods(wttContext connection, IErrorReporter errorReporter, InternalError internalError)
     {
@@ -25,11 +29,11 @@ public class Foods : IDatabase
     {
         try
         {
-            Connection.Foods.Add(new Model.Food()
+            Connection.Foods.Add(new Model.Food
             {
                 Price = food.Price,
                 Title = food.Title,
-                IsAvailable = food.IsAvailable,
+                IsAvailable = food.IsAvailable
             });
             Connection.SaveChanges();
         }
@@ -103,13 +107,13 @@ public class Foods : IDatabase
     {
         try
         {
-            var model = new Model.FoodOrder()
+            var model = new Model.FoodOrder
             {
                 Price = order
                     .Price, // Integrity of food price is already checked in core. It is non of database layers business to check it.
                 Date = order.Date,
                 FoodId = order.FoodId,
-                UserId = order.UserId,
+                UserId = order.UserId
             };
             Connection.FoodOrders.Add(model);
             Connection.SaveChanges();
@@ -137,14 +141,14 @@ public class Foods : IDatabase
         }
     }
 
-    private Domain.Entities.Food ConvertFoodModel(Database.Model.Food model)
+    private Food ConvertFoodModel(Model.Food model)
     {
-        return new Domain.Entities.Food()
+        return new Food
         {
             Id = model.Id,
             Price = model.Price,
             Title = model.Title,
-            IsAvailable = model.IsAvailable,
+            IsAvailable = model.IsAvailable
         };
     }
 }

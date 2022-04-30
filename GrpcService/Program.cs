@@ -45,13 +45,13 @@ GrpcService1.App.Core.Users.IDatabase usersDB = new Users(new Users.UsersDatabas
     InternalError = new InternalError("internal error")
 });
 GrpcService1.App.Core.Foods.IDatabase foodsDB = new Foods(connection, reporter, new InternalError("internal occurred"));
-GrpcService1.App.Core.Missions.IDatabase missionsDB = new Database(new Database.MissionsDatabaseDependencies()
+GrpcService1.App.Core.Missions.IDatabase missionsDB = new Database(new Database.MissionsDatabaseDependencies
 {
     Connection = connection,
-    ErrorReporter = reporter,
-}, new Database.MissionsDatabaseConfigs()
+    ErrorReporter = reporter
+}, new Database.MissionsDatabaseConfigs
 {
-    InternalErrorMessage = "InternalErrorMessage",
+    InternalErrorMessage = "InternalErrorMessage"
 });
 
 // Adding core classes to container
@@ -105,12 +105,12 @@ builder.Services.AddSingleton(new GrpcService1.App.Core.Projects.Core(
     })
 );
 builder.Services.AddSingleton(new GrpcService1.App.Core.Foods.Core(
-    new GrpcService1.App.Core.Foods.Core.FoodsCoreDependencies()
+    new GrpcService1.App.Core.Foods.Core.FoodsCoreDependencies
     {
-        Database = foodsDB,
-    }, new GrpcService1.App.Core.Foods.Core.FoodsCoreConfigs()
+        Database = foodsDB
+    }, new GrpcService1.App.Core.Foods.Core.FoodsCoreConfigs
     {
-        InternalErrorMessage = "InternalErrorMessage",
+        InternalErrorMessage = "InternalErrorMessage"
     }));
 builder.Services.AddSingleton<ITokenSource>(new TokenSource(connection));
 builder.Services.AddSingleton(new AuthenticationFailed("Authentication failed"));
@@ -146,14 +146,14 @@ builder.Services.AddSingleton(new GrpcService1.App.Core.Users.Core(
         })
     })
 );
-builder.Services.AddSingleton<GrpcService1.App.Core.Missions.Core>(new GrpcService1.App.Core.Missions.Core(
-    new GrpcService1.App.Core.Missions.Core.MissionsCoreDependencies()
+builder.Services.AddSingleton(new GrpcService1.App.Core.Missions.Core(
+    new GrpcService1.App.Core.Missions.Core.MissionsCoreDependencies
     {
-        Database = missionsDB,
+        Database = missionsDB
     },
-    new GrpcService1.App.Core.Missions.Core.MissionsCoreConfigs()
+    new GrpcService1.App.Core.Missions.Core.MissionsCoreConfigs
     {
-        InternalErrorMessage = "InternalErrorMessage",
+        InternalErrorMessage = "InternalErrorMessage"
     }));
 var app = builder.Build();
 

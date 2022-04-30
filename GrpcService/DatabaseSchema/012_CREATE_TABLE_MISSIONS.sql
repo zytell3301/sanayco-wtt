@@ -4,11 +4,11 @@ wtt;
 CREATE TABLE missions
 (
     id          INT IDENTITY (1,1) PRIMARY KEY,
-    member_id   INT      NOT NULL,
-    project_id  INT      NOT NULL,
-    from_date   DATETIME NOT NULL,
-    to_date     DATETIME NOT NULL,
-    description VARCHAR(1024)  NOT NULL,
+    member_id   INT           NOT NULL,
+    project_id  INT           NOT NULL,
+    from_date   DATETIME      NOT NULL,
+    to_date     DATETIME      NOT NULL,
+    description VARCHAR(1024) NOT NULL,
 );
 
 ALTER TABLE missions

@@ -1,24 +1,18 @@
-﻿using GrpcService1.Domain.Entities;
+﻿#region
+
+using GrpcService1.Domain.Entities;
 using GrpcService1.Domain.Errors;
+
+#endregion
 
 namespace GrpcService1.App.Core.Foods;
 
 public class Core
 {
-    private readonly InternalError InternalError;
     private readonly FoodNotAvailable FoodNotAvailableError;
+    private readonly InternalError InternalError;
 
-    private IDatabase Database;
-
-    public class FoodsCoreDependencies
-    {
-        public IDatabase Database;
-    }
-
-    public class FoodsCoreConfigs
-    {
-        public string InternalErrorMessage;
-    }
+    private readonly IDatabase Database;
 
     public Core(FoodsCoreDependencies dependencies, FoodsCoreConfigs configs)
     {
@@ -106,9 +100,9 @@ public class Core
     {
         try
         {
-            var food = Database.GetFoodInfo(new Food()
+            var food = Database.GetFoodInfo(new Food
             {
-                Id = order.FoodId,
+                Id = order.FoodId
             });
             switch (food.IsAvailable)
             {
@@ -136,6 +130,16 @@ public class Core
         {
             throw InternalError;
         }
+    }
+
+    public class FoodsCoreDependencies
+    {
+        public IDatabase Database;
+    }
+
+    public class FoodsCoreConfigs
+    {
+        public string InternalErrorMessage;
     }
 
     private class FoodNotAvailable : Domain.Errors.Status

@@ -17,7 +17,7 @@ public class BaseHandler : ControllerBase
     private readonly AuthorizationFailed AuthorizationFailed;
     private readonly IPermissionsSource PermissionsSource;
     private readonly ITokenSource TokenSource;
-    private Dictionary<string, Response> Responses = new Dictionary<string, Response>();
+    private readonly Dictionary<string, Response> Responses = new();
 
     private int? UserId;
 

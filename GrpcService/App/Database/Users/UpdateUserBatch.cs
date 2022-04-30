@@ -11,9 +11,9 @@ namespace GrpcService1.App.Database.Users;
 
 public class UpdateUserBatch : Core.Users.UpdateUserBatch
 {
-    private readonly InternalError InternalError;
     private readonly wttContext Connection;
     private readonly IErrorReporter ErrorReporter;
+    private readonly InternalError InternalError;
     private readonly User User;
 
     public UpdateUserBatch(wttContext connection, Domain.Entities.User user, IErrorReporter errorReporter,

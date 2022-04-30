@@ -3,7 +3,6 @@
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Missions.Validations;
 using GrpcService1.Domain.Entities;
-using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -116,24 +115,6 @@ public class Handler : BaseHandler
         return ResponseToJson(OperationSuccessfulResponse());
     }
 
-    private class GetMissionResponse : Response
-    {
-        public Mission mission { get; set; }
-
-        public class Mission
-        {
-            public int id { get; set; }
-            public int member_id { get; set; }
-            public int project_id { get; set; }
-            public DateTime from_date { get; set; }
-            public DateTime to_date { get; set; }
-            public string description { get; set; }
-            public string title { get; set; }
-            public string location { get; set; }
-            public bool is_verified { get; set; }
-        }
-    }
-
     [HttpGet("get-mission/{id}")]
     public string GetMission(int id)
     {
@@ -148,14 +129,14 @@ public class Handler : BaseHandler
 
         try
         {
-            var mission = Core.GetMission(new Mission()
+            var mission = Core.GetMission(new Mission
             {
-                Id = id,
+                Id = id
             });
-            return JsonSerializer.Serialize(new GetMissionResponse()
+            return JsonSerializer.Serialize(new GetMissionResponse
             {
                 status_code = 0,
-                mission = new GetMissionResponse.Mission()
+                mission = new GetMissionResponse.Mission
                 {
                     id = mission.Id,
                     description = mission.Description,
@@ -165,7 +146,7 @@ public class Handler : BaseHandler
                     member_id = mission.MemberId,
                     project_id = mission.ProjectId,
                     title = mission.Title,
-                    to_date = mission.ToDate,
+                    to_date = mission.ToDate
                 }
             });
         }
@@ -256,10 +237,10 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.ApproveMission(new Mission()
+            Core.ApproveMission(new Mission
             {
                 Id = body.mission_id,
-                IsVerified = true,
+                IsVerified = true
             });
         }
         catch (Exception)
@@ -268,5 +249,23 @@ public class Handler : BaseHandler
         }
 
         return ResponseToJson(OperationSuccessfulResponse());
+    }
+
+    private class GetMissionResponse : Response
+    {
+        public Mission mission { get; set; }
+
+        public class Mission
+        {
+            public int id { get; set; }
+            public int member_id { get; set; }
+            public int project_id { get; set; }
+            public DateTime from_date { get; set; }
+            public DateTime to_date { get; set; }
+            public string description { get; set; }
+            public string title { get; set; }
+            public string location { get; set; }
+            public bool is_verified { get; set; }
+        }
     }
 }

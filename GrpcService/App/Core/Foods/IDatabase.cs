@@ -1,4 +1,8 @@
-﻿using GrpcService1.Domain.Entities;
+﻿#region
+
+using GrpcService1.Domain.Entities;
+
+#endregion
 
 namespace GrpcService1.App.Core.Foods;
 
