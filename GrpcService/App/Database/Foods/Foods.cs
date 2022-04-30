@@ -42,31 +42,106 @@ public class Foods : IDatabase
 
     public void UpdateFoodInfo(Food food)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var model = Connection.Foods.First(f => f.Id == food.Id);
+            model.Price = food.Price;
+            model.Title = food.Title;
+            Connection.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
     }
 
     public Food GetFoodInfo(Food food)
     {
-        throw new NotImplementedException();
+        try
+        {
+            return ConvertFoodModel(Connection.Foods.First(f => f.Id == food.Id));
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
     }
 
     public void ChangeFoodStatus(Food food)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var model = Connection.Foods.First(f => f.Id == food.Id);
+            model.IsAvailable = food.IsAvailable;
+            Connection.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
     }
 
     public void DeleteFood(Food food)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var model = Connection.Foods.First(f => f.Id == food.Id);
+            Connection.Remove(food);
+            Connection.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
     }
 
     public void RecordOrder(FoodOrder order)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var model = new Model.FoodOrder()
+            {
+                Price = order
+                    .Price, // Integrity of food price is already checked in core. It is non of database layers business to check it.
+                Date = order.Date,
+                FoodId = order.FoodId,
+                UserId = order.UserId,
+            };
+            Connection.FoodOrders.Add(model);
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
     }
 
     public void DeleteOrder(FoodOrder order)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var model = Connection.FoodOrders.First(o => o.Id == order.Id);
+            Connection.FoodOrders.Remove(model);
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
+    }
+
+    private Domain.Entities.Food ConvertFoodModel(Database.Model.Food model)
+    {
+        return new Domain.Entities.Food()
+        {
+            Id = model.Id,
+            Price = model.Price,
+            Title = model.Title,
+            IsAvailable = model.IsAvailable,
+        };
     }
 }
