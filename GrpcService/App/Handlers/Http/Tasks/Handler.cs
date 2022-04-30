@@ -82,6 +82,28 @@ public class Handler : BaseHandler
             return InvalidRequestResponse;
         }
 
+        try
+        {
+            switch (Core.CheckTaskOwnership(body.task_id, GetUserId()))
+            {
+                case false:
+                    try
+                    {
+                        Authorize("delete-task");
+                    }
+                    catch (Exception)
+                    {
+                        return ResponseToJson(AuthorizationFailedResponse());
+                    }
+
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
         switch (ModelState.IsValid)
         {
             case false:
@@ -115,6 +137,20 @@ public class Handler : BaseHandler
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
             return InvalidRequestResponse;
+        }
+
+        try
+        {
+            switch (Core.CheckTaskOwnership(body.task_id, GetUserId()))
+            {
+                case false:
+                    Authorize("edit-task");
+                    break;
+            }
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
         }
 
         switch (ModelState.IsValid)
@@ -178,6 +214,15 @@ public class Handler : BaseHandler
     [HttpPost("approve-task")]
     public string ApproveTask()
     {
+        try
+        {
+            Authorize("change-task-status");
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
         UpdateTaskStatusValidation body;
         try
         {
@@ -213,6 +258,15 @@ public class Handler : BaseHandler
     [HttpPost("reject-task")]
     public string RejectTask()
     {
+        try
+        {
+            Authorize("change-task-status");
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
         UpdateTaskStatusValidation body;
         try
         {
@@ -248,6 +302,15 @@ public class Handler : BaseHandler
     [HttpPost("set-task-waiting")]
     public string SetTaskWaiting()
     {
+        try
+        {
+            Authorize("change-task-status");
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
         UpdateTaskStatusValidation body;
         try
         {
