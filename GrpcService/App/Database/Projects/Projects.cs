@@ -128,6 +128,32 @@ public class Projects : IDatabase
         }
     }
 
+    public ProjectMember GetProjectMember(ProjectMember member)
+    {
+        try
+        {
+            var model = Connection.ProjectMembers.First(m => m.Id == member.Id);
+            return ConvertModelToProjectMember(model);
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
+    }
+
+    private ProjectMember ConvertModelToProjectMember(Model.ProjectMember model)
+    {
+        return new ProjectMember()
+        {
+            Id = model.Id,
+            Level = model.Level,
+            CreatedAt = model.CreatedAt.Value,
+            ProjectId = model.ProjectId.Value,
+            UserId = model.UserId.Value,
+        };
+    }
+
     private Project ConvertModelToProject(Model.Project model)
     {
         return new Project

@@ -71,16 +71,6 @@ public class Handler : BaseHandler
     [HttpPost("edit-project")]
     public string UpdateProject()
     {
-        try
-        {
-            Authorize("edit-project");
-        }
-        catch (Exception)
-        {
-            // @TODO It must be checked that if the client is the owner of the current entity
-            return ResponseToJson(AuthorizationFailedResponse());
-        }
-
         UpdateProjectValidation body;
         try
         {
@@ -90,6 +80,20 @@ public class Handler : BaseHandler
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
             return InvalidRequestResponse;
+        }
+
+        try
+        {
+            switch (Core.CheckProjectOwnership(body.project_id, GetUserId()))
+            {
+                case false:
+                    Authorize("edit-project");
+                    break;
+            }
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
         }
 
         switch (ModelState.IsValid)
@@ -171,6 +175,21 @@ public class Handler : BaseHandler
 
         try
         {
+            switch (Core.CheckProjectOwnership(body.project_id, GetUserId()))
+            {
+                case false:
+                    Authorize("add-project-member");
+                    break;
+            }
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
+
+        try
+        {
             Core.AddMember(new ProjectMember
             {
                 ProjectId = body.project_id,
@@ -204,6 +223,15 @@ public class Handler : BaseHandler
         {
             case false:
                 return ResponseToJson(DataValidationFailedResponse());
+        }
+
+        try
+        {
+            Core.CheckProjectOwnership(body.project_id, GetUserId());
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
         }
 
         try
@@ -244,6 +272,20 @@ public class Handler : BaseHandler
 
         try
         {
+            switch (Core.CheckProjectOwnership(body.project_id, GetUserId()))
+            {
+                case false:
+                    Authorize("delete-project");
+                    break;
+            }
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
+        try
+        {
             Core.DeleteProject(new Project
             {
                 Id = body.project_id
@@ -275,6 +317,21 @@ public class Handler : BaseHandler
         {
             case false:
                 return ResponseToJson(DataValidationFailedResponse());
+        }
+
+
+        try
+        {
+            switch (Core.CheckProjectOwnership(body.project_id, GetUserId()))
+            {
+                case false:
+                    Authorize("delete-project-member");
+                    break;
+            }
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
         }
 
         try

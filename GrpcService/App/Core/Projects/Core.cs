@@ -23,6 +23,22 @@ public class Core
         Database = dependencies.Database;
     }
 
+    public bool CheckProjectOwnership(int projectId, int userId)
+    {
+        var member = Database.GetProjectMember(new ProjectMember()
+        {
+            ProjectId = projectId,
+            UserId = userId,
+        });
+        return CheckMemberAccess(member.Level);
+    }
+
+    // For now the access for modifying a project is only granted to its creator. Change this function if needed
+    private bool CheckMemberAccess(string level)
+    {
+        return level == CreatorProjectMemberCode;
+    }
+
     public void RecordProject(Project project, User creator)
     {
         try
