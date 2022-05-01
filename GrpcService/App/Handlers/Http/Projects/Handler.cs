@@ -227,7 +227,12 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.CheckProjectOwnership(body.project_id, GetUserId());
+            switch (Core.CheckProjectOwnership(body.project_id, GetUserId()))
+            {
+                case false:
+                    Authorize("delete-project-member");
+                    break;
+            }
         }
         catch (Exception)
         {
@@ -325,7 +330,7 @@ public class Handler : BaseHandler
             switch (Core.CheckProjectOwnership(body.project_id, GetUserId()))
             {
                 case false:
-                    Authorize("delete-project-member");
+                    Authorize("edit-project-member");
                     break;
             }
         }

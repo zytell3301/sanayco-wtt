@@ -43,6 +43,7 @@ public class Core
     {
         try
         {
+            project.CreatedAt = DateTime.Now;
             var batch = Database.RecordProject(project);
             /*
              * Since every user that creates a project is a member of it, so we must
@@ -51,6 +52,7 @@ public class Core
             var member = new ProjectMember();
             member.Level = CreatorProjectMemberCode;
             member.UserId = creator.Id;
+            member.CreatedAt = DateTime.Now;
             batch.AddProjectMember(member);
             batch.ExecuteOperation();
         }
@@ -88,6 +90,7 @@ public class Core
     {
         try
         {
+            projectMember.CreatedAt = DateTime.Now;
             Database.AddMemberToProject(projectMember);
         }
         catch (EntityNotFound)

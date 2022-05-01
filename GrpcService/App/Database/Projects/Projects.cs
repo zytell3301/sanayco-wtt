@@ -27,7 +27,8 @@ public class Projects : IDatabase
         return new RecordProjectBatch(Connection, ErrorReporter, new Model.Project
         {
             Description = project.Description,
-            Name = project.Name
+            Name = project.Name,
+            CreatedAt = project.CreatedAt,
         });
     }
 
@@ -56,7 +57,8 @@ public class Projects : IDatabase
             {
                 Level = projectMember.Level,
                 ProjectId = projectMember.ProjectId,
-                UserId = projectMember.UserId
+                UserId = projectMember.UserId,
+                CreatedAt = projectMember.CreatedAt,
             });
             Connection.SaveChanges();
         }
@@ -132,7 +134,8 @@ public class Projects : IDatabase
     {
         try
         {
-            var model = Connection.ProjectMembers.First(m => m.Id == member.Id);
+            var model = Connection.ProjectMembers.Where(m => m.UserId == member.UserId)
+                .First(m => m.ProjectId == member.ProjectId);
             return ConvertModelToProjectMember(model);
         }
         catch (Exception e)
@@ -160,7 +163,8 @@ public class Projects : IDatabase
         {
             Id = model.Id,
             Description = model.Description,
-            Name = model.Name
+            Name = model.Name,
+            CreatedAt = model.CreatedAt.Value,
         };
     }
 }
