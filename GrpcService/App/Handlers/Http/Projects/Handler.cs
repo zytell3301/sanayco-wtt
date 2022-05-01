@@ -27,7 +27,7 @@ public class Handler : BaseHandler
         {
             Authorize("create-project");
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(AuthorizationFailedResponse());
         }
@@ -37,7 +37,7 @@ public class Handler : BaseHandler
         {
             body = DecodePayloadJson<RecordProjectValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
             return InvalidRequestResponse;
@@ -60,7 +60,7 @@ public class Handler : BaseHandler
                 Id = GetUserId()
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }
@@ -75,7 +75,7 @@ public class Handler : BaseHandler
         {
             Authorize("edit-project");
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO It must be checked that if the client is the owner of the current entity
             return ResponseToJson(AuthorizationFailedResponse());
@@ -86,7 +86,7 @@ public class Handler : BaseHandler
         {
             body = DecodePayloadJson<UpdateProjectValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
             return InvalidRequestResponse;
@@ -107,7 +107,7 @@ public class Handler : BaseHandler
                 Name = body.name
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }
@@ -122,7 +122,7 @@ public class Handler : BaseHandler
         {
             Authenticate();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(AuthenticationFailedResponse());
         }
@@ -140,7 +140,7 @@ public class Handler : BaseHandler
                 Project = project
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return JsonSerializer.Serialize(new GetProjectResponse
             {
@@ -157,7 +157,7 @@ public class Handler : BaseHandler
         {
             body = DecodePayloadJson<AddMemberValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
             return InvalidRequestResponse;
@@ -178,7 +178,7 @@ public class Handler : BaseHandler
                 Level = body.level
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }
@@ -194,7 +194,7 @@ public class Handler : BaseHandler
         {
             body = DecodePayloadJson<RemoveMemberValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
             return InvalidRequestResponse;
@@ -214,7 +214,7 @@ public class Handler : BaseHandler
                 UserId = body.user_id
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }
@@ -230,7 +230,7 @@ public class Handler : BaseHandler
         {
             body = DecodePayloadJson<DeleteProjectValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
             return InvalidRequestResponse;
@@ -249,7 +249,7 @@ public class Handler : BaseHandler
                 Id = body.project_id
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }
@@ -265,7 +265,7 @@ public class Handler : BaseHandler
         {
             body = DecodePayloadJson<AddMemberValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
             return InvalidRequestResponse;
@@ -286,7 +286,7 @@ public class Handler : BaseHandler
                 UserId = body.user_id
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }

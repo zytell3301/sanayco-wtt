@@ -41,7 +41,7 @@ public class RecordPermissionsBatch : IRecordPermissionsBatch
         {
             Connection.SaveChanges();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw new InternalError("internal error occurred");
         }

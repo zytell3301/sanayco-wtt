@@ -37,7 +37,7 @@ public class Core
         {
             Database.DeleteMission(mission);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }

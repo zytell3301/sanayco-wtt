@@ -25,7 +25,7 @@ public class Handler : BaseHandler
         {
             Authenticate();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(AuthenticationFailedResponse());
         }
@@ -37,7 +37,7 @@ public class Handler : BaseHandler
                 Id = GetUserId()
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }
@@ -52,7 +52,7 @@ public class Handler : BaseHandler
         {
             Authenticate();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(AuthenticationFailedResponse());
         }
@@ -64,7 +64,7 @@ public class Handler : BaseHandler
                 Id = GetUserId()
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }
@@ -79,7 +79,7 @@ public class Handler : BaseHandler
         {
             Authenticate();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(AuthenticationFailedResponse());
         }
@@ -91,7 +91,7 @@ public class Handler : BaseHandler
                 Id = GetUserId()
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }

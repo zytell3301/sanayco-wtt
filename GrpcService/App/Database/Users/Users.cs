@@ -128,7 +128,7 @@ public class Users : IDatabase
 
             return permissions;
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }

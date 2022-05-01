@@ -43,7 +43,7 @@ public class Core
             task.CreatedAt = DateTime.Now;
             Database.RecordTask(task);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -55,7 +55,7 @@ public class Core
         {
             Database.DeleteTask(task);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -67,7 +67,7 @@ public class Core
         {
             Database.EditTask(task);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -79,7 +79,7 @@ public class Core
         {
             Database.ChangeTaskStatus(task, ApprovedTaskCode);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -91,7 +91,7 @@ public class Core
         {
             Database.ChangeTaskStatus(task, RejectedTaskCode);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -103,7 +103,7 @@ public class Core
         {
             Database.ChangeTaskStatus(task, WaitingTaskCode);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -115,7 +115,7 @@ public class Core
         {
             return Database.GetTask(task.Id);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }

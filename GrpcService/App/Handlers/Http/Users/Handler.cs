@@ -27,7 +27,7 @@ public class Handler : BaseHandler
         {
             body = DecodePayloadJson<LoginValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
             return InvalidRequestResponse;
@@ -53,7 +53,7 @@ public class Handler : BaseHandler
                 expiration_date = token.ExpirationDate.Value
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }
@@ -181,7 +181,7 @@ public class Handler : BaseHandler
         {
             Authorize("edit-user");
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(AuthorizationFailedResponse());
         }

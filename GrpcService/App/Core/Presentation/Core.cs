@@ -32,7 +32,7 @@ public class Core
         {
             database.RecordPresentation(user);
         }
-        catch (InternalError e)
+        catch (InternalError)
         {
             throw InternalError;
         }
@@ -47,7 +47,7 @@ public class Core
         {
             database.RecordPresentationEnd(user);
         }
-        catch (InternalError e)
+        catch (InternalError)
         {
             throw InternalError;
         }
@@ -65,7 +65,7 @@ public class Core
         {
             presentationTime = database.GetPresentationTime(user);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }

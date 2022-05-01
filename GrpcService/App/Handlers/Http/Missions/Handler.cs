@@ -122,7 +122,7 @@ public class Handler : BaseHandler
         {
             // @TODO We must check that if the requesting client is the owner of current entity or not
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(AuthorizationFailedResponse());
         }
@@ -150,7 +150,7 @@ public class Handler : BaseHandler
                 }
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }

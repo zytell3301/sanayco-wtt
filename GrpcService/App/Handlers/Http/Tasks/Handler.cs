@@ -99,7 +99,7 @@ public class Handler : BaseHandler
                     break;
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(AuthorizationFailedResponse());
         }
@@ -316,7 +316,7 @@ public class Handler : BaseHandler
         {
             body = DecodePayloadJson<UpdateTaskStatusValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
             return InvalidRequestResponse;

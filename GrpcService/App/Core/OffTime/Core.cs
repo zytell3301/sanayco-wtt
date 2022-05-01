@@ -73,7 +73,7 @@ public class Core
             offTime.Status = WaitingOffTimeCode;
             Database.RecordOffTime(offTime);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return InternalError;
         }
@@ -87,7 +87,7 @@ public class Core
         {
             Database.ChangeOffTimeStatus(offTime, ApprovedOffTimeCode);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -99,7 +99,7 @@ public class Core
         {
             Database.ChangeOffTimeStatus(offTime, RejectedOffTimeCode);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -111,7 +111,7 @@ public class Core
         {
             Database.ChangeOffTimeStatus(offTime, WaitingOffTimeCode);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -123,7 +123,7 @@ public class Core
         {
             Database.DeleteOffTime(offTime);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -135,7 +135,7 @@ public class Core
         {
             return Database.GetOffTime(offTime);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -147,7 +147,7 @@ public class Core
         {
             Database.EditOffTime(offTime);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }

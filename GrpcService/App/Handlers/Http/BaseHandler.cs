@@ -113,7 +113,7 @@ public class BaseHandler : ControllerBase
         {
             UserId = TokenSource.GetTokenUserId(Request.Headers["_token"]);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw AuthenticationFailed;
         }
@@ -129,11 +129,11 @@ public class BaseHandler : ControllerBase
                     throw AuthorizationFailed;
             }
         }
-        catch (AuthenticationFailed e)
+        catch (AuthenticationFailed)
         {
             throw AuthenticationFailed;
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw AuthorizationFailed;
         }

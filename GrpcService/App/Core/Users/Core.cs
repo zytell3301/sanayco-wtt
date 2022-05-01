@@ -53,7 +53,7 @@ public class Core
 
             return token;
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -93,7 +93,7 @@ public class Core
         {
             Database.DeleteUserByUsername(user);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -105,7 +105,7 @@ public class Core
         {
             return Database.GetUserByUsername(user);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -117,7 +117,7 @@ public class Core
         {
             return Database.GetUserPermissions(user);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -135,7 +135,7 @@ public class Core
             batch.AddPermission(permissions);
             batch.SaveChanges();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }

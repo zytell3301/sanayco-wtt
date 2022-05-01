@@ -38,7 +38,7 @@ public class Core
             batch.AddProjectMember(member);
             batch.ExecuteOperation();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -50,7 +50,7 @@ public class Core
         {
             return Database.GetProject(project);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -62,7 +62,7 @@ public class Core
         {
             Database.UpdateProject(project);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -74,11 +74,11 @@ public class Core
         {
             Database.AddMemberToProject(projectMember);
         }
-        catch (EntityNotFound e)
+        catch (EntityNotFound)
         {
             return new EntityNotFound("User not found");
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return InternalError;
         }
@@ -92,7 +92,7 @@ public class Core
         {
             Database.RemoveUserFromProject(projectMember);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -104,7 +104,7 @@ public class Core
         {
             Database.DeleteProject(project);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }
@@ -116,7 +116,7 @@ public class Core
         {
             Database.UpdateProjectMember(projectMember);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw InternalError;
         }

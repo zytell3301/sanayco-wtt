@@ -24,7 +24,7 @@ public class PermissionsSource : IPermissionsSource
             return
                 true; // If the code reaches here it means that the previous line didn't throw a record not found exception
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return false;
         }
