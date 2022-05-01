@@ -31,7 +31,8 @@ public class OffTimes : IDatabase
                 Status = offTime.Status,
                 FromDate = offTime.FromDate,
                 ToDate = offTime.ToDate,
-                UserId = offTime.UserId
+                UserId = offTime.UserId,
+                CreatedAt = offTime.CreatedAt,
             });
             Connection.SaveChanges();
         }

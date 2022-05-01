@@ -56,7 +56,7 @@ public class Handler : BaseHandler
                 Description = body.description,
                 FromDate = DateTime.UnixEpoch.AddSeconds(body.from_date),
                 ToDate = DateTime.UnixEpoch.AddSeconds(body.to_date),
-                UserId = body.user_id
+                UserId = GetUserId(),
             });
         }
         catch (Exception)
@@ -219,10 +219,18 @@ public class Handler : BaseHandler
                 return ResponseToJson(DataValidationFailedResponse());
         }
 
-        switch (Core.CheckOffTimeOwnership(body.off_time_id, GetUserId()))
+        try
         {
-            case false:
-                return ResponseToJson(AuthorizationFailedResponse());
+            switch (Core.CheckOffTimeOwnership(body.off_time_id, GetUserId()))
+            {
+                case false:
+                    Authorize("cancel-off-time");
+                    break;
+            }
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
         }
 
         try
@@ -284,10 +292,19 @@ public class Handler : BaseHandler
                 return ResponseToJson(DataValidationFailedResponse());
         }
 
-        switch (Core.CheckOffTimeOwnership(body.off_time_id, GetUserId()))
+        try
         {
-            case false:
-                return ResponseToJson(AuthorizationFailedResponse());
+            switch (Core.CheckOffTimeOwnership(body.off_time_id, GetUserId()))
+            {
+                case false:
+                    Authorize("edit-off-time");
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            return ResponseToJson(AuthorizationFailedResponse());
         }
 
         try
