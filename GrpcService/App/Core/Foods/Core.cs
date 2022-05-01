@@ -22,6 +22,15 @@ public class Core
         Database = dependencies.Database;
     }
 
+    public bool CheckOrderOwnership(int orderId, int userId)
+    {
+        var order = Database.GetOrder(new FoodOrder()
+        {
+            Id = orderId,
+        });
+        return order.UserId == userId;
+    }
+
     public void RecordFood(Food food)
     {
         try

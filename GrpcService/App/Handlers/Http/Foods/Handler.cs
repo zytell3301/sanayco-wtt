@@ -339,6 +339,20 @@ public class Handler : BaseHandler
 
         try
         {
+            switch (Core.CheckOrderOwnership(body.order_id, GetUserId()))
+            {
+                case false:
+                    Authorize("cancel-food-order");
+                    break;
+            }
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
+        try
+        {
             Core.CancelOrder(new FoodOrder
             {
                 Id = body.order_id

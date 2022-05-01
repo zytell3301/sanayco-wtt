@@ -15,4 +15,5 @@ public interface IDatabase
     public void DeleteFood(Food food);
     public void RecordOrder(FoodOrder order);
     public void DeleteOrder(FoodOrder order);
+    public FoodOrder GetOrder(FoodOrder order);
 }

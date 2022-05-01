@@ -141,6 +141,32 @@ public class Foods : IDatabase
         }
     }
 
+    public FoodOrder GetOrder(FoodOrder order)
+    {
+        try
+        {
+            var model = Connection.FoodOrders.First(o => o.Id == order.Id);
+            return ConvertFoodOrderModel(model);
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
+    }
+
+    private FoodOrder ConvertFoodOrderModel(Model.FoodOrder model)
+    {
+        return new FoodOrder()
+        {
+            Id = model.Id,
+            Date = model.Date,
+            Price = model.Price,
+            FoodId = model.FoodId,
+            UserId = model.UserId,
+        };
+    }
+
     private Food ConvertFoodModel(Model.Food model)
     {
         return new Food
