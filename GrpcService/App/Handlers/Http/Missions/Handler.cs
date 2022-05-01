@@ -25,7 +25,7 @@ public class Handler : BaseHandler
     {
         try
         {
-            Authorize("submit-mission");
+            Authorize("record-mission");
         }
         catch (Exception)
         {
@@ -250,7 +250,6 @@ public class Handler : BaseHandler
             Core.ApproveMission(new Mission
             {
                 Id = body.mission_id,
-                IsVerified = true
             });
         }
         catch (Exception)
