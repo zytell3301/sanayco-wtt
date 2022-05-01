@@ -1,5 +1,4 @@
-USE
-wtt;
+USE wtt;
 
 CREATE TABLE missions
 (

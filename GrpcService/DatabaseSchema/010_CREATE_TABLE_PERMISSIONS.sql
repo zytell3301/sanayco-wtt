@@ -1,3 +1,5 @@
+USE wtt;
+
 /* It is recommended to log every permission. Maybe we want trace that who granted the permission to current user*/
 CREATE TABLE permissions
 (

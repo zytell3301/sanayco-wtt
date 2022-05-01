@@ -1,5 +1,5 @@
-USE
-wtt;
+USE wtt;
+
 CREATE TABLE presentations
 (
     id      INT IDENTITY (1,1),

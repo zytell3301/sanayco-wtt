@@ -1,8 +1,10 @@
+USE wtt;
+
 CREATE TABLE projects
 (
     id          INT IDENTITY (1,1),
-    name        CHAR(32),
-    description VARCHAR,
+    name        VARCHAR(32),
+    description VARCHAR(1024),
     created_at  DATETIME,
     PRIMARY KEY (id),
 )

@@ -1,3 +1,4 @@
+USE wtt;
 /*
  * Relation definitions for tasks table
  */
