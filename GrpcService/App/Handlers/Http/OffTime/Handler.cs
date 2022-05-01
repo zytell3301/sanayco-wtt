@@ -27,7 +27,7 @@ public class Handler : BaseHandler
         {
             Authorize("record-off-time");
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(AuthorizationFailedResponse());
         }
@@ -37,7 +37,7 @@ public class Handler : BaseHandler
         {
             body = DecodePayloadJson<RecordOffTimeValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store current request data for ip blacklist analysis
             return InvalidRequestResponse;
@@ -59,7 +59,7 @@ public class Handler : BaseHandler
                 UserId = body.user_id
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }
@@ -74,7 +74,7 @@ public class Handler : BaseHandler
         {
             Authorize("change-off-time-status");
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(AuthorizationFailedResponse());
         }
@@ -84,7 +84,7 @@ public class Handler : BaseHandler
         {
             body = DecodePayloadJson<UpdateOffTimeStatusValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store current request data for ip blacklist analysis
             return InvalidRequestResponse;
@@ -103,7 +103,7 @@ public class Handler : BaseHandler
                 Id = body.off_time_id
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }
@@ -118,7 +118,7 @@ public class Handler : BaseHandler
         {
             Authorize("change-off-time-status");
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(AuthorizationFailedResponse());
         }
@@ -129,7 +129,7 @@ public class Handler : BaseHandler
             // @TODO Since this exception happens when client is sending invalid data, we can store current request data for ip blacklist analysis
             body = DecodePayloadJson<UpdateOffTimeStatusValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return InvalidRequestResponse;
         }
@@ -147,7 +147,7 @@ public class Handler : BaseHandler
                 Id = body.off_time_id
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }
@@ -162,7 +162,7 @@ public class Handler : BaseHandler
         {
             Authorize("change-off-time-status");
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(AuthorizationFailedResponse());
         }
@@ -172,7 +172,7 @@ public class Handler : BaseHandler
         {
             body = DecodePayloadJson<UpdateOffTimeStatusValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store current request data for ip blacklist analysis
             return InvalidRequestResponse;
@@ -191,7 +191,7 @@ public class Handler : BaseHandler
                 Id = body.off_time_id
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }
@@ -207,7 +207,7 @@ public class Handler : BaseHandler
         {
             body = DecodePayloadJson<CancelOffTimeValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store current request data for ip blacklist analysis
             return InvalidRequestResponse;
@@ -219,6 +219,12 @@ public class Handler : BaseHandler
                 return ResponseToJson(DataValidationFailedResponse());
         }
 
+        switch (Core.CheckOffTimeOwnership(body.off_time_id, GetUserId()))
+        {
+            case false:
+                return ResponseToJson(AuthorizationFailedResponse());
+        }
+
         try
         {
             Core.CancelOffTime(new Domain.Entities.OffTime
@@ -226,7 +232,7 @@ public class Handler : BaseHandler
                 Id = body.off_time_id
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }
@@ -246,7 +252,7 @@ public class Handler : BaseHandler
         {
             offTime = Core.GetOffTime(offTime);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }
@@ -266,7 +272,7 @@ public class Handler : BaseHandler
         {
             body = DecodePayloadJson<EditOffTimeValidation>();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // @TODO Since this exception happens when client is sending invalid data, we can store current request data for ip blacklist analysis.
             return InvalidRequestResponse;
@@ -276,6 +282,12 @@ public class Handler : BaseHandler
         {
             case false:
                 return ResponseToJson(DataValidationFailedResponse());
+        }
+
+        switch (Core.CheckOffTimeOwnership(body.off_time_id, GetUserId()))
+        {
+            case false:
+                return ResponseToJson(AuthorizationFailedResponse());
         }
 
         try
@@ -288,7 +300,7 @@ public class Handler : BaseHandler
                 ToDate = DateTime.UnixEpoch.AddSeconds(body.to_date)
             });
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return ResponseToJson(InternalErrorResponse());
         }

@@ -42,6 +42,15 @@ public class Core
         Database = dependencies.Database;
     }
 
+    public bool CheckOffTimeOwnership(int offTimeId, int userId)
+    {
+        var offTime = Database.GetOffTime(new Domain.Entities.OffTime()
+        {
+            Id = offTimeId,
+        });
+        return offTime.UserId == userId;
+    }
+
     /*
      * @TODO Add extra checking for off time availability 
      */
