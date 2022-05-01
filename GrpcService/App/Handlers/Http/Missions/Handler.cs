@@ -74,15 +74,6 @@ public class Handler : BaseHandler
     [HttpPost("delete-mission")]
     public string DeleteMission()
     {
-        try
-        {
-            // @TODO We must check that if the requesting client is the owner of the current entity
-        }
-        catch (Exception)
-        {
-            return ResponseToJson(AuthorizationFailedResponse());
-        }
-
         DeleteMissionValidation body;
         try
         {
@@ -98,6 +89,20 @@ public class Handler : BaseHandler
         {
             case false:
                 return ResponseToJson(DataValidationFailedResponse());
+        }
+
+        try
+        {
+            switch (Core.CheckMissionOwnership(body.mission_id, GetUserId()))
+            {
+                case false:
+                    Authorize("delete-mission");
+                    break;
+            }
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
         }
 
         try
@@ -159,15 +164,6 @@ public class Handler : BaseHandler
     [HttpPost("update-mission")]
     public string UpdateMission()
     {
-        try
-        {
-            // @TODO We must check that if the requesting client is the owner of current entity or not
-        }
-        catch (Exception)
-        {
-            return ResponseToJson(AuthorizationFailedResponse());
-        }
-
         UpdateMissionValidation body;
         try
         {
@@ -183,6 +179,20 @@ public class Handler : BaseHandler
         {
             case false:
                 return ResponseToJson(DataValidationFailedResponse());
+        }
+
+        try
+        {
+            switch (Core.CheckMissionOwnership(body.mission_id, GetUserId()))
+            {
+                case false:
+                    Authorize("edit-mission");
+                    break;
+            }
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
         }
 
         try

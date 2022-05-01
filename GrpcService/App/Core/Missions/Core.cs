@@ -18,6 +18,15 @@ public class Core
         InternalError = new InternalError(configs.InternalErrorMessage);
     }
 
+    public bool CheckMissionOwnership(int missionId, int userId)
+    {
+        var mission = Database.GetMission(new Mission()
+        {
+            Id = missionId,
+        });
+        return mission.MemberId == userId;
+    }
+
     public void RecordMission(Mission mission)
     {
         try
