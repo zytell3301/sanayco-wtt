@@ -24,11 +24,11 @@ public class Handler : BaseHandler
     {
         try
         {
-            Authenticate();
+            Authorize("create-task");
         }
         catch (Exception)
         {
-            return ResponseToJson(AuthenticationFailedResponse());
+            return ResponseToJson(AuthorizationFailedResponse());
         }
 
         RecordTaskValidaion body;
