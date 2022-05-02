@@ -48,7 +48,6 @@ public class UpdateUserBatch : Core.Users.UpdateUserBatch
         {
             foreach (var permission in permissions)
             {
-                Console.WriteLine(permission.UserId);
                 Connection.Permissions.Add(new Model.Permission
                 {
                     Title = permission.Title,
