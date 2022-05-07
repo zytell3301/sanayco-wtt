@@ -21,4 +21,8 @@ public class Task
 
     public string WorkLocation { get; set; }
     public int UserId { get; set; }
+
+    public int Points { get; set; }
+
+    public DateTime StartTime { get; set; }
 }
