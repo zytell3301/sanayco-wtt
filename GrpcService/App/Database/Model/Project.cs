@@ -1,16 +1,24 @@
-﻿namespace GrpcService1.App.Database.Model;
+﻿using System;
+using System.Collections.Generic;
 
-public class Project
+namespace GrpcService1.App.Database.Model
 {
-    public Project()
+    public partial class Project
     {
-        Missions = new HashSet<Mission>();
+        public Project()
+        {
+            Missions = new HashSet<Mission>();
+            ProjectMembers = new HashSet<ProjectMember>();
+            Tasks = new HashSet<Task>();
+        }
+
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
+        public DateTime? CreatedAt { get; set; }
+
+        public virtual ICollection<Mission> Missions { get; set; }
+        public virtual ICollection<ProjectMember> ProjectMembers { get; set; }
+        public virtual ICollection<Task> Tasks { get; set; }
     }
-
-    public int Id { get; set; }
-    public string? Name { get; set; }
-    public DateTime? CreatedAt { get; set; }
-    public string? Description { get; set; }
-
-    public virtual ICollection<Mission> Missions { get; set; }
 }

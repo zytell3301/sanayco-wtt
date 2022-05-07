@@ -1,16 +1,20 @@
-﻿namespace GrpcService1.App.Database.Model;
+﻿using System;
+using System.Collections.Generic;
 
-public class Food
+namespace GrpcService1.App.Database.Model
 {
-    public Food()
+    public partial class Food
     {
-        FoodOrders = new HashSet<FoodOrder>();
+        public Food()
+        {
+            FoodOrders = new HashSet<FoodOrder>();
+        }
+
+        public int Id { get; set; }
+        public string Title { get; set; } = null!;
+        public int Price { get; set; }
+        public bool IsAvailable { get; set; }
+
+        public virtual ICollection<FoodOrder> FoodOrders { get; set; }
     }
-
-    public int Id { get; set; }
-    public string Title { get; set; } = null!;
-    public int Price { get; set; }
-    public bool IsAvailable { get; set; }
-
-    public virtual ICollection<FoodOrder> FoodOrders { get; set; }
 }
