@@ -292,7 +292,14 @@ namespace GrpcService1.App.Database.Model
                     .HasColumnType("datetime")
                     .HasColumnName("end_time");
 
+                entity.Property(e => e.Points).HasColumnName("points");
+
                 entity.Property(e => e.ProjectId).HasColumnName("project_id");
+
+                entity.Property(e => e.StartTime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("start_time")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Status)
                     .HasMaxLength(32)

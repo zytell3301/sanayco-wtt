@@ -14,6 +14,8 @@ namespace GrpcService1.App.Database.Model
         public DateTime? EndTime { get; set; }
         public string? Description { get; set; }
         public string? Status { get; set; }
+        public DateTime StartTime { get; set; }
+        public int Points { get; set; }
 
         public virtual Project? Project { get; set; }
         public virtual User? User { get; set; }
