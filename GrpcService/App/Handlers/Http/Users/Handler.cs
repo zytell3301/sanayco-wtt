@@ -60,11 +60,11 @@ public class Handler : BaseHandler
     }
 
     [HttpPost("/record-user")]
-    public string RecordUser()
+    public string RecordUser([FromForm] string data, [FromForm] IFormFile profile_picture)
     {
         try
         {
-            Authorize("register-user");
+            Authorize("create-user");
         }
         catch (Exception)
         {
@@ -74,7 +74,7 @@ public class Handler : BaseHandler
         RecordUserValidation body;
         try
         {
-            body = DecodePayloadJson<RecordUserValidation>();
+            body = JsonSerializer.Deserialize<RecordUserValidation>(data);
         }
         catch (Exception)
         {
@@ -98,7 +98,7 @@ public class Handler : BaseHandler
                 CompanyLevel = body.company_level,
                 LastName = body.lastname,
                 SkillLevel = body.skill_level
-            }, ParsePermissionsArray(body.permissions));
+            }, ParsePermissionsArray(body.permissions), profile_picture);
         }
         catch (Exception)
         {
