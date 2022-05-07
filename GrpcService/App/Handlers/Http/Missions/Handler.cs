@@ -260,6 +260,20 @@ public class Handler : BaseHandler
         return ResponseToJson(OperationSuccessfulResponse());
     }
 
+    [HttpPost("reject")]
+    public string RejectMission()
+    {
+        Console.WriteLine(":D");
+        return "";
+    }
+
+    [HttpPost("set-waiting")]
+    public string SetMissionWaiting()
+    {
+        Console.WriteLine(":D2");
+        return "";
+    }
+
     private class GetMissionResponse : Response
     {
         public Mission mission { get; set; }
@@ -274,7 +288,7 @@ public class Handler : BaseHandler
             public string description { get; set; }
             public string title { get; set; }
             public string location { get; set; }
-            public bool is_verified { get; set; }
+            public bool? is_verified { get; set; }
         }
     }
 }

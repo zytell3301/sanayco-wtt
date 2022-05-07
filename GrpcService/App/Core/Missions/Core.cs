@@ -31,7 +31,7 @@ public class Core
     {
         try
         {
-            mission.IsVerified = false;
+            mission.IsVerified = null;
             Database.RecordMission(mission);
         }
         catch (Exception)
