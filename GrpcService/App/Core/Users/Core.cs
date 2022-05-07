@@ -16,12 +16,14 @@ public class Core
 
     private readonly InvalidCredentials InvalidCredentials;
     private readonly ITokenGenerator TokenGenerator;
+    private readonly IProfilePicturesStorage ProfilePicturesStorage;
 
     public Core(UsersCoreConfigs configs, UsersCoreDependencies dependencies)
     {
         Database = dependencies.Database;
         Hash = dependencies.Hash;
         TokenGenerator = dependencies.TokenGenerator;
+        ProfilePicturesStorage = dependencies.ProfilePicturesStorage;
 
         InvalidCredentials = new InvalidCredentials(configs.InvalidCredentialsMessage);
         InternalError = new InternalError(configs.InternalErrorMessage);
@@ -59,10 +61,11 @@ public class Core
         }
     }
 
-    public void Register(User user, List<Permission> permissions)
+    public void Register(User user, List<Permission> permissions, IFormFile profilePicture)
     {
         try
         {
+            // var fileName = ProfilePicturesStorage.StoreProfilePicture(profilePicture);
             var UserId = Database.RecordUser(new User
             {
                 Name = user.Name,
@@ -70,7 +73,7 @@ public class Core
                 CompanyLevel = user.CompanyLevel,
                 LastName = user.LastName,
                 SkillLevel = user.SkillLevel,
-                Username = user.Username
+                Username = user.Username,
             });
             var permissionsBatch = Database.NewPermissionBatch();
             foreach (var permission in permissions)
@@ -153,5 +156,6 @@ public class Core
         public IDatabase Database;
         public IHash Hash;
         public ITokenGenerator TokenGenerator;
+        public IProfilePicturesStorage ProfilePicturesStorage;
     }
 }
