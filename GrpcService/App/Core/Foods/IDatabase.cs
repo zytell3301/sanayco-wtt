@@ -16,4 +16,5 @@ public interface IDatabase
     public void RecordOrder(FoodOrder order);
     public void DeleteOrder(FoodOrder order);
     public FoodOrder GetOrder(FoodOrder order);
+    public List<Domain.Entities.Food> GetAvailableFoodsList();
 }
