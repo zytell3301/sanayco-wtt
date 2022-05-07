@@ -263,15 +263,89 @@ public class Handler : BaseHandler
     [HttpPost("reject")]
     public string RejectMission()
     {
-        Console.WriteLine(":D");
-        return "";
+        try
+        {
+            Authorize("change-mission-status");
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
+        ChangeMissionStatusValidation body;
+        try
+        {
+            body = DecodePayloadJson<ChangeMissionStatusValidation>();
+        }
+        catch (Exception)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
+
+        switch (ModelState.IsValid)
+        {
+            case false:
+                return ResponseToJson(DataValidationFailedResponse());
+        }
+
+        try
+        {
+            Core.RejectMission(new Mission
+            {
+                Id = body.mission_id,
+            });
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(InternalErrorResponse());
+        }
+
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     [HttpPost("set-waiting")]
     public string SetMissionWaiting()
     {
-        Console.WriteLine(":D2");
-        return "";
+        try
+        {
+            Authorize("change-mission-status");
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
+        ChangeMissionStatusValidation body;
+        try
+        {
+            body = DecodePayloadJson<ChangeMissionStatusValidation>();
+        }
+        catch (Exception)
+        {
+            // @TODO Since this exception happens when client is sending invalid data, we can store  current request data for ip blacklist analysis
+            return InvalidRequestResponse;
+        }
+
+        switch (ModelState.IsValid)
+        {
+            case false:
+                return ResponseToJson(DataValidationFailedResponse());
+        }
+
+        try
+        {
+            Core.SetMissionWaiting(new Mission
+            {
+                Id = body.mission_id,
+            });
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(InternalErrorResponse());
+        }
+
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     private class GetMissionResponse : Response
