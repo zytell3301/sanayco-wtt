@@ -288,10 +288,6 @@ namespace GrpcService1.App.Database.Model
                     .IsUnicode(false)
                     .HasColumnName("description");
 
-                entity.Property(e => e.EndTime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("end_time");
-
                 entity.Property(e => e.Points).HasColumnName("points");
 
                 entity.Property(e => e.ProjectId).HasColumnName("project_id");
