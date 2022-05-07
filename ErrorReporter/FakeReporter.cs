@@ -1,4 +1,6 @@
-﻿namespace ErrorReporter;
+﻿using Confluent.Kafka;
+
+namespace ErrorReporter;
 
 public class FakeReporter : IErrorReporter
 {
@@ -10,6 +12,17 @@ public class FakeReporter : IErrorReporter
      */
     public void ReportException(Exception exception)
     {
-        Console.WriteLine(exception.Message);
+        printException(exception);
+        while (exception.InnerException != null)
+        {
+            exception = exception.InnerException;
+            printException(exception);
+        }
+    }
+
+    private void printException(Exception exception)
+    {
+        Console.WriteLine("Exception message: " + exception.Message);
+        Console.WriteLine("Stack trace: " + exception.StackTrace);
     }
 }
