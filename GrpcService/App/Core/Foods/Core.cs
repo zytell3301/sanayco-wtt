@@ -141,6 +141,18 @@ public class Core
         }
     }
 
+    public List<Domain.Entities.Food> GetAvailableFoodsList()
+    {
+        try
+        {
+            return Database.GetAvailableFoodsList();
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
     public class FoodsCoreDependencies
     {
         public IDatabase Database;
