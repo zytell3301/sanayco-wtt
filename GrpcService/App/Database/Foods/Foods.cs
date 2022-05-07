@@ -155,6 +155,26 @@ public class Foods : IDatabase
         }
     }
 
+    public List<Food> GetAvailableFoodsList()
+    {
+        var foods = new List<Food>();
+        try
+        {
+            foreach (var food in Connection.Foods.Where(f => f.IsAvailable == true).ToList())
+            {
+                foods.Add(ConvertFoodModel(food));
+            }
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
+
+        return foods;
+    }
+
+
     private FoodOrder ConvertFoodOrderModel(Model.FoodOrder model)
     {
         return new FoodOrder()
