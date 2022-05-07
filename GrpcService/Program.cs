@@ -13,6 +13,7 @@ using GrpcService1.App.Database.Users;
 using GrpcService1.App.Handlers.Http;
 using GrpcService1.App.HashGenerator;
 using GrpcService1.App.PermissionsSource;
+using GrpcService1.App.ProfilePicturesStorage;
 using GrpcService1.App.TokenGenerator;
 using GrpcService1.App.TokenSource;
 using GrpcService1.Domain.Errors;
@@ -135,6 +136,20 @@ builder.Services.AddSingleton(new GrpcService1.App.Core.Users.Core(
             TokenLength = 32,
             ValidaCharacters = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         }),
+        ProfilePicturesStorage = new ProfilePicturesStorage(
+            new ProfilePicturesStorage.ProfilePicturesStorageDependencies()
+            {
+                ErrorReporter = reporter,
+                TokenGenerator = new TokenGenerator(new TokenGenerator.TokenGeneratorConfigs()
+                {
+                    TokenLength = 32,
+                    ValidaCharacters = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                }),
+            }, new ProfilePicturesStorage.ProfilePicturesStorageConfigs()
+            {
+                InternalErrorMessage = "InternalErrorMessage",
+                PicturesRootDirectory = "./"
+            }),
         Database = usersDB,
         Hash = new HashGenerator(new HashGenerator.HashGeneratorConfigs
         {
