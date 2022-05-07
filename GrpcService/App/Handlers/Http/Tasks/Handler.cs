@@ -168,6 +168,8 @@ public class Handler : BaseHandler
                 Description = body.description,
                 WorkLocation = body.work_location,
                 Title = body.title,
+                Points = body.points,
+                StartTime = DateTime.UnixEpoch.AddSeconds((double) (body.start_time / 1000))
             });
         }
         catch (Exception)
