@@ -122,7 +122,9 @@ public class Tasks : IDatabase
             Description = model.Description,
             Status = model.Status,
             Title = model.Title,
-            WorkLocation = model.WorkLocation
+            WorkLocation = model.WorkLocation,
+            Points = model.Points,
+            StartTime = model.StartTime,
         };
         switch (task.CreatedAt.HasValue)
         {
