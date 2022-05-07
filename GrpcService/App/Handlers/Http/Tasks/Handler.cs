@@ -54,10 +54,11 @@ public class Handler : BaseHandler
             {
                 Description = body.description,
                 Title = body.title,
-                EndTime = DateTime.UnixEpoch.AddSeconds(body.end_time),
                 ProjectId = body.project_id,
                 WorkLocation = body.work_location,
-                UserId = GetUserId()
+                UserId = GetUserId(),
+                Points = body.points,
+                StartTime = DateTime.UnixEpoch.AddSeconds(body.start_time),
             });
         }
         catch (Exception)
@@ -167,7 +168,6 @@ public class Handler : BaseHandler
                 Description = body.description,
                 WorkLocation = body.work_location,
                 Title = body.title,
-                EndTime = DateTime.UnixEpoch.AddSeconds(body.end_time)
             });
         }
         catch (Exception)

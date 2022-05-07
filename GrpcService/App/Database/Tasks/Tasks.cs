@@ -26,15 +26,15 @@ public class Tasks : IDatabase
         {
             Connection.Tasks.Add(new Model.Task
             {
-                // CreatedAt is not initialized because it will be evaluated in database
                 Description = task.Description,
                 Status = task.Status,
                 Title = task.Title,
-                EndTime = task.EndTime,
                 ProjectId = task.ProjectId,
                 WorkLocation = task.WorkLocation,
                 CreatedAt = task.CreatedAt,
-                UserId = task.UserId
+                UserId = task.UserId,
+                Points = task.Points,
+                StartTime = task.StartTime,
             });
             Connection.SaveChanges();
         }
@@ -67,8 +67,9 @@ public class Tasks : IDatabase
             var model = Connection.Tasks.First(t => t.Id == task.Id);
             model.Description = task.Description;
             model.Title = task.Title;
-            model.EndTime = task.EndTime;
             model.WorkLocation = task.WorkLocation;
+            model.Points = task.Points;
+            model.StartTime = task.StartTime;
             UpdateTask(model);
             Connection.SaveChanges();
         }
@@ -127,13 +128,6 @@ public class Tasks : IDatabase
         {
             case true:
                 task.CreatedAt = model.CreatedAt.Value;
-                break;
-        }
-
-        switch (model.EndTime.HasValue)
-        {
-            case true:
-                task.EndTime = model.EndTime.Value;
                 break;
         }
 
