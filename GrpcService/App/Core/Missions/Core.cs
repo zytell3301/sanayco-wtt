@@ -89,6 +89,32 @@ public class Core
         }
     }
 
+    public void RejectMission(Mission mission)
+    {
+        try
+        {
+            mission.IsVerified = false;
+            Database.ChangeMissionStatus(mission);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
+    public void SetMissionWaiting(Mission mission)
+    {
+        try
+        {
+            mission.IsVerified = null;
+            Database.ChangeMissionStatus(mission);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
     public class MissionsCoreDependencies
     {
         public IDatabase Database;
