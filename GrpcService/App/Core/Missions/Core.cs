@@ -20,9 +20,9 @@ public class Core
 
     public bool CheckMissionOwnership(int missionId, int userId)
     {
-        var mission = Database.GetMission(new Mission()
+        var mission = Database.GetMission(new Mission
         {
-            Id = missionId,
+            Id = missionId
         });
         return mission.MemberId == userId;
     }

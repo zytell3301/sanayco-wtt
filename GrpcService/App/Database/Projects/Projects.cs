@@ -28,7 +28,7 @@ public class Projects : IDatabase
         {
             Description = project.Description,
             Name = project.Name,
-            CreatedAt = project.CreatedAt,
+            CreatedAt = project.CreatedAt
         });
     }
 
@@ -58,7 +58,7 @@ public class Projects : IDatabase
                 Level = projectMember.Level,
                 ProjectId = projectMember.ProjectId,
                 UserId = projectMember.UserId,
-                CreatedAt = projectMember.CreatedAt,
+                CreatedAt = projectMember.CreatedAt
             });
             Connection.SaveChanges();
         }
@@ -147,13 +147,13 @@ public class Projects : IDatabase
 
     private ProjectMember ConvertModelToProjectMember(Model.ProjectMember model)
     {
-        return new ProjectMember()
+        return new ProjectMember
         {
             Id = model.Id,
             Level = model.Level,
             CreatedAt = model.CreatedAt.Value,
             ProjectId = model.ProjectId.Value,
-            UserId = model.UserId.Value,
+            UserId = model.UserId.Value
         };
     }
 
@@ -164,7 +164,7 @@ public class Projects : IDatabase
             Id = model.Id,
             Description = model.Description,
             Name = model.Name,
-            CreatedAt = model.CreatedAt.Value,
+            CreatedAt = model.CreatedAt.Value
         };
     }
 }

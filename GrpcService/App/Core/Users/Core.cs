@@ -15,8 +15,8 @@ public class Core
     private readonly InternalError InternalError;
 
     private readonly InvalidCredentials InvalidCredentials;
-    private readonly ITokenGenerator TokenGenerator;
     private readonly IProfilePicturesStorage ProfilePicturesStorage;
+    private readonly ITokenGenerator TokenGenerator;
 
     public Core(UsersCoreConfigs configs, UsersCoreDependencies dependencies)
     {
@@ -73,7 +73,7 @@ public class Core
                 CompanyLevel = user.CompanyLevel,
                 LastName = user.LastName,
                 SkillLevel = user.SkillLevel,
-                Username = user.Username,
+                Username = user.Username
             });
             var permissionsBatch = Database.NewPermissionBatch();
             foreach (var permission in permissions)
@@ -155,7 +155,7 @@ public class Core
     {
         public IDatabase Database;
         public IHash Hash;
-        public ITokenGenerator TokenGenerator;
         public IProfilePicturesStorage ProfilePicturesStorage;
+        public ITokenGenerator TokenGenerator;
     }
 }

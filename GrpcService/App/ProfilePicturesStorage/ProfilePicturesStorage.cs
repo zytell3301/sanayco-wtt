@@ -1,28 +1,19 @@
-﻿using ErrorReporter;
+﻿#region
+
+using ErrorReporter;
 using GrpcService1.App.Core.Users;
 using GrpcService1.Domain.Errors;
+
+#endregion
 
 namespace GrpcService1.App.ProfilePicturesStorage;
 
 public class ProfilePicturesStorage : IProfilePicturesStorage
 {
-    private readonly ITokenGenerator TokenGenerator;
     private readonly IErrorReporter ErrorReporter;
     private readonly InternalError InternalError;
     private readonly string PicturesRootDirectory;
-
-    public class ProfilePicturesStorageDependencies
-    {
-        public ITokenGenerator TokenGenerator;
-        public IErrorReporter ErrorReporter;
-    }
-
-    public class ProfilePicturesStorageConfigs
-    {
-        public string InternalErrorMessage;
-
-        public string PicturesRootDirectory;
-    }
+    private readonly ITokenGenerator TokenGenerator;
 
     public ProfilePicturesStorage(ProfilePicturesStorageDependencies dependencies,
         ProfilePicturesStorageConfigs configs)
@@ -39,13 +30,26 @@ public class ProfilePicturesStorage : IProfilePicturesStorage
     {
         // try
         // {
-            file.CopyTo(File.Create(PicturesRootDirectory+""));
-            return file.FileName;
+        file.CopyTo(File.Create(PicturesRootDirectory + ""));
+        return file.FileName;
         // }
         // catch (Exception e)
         // {
-            // ErrorReporter.ReportException(e);
-            // throw InternalError;
+        // ErrorReporter.ReportException(e);
+        // throw InternalError;
         // }
+    }
+
+    public class ProfilePicturesStorageDependencies
+    {
+        public IErrorReporter ErrorReporter;
+        public ITokenGenerator TokenGenerator;
+    }
+
+    public class ProfilePicturesStorageConfigs
+    {
+        public string InternalErrorMessage;
+
+        public string PicturesRootDirectory;
     }
 }

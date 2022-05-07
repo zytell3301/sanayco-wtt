@@ -13,9 +13,9 @@ namespace GrpcService1.App.Database.Foods;
 
 public class Foods : IDatabase
 {
-    private readonly InternalError InternalError;
     private readonly wttContext Connection;
     private readonly IErrorReporter ErrorReporter;
+    private readonly InternalError InternalError;
 
     public Foods(wttContext connection, IErrorReporter errorReporter, InternalError internalError)
     {
@@ -161,9 +161,7 @@ public class Foods : IDatabase
         try
         {
             foreach (var food in Connection.Foods.Where(f => f.IsAvailable == true).ToList())
-            {
                 foods.Add(ConvertFoodModel(food));
-            }
         }
         catch (Exception e)
         {
@@ -177,13 +175,13 @@ public class Foods : IDatabase
 
     private FoodOrder ConvertFoodOrderModel(Model.FoodOrder model)
     {
-        return new FoodOrder()
+        return new FoodOrder
         {
             Id = model.Id,
             Date = model.Date,
             Price = model.Price,
             FoodId = model.FoodId,
-            UserId = model.UserId,
+            UserId = model.UserId
         };
     }
 

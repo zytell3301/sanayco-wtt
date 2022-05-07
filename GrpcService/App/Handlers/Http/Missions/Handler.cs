@@ -249,7 +249,7 @@ public class Handler : BaseHandler
         {
             Core.ApproveMission(new Mission
             {
-                Id = body.mission_id,
+                Id = body.mission_id
             });
         }
         catch (Exception)
@@ -293,7 +293,7 @@ public class Handler : BaseHandler
         {
             Core.RejectMission(new Mission
             {
-                Id = body.mission_id,
+                Id = body.mission_id
             });
         }
         catch (Exception)
@@ -337,7 +337,7 @@ public class Handler : BaseHandler
         {
             Core.SetMissionWaiting(new Mission
             {
-                Id = body.mission_id,
+                Id = body.mission_id
             });
         }
         catch (Exception)

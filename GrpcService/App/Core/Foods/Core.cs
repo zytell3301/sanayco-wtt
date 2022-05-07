@@ -9,10 +9,9 @@ namespace GrpcService1.App.Core.Foods;
 
 public class Core
 {
+    private readonly IDatabase Database;
     private readonly FoodNotAvailable FoodNotAvailableError;
     private readonly InternalError InternalError;
-
-    private readonly IDatabase Database;
 
     public Core(FoodsCoreDependencies dependencies, FoodsCoreConfigs configs)
     {
@@ -24,9 +23,9 @@ public class Core
 
     public bool CheckOrderOwnership(int orderId, int userId)
     {
-        var order = Database.GetOrder(new FoodOrder()
+        var order = Database.GetOrder(new FoodOrder
         {
-            Id = orderId,
+            Id = orderId
         });
         return order.UserId == userId;
     }
@@ -141,7 +140,7 @@ public class Core
         }
     }
 
-    public List<Domain.Entities.Food> GetAvailableFoodsList()
+    public List<Food> GetAvailableFoodsList()
     {
         try
         {

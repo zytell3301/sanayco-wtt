@@ -34,7 +34,7 @@ public class Tasks : IDatabase
                 CreatedAt = task.CreatedAt,
                 UserId = task.UserId,
                 Points = task.Points,
-                StartTime = task.StartTime,
+                StartTime = task.StartTime
             });
             Connection.SaveChanges();
         }
@@ -124,7 +124,7 @@ public class Tasks : IDatabase
             Title = model.Title,
             WorkLocation = model.WorkLocation,
             Points = model.Points,
-            StartTime = model.StartTime,
+            StartTime = model.StartTime
         };
         switch (task.CreatedAt.HasValue)
         {

@@ -1,4 +1,5 @@
-USE wtt;
+USE
+wtt;
 
 ALTER TABLE users
     ADD username VARCHAR(32);

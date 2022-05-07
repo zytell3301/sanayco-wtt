@@ -137,15 +137,15 @@ builder.Services.AddSingleton(new GrpcService1.App.Core.Users.Core(
             ValidaCharacters = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         }),
         ProfilePicturesStorage = new ProfilePicturesStorage(
-            new ProfilePicturesStorage.ProfilePicturesStorageDependencies()
+            new ProfilePicturesStorage.ProfilePicturesStorageDependencies
             {
                 ErrorReporter = reporter,
-                TokenGenerator = new TokenGenerator(new TokenGenerator.TokenGeneratorConfigs()
+                TokenGenerator = new TokenGenerator(new TokenGenerator.TokenGeneratorConfigs
                 {
                     TokenLength = 32,
-                    ValidaCharacters = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-                }),
-            }, new ProfilePicturesStorage.ProfilePicturesStorageConfigs()
+                    ValidaCharacters = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                })
+            }, new ProfilePicturesStorage.ProfilePicturesStorageConfigs
             {
                 InternalErrorMessage = "InternalErrorMessage",
                 PicturesRootDirectory = "./"

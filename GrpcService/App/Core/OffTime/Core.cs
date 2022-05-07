@@ -44,9 +44,9 @@ public class Core
 
     public bool CheckOffTimeOwnership(int offTimeId, int userId)
     {
-        var offTime = Database.GetOffTime(new Domain.Entities.OffTime()
+        var offTime = Database.GetOffTime(new Domain.Entities.OffTime
         {
-            Id = offTimeId,
+            Id = offTimeId
         });
         return offTime.UserId == userId;
     }

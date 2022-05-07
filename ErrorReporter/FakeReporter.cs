@@ -1,6 +1,4 @@
-﻿using Confluent.Kafka;
-
-namespace ErrorReporter;
+﻿namespace ErrorReporter;
 
 public class FakeReporter : IErrorReporter
 {

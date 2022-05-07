@@ -15,7 +15,7 @@ public interface IDatabase
     public void DeleteProject(Project project);
     public void UpdateProjectMember(ProjectMember projectMember);
     public Project GetProject(Project project);
-    public Domain.Entities.ProjectMember GetProjectMember(ProjectMember member);
+    public ProjectMember GetProjectMember(ProjectMember member);
 }
 
 /**

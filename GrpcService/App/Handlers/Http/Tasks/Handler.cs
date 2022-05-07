@@ -58,7 +58,7 @@ public class Handler : BaseHandler
                 WorkLocation = body.work_location,
                 UserId = GetUserId(),
                 Points = body.points,
-                StartTime = DateTime.UnixEpoch.AddSeconds((double) (body.start_time / 1000)),
+                StartTime = DateTime.UnixEpoch.AddSeconds((double) (body.start_time / 1000))
             });
         }
         catch (Exception)

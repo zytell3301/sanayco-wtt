@@ -43,7 +43,7 @@ public class RecordProjectBatch : IRecordProjectBatch
                 Level = projectMember.Level,
                 ProjectId = Project.Id,
                 UserId = projectMember.UserId,
-                CreatedAt = projectMember.CreatedAt,
+                CreatedAt = projectMember.CreatedAt
             });
         }
         catch (Exception e)

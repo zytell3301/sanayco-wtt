@@ -10,5 +10,11 @@ public class Mission
     public string Description { get; set; }
     public string Title { get; set; }
     public string Location { get; set; }
-    public bool? IsVerified { get; set; } // Null indicates that the mission status is waiting, False means rejected and true means accepted.
+
+    public bool?
+        IsVerified
+    {
+        get;
+        set;
+    } // Null indicates that the mission status is waiting, False means rejected and true means accepted.
 }

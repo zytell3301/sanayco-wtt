@@ -56,7 +56,7 @@ public class Handler : BaseHandler
                 Description = body.description,
                 FromDate = DateTime.UnixEpoch.AddSeconds(body.from_date),
                 ToDate = DateTime.UnixEpoch.AddSeconds(body.to_date),
-                UserId = GetUserId(),
+                UserId = GetUserId()
             });
         }
         catch (Exception)

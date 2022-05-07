@@ -1,4 +1,5 @@
-USE wtt;
+USE
+wtt;
 
 CREATE TABLE project_members
 (

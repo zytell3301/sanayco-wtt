@@ -1,4 +1,5 @@
-USE wtt;
+USE
+wtt;
 
 ALTER TABLE missions
     ADD title VARCHAR(128) NOT NULL;

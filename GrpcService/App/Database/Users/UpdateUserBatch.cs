@@ -47,14 +47,12 @@ public class UpdateUserBatch : Core.Users.UpdateUserBatch
         try
         {
             foreach (var permission in permissions)
-            {
                 Connection.Permissions.Add(new Model.Permission
                 {
                     Title = permission.Title,
                     GrantedBy = permission.GrantedBy,
                     UserId = permission.UserId
                 });
-            }
         }
         catch (Exception e)
         {

@@ -25,10 +25,10 @@ public class Core
 
     public bool CheckProjectOwnership(int projectId, int userId)
     {
-        var member = Database.GetProjectMember(new ProjectMember()
+        var member = Database.GetProjectMember(new ProjectMember
         {
             ProjectId = projectId,
-            UserId = userId,
+            UserId = userId
         });
         return CheckMemberAccess(member.Level);
     }
