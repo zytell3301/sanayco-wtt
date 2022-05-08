@@ -3,6 +3,7 @@
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Missions.Validations;
 using GrpcService1.Domain.Entities;
+using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -346,6 +347,38 @@ public class Handler : BaseHandler
         }
 
         return ResponseToJson(OperationSuccessfulResponse());
+    }
+
+    [HttpGet("get-range/{fromDate}/{toDate}")]
+    public string GetMissionRange(int fromDate, int toDate)
+    {
+        try
+        {
+            Authenticate();
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthenticationFailedResponse());
+        }
+
+        try
+        {
+            return JsonSerializer.Serialize(new GetMissionRangeResponse()
+            {
+                status_code = 0,
+                missions = Core.GetMissionRange(DateTime.UnixEpoch.AddSeconds(fromDate),
+                    DateTime.UnixEpoch.AddSeconds(toDate), GetUserId()),
+            });
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(InternalErrorResponse());
+        }
+    }
+
+    private class GetMissionRangeResponse : Response
+    {
+        public List<Domain.Entities.Mission> missions { get; set; }
     }
 
     private class GetMissionResponse : Response

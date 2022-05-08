@@ -106,6 +106,37 @@ public class Database : IDatabase
         }
     }
 
+    public List<Mission> GetMissionRange(DateTime fromDate, DateTime toDate, int userId)
+    {
+        var missions = new List<Domain.Entities.Mission>();
+        try
+        {
+            foreach (var mission in Connection.Missions.Where(m => m.FromDate > fromDate).Where(m => m.ToDate < toDate)
+                         .ToList())
+            {
+                missions.Add(new Mission()
+                {
+                    Id = mission.Id,
+                    Description = mission.Description,
+                    Location = mission.Location,
+                    Title = mission.Title,
+                    FromDate = mission.FromDate,
+                    IsVerified = mission.IsVerified,
+                    MemberId = mission.MemberId,
+                    ProjectId = mission.ProjectId,
+                    ToDate = mission.ToDate,
+                });
+            }
+
+            return missions;
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
+    }
+
     private Mission ConvertModelToMissionEntity(Model.Mission mission)
     {
         return new Mission

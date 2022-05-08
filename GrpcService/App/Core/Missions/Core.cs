@@ -115,6 +115,18 @@ public class Core
         }
     }
 
+    public List<Domain.Entities.Mission> GetMissionRange(DateTime fromDate, DateTime toDate, int userId)
+    {
+        try
+        {
+            return Database.GetMissionRange(fromDate, toDate, userId);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
     public class MissionsCoreDependencies
     {
         public IDatabase Database;

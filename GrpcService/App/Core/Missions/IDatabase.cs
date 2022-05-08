@@ -13,4 +13,5 @@ public interface IDatabase
     public void UpdateMission(Mission mission);
     public Mission GetMission(Mission mission);
     public void ChangeMissionStatus(Mission mission);
+    public List<Domain.Entities.Mission> GetMissionRange(DateTime fromDate, DateTime toDate, int userId);
 }
