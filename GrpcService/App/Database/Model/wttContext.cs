@@ -406,6 +406,5 @@ public class wttContext : DbContext
 
     private void OnModelCreatingPartial(ModelBuilder modelBuilder)
     {
-        throw new NotImplementedException();
     }
 }
