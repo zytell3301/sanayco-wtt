@@ -119,7 +119,6 @@ public class Core
             }
 
             order.Price = food.Price;
-            order.Date = DateTime.Now;
             Database.RecordOrder(order);
         }
         catch (Exception)

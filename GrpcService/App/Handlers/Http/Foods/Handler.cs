@@ -3,6 +3,7 @@
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Foods.Validations;
 using GrpcService1.Domain.Entities;
+using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -306,7 +307,8 @@ public class Handler : BaseHandler
             Core.OrderFood(new FoodOrder
             {
                 FoodId = body.food_id,
-                UserId = GetUserId()
+                UserId = GetUserId(),
+                Date = DateTime.UnixEpoch.AddSeconds((float) body.date),
             });
         }
         catch (Exception)
@@ -364,6 +366,52 @@ public class Handler : BaseHandler
         }
 
         return ResponseToJson(OperationSuccessfulResponse());
+    }
+
+    [HttpGet("get-available-foods-list")]
+    public string GetAvailableFoodsList()
+    {
+        try
+        {
+            Authorize("order-food");
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthorizationFailedResponse());
+        }
+
+        try
+        {
+            var foods = Core.GetAvailableFoodsList();
+            var response = new GetAvailableFoodsListResponse();
+            foreach (var food in foods)
+            {
+                response.foods.Add(new GetAvailableFoodsListResponse.Food()
+                {
+                    id = food.Id,
+                    price = food.Price,
+                    title = food.Title,
+                });
+            }
+
+            return JsonSerializer.Serialize(response);
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(InternalErrorResponse());
+        }
+    }
+
+    private class GetAvailableFoodsListResponse : Response
+    {
+        public List<Food> foods { get; set; } = new List<Food>();
+
+        public class Food
+        {
+            public int id { get; set; }
+            public string title { get; set; }
+            public int price { get; set; }
+        }
     }
 
     private class GetFoodInfoResponse : Response
