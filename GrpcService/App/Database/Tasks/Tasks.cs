@@ -109,6 +109,38 @@ public class Tasks : IDatabase
         }
     }
 
+    public List<Domain.Entities.Task> GetTaskRange(DateTime fromDate, DateTime toDate, int userId)
+    {
+        var tasks = new List<Domain.Entities.Task>();
+        try
+        {
+            foreach (var task in Connection.Tasks.Where(t => t.CreatedAt > fromDate).Where(t => t.CreatedAt < toDate)
+                         .ToList())
+            {
+                tasks.Add(new Domain.Entities.Task()
+                {
+                    Id = task.Id,
+                    Description = task.Description,
+                    Points = task.Points,
+                    Title = task.Title,
+                    Status = task.Status,
+                    ProjectId = task.ProjectId.Value,
+                    StartTime = task.StartTime,
+                    UserId = task.UserId.Value,
+                    WorkLocation = task.WorkLocation,
+                    CreatedAt = task.CreatedAt.Value,
+                });
+            }
+
+            return tasks;
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
+    }
+
     private void UpdateTask(Model.Task task)
     {
         Connection.Tasks.Update(task);

@@ -2,6 +2,7 @@
 
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.tasks.Validations;
+using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -343,6 +344,39 @@ public class Handler : BaseHandler
         }
 
         return ResponseToJson(OperationSuccessfulResponse());
+    }
+
+    [HttpGet("get-range/{fromDate}/{toDate}")]
+    public string GetTaskRange(int fromDate, int toDate)
+    {
+        try
+        {
+            // Authenticate();
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthenticationFailedResponse());
+        }
+
+        try
+        {
+            return JsonSerializer.Serialize(new GetTaskRangeResponse()
+            {
+                status_code = 0,
+                tasks = Core.GetTaskRange(DateTime.UnixEpoch.AddSeconds(fromDate),
+                    DateTime.UnixEpoch.AddSeconds(toDate), 1),
+            });
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(InternalErrorResponse());
+        }
+    }
+
+
+    private class GetTaskRangeResponse : Response
+    {
+        public List<Domain.Entities.Task> tasks { get; set; }
     }
 
     private class GetTaskResponse : Response

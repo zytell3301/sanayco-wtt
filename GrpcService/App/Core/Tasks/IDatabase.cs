@@ -11,4 +11,5 @@ public interface IDatabase
     public void ChangeTaskStatus(Domain.Entities.Task task, string status);
 
     public Domain.Entities.Task GetTask(int taskId);
+    public List<Domain.Entities.Task> GetTaskRange(DateTime fromDate, DateTime toDate, int userId);
 }

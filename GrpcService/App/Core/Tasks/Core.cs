@@ -121,6 +121,18 @@ public class Core
         }
     }
 
+    public List<Domain.Entities.Task> GetTaskRange(DateTime fromDate, DateTime toDate, int userId)
+    {
+        try
+        {
+            return Database.GetTaskRange(fromDate, toDate, userId);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
     public class TasksCoreConfigs
     {
         public string ApprovedTaskCode;
