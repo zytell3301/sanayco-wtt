@@ -22,4 +22,6 @@ public interface IDatabase
      * for the case that the user has ended his representation and currently not present.
      */
     public DateTime GetPresentationTime(User user);
+
+    public List<Domain.Entities.Presentation> GetPresentationsRange(DateTime fromDate, DateTime toDate, int userId);
 }

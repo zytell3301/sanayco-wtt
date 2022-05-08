@@ -65,4 +65,31 @@ public class Presentations : IDatabase
             throw new InternalError("");
         }
     }
+
+    public List<Domain.Entities.Presentation> GetPresentationsRange(DateTime fromDate, DateTime toDate, int userId)
+    {
+        var presentations = new List<Domain.Entities.Presentation>();
+        try
+        {
+            foreach (var presentation in Connection.Presentations.Where(p => p.Start > fromDate)
+                         .Where(p => p.End < toDate)
+                         .Where(p => p.UserId == userId).ToList())
+            {
+                presentations.Add(new Domain.Entities.Presentation()
+                {
+                    Id = presentation.Id,
+                    End = presentation.End,
+                    Start = presentation.Start,
+                    UserId = presentation.UserId.Value,
+                });
+            }
+
+            return presentations;
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
+    }
 }

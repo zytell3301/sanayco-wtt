@@ -73,6 +73,18 @@ public class Core
         return presentationTime;
     }
 
+    public List<Domain.Entities.Presentation> GetPresentationsRange(DateTime fromDate, DateTime toDate, int userId)
+    {
+        try
+        {
+            return database.GetPresentationsRange(fromDate, toDate, userId);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
     public class PresentationCoreConfigs
     {
         public string InternalErrorMessage;
