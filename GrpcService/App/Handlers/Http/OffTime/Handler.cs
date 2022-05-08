@@ -3,6 +3,7 @@
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.OffTime.Validations;
 using GrpcService1.Domain.Entities;
+using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -323,6 +324,39 @@ public class Handler : BaseHandler
         }
 
         return ResponseToJson(OperationSuccessfulResponse());
+    }
+
+    [HttpGet("get-range/{fromDate}/{toDate}")]
+    public string GetOffTimeListRange(int fromDate, int toDate)
+    {
+        try
+        {
+            Authenticate();
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthenticationFailedResponse());
+        }
+
+        try
+        {
+            return JsonSerializer.Serialize(new GetOffTimeRangeResponse()
+            {
+                off_times = Core.GetOffTimeListRange(DateTime.UnixEpoch.AddSeconds(fromDate),
+                    DateTime.UnixEpoch.AddSeconds(toDate),
+                    GetUserId()),
+                status_code = 0,
+            });
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(InternalErrorResponse());
+        }
+    }
+
+    private class GetOffTimeRangeResponse : Response
+    {
+        public List<Domain.Entities.OffTime> off_times { get; set; }
     }
 
     private class GetOffTimeResponse

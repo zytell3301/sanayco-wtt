@@ -17,4 +17,6 @@ public interface IDatabase
     public void EditOffTime(Domain.Entities.OffTime offTime);
 
     public Domain.Entities.OffTime GetOffTime(Domain.Entities.OffTime offTime);
+
+    public List<Domain.Entities.OffTime> GetOffTimeListRange(DateTime fromDate, DateTime toDate, int userId);
 }

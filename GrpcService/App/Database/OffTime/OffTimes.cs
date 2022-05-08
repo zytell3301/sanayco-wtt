@@ -121,6 +121,35 @@ public class OffTimes : IDatabase
         }
     }
 
+    public List<Domain.Entities.OffTime> GetOffTimeListRange(DateTime fromDate, DateTime toDate, int userId)
+    {
+        var offtimes = new List<Domain.Entities.OffTime>();
+        try
+        {
+            foreach (var offTime in Connection.OffTimes.Where(o => o.CreatedAt > fromDate)
+                         .Where(o => o.CreatedAt < toDate).ToList())
+            {
+                offtimes.Add(new Domain.Entities.OffTime()
+                {
+                    Id = offTime.Id,
+                    Description = offTime.Description,
+                    Status = offTime.Status,
+                    CreatedAt = offTime.CreatedAt,
+                    FromDate = offTime.FromDate.Value,
+                    ToDate = offTime.ToDate.Value,
+                    UserId = offTime.UserId.Value,
+                });
+            }
+
+            return offtimes;
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
+    }
+
     private Domain.Entities.OffTime ConvertModelToOffTime(Model.OffTime model)
     {
         // Database offers the feature of null foreign key value but we always supply values to user_id,from_date and to_date fields.

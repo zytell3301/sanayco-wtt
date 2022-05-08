@@ -154,6 +154,18 @@ public class Core
         }
     }
 
+    public List<Domain.Entities.OffTime> GetOffTimeListRange(DateTime fromDate, DateTime toDate, int userId)
+    {
+        try
+        {
+            return Database.GetOffTimeListRange(fromDate, toDate, userId);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
     public class OffTimeCoreConfigs
     {
         public string ApprovedOffTimeCode;
