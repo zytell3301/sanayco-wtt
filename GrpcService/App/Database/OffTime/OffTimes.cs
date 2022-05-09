@@ -126,8 +126,8 @@ public class OffTimes : IDatabase
         var offtimes = new List<Domain.Entities.OffTime>();
         try
         {
-            foreach (var offTime in Connection.OffTimes.Where(o => o.CreatedAt > fromDate)
-                         .Where(o => o.CreatedAt < toDate).ToList())
+            foreach (var offTime in Connection.OffTimes.Where(o => o.CreatedAt > fromDate && o.CreatedAt < toDate)
+                         .ToList())
             {
                 offtimes.Add(new Domain.Entities.OffTime()
                 {

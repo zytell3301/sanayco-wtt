@@ -349,8 +349,8 @@ public class Handler : BaseHandler
         return ResponseToJson(OperationSuccessfulResponse());
     }
 
-    [HttpGet("get-range/{fromDate}/{toDate}")]
-    public string GetMissionRange(int fromDate, int toDate)
+    [HttpGet("get-range/{fromDate}/{toDate}/{projectId}")]
+    public string GetMissionRange(int fromDate, int toDate, int projectId)
     {
         try
         {
@@ -367,7 +367,7 @@ public class Handler : BaseHandler
             {
                 status_code = 0,
                 missions = Core.GetMissionRange(DateTime.UnixEpoch.AddSeconds(fromDate),
-                    DateTime.UnixEpoch.AddSeconds(toDate), GetUserId()),
+                    DateTime.UnixEpoch.AddSeconds(toDate), GetUserId(),projectId),
             });
         }
         catch (Exception)

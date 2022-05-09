@@ -71,9 +71,9 @@ public class Presentations : IDatabase
         var presentations = new List<Domain.Entities.Presentation>();
         try
         {
-            foreach (var presentation in Connection.Presentations.Where(p => p.Start > fromDate)
-                         .Where(p => p.End < toDate)
-                         .Where(p => p.UserId == userId).ToList())
+            foreach (var presentation in
+                     Connection.Presentations.Where(p => p.Start > fromDate && p.End < toDate && p.UserId == userId)
+                         .ToList())
             {
                 presentations.Add(new Domain.Entities.Presentation()
                 {

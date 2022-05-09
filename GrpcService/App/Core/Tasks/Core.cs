@@ -121,11 +121,12 @@ public class Core
         }
     }
 
-    public List<Domain.Entities.Task> GetTaskRange(DateTime fromDate, DateTime toDate, int userId)
+    public List<Domain.Entities.Task> GetTaskRange(DateTime fromDate, DateTime toDate, int userId, int projectId,
+        string workLocation)
     {
         try
         {
-            return Database.GetTaskRange(fromDate, toDate, userId);
+            return Database.GetTaskRange(fromDate, toDate, userId,projectId,workLocation);
         }
         catch (Exception)
         {

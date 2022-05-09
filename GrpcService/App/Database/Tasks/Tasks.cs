@@ -109,12 +109,15 @@ public class Tasks : IDatabase
         }
     }
 
-    public List<Domain.Entities.Task> GetTaskRange(DateTime fromDate, DateTime toDate, int userId)
+    public List<Domain.Entities.Task> GetTaskRange(DateTime fromDate, DateTime toDate, int userId, int projectId,
+        string workLocation)
     {
         var tasks = new List<Domain.Entities.Task>();
         try
         {
-            foreach (var task in Connection.Tasks.Where(t => t.CreatedAt > fromDate).Where(t => t.CreatedAt < toDate)
+            foreach (var task in Connection.Tasks.Where(t =>
+                             t.CreatedAt > fromDate && t.CreatedAt < toDate && t.UserId == userId &&
+                             t.ProjectId == projectId && t.WorkLocation == workLocation)
                          .ToList())
             {
                 tasks.Add(new Domain.Entities.Task()

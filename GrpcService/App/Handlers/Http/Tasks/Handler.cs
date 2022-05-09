@@ -346,12 +346,12 @@ public class Handler : BaseHandler
         return ResponseToJson(OperationSuccessfulResponse());
     }
 
-    [HttpGet("get-range/{fromDate}/{toDate}")]
-    public string GetTaskRange(int fromDate, int toDate)
+    [HttpGet("get-range/{fromDate}/{toDate}/{projectId}/{workLocation}")]
+    public string GetTaskRange(int fromDate, int toDate, int projectId, string workLocation)
     {
         try
         {
-            // Authenticate();
+            Authenticate();
         }
         catch (Exception)
         {
@@ -364,7 +364,7 @@ public class Handler : BaseHandler
             {
                 status_code = 0,
                 tasks = Core.GetTaskRange(DateTime.UnixEpoch.AddSeconds(fromDate),
-                    DateTime.UnixEpoch.AddSeconds(toDate), 1),
+                    DateTime.UnixEpoch.AddSeconds(toDate), GetUserId(), projectId, workLocation),
             });
         }
         catch (Exception)
