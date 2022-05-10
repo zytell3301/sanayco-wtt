@@ -3,6 +3,7 @@
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Projects.Validations;
 using GrpcService1.Domain.Entities;
+using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -354,6 +355,37 @@ public class Handler : BaseHandler
         }
 
         return ResponseToJson(OperationSuccessfulResponse());
+    }
+
+    [HttpGet("search/{name}")]
+    public string SearchForProject(string name)
+    {
+        try
+        {
+            Authenticate();
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthenticationFailedResponse());
+        }
+
+        try
+        {
+            return JsonSerializer.Serialize(new SearchForProjectResponse()
+            {
+                status_code = 0,
+                projects = Core.SearchForProject(name),
+            });
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(InternalErrorResponse());
+        }
+    }
+
+    private class SearchForProjectResponse : Response
+    {
+        public List<Domain.Entities.Project> projects { get; set; }
     }
 
     private class GetProjectResponse : Response

@@ -16,6 +16,7 @@ public interface IDatabase
     public void UpdateProjectMember(ProjectMember projectMember);
     public Project GetProject(Project project);
     public ProjectMember GetProjectMember(ProjectMember member);
+    public List<Domain.Entities.Project> SearchForProject(string title);
 }
 
 /**

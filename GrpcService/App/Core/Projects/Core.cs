@@ -141,6 +141,18 @@ public class Core
         }
     }
 
+    public List<Domain.Entities.Project> SearchForProject(string title)
+    {
+        try
+        {
+            return Database.SearchForProject(title);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
     public class ProjectsCoreConfigs
     {
         public string CreatorProjectMemberCode;
