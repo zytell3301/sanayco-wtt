@@ -10,5 +10,11 @@
     &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Tasks.CoreTest.test_CheckTaskOwnership_1&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Tasks.CoreTest.test_GetTaskRange&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Tasks.CoreTest.test_GetTaskRange_1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_GetOffTime&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_GetOffTime_1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_GetOffTimeRange_1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_GetOffTimeRange_2&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_RecordOffTime&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
