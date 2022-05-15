@@ -18,6 +18,7 @@ public class BaseHandler : ControllerBase
     private readonly IPermissionsSource PermissionsSource;
     private readonly Dictionary<string, Response> Responses = new();
     private readonly ITokenSource TokenSource;
+    private readonly IAuth Auth;
 
     private int? UserId;
 
@@ -27,6 +28,7 @@ public class BaseHandler : ControllerBase
         AuthenticationFailed = baseHandlerDependencies.AuthenticationFailed;
         AuthorizationFailed = baseHandlerDependencies.AuthorizationFailed;
         PermissionsSource = baseHandlerDependencies.PermissionsSource;
+        Auth = baseHandlerDependencies.Auth;
 
         InitializeResponses();
     }
@@ -111,7 +113,9 @@ public class BaseHandler : ControllerBase
     {
         try
         {
-            UserId = TokenSource.GetTokenUserId(Request.Headers["_token"]);
+            // Console.WriteLine(Request.Headers["_token"]);
+            Console.WriteLine(Auth.ExtractToken(Request.Headers["_token"]));
+            UserId = TokenSource.GetTokenUserId(Auth.ExtractToken(Request.Headers["_token"]));
         }
         catch (Exception)
         {

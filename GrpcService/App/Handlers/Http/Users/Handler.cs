@@ -49,8 +49,7 @@ public class Handler : BaseHandler
             return JsonSerializer.Serialize(new LoginResponse
             {
                 status_code = 0,
-                token = token.Token1,
-                expiration_date = token.ExpirationDate.Value
+                token = token,
             });
         }
         catch (Exception)

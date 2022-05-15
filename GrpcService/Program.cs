@@ -12,12 +12,14 @@ using GrpcService1.App.Database.Tasks;
 using GrpcService1.App.Database.Users;
 using GrpcService1.App.Handlers.Http;
 using GrpcService1.App.HashGenerator;
+using GrpcService1.App.Auth;
 using GrpcService1.App.PermissionsSource;
 using GrpcService1.App.ProfilePicturesStorage;
 using GrpcService1.App.TokenGenerator;
 using GrpcService1.App.TokenSource;
 using GrpcService1.Domain.Errors;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 #endregion
 
@@ -39,6 +41,17 @@ IDatabase tasksDB = new Tasks(connection, reporter);
 GrpcService1.App.Core.Presentation.IDatabase presentationDB = new Presentations(connection, reporter);
 GrpcService1.App.Core.OffTime.IDatabase offTimesDB = new OffTimes(connection, reporter);
 GrpcService1.App.Core.Projects.IDatabase projectsDB = new Projects(connection, reporter);
+GrpcService1.App.Auth.Auth auth = new Auth(new Auth.AuthConfigs()
+{
+    Audience = "https://localhost:5001",
+    Issuer = "https://localhost:5001",
+    Key = "asdv234234^&%&^%&^hjsdfb2%%%",
+    SecurityAlgorithm = SecurityAlgorithms.HmacSha512,
+}, new Auth.AuthDependencies()
+{
+    ErrorReporter = reporter,
+    InternalError = new InternalError(""),
+});
 GrpcService1.App.Core.Users.IDatabase usersDB = new Users(new Users.UsersDatabaseDependencies
 {
     Connection = connection,
@@ -120,7 +133,8 @@ builder.Services.AddSingleton(new BaseHandlerDependencies
     AuthenticationFailed = new AuthenticationFailed("Authentication failed"),
     AuthorizationFailed = new AuthorizationFailed("Authorization failed"),
     PermissionsSource = new PermissionsSource(connection),
-    TokenSource = new TokenSource(connection)
+    TokenSource = new TokenSource(connection),
+    Auth = auth,
 });
 builder.Services.AddSingleton(new GrpcService1.App.Core.Users.Core(
     new GrpcService1.App.Core.Users.Core.UsersCoreConfigs
@@ -150,6 +164,7 @@ builder.Services.AddSingleton(new GrpcService1.App.Core.Users.Core(
                 InternalErrorMessage = "InternalErrorMessage",
                 PicturesRootDirectory = "./"
             }),
+        PermissionsSource = new PermissionsSource(connection),
         Database = usersDB,
         Hash = new HashGenerator(new HashGenerator.HashGeneratorConfigs
         {
@@ -158,7 +173,8 @@ builder.Services.AddSingleton(new GrpcService1.App.Core.Users.Core(
         }, new HashGenerator.HashGeneratorDependencies
         {
             ErrorReporter = reporter
-        })
+        }),
+        Auth = auth,
     })
 );
 builder.Services.AddSingleton(new GrpcService1.App.Core.Missions.Core(

@@ -12,4 +12,5 @@ public class BaseHandlerDependencies
     public IPermissionsSource PermissionsSource { get; set; }
     public AuthenticationFailed AuthenticationFailed { get; set; }
     public AuthorizationFailed AuthorizationFailed { get; set; }
+    public IAuth Auth { get; set; }
 }

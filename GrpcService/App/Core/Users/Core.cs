@@ -1,5 +1,6 @@
 ﻿#region
 
+using GrpcService1.App.Handlers.Http;
 using GrpcService1.Domain.Entities;
 using GrpcService1.Domain.Errors;
 
@@ -17,6 +18,8 @@ public class Core
     private readonly InvalidCredentials InvalidCredentials;
     private readonly IProfilePicturesStorage ProfilePicturesStorage;
     private readonly ITokenGenerator TokenGenerator;
+    private readonly IPermissionsSource PermissionsSource;
+    private readonly IAuth Auth;
 
     public Core(UsersCoreConfigs configs, UsersCoreDependencies dependencies)
     {
@@ -24,6 +27,8 @@ public class Core
         Hash = dependencies.Hash;
         TokenGenerator = dependencies.TokenGenerator;
         ProfilePicturesStorage = dependencies.ProfilePicturesStorage;
+        PermissionsSource = dependencies.PermissionsSource;
+        Auth = dependencies.Auth;
 
         InvalidCredentials = new InvalidCredentials(configs.InvalidCredentialsMessage);
         InternalError = new InternalError(configs.InternalErrorMessage);
@@ -31,7 +36,7 @@ public class Core
         ExpirationWindow = configs.ExpirationWindow;
     }
 
-    public Token Login(User user, string password)
+    public string Login(User user, string password)
     {
         try
         {
@@ -51,9 +56,13 @@ public class Core
                 ExpirationDate = DateTime.Now.AddSeconds(ExpirationWindow)
             };
 
+            var permissions = PermissionsSource.GetUserPermissions(user.Id);
+
+            var authToken = Auth.GenerateAuthToken(token, permissions);
+
             Database.RecordToken(token);
 
-            return token;
+            return authToken;
         }
         catch (Exception)
         {
@@ -157,5 +166,7 @@ public class Core
         public IHash Hash;
         public IProfilePicturesStorage ProfilePicturesStorage;
         public ITokenGenerator TokenGenerator;
+        public IPermissionsSource PermissionsSource;
+        public IAuth Auth;
     }
 }
