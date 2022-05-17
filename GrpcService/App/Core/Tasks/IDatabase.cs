@@ -14,4 +14,6 @@ public interface IDatabase
 
     public List<Domain.Entities.Task> GetTaskRange(DateTime fromDate, DateTime toDate, int userId, int projectId,
         string workLocation);
+
+    public List<Domain.Entities.Task> GetUserTasks(DateTime fromDate, DateTime toDate, int userId);
 }

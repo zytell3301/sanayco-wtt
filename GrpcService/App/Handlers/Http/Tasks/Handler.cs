@@ -373,6 +373,32 @@ public class Handler : BaseHandler
         }
     }
 
+    [HttpGet("get-user-tasks/{fromDate}/{toDate}")]
+    public string GetUserTasks(int fromDate, int toDate)
+    {
+        try
+        {
+            Authenticate();
+        }
+        catch (Exception) 
+        {
+            return ResponseToJson(AuthenticationFailedResponse());
+        }
+
+        try
+        {
+            return JsonSerializer.Serialize(new GetTaskRangeResponse()
+            {
+                status_code = 0,
+                tasks = Core.GetUserTasks(DateTime.UnixEpoch.AddSeconds(fromDate),
+                    DateTime.UnixEpoch.AddSeconds(toDate), GetUserId()),
+            });
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(InternalErrorResponse());
+        }
+    }
 
     private class GetTaskRangeResponse : Response
     {

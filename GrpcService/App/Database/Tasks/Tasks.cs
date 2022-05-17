@@ -144,6 +144,25 @@ public class Tasks : IDatabase
         }
     }
 
+    public List<Domain.Entities.Task> GetUserTasks(DateTime fromDate, DateTime toDate, int userId)
+    {
+        try
+        {
+            var tasks = new List<Domain.Entities.Task>();
+            foreach (var task in Connection.Tasks.Where(t => t.CreatedAt > fromDate).Where(t => t.CreatedAt < toDate)
+                         .Where(t => t.UserId == userId).ToList())
+            {
+                tasks.Add(ConvertModelToTask(task));
+            }
+
+            return tasks;
+        }
+        catch (Exception e)
+        {
+            throw new InternalError("");
+        }
+    }
+
     private void UpdateTask(Model.Task task)
     {
         Connection.Tasks.Update(task);

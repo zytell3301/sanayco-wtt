@@ -126,7 +126,19 @@ public class Core
     {
         try
         {
-            return Database.GetTaskRange(fromDate, toDate, userId,projectId,workLocation);
+            return Database.GetTaskRange(fromDate, toDate, userId, projectId, workLocation);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
+    public List<Domain.Entities.Task> GetUserTasks(DateTime fromDate, DateTime toDate, int userId)
+    {
+        try
+        {
+            return Database.GetUserTasks(fromDate, toDate, userId);
         }
         catch (Exception)
         {
