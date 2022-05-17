@@ -65,7 +65,7 @@ public class Core
         switch (totalOffTimeDuration >= OffTimeRestriction)
         {
             case true:
-                return OffTimeRestrictionExceeded;
+                throw OffTimeRestrictionExceeded;
         }
 
         try

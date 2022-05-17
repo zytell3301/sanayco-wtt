@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using Google.Protobuf.WellKnownTypes;
 using GrpcService1.App.Core.OffTime;
 using GrpcService1.Domain.Entities;
 using GrpcService1.Domain.Errors;
+using HarmonyLib;
 using Moq;
 using NUnit.Framework;
 
@@ -21,9 +24,9 @@ public class CoreTest
         Id = 1,
         Description = "",
         Status = "",
-        CreatedAt = DateTime.Now,
-        FromDate = DateTime.Now,
-        ToDate = DateTime.Now,
+        CreatedAt = DateTime.UnixEpoch,
+        FromDate = DateTime.UnixEpoch.AddSeconds(3600),
+        ToDate = DateTime.UnixEpoch,
         UserId = 1,
     };
 
@@ -44,8 +47,29 @@ public class CoreTest
             WaitingOffTimeCode = "WaitingOffTimeCode",
             OffTimeRestrictionExceededMessage = "OffTimeRestrictionExceededMessage",
         });
+        
+        
+        applyPatches();
     }
 
+    private void applyPatches()
+    {
+        var harmony = new Harmony("TestPatches");
+        harmony.PatchAll(Assembly.GetExecutingAssembly());
+        Assembly requiredAssembly = Assembly.GetExecutingAssembly();
+        foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+        {
+            switch (assembly.FullName == "GrpcService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+            {
+                case true:
+                    requiredAssembly = assembly;
+                    break;
+            }
+        }
+
+        harmony.PatchAll(requiredAssembly);
+    }
+    
     // Normal test case
     [Test]
     public void test_GetOffTime()
@@ -166,6 +190,8 @@ public class CoreTest
                         UserId = 1,
                         CreatedAt = DateTime.Now,
                         Status = "WaitingOffTimeCode",
+                        FromDate = DateTime.UnixEpoch,
+                        ToDate = DateTime.UnixEpoch.AddSeconds(3600),
                     }
                 },
                 GetOffTimeHistoryParameters = new GetOffTimeHistory()
@@ -194,14 +220,30 @@ public class CoreTest
         var data = RecordOffTimeParams.GenerateParams();
         data.GetOffTimeHistoryParameters.GetOffTimeHistoryResponse.OffTimes.Add(new OffTime()
         {
-            FromDate = DateTime.Now,
-            ToDate = DateTime.Now.AddYears(OffTimeRstriction +
-                                           1) // We make sure that the total off-time will definitely exceed specified range
+            Id = 1,
+            Description = "",
+            Status = "",
+            CreatedAt = DateTime.UnixEpoch,
+            UserId = 1,
+            FromDate = DateTime.UnixEpoch.AddSeconds(1),
+            ToDate = DateTime.UnixEpoch.AddSeconds(OffTimeRstriction +
+                                                   1) // We make sure that the total off-time will definitely exceed specified range
         });
-        OffTimesDB.Setup(o => o.GetOffTimeHistory(It.IsAny<User>(),
-            It.IsAny<DateTime>(),
-            It.IsAny<DateTime>())).Returns(data.GetOffTimeHistoryParameters.GetOffTimeHistoryResponse.OffTimes);
+        OffTimesDB.Setup(o => o.GetOffTimeHistory(data.CoreRecordOffTimeParameters.user,
+                DateTime.UnixEpoch.AddMonths(-1), DateTime.UnixEpoch))
+            .Returns(data.GetOffTimeHistoryParameters.GetOffTimeHistoryResponse.OffTimes);
         Assert.Throws<OffTimeRestrictionExceeded>(() =>
             Core.RecordOffTime(data.CoreRecordOffTimeParameters.user, data.CoreRecordOffTimeParameters.offTime));
+    }
+
+    [HarmonyPatch(typeof(DateTime))]
+    [HarmonyPatch("Now", MethodType.Getter)]
+    public class PathDate
+    {
+        static bool Prefix(ref DateTime __result)
+        {
+            __result = DateTime.UnixEpoch;
+            return false;
+        }
     }
 }
