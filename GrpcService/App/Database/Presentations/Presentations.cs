@@ -92,4 +92,45 @@ public class Presentations : IDatabase
             throw new InternalError("");
         }
     }
+
+    public void UpdatePresentation(Domain.Entities.Presentation presentation)
+    {
+        try
+        {
+            var model = Connection.Presentations.First(p => p.Id == presentation.Id);
+            model.Start = presentation.Start;
+            model.End = presentation.End;
+            Connection.SaveChanges();
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
+    }
+
+    public Domain.Entities.Presentation GetPresentation(Domain.Entities.Presentation presentation)
+    {
+        try
+        {
+            var model = Connection.Presentations.First(p => p.Id == presentation.Id);
+            return ConvertModelToPresentation(model);
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw new InternalError("");
+        }
+    }
+
+    public Domain.Entities.Presentation ConvertModelToPresentation(Database.Model.Presentation model)
+    {
+        return new Domain.Entities.Presentation()
+        {
+            Id = model.Id,
+            End = model.End,
+            Start = model.Start,
+            UserId = model.UserId.Value,
+        };
+    }
 }

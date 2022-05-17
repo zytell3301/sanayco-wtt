@@ -1,6 +1,7 @@
 ﻿#region
 
 using System.Text.Json;
+using GrpcService1.App.Handlers.Http.Presentation.Validations;
 using GrpcService1.Domain.Entities;
 using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
@@ -127,6 +128,98 @@ public class Handler : BaseHandler
         {
             return ResponseToJson(InternalErrorResponse());
         }
+    }
+
+    private class GetPresentationResponse : Response
+    {
+        public Domain.Entities.Presentation presentation { get; set; }
+    }
+
+    [HttpGet("get-presentation/{presentationId}")]
+    public string GetPresentation(int presentationId)
+    {
+        try
+        {
+            Authenticate();
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthenticationFailedResponse());
+        }
+
+        try
+        {
+            return JsonSerializer.Serialize(new GetPresentationResponse()
+            {
+                status_code = 0,
+                presentation = Core.GetPresentation(new Domain.Entities.Presentation()
+                {
+                    Id = presentationId,
+                }),
+            });
+        }
+        catch (Exception e)
+        {
+            return ResponseToJson(InternalErrorResponse());
+        }
+    }
+
+    [HttpPost("update-presentation")]
+    public string UpdatePresentation()
+    {
+        try
+        {
+            Authenticate();
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(AuthenticationFailedResponse());
+        }
+        
+        UpdatePresentationValidation body;
+        try
+        {
+            body = DecodePayloadJson<UpdatePresentationValidation>();
+        }
+        catch (Exception)
+        {
+            return InvalidRequestResponse;
+        }
+        
+        switch (ModelState.IsValid)
+        {
+            case false:
+                return ResponseToJson(DataValidationFailedResponse());
+        }
+
+        try
+        {
+            switch (Core.CheckEntityOwnership(body.presentation_id, GetUserId()))
+            {
+                case false:
+                    return ResponseToJson(AuthorizationFailedResponse());
+            }
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(InternalErrorResponse());
+        }
+
+        try
+        {
+            Core.UpdatePresentation(new Domain.Entities.Presentation()
+            {
+                Id = body.presentation_id,
+                End = DateTime.UnixEpoch.AddSeconds(body.end),
+                Start = DateTime.UnixEpoch.AddSeconds(body.start),
+            });
+        }
+        catch (Exception)
+        {
+            return ResponseToJson(InternalErrorResponse());
+        }
+
+        return ResponseToJson(OperationSuccessfulResponse());
     }
 
     private class GetPresentationsListRangeResponse : Response

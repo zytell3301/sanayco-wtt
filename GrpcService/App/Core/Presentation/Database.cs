@@ -24,4 +24,8 @@ public interface IDatabase
     public DateTime GetPresentationTime(User user);
 
     public List<Domain.Entities.Presentation> GetPresentationsRange(DateTime fromDate, DateTime toDate, int userId);
+
+    public void UpdatePresentation(Domain.Entities.Presentation presentation);
+
+    public Domain.Entities.Presentation GetPresentation(Domain.Entities.Presentation presentation);
 }

@@ -13,6 +13,15 @@ public class Core
     private readonly InternalError InternalError;
     private readonly OperationSuccessful OperationSuccessful;
 
+    public bool CheckEntityOwnership(int presentationId, int applicantId)
+    {
+        var presentation = database.GetPresentation(new Domain.Entities.Presentation()
+        {
+            Id = presentationId,
+        });
+        return presentation.UserId == applicantId;
+    }
+
     public Core(PresentationCoreDependencies dependencies, PresentationCoreConfigs configs)
     {
         database = dependencies.Database;
@@ -78,6 +87,30 @@ public class Core
         try
         {
             return database.GetPresentationsRange(fromDate, toDate, userId);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
+    public void UpdatePresentation(Domain.Entities.Presentation presentation)
+    {
+        try
+        {
+            database.UpdatePresentation(presentation);
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
+    public Domain.Entities.Presentation GetPresentation(Domain.Entities.Presentation presentation)
+    {
+        try
+        {
+            return database.GetPresentation(presentation);
         }
         catch (Exception)
         {
