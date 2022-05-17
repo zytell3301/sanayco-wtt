@@ -1,4 +1,50 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\randy\.nuget\packages\google.protobuf\3.20.1-rc1\lib\net5.0\Google.Protobuf.dll" /&gt;&#xD;
-&lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>
+&lt;/AssemblyExplorer&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1087df96_002Da63d_002D43e3_002D90c9_002D20af06f375e1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="test_RecordTask" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Tasks.CoreTest.test_RecordTask&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Tasks.CoreTest.test_RecordTask_2&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Tasks.CoreTest.test&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Tasks.CoreTest.test_CheckTaskOwnership_1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Tasks.CoreTest.test_GetTaskRange&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Tasks.CoreTest.test_GetTaskRange_1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_GetOffTime&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_GetOffTime_1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_GetOffTimeRange_1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_GetOffTimeRange_2&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_RecordOffTime&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1dd078ab_002D3382_002D433f_002D9722_002D74c0a69508e3/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="test_RecordOffTime #5" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_RecordOffTime&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=48581fd1_002Da9d8_002D4240_002Da2ef_002Dd5846e501878/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="test_RecordOffTime" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_RecordOffTime&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=96691669_002D4978_002D4331_002Daf9b_002Dce3f5d891c39/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="test_RecordOffTime #6" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_RecordOffTime&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a55191a8_002D3ba0_002D4cba_002Da2a1_002D07635b911058/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="test_RecordOffTime #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_RecordOffTime&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b528d5e7_002D0d49_002D4758_002D8bd4_002Daf61fac74f75/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="test_RecordOffTime #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_RecordOffTime&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=bade6f35_002Db9b3_002D4eaf_002D8b99_002D2dfcd093f796/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="test_RecordOffTime #4" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_RecordOffTime&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
