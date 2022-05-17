@@ -115,7 +115,7 @@ public class Core
         }
     }
 
-    public List<Domain.Entities.Mission> GetMissionRange(DateTime fromDate, DateTime toDate, int userId, int projectId)
+    public List<Mission> GetMissionRange(DateTime fromDate, DateTime toDate, int userId, int projectId)
     {
         try
         {

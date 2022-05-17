@@ -3,7 +3,6 @@
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.OffTime.Validations;
 using GrpcService1.Domain.Entities;
-using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -340,12 +339,12 @@ public class Handler : BaseHandler
 
         try
         {
-            return JsonSerializer.Serialize(new GetOffTimeRangeResponse()
+            return JsonSerializer.Serialize(new GetOffTimeRangeResponse
             {
                 off_times = Core.GetOffTimeListRange(DateTime.UnixEpoch.AddSeconds(fromDate),
                     DateTime.UnixEpoch.AddSeconds(toDate),
                     GetUserId()),
-                status_code = 0,
+                status_code = 0
             });
         }
         catch (Exception)

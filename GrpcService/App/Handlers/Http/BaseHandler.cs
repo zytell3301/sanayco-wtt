@@ -12,13 +12,13 @@ public class BaseHandler : ControllerBase
 {
     // This is the response that will be returned if the client is sending invalid data
     protected const string InvalidRequestResponse = "";
+    private readonly IAuth Auth;
 
     private readonly AuthenticationFailed AuthenticationFailed;
     private readonly AuthorizationFailed AuthorizationFailed;
     private readonly IPermissionsSource PermissionsSource;
     private readonly Dictionary<string, Response> Responses = new();
     private readonly ITokenSource TokenSource;
-    private readonly IAuth Auth;
 
     private int? UserId;
 

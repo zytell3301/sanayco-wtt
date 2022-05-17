@@ -10,16 +10,16 @@ namespace GrpcService1.App.Core.Users;
 
 public class Core
 {
+    private readonly IAuth Auth;
     private readonly IDatabase Database;
     private readonly int ExpirationWindow;
     private readonly IHash Hash;
     private readonly InternalError InternalError;
 
     private readonly InvalidCredentials InvalidCredentials;
+    private readonly IPermissionsSource PermissionsSource;
     private readonly IProfilePicturesStorage ProfilePicturesStorage;
     private readonly ITokenGenerator TokenGenerator;
-    private readonly IPermissionsSource PermissionsSource;
-    private readonly IAuth Auth;
 
     public Core(UsersCoreConfigs configs, UsersCoreDependencies dependencies)
     {
@@ -162,11 +162,11 @@ public class Core
 
     public class UsersCoreDependencies
     {
+        public IAuth Auth;
         public IDatabase Database;
         public IHash Hash;
+        public IPermissionsSource PermissionsSource;
         public IProfilePicturesStorage ProfilePicturesStorage;
         public ITokenGenerator TokenGenerator;
-        public IPermissionsSource PermissionsSource;
-        public IAuth Auth;
     }
 }

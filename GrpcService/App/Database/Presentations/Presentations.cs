@@ -4,6 +4,7 @@ using ErrorReporter;
 using GrpcService1.App.Core.Presentation;
 using GrpcService1.App.Database.Model;
 using GrpcService1.Domain.Errors;
+using Presentation = GrpcService1.Domain.Entities.Presentation;
 using User = GrpcService1.Domain.Entities.User;
 
 #endregion
@@ -25,7 +26,7 @@ public class Presentations : IDatabase
     {
         try
         {
-            Connection.Presentations.Add(new Presentation
+            Connection.Presentations.Add(new Model.Presentation
             {
                 UserId = user.Id,
                 Start = DateTime.Now
@@ -66,23 +67,21 @@ public class Presentations : IDatabase
         }
     }
 
-    public List<Domain.Entities.Presentation> GetPresentationsRange(DateTime fromDate, DateTime toDate, int userId)
+    public List<Presentation> GetPresentationsRange(DateTime fromDate, DateTime toDate, int userId)
     {
-        var presentations = new List<Domain.Entities.Presentation>();
+        var presentations = new List<Presentation>();
         try
         {
             foreach (var presentation in
                      Connection.Presentations.Where(p => p.Start > fromDate && p.End < toDate && p.UserId == userId)
                          .ToList())
-            {
-                presentations.Add(new Domain.Entities.Presentation()
+                presentations.Add(new Presentation
                 {
                     Id = presentation.Id,
                     End = presentation.End,
                     Start = presentation.Start,
-                    UserId = presentation.UserId.Value,
+                    UserId = presentation.UserId.Value
                 });
-            }
 
             return presentations;
         }
@@ -93,7 +92,7 @@ public class Presentations : IDatabase
         }
     }
 
-    public void UpdatePresentation(Domain.Entities.Presentation presentation)
+    public void UpdatePresentation(Presentation presentation)
     {
         try
         {
@@ -109,7 +108,7 @@ public class Presentations : IDatabase
         }
     }
 
-    public Domain.Entities.Presentation GetPresentation(Domain.Entities.Presentation presentation)
+    public Presentation GetPresentation(Presentation presentation)
     {
         try
         {
@@ -123,14 +122,14 @@ public class Presentations : IDatabase
         }
     }
 
-    public Domain.Entities.Presentation ConvertModelToPresentation(Database.Model.Presentation model)
+    public Presentation ConvertModelToPresentation(Model.Presentation model)
     {
-        return new Domain.Entities.Presentation()
+        return new Presentation
         {
             Id = model.Id,
             End = model.End,
             Start = model.Start,
-            UserId = model.UserId.Value,
+            UserId = model.UserId.Value
         };
     }
 }

@@ -147,13 +147,11 @@ public class Projects : IDatabase
 
     public List<Project> SearchForProject(string title)
     {
-        var projects = new List<Domain.Entities.Project>();
+        var projects = new List<Project>();
         try
         {
             foreach (var project in Connection.Projects.Where(p => p.Name.Contains(title)).ToList())
-            {
                 projects.Add(ConvertModelToProject(project));
-            }
 
             return projects;
         }

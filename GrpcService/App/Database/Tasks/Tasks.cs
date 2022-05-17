@@ -119,8 +119,7 @@ public class Tasks : IDatabase
                              t.CreatedAt > fromDate && t.CreatedAt < toDate && t.UserId == userId &&
                              t.ProjectId == projectId && t.WorkLocation == workLocation)
                          .ToList())
-            {
-                tasks.Add(new Domain.Entities.Task()
+                tasks.Add(new Domain.Entities.Task
                 {
                     Id = task.Id,
                     Description = task.Description,
@@ -131,9 +130,8 @@ public class Tasks : IDatabase
                     StartTime = task.StartTime,
                     UserId = task.UserId.Value,
                     WorkLocation = task.WorkLocation,
-                    CreatedAt = task.CreatedAt.Value,
+                    CreatedAt = task.CreatedAt.Value
                 });
-            }
 
             return tasks;
         }
@@ -151,9 +149,7 @@ public class Tasks : IDatabase
             var tasks = new List<Domain.Entities.Task>();
             foreach (var task in Connection.Tasks.Where(t => t.CreatedAt > fromDate).Where(t => t.CreatedAt < toDate)
                          .Where(t => t.UserId == userId).ToList())
-            {
                 tasks.Add(ConvertModelToTask(task));
-            }
 
             return tasks;
         }

@@ -128,8 +128,7 @@ public class OffTimes : IDatabase
         {
             foreach (var offTime in Connection.OffTimes.Where(o => o.CreatedAt > fromDate && o.CreatedAt < toDate)
                          .ToList())
-            {
-                offtimes.Add(new Domain.Entities.OffTime()
+                offtimes.Add(new Domain.Entities.OffTime
                 {
                     Id = offTime.Id,
                     Description = offTime.Description,
@@ -137,9 +136,8 @@ public class OffTimes : IDatabase
                     CreatedAt = offTime.CreatedAt,
                     FromDate = offTime.FromDate.Value,
                     ToDate = offTime.ToDate.Value,
-                    UserId = offTime.UserId.Value,
+                    UserId = offTime.UserId.Value
                 });
-            }
 
             return offtimes;
         }

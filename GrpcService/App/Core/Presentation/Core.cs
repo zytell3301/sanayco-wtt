@@ -13,15 +13,6 @@ public class Core
     private readonly InternalError InternalError;
     private readonly OperationSuccessful OperationSuccessful;
 
-    public bool CheckEntityOwnership(int presentationId, int applicantId)
-    {
-        var presentation = database.GetPresentation(new Domain.Entities.Presentation()
-        {
-            Id = presentationId,
-        });
-        return presentation.UserId == applicantId;
-    }
-
     public Core(PresentationCoreDependencies dependencies, PresentationCoreConfigs configs)
     {
         database = dependencies.Database;
@@ -30,6 +21,15 @@ public class Core
          */
         InternalError = new InternalError(configs.InternalErrorMessage);
         OperationSuccessful = new OperationSuccessful(configs.OperationSuccessfulMessage);
+    }
+
+    public bool CheckEntityOwnership(int presentationId, int applicantId)
+    {
+        var presentation = database.GetPresentation(new Domain.Entities.Presentation
+        {
+            Id = presentationId
+        });
+        return presentation.UserId == applicantId;
     }
 
     /*

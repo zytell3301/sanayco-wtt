@@ -3,7 +3,6 @@
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Foods.Validations;
 using GrpcService1.Domain.Entities;
-using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -308,7 +307,7 @@ public class Handler : BaseHandler
             {
                 FoodId = body.food_id,
                 UserId = GetUserId(),
-                Date = DateTime.UnixEpoch.AddSeconds((float) body.date),
+                Date = DateTime.UnixEpoch.AddSeconds((float) body.date)
             });
         }
         catch (Exception)
@@ -385,14 +384,12 @@ public class Handler : BaseHandler
             var foods = Core.GetAvailableFoodsList();
             var response = new GetAvailableFoodsListResponse();
             foreach (var food in foods)
-            {
-                response.foods.Add(new GetAvailableFoodsListResponse.Food()
+                response.foods.Add(new GetAvailableFoodsListResponse.Food
                 {
                     id = food.Id,
                     price = food.Price,
-                    title = food.Title,
+                    title = food.Title
                 });
-            }
 
             return JsonSerializer.Serialize(response);
         }
@@ -404,7 +401,7 @@ public class Handler : BaseHandler
 
     private class GetAvailableFoodsListResponse : Response
     {
-        public List<Food> foods { get; set; } = new List<Food>();
+        public List<Food> foods { get; } = new();
 
         public class Food
         {

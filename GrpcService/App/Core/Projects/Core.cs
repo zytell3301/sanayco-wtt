@@ -141,7 +141,7 @@ public class Core
         }
     }
 
-    public List<Domain.Entities.Project> SearchForProject(string title)
+    public List<Project> SearchForProject(string title)
     {
         try
         {

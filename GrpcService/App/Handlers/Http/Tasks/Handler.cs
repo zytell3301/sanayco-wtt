@@ -2,7 +2,6 @@
 
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.tasks.Validations;
-using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -360,11 +359,11 @@ public class Handler : BaseHandler
 
         try
         {
-            return JsonSerializer.Serialize(new GetTaskRangeResponse()
+            return JsonSerializer.Serialize(new GetTaskRangeResponse
             {
                 status_code = 0,
                 tasks = Core.GetTaskRange(DateTime.UnixEpoch.AddSeconds(fromDate),
-                    DateTime.UnixEpoch.AddSeconds(toDate), GetUserId(), projectId, workLocation),
+                    DateTime.UnixEpoch.AddSeconds(toDate), GetUserId(), projectId, workLocation)
             });
         }
         catch (Exception)
@@ -380,18 +379,18 @@ public class Handler : BaseHandler
         {
             Authenticate();
         }
-        catch (Exception) 
+        catch (Exception)
         {
             return ResponseToJson(AuthenticationFailedResponse());
         }
 
         try
         {
-            return JsonSerializer.Serialize(new GetTaskRangeResponse()
+            return JsonSerializer.Serialize(new GetTaskRangeResponse
             {
                 status_code = 0,
                 tasks = Core.GetUserTasks(DateTime.UnixEpoch.AddSeconds(fromDate),
-                    DateTime.UnixEpoch.AddSeconds(toDate), GetUserId()),
+                    DateTime.UnixEpoch.AddSeconds(toDate), GetUserId())
             });
         }
         catch (Exception)

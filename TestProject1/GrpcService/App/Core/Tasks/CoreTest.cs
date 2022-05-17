@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using GrpcService1.App.Core.Tasks;
 using GrpcService1.Domain.Entities;
@@ -6,15 +8,34 @@ using GrpcService1.Domain.Errors;
 using Moq;
 using NUnit.Framework;
 
+#endregion
+
 namespace TestProject1.GrpcService.App.Core.Tasks;
 
 [TestFixture]
 public class CoreTest
 {
-    private Mock<GrpcService1.App.Core.Tasks.IDatabase> TasksDB;
+    [SetUp]
+    public void Setup()
+    {
+        TasksDB = new Mock<IDatabase>(MockBehavior.Strict);
+        Core = new GrpcService1.App.Core.Tasks.Core(new GrpcService1.App.Core.Tasks.Core.TasksCoreDependencies
+        {
+            Database = TasksDB.Object
+        }, new GrpcService1.App.Core.Tasks.Core.TasksCoreConfigs
+        {
+            ApprovedTaskCode = "ApprovedTaskCode",
+            InternalErrorMessage = "InternalErrorMessage",
+            OperationSuccessfulMessage = "OperationSuccessfulMessage",
+            WaitingTaskCode = "WaitingTaskCode",
+            UnApprovedTaskCode = "UnApprovedTaskCode"
+        });
+    }
+
+    private Mock<IDatabase> TasksDB;
     private GrpcService1.App.Core.Tasks.Core Core;
 
-    private Task DummyTask = new Task()
+    private readonly Task DummyTask = new()
     {
         Id = 1,
         UserId = 1,
@@ -25,25 +46,8 @@ public class CoreTest
         CreatedAt = DateTime.Now,
         ProjectId = 1,
         WorkLocation = "",
-        StartTime = DateTime.Now,
+        StartTime = DateTime.Now
     };
-
-    [SetUp]
-    public void Setup()
-    {
-        TasksDB = new Mock<IDatabase>(MockBehavior.Strict);
-        Core = new GrpcService1.App.Core.Tasks.Core(new GrpcService1.App.Core.Tasks.Core.TasksCoreDependencies()
-        {
-            Database = TasksDB.Object,
-        }, new GrpcService1.App.Core.Tasks.Core.TasksCoreConfigs()
-        {
-            ApprovedTaskCode = "ApprovedTaskCode",
-            InternalErrorMessage = "InternalErrorMessage",
-            OperationSuccessfulMessage = "OperationSuccessfulMessage",
-            WaitingTaskCode = "WaitingTaskCode",
-            UnApprovedTaskCode = "UnApprovedTaskCode",
-        });
-    }
 
     // Normal test case
     [Test]
@@ -73,9 +77,9 @@ public class CoreTest
     [Test]
     public void test_CheckTaskOwnership_1()
     {
-        TasksDB.Setup(d => d.GetTask(DummyTask.Id)).Returns(new Task()
+        TasksDB.Setup(d => d.GetTask(DummyTask.Id)).Returns(new Task
         {
-            UserId = 2, // Something different from DummyTasks userId
+            UserId = 2 // Something different from DummyTasks userId
         });
         Assert.IsFalse(Core.CheckTaskOwnership(DummyTask.Id, DummyTask.UserId));
     }
@@ -91,21 +95,21 @@ public class CoreTest
     private class GetTaskRangeParams
     {
         public DateTime fromDate;
+        public int projectId;
         public DateTime toDate;
         public int userId;
-        public int projectId;
         public string workLocation;
     }
 
     private GetTaskRangeParams GenerateGetTaskRangeParams()
     {
-        return new GetTaskRangeParams()
+        return new GetTaskRangeParams
         {
             fromDate = DateTime.Now,
             toDate = DateTime.Now.AddSeconds(1),
             projectId = 1,
             userId = 1,
-            workLocation = "home",
+            workLocation = "home"
         };
     }
 

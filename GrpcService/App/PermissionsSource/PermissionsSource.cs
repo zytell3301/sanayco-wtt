@@ -32,20 +32,13 @@ public class PermissionsSource : IPermissionsSource
         }
     }
 
-    private IQueryable<Database.Model.Permission> GetUserPermissionQuery(int userId)
-    {
-        return Connection.Permissions.Where(p => p.UserId == userId);
-    }
-
     public List<Permission> GetUserPermissions(int userId)
     {
         var permissions = new List<Permission>();
         try
         {
             foreach (var permission in GetUserPermissionQuery(userId).ToList())
-            {
                 permissions.Add(ConvertPermissionModel(permission));
-            }
 
             return permissions;
         }
@@ -55,15 +48,20 @@ public class PermissionsSource : IPermissionsSource
         }
     }
 
+    private IQueryable<Database.Model.Permission> GetUserPermissionQuery(int userId)
+    {
+        return Connection.Permissions.Where(p => p.UserId == userId);
+    }
+
     private Permission ConvertPermissionModel(Database.Model.Permission model)
     {
-        return new Permission()
+        return new Permission
         {
             Id = model.Id,
             Title = model.Title,
             CreatedAt = model.CreatedAt.Value,
             GrantedBy = model.GrantedBy.Value,
-            UserId = model.UserId.Value,
+            UserId = model.UserId.Value
         };
     }
 }

@@ -108,15 +108,14 @@ public class Database : IDatabase
 
     public List<Mission> GetMissionRange(DateTime fromDate, DateTime toDate, int userId, int projectId)
     {
-        var missions = new List<Domain.Entities.Mission>();
+        var missions = new List<Mission>();
         try
         {
             foreach (var mission in Connection.Missions
                          .Where(m => m.FromDate > fromDate && m.ToDate < toDate && m.MemberId == userId &&
                                      m.ProjectId == projectId)
                          .ToList())
-            {
-                missions.Add(new Mission()
+                missions.Add(new Mission
                 {
                     Id = mission.Id,
                     Description = mission.Description,
@@ -126,9 +125,8 @@ public class Database : IDatabase
                     IsVerified = mission.IsVerified,
                     MemberId = mission.MemberId,
                     ProjectId = mission.ProjectId,
-                    ToDate = mission.ToDate,
+                    ToDate = mission.ToDate
                 });
-            }
 
             return missions;
         }

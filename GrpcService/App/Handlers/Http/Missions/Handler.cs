@@ -3,7 +3,6 @@
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Missions.Validations;
 using GrpcService1.Domain.Entities;
-using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -363,11 +362,11 @@ public class Handler : BaseHandler
 
         try
         {
-            return JsonSerializer.Serialize(new GetMissionRangeResponse()
+            return JsonSerializer.Serialize(new GetMissionRangeResponse
             {
                 status_code = 0,
                 missions = Core.GetMissionRange(DateTime.UnixEpoch.AddSeconds(fromDate),
-                    DateTime.UnixEpoch.AddSeconds(toDate), GetUserId(),projectId),
+                    DateTime.UnixEpoch.AddSeconds(toDate), GetUserId(), projectId)
             });
         }
         catch (Exception)
@@ -378,7 +377,7 @@ public class Handler : BaseHandler
 
     private class GetMissionRangeResponse : Response
     {
-        public List<Domain.Entities.Mission> missions { get; set; }
+        public List<Mission> missions { get; set; }
     }
 
     private class GetMissionResponse : Response

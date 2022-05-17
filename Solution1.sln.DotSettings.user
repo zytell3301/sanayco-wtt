@@ -20,7 +20,7 @@
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1dd078ab_002D3382_002D433f_002D9722_002D74c0a69508e3/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="test_RecordOffTime #5" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_RecordOffTime&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=48581fd1_002Da9d8_002D4240_002Da2ef_002Dd5846e501878/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="test_RecordOffTime" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;

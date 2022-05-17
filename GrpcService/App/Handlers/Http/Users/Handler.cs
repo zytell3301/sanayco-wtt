@@ -49,7 +49,7 @@ public class Handler : BaseHandler
             return JsonSerializer.Serialize(new LoginResponse
             {
                 status_code = 0,
-                token = token,
+                token = token
             });
         }
         catch (Exception)

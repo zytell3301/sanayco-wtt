@@ -3,7 +3,6 @@
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Projects.Validations;
 using GrpcService1.Domain.Entities;
-using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -371,10 +370,10 @@ public class Handler : BaseHandler
 
         try
         {
-            return JsonSerializer.Serialize(new SearchForProjectResponse()
+            return JsonSerializer.Serialize(new SearchForProjectResponse
             {
                 status_code = 0,
-                projects = Core.SearchForProject(name),
+                projects = Core.SearchForProject(name)
             });
         }
         catch (Exception)
@@ -385,7 +384,7 @@ public class Handler : BaseHandler
 
     private class SearchForProjectResponse : Response
     {
-        public List<Domain.Entities.Project> projects { get; set; }
+        public List<Project> projects { get; set; }
     }
 
     private class GetProjectResponse : Response

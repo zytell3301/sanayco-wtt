@@ -3,9 +3,7 @@
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Presentation.Validations;
 using GrpcService1.Domain.Entities;
-using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 #endregion
 
@@ -117,7 +115,7 @@ public class Handler : BaseHandler
 
         try
         {
-            return JsonSerializer.Serialize(new GetPresentationsListRangeResponse()
+            return JsonSerializer.Serialize(new GetPresentationsListRangeResponse
             {
                 presentations = Core.GetPresentationsRange(DateTime.UnixEpoch.AddSeconds(fromDate),
                     DateTime.UnixEpoch.AddSeconds(toDate),
@@ -128,11 +126,6 @@ public class Handler : BaseHandler
         {
             return ResponseToJson(InternalErrorResponse());
         }
-    }
-
-    private class GetPresentationResponse : Response
-    {
-        public Domain.Entities.Presentation presentation { get; set; }
     }
 
     [HttpGet("get-presentation/{presentationId}")]
@@ -149,13 +142,13 @@ public class Handler : BaseHandler
 
         try
         {
-            return JsonSerializer.Serialize(new GetPresentationResponse()
+            return JsonSerializer.Serialize(new GetPresentationResponse
             {
                 status_code = 0,
-                presentation = Core.GetPresentation(new Domain.Entities.Presentation()
+                presentation = Core.GetPresentation(new Domain.Entities.Presentation
                 {
-                    Id = presentationId,
-                }),
+                    Id = presentationId
+                })
             });
         }
         catch (Exception e)
@@ -175,7 +168,7 @@ public class Handler : BaseHandler
         {
             return ResponseToJson(AuthenticationFailedResponse());
         }
-        
+
         UpdatePresentationValidation body;
         try
         {
@@ -185,7 +178,7 @@ public class Handler : BaseHandler
         {
             return InvalidRequestResponse;
         }
-        
+
         switch (ModelState.IsValid)
         {
             case false:
@@ -207,11 +200,11 @@ public class Handler : BaseHandler
 
         try
         {
-            Core.UpdatePresentation(new Domain.Entities.Presentation()
+            Core.UpdatePresentation(new Domain.Entities.Presentation
             {
                 Id = body.presentation_id,
                 End = DateTime.UnixEpoch.AddSeconds(body.end),
-                Start = DateTime.UnixEpoch.AddSeconds(body.start),
+                Start = DateTime.UnixEpoch.AddSeconds(body.start)
             });
         }
         catch (Exception)
@@ -220,6 +213,11 @@ public class Handler : BaseHandler
         }
 
         return ResponseToJson(OperationSuccessfulResponse());
+    }
+
+    private class GetPresentationResponse : Response
+    {
+        public Domain.Entities.Presentation presentation { get; set; }
     }
 
     private class GetPresentationsListRangeResponse : Response
