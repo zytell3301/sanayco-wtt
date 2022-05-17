@@ -17,4 +17,34 @@
     &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_GetOffTimeRange_2&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_RecordOffTime&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1dd078ab_002D3382_002D433f_002D9722_002D74c0a69508e3/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="test_RecordOffTime #5" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_RecordOffTime&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=48581fd1_002Da9d8_002D4240_002Da2ef_002Dd5846e501878/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="test_RecordOffTime" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_RecordOffTime&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=96691669_002D4978_002D4331_002Daf9b_002Dce3f5d891c39/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="test_RecordOffTime #6" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_RecordOffTime&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a55191a8_002D3ba0_002D4cba_002Da2a1_002D07635b911058/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="test_RecordOffTime #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_RecordOffTime&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b528d5e7_002D0d49_002D4758_002D8bd4_002Daf61fac74f75/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="test_RecordOffTime #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_RecordOffTime&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=bade6f35_002Db9b3_002D4eaf_002D8b99_002D2dfcd093f796/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="test_RecordOffTime #4" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::9EE41202-E543-4B12-A097-10A31E4E75BB::net6.0::TestProject1.GrpcService.App.Core.Offtime.CoreTest.test_RecordOffTime&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
