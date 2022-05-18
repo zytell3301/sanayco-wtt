@@ -399,6 +399,14 @@ public class Handler : BaseHandler
         }
     }
 
+    [HttpGet("get-excel-report/{fromDate}/{toDate}")]
+    public IActionResult GetExcelFile(int fromDate, int toDate)
+    {
+        var excel = Core.GetExcelReport(DateTime.UnixEpoch.AddSeconds(fromDate), DateTime.UnixEpoch.AddSeconds(toDate),
+            1);
+        return File(excel.GetByte(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+    }
+
     private class GetTaskRangeResponse : Response
     {
         public List<Domain.Entities.Task> tasks { get; set; }

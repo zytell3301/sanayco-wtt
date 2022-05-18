@@ -182,7 +182,8 @@ public class Startup
     {
         Builder.Services.AddSingleton(new Core(new Core.TasksCoreDependencies
             {
-                Database = Dependencies.DBDependencies.TasksDB
+                Database = Dependencies.DBDependencies.TasksDB,
+                Excel = new Excel(),
             }, new Core.TasksCoreConfigs
             {
                 OperationSuccessfulMessage = "OperationSuccessfulMessage",
