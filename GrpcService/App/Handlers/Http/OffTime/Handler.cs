@@ -353,6 +353,32 @@ public class Handler : BaseHandler
         }
     }
 
+    [HttpGet("get-excel-report/{fromDate}/{toDate}")]
+    public IActionResult GetExcelReport(int fromDate, int toDate)
+    {
+        try
+        {
+            Authenticate();
+        }
+        catch (Exception)
+        {
+            return StatusCode(401, ResponseToJson(AuthenticationFailedResponse()));
+        }
+
+        try
+        {
+            var data = Core
+                .GetExcelReport(DateTime.UnixEpoch.AddSeconds(fromDate), DateTime.UnixEpoch.AddSeconds(toDate), 1)
+                .GetByte();
+
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, ResponseToJson(InternalErrorResponse()));
+        }
+    }
+
     private class GetOffTimeRangeResponse : Response
     {
         public List<Domain.Entities.OffTime> off_times { get; set; }

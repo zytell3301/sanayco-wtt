@@ -208,7 +208,8 @@ public class Startup
         Builder.Services.AddSingleton(new GrpcService1.App.Core.OffTime.Core(
             new GrpcService1.App.Core.OffTime.Core.OffTimeDependencies
             {
-                Database = Dependencies.DBDependencies.OffTimesDB
+                Database = Dependencies.DBDependencies.OffTimesDB,
+                Excel = new Excel(),
             }, new GrpcService1.App.Core.OffTime.Core.OffTimeCoreConfigs
             {
                 OperationSuccessfulMessage = "OperationSuccessfulMessage",

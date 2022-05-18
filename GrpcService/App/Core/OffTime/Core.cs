@@ -1,6 +1,7 @@
 ﻿#region
 
 using Google.Protobuf.WellKnownTypes;
+using GrpcService1.App.Excel;
 using GrpcService1.Domain.Entities;
 using GrpcService1.Domain.Errors;
 
@@ -17,6 +18,7 @@ public class Core
 
     private readonly IDatabase Database;
     private readonly InternalError InternalError;
+    private IExcel Excel;
 
     /*
      * Number of seconds that if exceeded, the manager must approve the
@@ -40,6 +42,7 @@ public class Core
         WaitingOffTimeCode = configs.WaitingOffTimeCode;
 
         Database = dependencies.Database;
+        Excel = dependencies.Excel;
     }
 
     public bool CheckOffTimeOwnership(int offTimeId, int userId)
@@ -166,6 +169,41 @@ public class Core
         }
     }
 
+    public IExcel.IExcelFile GetExcelReport(DateTime fromDate, DateTime toDate, int userId)
+    {
+        try
+        {
+            var offTimes = Database.GetOffTimeListRange(fromDate, toDate, userId);
+            var excel = Excel.NewExcel();
+
+            excel.SetCell(1, 1, "id");
+            excel.SetCell(1, 2, "description");
+            excel.SetCell(1, 3, "status");
+            excel.SetCell(1, 4, "created at");
+            excel.SetCell(1, 5, "from date");
+            excel.SetCell(1, 6, "to date");
+            excel.SetCell(1, 7, "user id");
+
+            var i = 2;
+            foreach (var offTime in offTimes)
+            {
+                excel.SetCell(i, 1, offTime.Id.ToString());
+                excel.SetCell(i, 2, offTime.Description);
+                excel.SetCell(i, 3, offTime.Status);
+                excel.SetCell(i, 4, offTime.CreatedAt.ToString());
+                excel.SetCell(i, 5, offTime.FromDate.ToString());
+                excel.SetCell(i, 6, offTime.ToDate.ToString());
+                excel.SetCell(i, 7, offTime.UserId.ToString());
+            }
+
+            return excel.GetExcelFile();
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
     public class OffTimeCoreConfigs
     {
         public string ApprovedOffTimeCode;
@@ -180,5 +218,6 @@ public class Core
     public class OffTimeDependencies
     {
         public IDatabase Database;
+        public IExcel Excel;
     }
 }
