@@ -4,6 +4,7 @@ using GrpcService1.App.Excel;
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Presentation.Validations;
 using GrpcService1.Domain.Entities;
+using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -219,17 +220,32 @@ public class Handler : BaseHandler
     [HttpGet("get-excel-report/{fromDate}/{toDate}")]
     public IActionResult GetExcelFile(int fromDate, int toDate)
     {
-        var excel = Core.GenerateExcel(DateTime.UnixEpoch.AddSeconds(fromDate), DateTime.UnixEpoch.AddSeconds(toDate),
-            1);
-        var cd = new System.Net.Mime.ContentDisposition()
+        try
         {
-            FileName = "report.xlsx",
-            Inline = false,
-        };
-        
-        
-        
-        return File(excel.GetByte(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            Authenticate();
+        }
+        catch (Exception)
+        {
+            return StatusCode(401, ResponseToJson(AuthenticationFailedResponse()));
+        }
+
+        try
+        {
+            var excel = Core.GenerateExcel(DateTime.UnixEpoch.AddSeconds(fromDate),
+                DateTime.UnixEpoch.AddSeconds(toDate),
+                GetUserId());
+            var cd = new System.Net.Mime.ContentDisposition()
+            {
+                FileName = "report.xlsx",
+                Inline = false,
+            };
+
+            return File(excel.GetByte(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, ResponseToJson(InternalErrorResponse()));
+        }
     }
 
     private class GetPresentationResponse : Response
