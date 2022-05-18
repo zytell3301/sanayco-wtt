@@ -402,9 +402,26 @@ public class Handler : BaseHandler
     [HttpGet("get-excel-report/{fromDate}/{toDate}")]
     public IActionResult GetExcelFile(int fromDate, int toDate)
     {
-        var excel = Core.GetExcelReport(DateTime.UnixEpoch.AddSeconds(fromDate), DateTime.UnixEpoch.AddSeconds(toDate),
-            1);
-        return File(excel.GetByte(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        try
+        {
+            Authenticate();
+        }
+        catch (Exception)
+        {
+            return StatusCode(401, ResponseToJson(AuthenticationFailedResponse()));
+        }
+
+        try
+        {
+            var excel = Core.GetExcelReport(DateTime.UnixEpoch.AddSeconds(fromDate),
+                DateTime.UnixEpoch.AddSeconds(toDate),
+                GetUserId());
+            return File(excel.GetByte(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, ResponseToJson(InternalErrorResponse()));
+        }
     }
 
     private class GetTaskRangeResponse : Response
