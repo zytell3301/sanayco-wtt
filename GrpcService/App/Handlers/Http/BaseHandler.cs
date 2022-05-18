@@ -113,8 +113,6 @@ public class BaseHandler : ControllerBase
     {
         try
         {
-            // Console.WriteLine(Request.Headers["_token"]);
-            Console.WriteLine(Auth.ExtractToken(Request.Headers["_token"]));
             UserId = TokenSource.GetTokenUserId(Auth.ExtractToken(Request.Headers["_token"]));
         }
         catch (Exception)
