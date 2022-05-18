@@ -1,5 +1,6 @@
 ﻿#region
 
+using GrpcService1.App.Excel;
 using GrpcService1.Domain.Entities;
 using GrpcService1.Domain.Errors;
 
@@ -12,6 +13,7 @@ public class Core
     private readonly IDatabase database;
     private readonly InternalError InternalError;
     private readonly OperationSuccessful OperationSuccessful;
+    private IExcel Excel;
 
     public Core(PresentationCoreDependencies dependencies, PresentationCoreConfigs configs)
     {
@@ -21,6 +23,7 @@ public class Core
          */
         InternalError = new InternalError(configs.InternalErrorMessage);
         OperationSuccessful = new OperationSuccessful(configs.OperationSuccessfulMessage);
+        Excel = dependencies.Excel;
     }
 
     public bool CheckEntityOwnership(int presentationId, int applicantId)
@@ -118,6 +121,34 @@ public class Core
         }
     }
 
+    public IExcel.IExcelFile GenerateExcel(DateTime fromDate, DateTime toDate, int userId)
+    {
+        try
+        {
+            var presentations = database.GetPresentationsRange(fromDate, toDate, userId);
+            var excel = Excel.NewExcel();
+            excel.SetCell(1, 1, "id");
+            excel.SetCell(1, 2, "user id");
+            excel.SetCell(1, 3, "start");
+            excel.SetCell(1, 4, "end");
+            var i = 2;
+            foreach (var presentation in presentations)
+            {
+                excel.SetCell(i, 1, presentation.Id.ToString());
+                excel.SetCell(i, 2, presentation.UserId.ToString());
+                excel.SetCell(i, 3, presentation.Start.ToString());
+                excel.SetCell(i, 4, presentation.End.ToString());
+                i++;
+            }
+
+            return excel.GetExcelFile();
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
     public class PresentationCoreConfigs
     {
         public string InternalErrorMessage;
@@ -127,5 +158,6 @@ public class Core
     public class PresentationCoreDependencies
     {
         public IDatabase Database;
+        public IExcel Excel;
     }
 }

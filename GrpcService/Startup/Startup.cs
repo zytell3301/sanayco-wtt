@@ -9,6 +9,7 @@ using GrpcService1.App.Database.Presentations;
 using GrpcService1.App.Database.Projects;
 using GrpcService1.App.Database.Tasks;
 using GrpcService1.App.Database.Users;
+using GrpcService1.App.Excel;
 using GrpcService1.App.Handlers.Http;
 using GrpcService1.App.HashGenerator;
 using GrpcService1.App.PermissionsSource;
@@ -195,7 +196,8 @@ public class Startup
         Builder.Services.AddSingleton(new GrpcService1.App.Core.Presentation.Core(
             new GrpcService1.App.Core.Presentation.Core.PresentationCoreDependencies
             {
-                Database = Dependencies.DBDependencies.PresentationDB
+                Database = Dependencies.DBDependencies.PresentationDB,
+                Excel = new Excel(),
             }, new GrpcService1.App.Core.Presentation.Core.PresentationCoreConfigs
             {
                 OperationSuccessfulMessage = "OperationSuccessfulMessage",

@@ -1,5 +1,6 @@
 ﻿#region
 
+using GrpcService1.App.Excel;
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Presentation.Validations;
 using GrpcService1.Domain.Entities;
@@ -213,6 +214,22 @@ public class Handler : BaseHandler
         }
 
         return ResponseToJson(OperationSuccessfulResponse());
+    }
+
+    [HttpGet("get-excel-report/{fromDate}/{toDate}")]
+    public IActionResult GetExcelFile(int fromDate, int toDate)
+    {
+        var excel = Core.GenerateExcel(DateTime.UnixEpoch.AddSeconds(fromDate), DateTime.UnixEpoch.AddSeconds(toDate),
+            1);
+        var cd = new System.Net.Mime.ContentDisposition()
+        {
+            FileName = "report.xlsx",
+            Inline = false,
+        };
+        
+        
+        
+        return File(excel.GetByte(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
     }
 
     private class GetPresentationResponse : Response
