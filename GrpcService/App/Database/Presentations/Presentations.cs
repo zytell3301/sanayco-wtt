@@ -15,11 +15,21 @@ public class Presentations : IDatabase
 {
     private readonly wttContext Connection;
     private readonly IErrorReporter ErrorReporter;
+    private readonly InternalError InternalError;
 
-    public Presentations(wttContext connection, IErrorReporter errorReporter)
+    public class PresentationsDatabaseDependencies
     {
-        Connection = connection;
-        ErrorReporter = errorReporter;
+        public wttContext Connection;
+        public IErrorReporter ErrorReporter;
+        public InternalError InternalError;
+    }
+
+    public Presentations(PresentationsDatabaseDependencies dependencies)
+    {
+        Connection = dependencies.Connection;
+        ErrorReporter = dependencies.ErrorReporter;
+
+        InternalError = dependencies.InternalError;
     }
 
     public void RecordPresentation(User user)
@@ -36,7 +46,7 @@ public class Presentations : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -50,7 +60,7 @@ public class Presentations : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -63,7 +73,7 @@ public class Presentations : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -88,7 +98,7 @@ public class Presentations : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -104,7 +114,7 @@ public class Presentations : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -118,7 +128,7 @@ public class Presentations : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 

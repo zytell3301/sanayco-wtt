@@ -14,11 +14,20 @@ public class OffTimes : IDatabase
 {
     private readonly wttContext Connection;
     private readonly IErrorReporter ErrorReporter;
+    private readonly InternalError InternalError;
 
-    public OffTimes(wttContext connection, IErrorReporter errorReporter)
+    public class OffTimesDatabaseDependencies
     {
-        Connection = connection;
-        ErrorReporter = errorReporter;
+        public wttContext Connection;
+        public IErrorReporter ErrorReporter;
+        public InternalError InternalError;
+    }
+
+    public OffTimes(OffTimesDatabaseDependencies dependencies)
+    {
+        Connection = dependencies.Connection;
+        ErrorReporter = dependencies.ErrorReporter;
+        InternalError = dependencies.InternalError;
     }
 
     public void RecordOffTime(Domain.Entities.OffTime offTime)
@@ -39,7 +48,7 @@ public class OffTimes : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -55,7 +64,7 @@ public class OffTimes : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
 
         return offTimes;
@@ -72,7 +81,7 @@ public class OffTimes : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -87,7 +96,7 @@ public class OffTimes : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -104,7 +113,7 @@ public class OffTimes : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -117,7 +126,7 @@ public class OffTimes : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -144,7 +153,7 @@ public class OffTimes : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 

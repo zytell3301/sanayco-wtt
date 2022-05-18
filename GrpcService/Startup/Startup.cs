@@ -115,28 +115,50 @@ public class Startup
         Dependencies.DBDependencies.Connection = new wttContext(new DbContextOptions<wttContext>());
 
         Dependencies.DBDependencies.TasksDB =
-            new Tasks(Dependencies.DBDependencies.Connection, Dependencies.ErrorReporter);
+            new Tasks(new Tasks.TasksDatabaseDependencies()
+            {
+                Connection = Dependencies.DBDependencies.Connection,
+                ErrorReporter = Dependencies.ErrorReporter,
+                InternalError = new InternalError("InternalError")
+            });
         Dependencies.DBDependencies.PresentationDB =
-            new Presentations(Dependencies.DBDependencies.Connection, Dependencies.ErrorReporter);
+            new Presentations(new Presentations.PresentationsDatabaseDependencies()
+            {
+                Connection = Dependencies.DBDependencies.Connection,
+                ErrorReporter = Dependencies.ErrorReporter,
+                InternalError = new InternalError("InternalError"),
+            });
         Dependencies.DBDependencies.OffTimesDB =
-            new OffTimes(Dependencies.DBDependencies.Connection, Dependencies.ErrorReporter);
+            new OffTimes(new OffTimes.OffTimesDatabaseDependencies()
+            {
+                Connection = Dependencies.DBDependencies.Connection,
+                ErrorReporter = Dependencies.ErrorReporter,
+                InternalError = new InternalError("InternalError")
+            });
         Dependencies.DBDependencies.ProjectsDB =
-            new Projects(Dependencies.DBDependencies.Connection, Dependencies.ErrorReporter);
+            new Projects(new Projects.ProjectsDatabaseDependencies()
+            {
+                Connection = Dependencies.DBDependencies.Connection,
+                ErrorReporter = Dependencies.ErrorReporter,
+                InternalError = new InternalError("InternalError"),
+            });
         Dependencies.DBDependencies.UsersDB = new Users(new Users.UsersDatabaseDependencies
         {
             Connection = Dependencies.DBDependencies.Connection,
             ErrorReporter = Dependencies.ErrorReporter,
             InternalError = new InternalError("internal error")
         });
-        Dependencies.DBDependencies.FoodsDB = new Foods(Dependencies.DBDependencies.Connection,
-            Dependencies.ErrorReporter, new InternalError("internal error occurred"));
+        Dependencies.DBDependencies.FoodsDB = new Foods(new Foods.FoodsDatabaseDependencies()
+        {
+            Connection = Dependencies.DBDependencies.Connection,
+            ErrorReporter = Dependencies.ErrorReporter,
+            InternalError = new InternalError("internalError")
+        });
         Dependencies.DBDependencies.MissionsDB = new Database(new Database.MissionsDatabaseDependencies
         {
             Connection = Dependencies.DBDependencies.Connection,
             ErrorReporter = Dependencies.ErrorReporter,
-        }, new Database.MissionsDatabaseConfigs
-        {
-            InternalErrorMessage = "InternalErrorMessage"
+            InternalError = new InternalError("InternalError")
         });
     }
 

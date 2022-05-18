@@ -16,12 +16,12 @@ public class Database : IDatabase
     private readonly IErrorReporter ErrorReporter;
     private readonly InternalError InternalError;
 
-    public Database(MissionsDatabaseDependencies dependencies, MissionsDatabaseConfigs configs)
+    public Database(MissionsDatabaseDependencies dependencies)
     {
         Connection = dependencies.Connection;
         ErrorReporter = dependencies.ErrorReporter;
 
-        InternalError = new InternalError(configs.InternalErrorMessage);
+        InternalError = dependencies.InternalError;
     }
 
     public void RecordMission(Mission mission)
@@ -44,6 +44,7 @@ public class Database : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
+            throw InternalError;
         }
     }
 
@@ -57,6 +58,7 @@ public class Database : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
+            throw InternalError;
         }
     }
 
@@ -76,6 +78,7 @@ public class Database : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
+            throw InternalError;
         }
     }
 
@@ -157,10 +160,6 @@ public class Database : IDatabase
     {
         public wttContext Connection;
         public IErrorReporter ErrorReporter;
-    }
-
-    public class MissionsDatabaseConfigs
-    {
-        public string InternalErrorMessage;
+        public InternalError InternalError;
     }
 }

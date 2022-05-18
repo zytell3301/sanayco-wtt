@@ -17,12 +17,19 @@ public class Foods : IDatabase
     private readonly IErrorReporter ErrorReporter;
     private readonly InternalError InternalError;
 
-    public Foods(wttContext connection, IErrorReporter errorReporter, InternalError internalError)
+    public class FoodsDatabaseDependencies
     {
-        Connection = connection;
-        ErrorReporter = errorReporter;
+        public wttContext Connection;
+        public IErrorReporter ErrorReporter;
+        public InternalError InternalError;
+    }
 
-        InternalError = internalError;
+    public Foods(FoodsDatabaseDependencies dependencies)
+    {
+        Connection = dependencies.Connection;
+        ErrorReporter = dependencies.ErrorReporter;
+
+        InternalError = dependencies.InternalError;
     }
 
     public void RecordFood(Food food)

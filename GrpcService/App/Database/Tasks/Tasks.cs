@@ -13,11 +13,20 @@ public class Tasks : IDatabase
 {
     private readonly wttContext Connection;
     private readonly IErrorReporter ErrorReporter;
+    private readonly InternalError InternalError;
 
-    public Tasks(wttContext connection, IErrorReporter errorReporter)
+    public class TasksDatabaseDependencies
     {
-        Connection = connection;
-        ErrorReporter = errorReporter;
+        public wttContext Connection;
+        public IErrorReporter ErrorReporter;
+        public InternalError InternalError;
+    }
+
+    public Tasks(TasksDatabaseDependencies dependencies)
+    {
+        Connection = dependencies.Connection;
+        ErrorReporter = dependencies.ErrorReporter;
+        InternalError = dependencies.InternalError;
     }
 
     public void RecordTask(Domain.Entities.Task task)
@@ -41,7 +50,7 @@ public class Tasks : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -56,7 +65,7 @@ public class Tasks : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -76,7 +85,7 @@ public class Tasks : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -91,7 +100,7 @@ public class Tasks : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -105,7 +114,7 @@ public class Tasks : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -138,7 +147,7 @@ public class Tasks : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -155,7 +164,7 @@ public class Tasks : IDatabase
         }
         catch (Exception e)
         {
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 

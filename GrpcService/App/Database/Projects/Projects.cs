@@ -15,11 +15,21 @@ public class Projects : IDatabase
 {
     private readonly wttContext Connection;
     private readonly IErrorReporter ErrorReporter;
+    private readonly InternalError InternalError;
 
-    public Projects(wttContext connection, IErrorReporter errorReporter)
+    public class ProjectsDatabaseDependencies
     {
-        Connection = connection;
-        ErrorReporter = errorReporter;
+        public wttContext Connection;
+        public IErrorReporter ErrorReporter;
+        public InternalError InternalError;
+    }
+
+    public Projects(ProjectsDatabaseDependencies dependencies)
+    {
+        Connection = dependencies.Connection;
+        ErrorReporter = dependencies.ErrorReporter;
+
+        InternalError = dependencies.InternalError;
     }
 
     public IRecordProjectBatch RecordProject(Project project)
@@ -45,7 +55,7 @@ public class Projects : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -65,7 +75,7 @@ public class Projects : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -81,7 +91,7 @@ public class Projects : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -96,7 +106,7 @@ public class Projects : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -113,7 +123,7 @@ public class Projects : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -126,7 +136,7 @@ public class Projects : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -141,7 +151,7 @@ public class Projects : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
@@ -158,7 +168,7 @@ public class Projects : IDatabase
         catch (Exception e)
         {
             ErrorReporter.ReportException(e);
-            throw new InternalError("");
+            throw InternalError;
         }
     }
 
