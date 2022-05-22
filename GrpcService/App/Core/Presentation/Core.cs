@@ -14,6 +14,7 @@ public class Core
     private readonly InternalError InternalError;
     private readonly OperationSuccessful OperationSuccessful;
     private IExcel Excel;
+    private IPdf Pdf;
 
     public Core(PresentationCoreDependencies dependencies, PresentationCoreConfigs configs)
     {
@@ -24,6 +25,7 @@ public class Core
         InternalError = new InternalError(configs.InternalErrorMessage);
         OperationSuccessful = new OperationSuccessful(configs.OperationSuccessfulMessage);
         Excel = dependencies.Excel;
+        Pdf = dependencies.Pdf;
     }
 
     public bool CheckEntityOwnership(int presentationId, int applicantId)
@@ -149,6 +151,27 @@ public class Core
         }
     }
 
+    public IPdf.IPdfFile GeneratePdf(DateTime fromDate, DateTime toDate, int userId)
+    {
+        try
+        {
+            var presentations = database.GetPresentationsRange(fromDate, toDate, userId);
+            var user = database.GetUser(userId);
+            return Pdf.NewPdfFile(presentations, new IPdf.ReportInfo()
+            {
+                FromDate = fromDate.ToString(),
+                GeneratedAt = DateTime.Now.ToString(),
+                ToDate = toDate.ToString(),
+                Lastname = user.LastName,
+                Name = user.Name,
+            });
+        }
+        catch (Exception)
+        {
+            throw InternalError;
+        }
+    }
+
     public class PresentationCoreConfigs
     {
         public string InternalErrorMessage;
@@ -159,5 +182,6 @@ public class Core
     {
         public IDatabase Database;
         public IExcel Excel;
+        public IPdf Pdf;
     }
 }

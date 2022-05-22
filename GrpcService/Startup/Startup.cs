@@ -12,6 +12,7 @@ using GrpcService1.App.Database.Users;
 using GrpcService1.App.Excel;
 using GrpcService1.App.Handlers.Http;
 using GrpcService1.App.HashGenerator;
+using GrpcService1.App.Pdf.Presentations;
 using GrpcService1.App.PermissionsSource;
 using GrpcService1.App.ProfilePicturesStorage;
 using GrpcService1.App.TokenGenerator;
@@ -199,6 +200,7 @@ public class Startup
             {
                 Database = Dependencies.DBDependencies.PresentationDB,
                 Excel = new Excel(),
+                Pdf = new Pdf(),
             }, new GrpcService1.App.Core.Presentation.Core.PresentationCoreConfigs
             {
                 OperationSuccessfulMessage = "OperationSuccessfulMessage",

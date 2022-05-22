@@ -248,6 +248,31 @@ public class Handler : BaseHandler
         }
     }
 
+    [HttpGet("get-pdf-report/{fromDate}/{toDate}")]
+    public IActionResult GetPdfFile(int fromDate, int toDate)
+    {
+        try
+        {
+            Authenticate();
+        }
+        catch (Exception)
+        {
+            return StatusCode(401, ResponseToJson(AuthenticationFailedResponse()));
+        }
+
+        try
+        {
+            var pdf = Core.GeneratePdf(DateTime.UnixEpoch.AddSeconds(fromDate),
+                DateTime.UnixEpoch.AddSeconds(toDate),
+                GetUserId());
+            return File(pdf.GetPdfBytes(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, ResponseToJson(InternalErrorResponse()));
+        }
+    }
+
     private class GetPresentationResponse : Response
     {
         public Domain.Entities.Presentation presentation { get; set; }

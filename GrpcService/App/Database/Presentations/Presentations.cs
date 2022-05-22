@@ -132,6 +132,30 @@ public class Presentations : IDatabase
         }
     }
 
+    public User GetUser(int userId)
+    {
+        try
+        {
+            var model = Connection.Users.First(u => u.Id == userId);
+            return new User()
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Password = model.Password,
+                Username = model.Username,
+                CompanyLevel = model.CompanyLevel,
+                CreatedAt = model.CreatedAt,
+                LastName = model.Lastname,
+                SkillLevel = model.SkillLevel,
+            };
+        }
+        catch (Exception e)
+        {
+            ErrorReporter.ReportException(e);
+            throw InternalError;
+        }
+    }
+
     public Presentation ConvertModelToPresentation(Model.Presentation model)
     {
         return new Presentation
