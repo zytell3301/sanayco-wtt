@@ -31,6 +31,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="App\Pdf\Tasks" />
         <Folder Include="ErrorReporter" />
         <Folder Include="Properties\TokenGenerator" />
         <Folder Include="Services" />

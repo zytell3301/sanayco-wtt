@@ -5,7 +5,6 @@ namespace GrpcService1.App.Pdf;
 
 public interface IPdfBase
 {
-    public IPdfFile NewPdfFile(List<Presentation> presentations, IPdf.ReportInfo reportInfo);
     public interface IPdfFile
     {
         public byte[] GetPdfBytes();
