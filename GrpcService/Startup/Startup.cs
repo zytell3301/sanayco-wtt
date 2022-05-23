@@ -84,6 +84,7 @@ public class Startup
     {
         Dependencies.DBDependencies.Connection = new wttContext(new DbContextOptions<wttContext>());
 
+        // Tasks core db
         Dependencies.DBDependencies.TasksDB =
             new Tasks(new Tasks.TasksDatabaseDependencies
             {
@@ -91,6 +92,8 @@ public class Startup
                 ErrorReporter = Dependencies.ErrorReporter,
                 InternalError = new InternalError("InternalError")
             });
+
+        // Presentations core db
         Dependencies.DBDependencies.PresentationDB =
             new Presentations(new Presentations.PresentationsDatabaseDependencies
             {
@@ -98,6 +101,8 @@ public class Startup
                 ErrorReporter = Dependencies.ErrorReporter,
                 InternalError = new InternalError("InternalError")
             });
+
+        // OffTimes core db
         Dependencies.DBDependencies.OffTimesDB =
             new OffTimes(new OffTimes.OffTimesDatabaseDependencies
             {
@@ -105,6 +110,8 @@ public class Startup
                 ErrorReporter = Dependencies.ErrorReporter,
                 InternalError = new InternalError("InternalError")
             });
+
+        // Projects core db
         Dependencies.DBDependencies.ProjectsDB =
             new Projects(new Projects.ProjectsDatabaseDependencies
             {
@@ -112,18 +119,24 @@ public class Startup
                 ErrorReporter = Dependencies.ErrorReporter,
                 InternalError = new InternalError("InternalError")
             });
+
+        //Users core db
         Dependencies.DBDependencies.UsersDB = new Users(new Users.UsersDatabaseDependencies
         {
             Connection = Dependencies.DBDependencies.Connection,
             ErrorReporter = Dependencies.ErrorReporter,
             InternalError = new InternalError("internal error")
         });
+
+        // Foods core db
         Dependencies.DBDependencies.FoodsDB = new Foods(new Foods.FoodsDatabaseDependencies
         {
             Connection = Dependencies.DBDependencies.Connection,
             ErrorReporter = Dependencies.ErrorReporter,
             InternalError = new InternalError("internalError")
         });
+
+        // Missions core db
         Dependencies.DBDependencies.MissionsDB = new Database(new Database.MissionsDatabaseDependencies
         {
             Connection = Dependencies.DBDependencies.Connection,
@@ -147,7 +160,7 @@ public class Startup
         });
     }
 
-    private void InjectDependenciesToServiceContainer()
+    private void StartTasksCore()
     {
         Builder.Services.AddSingleton(new Core(new Core.TasksCoreDependencies
             {
@@ -164,6 +177,10 @@ public class Startup
                 WaitingTaskCode = "WaitingTaskCode"
             })
         );
+    }
+
+    private void StartPresentationsCore()
+    {
         Builder.Services.AddSingleton(new App.Core.Presentation.Core(
             new App.Core.Presentation.Core.PresentationCoreDependencies
             {
@@ -176,6 +193,10 @@ public class Startup
                 InternalErrorMessage = "InternalErrorMessage"
             })
         );
+    }
+
+    private void StartOffTimesCore()
+    {
         Builder.Services.AddSingleton(new App.Core.OffTime.Core(
             new App.Core.OffTime.Core.OffTimeDependencies
             {
@@ -192,6 +213,10 @@ public class Startup
                 OffTimeRestrictionExceededMessage = "OffTimeRestrictionExceededMessage"
             })
         );
+    }
+
+    private void StartProjectsCore()
+    {
         Builder.Services.AddSingleton(new App.Core.Projects.Core(
             new App.Core.Projects.Core.ProjectsCoreDependencies
             {
@@ -203,6 +228,10 @@ public class Startup
                 CreatorProjectMemberCode = "CreatorProjectMemberCode"
             })
         );
+    }
+
+    private void StartFoodsCore()
+    {
         Builder.Services.AddSingleton(new App.Core.Foods.Core(
             new App.Core.Foods.Core.FoodsCoreDependencies
             {
@@ -212,8 +241,20 @@ public class Startup
                 InternalErrorMessage = "InternalErrorMessage"
             })
         );
+    }
+
+    private void AddTokenSource()
+    {
         Builder.Services.AddSingleton<ITokenSource>(new TokenSource(Dependencies.DBDependencies.Connection));
+    }
+
+    private void AddExceptions()
+    {
         Builder.Services.AddSingleton(new AuthenticationFailed("Authentication failed"));
+    }
+
+    private void AddBaseHandler()
+    {
         Builder.Services.AddSingleton(new BaseHandlerDependencies
         {
             AuthenticationFailed = new AuthenticationFailed("Authentication failed"),
@@ -222,6 +263,10 @@ public class Startup
             TokenSource = new TokenSource(Dependencies.DBDependencies.Connection),
             Auth = Dependencies.Auth
         });
+    }
+
+    private void StartUsersCore()
+    {
         Builder.Services.AddSingleton(new App.Core.Users.Core(
             new App.Core.Users.Core.UsersCoreConfigs
             {
@@ -263,6 +308,10 @@ public class Startup
                 Auth = Dependencies.Auth
             })
         );
+    }
+
+    private void StartMissionsCore()
+    {
         Builder.Services.AddSingleton(new App.Core.Missions.Core(
             new App.Core.Missions.Core.MissionsCoreDependencies
             {
@@ -273,6 +322,20 @@ public class Startup
                 InternalErrorMessage = "InternalErrorMessage"
             })
         );
+    }
+
+    private void InjectDependenciesToServiceContainer()
+    {
+        StartTasksCore();
+        StartPresentationsCore();
+        StartOffTimesCore();
+        StartProjectsCore();
+        StartFoodsCore();
+        AddTokenSource();
+        AddExceptions();
+        AddBaseHandler();
+        StartUsersCore();
+        StartMissionsCore();
     }
 
     private void BuildApplicationBuilder()
