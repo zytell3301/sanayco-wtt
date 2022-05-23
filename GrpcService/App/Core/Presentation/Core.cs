@@ -1,6 +1,7 @@
 ﻿#region
 
 using GrpcService1.App.Excel;
+using GrpcService1.App.Pdf;
 using GrpcService1.Domain.Entities;
 using GrpcService1.Domain.Errors;
 
@@ -13,8 +14,8 @@ public class Core
     private readonly IDatabase database;
     private readonly InternalError InternalError;
     private readonly OperationSuccessful OperationSuccessful;
-    private IExcel Excel;
-    private IPdf Pdf;
+    private readonly IExcel Excel;
+    private readonly IPdf Pdf;
 
     public Core(PresentationCoreDependencies dependencies, PresentationCoreConfigs configs)
     {
@@ -151,19 +152,19 @@ public class Core
         }
     }
 
-    public IPdf.IPdfFile GeneratePdf(DateTime fromDate, DateTime toDate, int userId)
+    public IPdfBase.IPdfFile GeneratePdf(DateTime fromDate, DateTime toDate, int userId)
     {
         try
         {
             var presentations = database.GetPresentationsRange(fromDate, toDate, userId);
             var user = database.GetUser(userId);
-            return Pdf.NewPdfFile(presentations, new IPdf.ReportInfo()
+            return Pdf.NewPdfFile(presentations, new IPdf.ReportInfo
             {
                 FromDate = fromDate.ToString(),
                 GeneratedAt = DateTime.Now.ToString(),
                 ToDate = toDate.ToString(),
                 Lastname = user.LastName,
-                Name = user.Name,
+                Name = user.Name
             });
         }
         catch (Exception)

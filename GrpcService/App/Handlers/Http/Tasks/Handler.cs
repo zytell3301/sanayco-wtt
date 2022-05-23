@@ -438,17 +438,17 @@ public class Handler : BaseHandler
 
         // try
         // {
-            var pdf = Core.GeneratePdf(DateTime.UnixEpoch.AddSeconds(fromDate),
-                DateTime.UnixEpoch.AddSeconds(toDate),
-                1);
-            return File(pdf.GetPdfBytes(), "application/pdf");
+        var pdf = Core.GeneratePdf(DateTime.UnixEpoch.AddSeconds(fromDate),
+            DateTime.UnixEpoch.AddSeconds(toDate),
+            1);
+        return File(pdf.GetPdfBytes(), "application/pdf");
         // }
         // catch (Exception)
         // {
-            // return StatusCode(500, ResponseToJson(InternalErrorResponse()));
+        // return StatusCode(500, ResponseToJson(InternalErrorResponse()));
         // }
     }
-    
+
     private class GetTaskRangeResponse : Response
     {
         public List<Domain.Entities.Task> tasks { get; set; }

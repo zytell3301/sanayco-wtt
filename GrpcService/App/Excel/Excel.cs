@@ -1,5 +1,8 @@
-﻿using GrpcService1.App.Core.Presentation;
+﻿#region
+
 using OfficeOpenXml;
+
+#endregion
 
 namespace GrpcService1.App.Excel;
 
@@ -7,15 +10,14 @@ public class Excel : IExcel
 {
     public IExcel.IExcelManager NewExcel()
     {
-
         return new ExcelManager();
     }
 
-    public class ExcelManager : IExcel.IExcelFile,IExcel.IExcelManager
+    public class ExcelManager : IExcel.IExcelFile, IExcel.IExcelManager
     {
-        private ExcelPackage ExcelPackage;
-        private ExcelWorksheet ExcelWorksheet;
-        private MemoryStream Stream;
+        private readonly ExcelPackage ExcelPackage;
+        private readonly ExcelWorksheet ExcelWorksheet;
+        private readonly MemoryStream Stream;
 
         public ExcelManager()
         {
@@ -23,7 +25,7 @@ public class Excel : IExcel
             ExcelWorksheet = ExcelPackage.Workbook.Worksheets.Add("Sheet 1");
             Stream = new MemoryStream();
         }
-        
+
         public byte[] GetByte()
         {
             return Stream.GetBuffer();
@@ -38,6 +40,6 @@ public class Excel : IExcel
         {
             ExcelPackage.SaveAs(Stream);
             return this;
-        }   
+        }
     }
 }

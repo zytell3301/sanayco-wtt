@@ -1,10 +1,9 @@
 ﻿#region
 
-using GrpcService1.App.Excel;
+using System.Net.Mime;
 using System.Text.Json;
 using GrpcService1.App.Handlers.Http.Presentation.Validations;
 using GrpcService1.Domain.Entities;
-using GrpcService1.Domain.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 #endregion
@@ -234,10 +233,10 @@ public class Handler : BaseHandler
             var excel = Core.GenerateExcel(DateTime.UnixEpoch.AddSeconds(fromDate),
                 DateTime.UnixEpoch.AddSeconds(toDate),
                 GetUserId());
-            var cd = new System.Net.Mime.ContentDisposition()
+            var cd = new ContentDisposition
             {
                 FileName = "report.xlsx",
-                Inline = false,
+                Inline = false
             };
 
             return File(excel.GetByte(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");

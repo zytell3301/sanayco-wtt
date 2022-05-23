@@ -13,10 +13,10 @@ public class Core
     private readonly IDatabase Database;
     private readonly InternalError InternalError;
     private readonly OperationSuccessful OperationSuccessful;
-    private IExcel Excel;
-    private IPdf Pdf;
 
     public string ApprovedTaskCode;
+    private readonly IExcel Excel;
+    private readonly IPdf Pdf;
     public string RejectedTaskCode;
     public string WaitingTaskCode;
 
@@ -176,13 +176,13 @@ public class Core
                 excel.SetCell(i, 1, task.Id.ToString());
                 excel.SetCell(i, 2, task.UserId.ToString());
                 excel.SetCell(i, 3, task.ProjectId.ToString());
-                excel.SetCell(i, 4, task.Description.ToString());
-                excel.SetCell(i, 5, task.Status.ToString());
-                excel.SetCell(i, 6, task.Title.ToString());
+                excel.SetCell(i, 4, task.Description);
+                excel.SetCell(i, 5, task.Status);
+                excel.SetCell(i, 6, task.Title);
                 excel.SetCell(i, 7, task.StartTime.ToString());
                 excel.SetCell(i, 8, task.Points.ToString());
                 excel.SetCell(i, 9, task.CreatedAt.ToString());
-                excel.SetCell(i, 10, task.WorkLocation.ToString());
+                excel.SetCell(i, 10, task.WorkLocation);
             }
 
             return excel.GetExcelFile();
@@ -197,21 +197,21 @@ public class Core
     {
         // try
         // {
-            var presentations = Database.GetUserTasks(fromDate, toDate, userId);
-            var user = Database.GetUser(userId);
-            presentations[0].Description = "این یک پیام تست فارسی است";
-            return Pdf.NewPdfFile(presentations, new IPdf.ReportInfo()
-            {
-                FromDate = fromDate.ToString(),
-                GeneratedAt = DateTime.Now.ToString(),
-                ToDate = toDate.ToString(),
-                Lastname = user.LastName,
-                Name = user.Name,
-            });
+        var presentations = Database.GetUserTasks(fromDate, toDate, userId);
+        var user = Database.GetUser(userId);
+        presentations[0].Description = "این یک پیام تست فارسی است";
+        return Pdf.NewPdfFile(presentations, new IPdf.ReportInfo
+        {
+            FromDate = fromDate.ToString(),
+            GeneratedAt = DateTime.Now.ToString(),
+            ToDate = toDate.ToString(),
+            Lastname = user.LastName,
+            Name = user.Name
+        });
         // }
         // catch (Exception)
         // {
-            // throw InternalError;
+        // throw InternalError;
         // }
     }
 

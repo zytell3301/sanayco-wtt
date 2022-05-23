@@ -17,13 +17,6 @@ public class Foods : IDatabase
     private readonly IErrorReporter ErrorReporter;
     private readonly InternalError InternalError;
 
-    public class FoodsDatabaseDependencies
-    {
-        public wttContext Connection;
-        public IErrorReporter ErrorReporter;
-        public InternalError InternalError;
-    }
-
     public Foods(FoodsDatabaseDependencies dependencies)
     {
         Connection = dependencies.Connection;
@@ -201,5 +194,12 @@ public class Foods : IDatabase
             Title = model.Title,
             IsAvailable = model.IsAvailable
         };
+    }
+
+    public class FoodsDatabaseDependencies
+    {
+        public wttContext Connection;
+        public IErrorReporter ErrorReporter;
+        public InternalError InternalError;
     }
 }

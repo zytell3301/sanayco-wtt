@@ -17,13 +17,6 @@ public class Presentations : IDatabase
     private readonly IErrorReporter ErrorReporter;
     private readonly InternalError InternalError;
 
-    public class PresentationsDatabaseDependencies
-    {
-        public wttContext Connection;
-        public IErrorReporter ErrorReporter;
-        public InternalError InternalError;
-    }
-
     public Presentations(PresentationsDatabaseDependencies dependencies)
     {
         Connection = dependencies.Connection;
@@ -137,7 +130,7 @@ public class Presentations : IDatabase
         try
         {
             var model = Connection.Users.First(u => u.Id == userId);
-            return new User()
+            return new User
             {
                 Id = model.Id,
                 Name = model.Name,
@@ -146,7 +139,7 @@ public class Presentations : IDatabase
                 CompanyLevel = model.CompanyLevel,
                 CreatedAt = model.CreatedAt,
                 LastName = model.Lastname,
-                SkillLevel = model.SkillLevel,
+                SkillLevel = model.SkillLevel
             };
         }
         catch (Exception e)
@@ -165,5 +158,12 @@ public class Presentations : IDatabase
             Start = model.Start,
             UserId = model.UserId.Value
         };
+    }
+
+    public class PresentationsDatabaseDependencies
+    {
+        public wttContext Connection;
+        public IErrorReporter ErrorReporter;
+        public InternalError InternalError;
     }
 }

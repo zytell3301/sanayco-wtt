@@ -16,13 +16,6 @@ public class OffTimes : IDatabase
     private readonly IErrorReporter ErrorReporter;
     private readonly InternalError InternalError;
 
-    public class OffTimesDatabaseDependencies
-    {
-        public wttContext Connection;
-        public IErrorReporter ErrorReporter;
-        public InternalError InternalError;
-    }
-
     public OffTimes(OffTimesDatabaseDependencies dependencies)
     {
         Connection = dependencies.Connection;
@@ -173,5 +166,12 @@ public class OffTimes : IDatabase
         };
 
         return offTime;
+    }
+
+    public class OffTimesDatabaseDependencies
+    {
+        public wttContext Connection;
+        public IErrorReporter ErrorReporter;
+        public InternalError InternalError;
     }
 }

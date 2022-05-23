@@ -17,13 +17,6 @@ public class Projects : IDatabase
     private readonly IErrorReporter ErrorReporter;
     private readonly InternalError InternalError;
 
-    public class ProjectsDatabaseDependencies
-    {
-        public wttContext Connection;
-        public IErrorReporter ErrorReporter;
-        public InternalError InternalError;
-    }
-
     public Projects(ProjectsDatabaseDependencies dependencies)
     {
         Connection = dependencies.Connection;
@@ -193,5 +186,12 @@ public class Projects : IDatabase
             Name = model.Name,
             CreatedAt = model.CreatedAt.Value
         };
+    }
+
+    public class ProjectsDatabaseDependencies
+    {
+        public wttContext Connection;
+        public IErrorReporter ErrorReporter;
+        public InternalError InternalError;
     }
 }

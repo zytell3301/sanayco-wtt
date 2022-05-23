@@ -28,5 +28,5 @@ public interface IDatabase
     public void UpdatePresentation(Domain.Entities.Presentation presentation);
 
     public Domain.Entities.Presentation GetPresentation(Domain.Entities.Presentation presentation);
-    public Domain.Entities.User GetUser(int userId);
+    public User GetUser(int userId);
 }

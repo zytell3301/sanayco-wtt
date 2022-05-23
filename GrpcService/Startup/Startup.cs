@@ -1,6 +1,8 @@
-﻿using ErrorReporter;
+﻿#region
+
+using ErrorReporter;
 using GrpcService1.App.Auth;
-using GrpcService1.App.Core.Tasks;
+using GrpcService1.App.Core.Foods;
 using GrpcService1.App.Database.Foods;
 using GrpcService1.App.Database.Missions;
 using GrpcService1.App.Database.Model;
@@ -12,7 +14,7 @@ using GrpcService1.App.Database.Users;
 using GrpcService1.App.Excel;
 using GrpcService1.App.Handlers.Http;
 using GrpcService1.App.HashGenerator;
-using GrpcService1.App.Pdf.Presentations;
+using GrpcService1.App.Pdf.Tasks;
 using GrpcService1.App.PermissionsSource;
 using GrpcService1.App.ProfilePicturesStorage;
 using GrpcService1.App.TokenGenerator;
@@ -20,53 +22,19 @@ using GrpcService1.App.TokenSource;
 using GrpcService1.Domain.Errors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Core = GrpcService1.App.Core.Tasks.Core;
+
+#endregion
 
 namespace GrpcService1.Startup;
 
 public class Startup
 {
-    private WebApplicationBuilder Builder;
+    private readonly AppConfigs Configs = new();
+
+    private readonly ServiceDependencies Dependencies = new();
     private WebApplication App;
-
-    private readonly AppConfigs Configs = new AppConfigs();
-
-    private readonly ServiceDependencies Dependencies = new ServiceDependencies();
-
-
-    private class ServiceDependencies
-    {
-        public IErrorReporter ErrorReporter;
-        public DatabaseDependencies DBDependencies = new DatabaseDependencies();
-        public Auth Auth;
-
-        public class DatabaseDependencies
-        {
-            public wttContext Connection;
-            public IDatabase TasksDB;
-            public App.Core.Presentation.IDatabase PresentationDB;
-            public App.Core.OffTime.IDatabase OffTimesDB;
-            public App.Core.Projects.IDatabase ProjectsDB;
-            public App.Core.Users.IDatabase UsersDB;
-            public App.Core.Foods.IDatabase FoodsDB;
-            public App.Core.Missions.IDatabase MissionsDB;
-        }
-    }
-
-    private class AppConfigs
-    {
-        public const string ConnectionString =
-            "Server=localhost,50296;Database=wtt;Trusted_Connection=True;MultipleActiveResultSets=true;";
-
-        public Auth AuthConfigs = new Auth();
-
-        public class Auth
-        {
-            public string Audience = "https://localhost:5001";
-            public string Issuer = "https://localhost:5001";
-            public string key = "asdv234234^&%&^%&^hjsdfb2%%%";
-            public string SecurityAlgorithm = SecurityAlgorithms.HmacSha512;
-        }
-    }
+    private readonly WebApplicationBuilder Builder;
 
     public Startup(string[] args)
     {
@@ -117,32 +85,32 @@ public class Startup
         Dependencies.DBDependencies.Connection = new wttContext(new DbContextOptions<wttContext>());
 
         Dependencies.DBDependencies.TasksDB =
-            new Tasks(new Tasks.TasksDatabaseDependencies()
+            new Tasks(new Tasks.TasksDatabaseDependencies
             {
                 Connection = Dependencies.DBDependencies.Connection,
                 ErrorReporter = Dependencies.ErrorReporter,
                 InternalError = new InternalError("InternalError")
             });
         Dependencies.DBDependencies.PresentationDB =
-            new Presentations(new Presentations.PresentationsDatabaseDependencies()
+            new Presentations(new Presentations.PresentationsDatabaseDependencies
             {
                 Connection = Dependencies.DBDependencies.Connection,
                 ErrorReporter = Dependencies.ErrorReporter,
-                InternalError = new InternalError("InternalError"),
+                InternalError = new InternalError("InternalError")
             });
         Dependencies.DBDependencies.OffTimesDB =
-            new OffTimes(new OffTimes.OffTimesDatabaseDependencies()
+            new OffTimes(new OffTimes.OffTimesDatabaseDependencies
             {
                 Connection = Dependencies.DBDependencies.Connection,
                 ErrorReporter = Dependencies.ErrorReporter,
                 InternalError = new InternalError("InternalError")
             });
         Dependencies.DBDependencies.ProjectsDB =
-            new Projects(new Projects.ProjectsDatabaseDependencies()
+            new Projects(new Projects.ProjectsDatabaseDependencies
             {
                 Connection = Dependencies.DBDependencies.Connection,
                 ErrorReporter = Dependencies.ErrorReporter,
-                InternalError = new InternalError("InternalError"),
+                InternalError = new InternalError("InternalError")
             });
         Dependencies.DBDependencies.UsersDB = new Users(new Users.UsersDatabaseDependencies
         {
@@ -150,7 +118,7 @@ public class Startup
             ErrorReporter = Dependencies.ErrorReporter,
             InternalError = new InternalError("internal error")
         });
-        Dependencies.DBDependencies.FoodsDB = new Foods(new Foods.FoodsDatabaseDependencies()
+        Dependencies.DBDependencies.FoodsDB = new Foods(new Foods.FoodsDatabaseDependencies
         {
             Connection = Dependencies.DBDependencies.Connection,
             ErrorReporter = Dependencies.ErrorReporter,
@@ -171,7 +139,7 @@ public class Startup
             Audience = Configs.AuthConfigs.Audience,
             Issuer = Configs.AuthConfigs.Issuer,
             Key = Configs.AuthConfigs.key,
-            SecurityAlgorithm = Configs.AuthConfigs.SecurityAlgorithm,
+            SecurityAlgorithm = Configs.AuthConfigs.SecurityAlgorithm
         }, new Auth.AuthDependencies
         {
             ErrorReporter = Dependencies.ErrorReporter,
@@ -185,7 +153,7 @@ public class Startup
             {
                 Database = Dependencies.DBDependencies.TasksDB,
                 Excel = new Excel(),
-                Pdf = new App.Pdf.Tasks.Pdf(),
+                Pdf = new Pdf()
             }, new Core.TasksCoreConfigs
             {
                 OperationSuccessfulMessage = "OperationSuccessfulMessage",
@@ -196,24 +164,24 @@ public class Startup
                 WaitingTaskCode = "WaitingTaskCode"
             })
         );
-        Builder.Services.AddSingleton(new GrpcService1.App.Core.Presentation.Core(
-            new GrpcService1.App.Core.Presentation.Core.PresentationCoreDependencies
+        Builder.Services.AddSingleton(new App.Core.Presentation.Core(
+            new App.Core.Presentation.Core.PresentationCoreDependencies
             {
                 Database = Dependencies.DBDependencies.PresentationDB,
                 Excel = new Excel(),
-                Pdf = new Pdf(),
-            }, new GrpcService1.App.Core.Presentation.Core.PresentationCoreConfigs
+                Pdf = new App.Pdf.Presentations.Pdf()
+            }, new App.Core.Presentation.Core.PresentationCoreConfigs
             {
                 OperationSuccessfulMessage = "OperationSuccessfulMessage",
                 InternalErrorMessage = "InternalErrorMessage"
             })
         );
-        Builder.Services.AddSingleton(new GrpcService1.App.Core.OffTime.Core(
-            new GrpcService1.App.Core.OffTime.Core.OffTimeDependencies
+        Builder.Services.AddSingleton(new App.Core.OffTime.Core(
+            new App.Core.OffTime.Core.OffTimeDependencies
             {
                 Database = Dependencies.DBDependencies.OffTimesDB,
-                Excel = new Excel(),
-            }, new GrpcService1.App.Core.OffTime.Core.OffTimeCoreConfigs
+                Excel = new Excel()
+            }, new App.Core.OffTime.Core.OffTimeCoreConfigs
             {
                 OperationSuccessfulMessage = "OperationSuccessfulMessage",
                 InternalErrorMessage = "InternalErrorMessage",
@@ -224,22 +192,22 @@ public class Startup
                 OffTimeRestrictionExceededMessage = "OffTimeRestrictionExceededMessage"
             })
         );
-        Builder.Services.AddSingleton(new GrpcService1.App.Core.Projects.Core(
-            new GrpcService1.App.Core.Projects.Core.ProjectsCoreDependencies
+        Builder.Services.AddSingleton(new App.Core.Projects.Core(
+            new App.Core.Projects.Core.ProjectsCoreDependencies
             {
-                Database = Dependencies.DBDependencies.ProjectsDB,
-            }, new GrpcService1.App.Core.Projects.Core.ProjectsCoreConfigs
+                Database = Dependencies.DBDependencies.ProjectsDB
+            }, new App.Core.Projects.Core.ProjectsCoreConfigs
             {
                 InternalErrorMessage = "InternalErrorMessage",
                 OperationSuccessfulMessage = "OperationSuccessfulMessage",
                 CreatorProjectMemberCode = "CreatorProjectMemberCode"
             })
         );
-        Builder.Services.AddSingleton(new GrpcService1.App.Core.Foods.Core(
-            new GrpcService1.App.Core.Foods.Core.FoodsCoreDependencies
+        Builder.Services.AddSingleton(new App.Core.Foods.Core(
+            new App.Core.Foods.Core.FoodsCoreDependencies
             {
-                Database = Dependencies.DBDependencies.FoodsDB,
-            }, new GrpcService1.App.Core.Foods.Core.FoodsCoreConfigs
+                Database = Dependencies.DBDependencies.FoodsDB
+            }, new App.Core.Foods.Core.FoodsCoreConfigs
             {
                 InternalErrorMessage = "InternalErrorMessage"
             })
@@ -252,16 +220,16 @@ public class Startup
             AuthorizationFailed = new AuthorizationFailed("Authorization failed"),
             PermissionsSource = new PermissionsSource(Dependencies.DBDependencies.Connection),
             TokenSource = new TokenSource(Dependencies.DBDependencies.Connection),
-            Auth = Dependencies.Auth,
+            Auth = Dependencies.Auth
         });
-        Builder.Services.AddSingleton(new GrpcService1.App.Core.Users.Core(
-            new GrpcService1.App.Core.Users.Core.UsersCoreConfigs
+        Builder.Services.AddSingleton(new App.Core.Users.Core(
+            new App.Core.Users.Core.UsersCoreConfigs
             {
                 ExpirationWindow = 1000000,
                 InternalErrorMessage = "InternalErrorMessage",
                 InvalidCredentialsMessage = "InvalidCredentialsMessage"
             },
-            new GrpcService1.App.Core.Users.Core.UsersCoreDependencies
+            new App.Core.Users.Core.UsersCoreDependencies
             {
                 TokenGenerator = new TokenGenerator(new TokenGenerator.TokenGeneratorConfigs
                 {
@@ -290,17 +258,17 @@ public class Startup
                     InternalErrorMessage = "InternalErrorMessage"
                 }, new HashGenerator.HashGeneratorDependencies
                 {
-                    ErrorReporter = Dependencies.ErrorReporter,
+                    ErrorReporter = Dependencies.ErrorReporter
                 }),
-                Auth = Dependencies.Auth,
+                Auth = Dependencies.Auth
             })
         );
-        Builder.Services.AddSingleton(new GrpcService1.App.Core.Missions.Core(
-            new GrpcService1.App.Core.Missions.Core.MissionsCoreDependencies
+        Builder.Services.AddSingleton(new App.Core.Missions.Core(
+            new App.Core.Missions.Core.MissionsCoreDependencies
             {
-                Database = Dependencies.DBDependencies.MissionsDB,
+                Database = Dependencies.DBDependencies.MissionsDB
             },
-            new GrpcService1.App.Core.Missions.Core.MissionsCoreConfigs
+            new App.Core.Missions.Core.MissionsCoreConfigs
             {
                 InternalErrorMessage = "InternalErrorMessage"
             })
@@ -323,5 +291,41 @@ public class Startup
     private void RunApp()
     {
         App.Run();
+    }
+
+
+    private class ServiceDependencies
+    {
+        public Auth Auth;
+        public readonly DatabaseDependencies DBDependencies = new();
+        public IErrorReporter ErrorReporter;
+
+        public class DatabaseDependencies
+        {
+            public wttContext Connection;
+            public IDatabase FoodsDB;
+            public App.Core.Missions.IDatabase MissionsDB;
+            public App.Core.OffTime.IDatabase OffTimesDB;
+            public App.Core.Presentation.IDatabase PresentationDB;
+            public App.Core.Projects.IDatabase ProjectsDB;
+            public App.Core.Tasks.IDatabase TasksDB;
+            public App.Core.Users.IDatabase UsersDB;
+        }
+    }
+
+    private class AppConfigs
+    {
+        public const string ConnectionString =
+            "Server=localhost,50296;Database=wtt;Trusted_Connection=True;MultipleActiveResultSets=true;";
+
+        public readonly Auth AuthConfigs = new();
+
+        public class Auth
+        {
+            public readonly string Audience = "https://localhost:5001";
+            public readonly string Issuer = "https://localhost:5001";
+            public readonly string key = "asdv234234^&%&^%&^hjsdfb2%%%";
+            public readonly string SecurityAlgorithm = SecurityAlgorithms.HmacSha512;
+        }
     }
 }

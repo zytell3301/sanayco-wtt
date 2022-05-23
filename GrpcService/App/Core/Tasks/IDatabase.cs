@@ -1,4 +1,10 @@
-﻿namespace GrpcService1.App.Core.Tasks;
+﻿#region
+
+using GrpcService1.Domain.Entities;
+
+#endregion
+
+namespace GrpcService1.App.Core.Tasks;
 
 public interface IDatabase
 {
@@ -16,6 +22,6 @@ public interface IDatabase
         string workLocation);
 
     public List<Domain.Entities.Task> GetUserTasks(DateTime fromDate, DateTime toDate, int userId);
-    
-    public Domain.Entities.User GetUser(int userId);
+
+    public User GetUser(int userId);
 }

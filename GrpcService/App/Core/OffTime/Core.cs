@@ -18,7 +18,6 @@ public class Core
 
     private readonly IDatabase Database;
     private readonly InternalError InternalError;
-    private IExcel Excel;
 
     /*
      * Number of seconds that if exceeded, the manager must approve the
@@ -29,6 +28,7 @@ public class Core
     private readonly OperationSuccessful OperationSuccessful;
     private readonly string RejectedOffTimeCode;
     private readonly string WaitingOffTimeCode;
+    private readonly IExcel Excel;
 
     public Core(OffTimeDependencies dependencies, OffTimeCoreConfigs configs)
     {

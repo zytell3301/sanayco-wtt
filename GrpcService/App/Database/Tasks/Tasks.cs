@@ -4,6 +4,7 @@ using ErrorReporter;
 using GrpcService1.App.Core.Tasks;
 using GrpcService1.App.Database.Model;
 using GrpcService1.Domain.Errors;
+using User = GrpcService1.Domain.Entities.User;
 
 #endregion
 
@@ -14,13 +15,6 @@ public class Tasks : IDatabase
     private readonly wttContext Connection;
     private readonly IErrorReporter ErrorReporter;
     private readonly InternalError InternalError;
-
-    public class TasksDatabaseDependencies
-    {
-        public wttContext Connection;
-        public IErrorReporter ErrorReporter;
-        public InternalError InternalError;
-    }
 
     public Tasks(TasksDatabaseDependencies dependencies)
     {
@@ -155,24 +149,25 @@ public class Tasks : IDatabase
     {
         // try
         // {
-            var tasks = new List<Domain.Entities.Task>();
-            foreach (var task in Connection.Tasks.Where(t => t.CreatedAt > fromDate).Where(t => t.CreatedAt < toDate)
-                         .Where(t => t.UserId == userId).ToList())
-                tasks.Add(ConvertModelToTask(task));
+        var tasks = new List<Domain.Entities.Task>();
+        foreach (var task in Connection.Tasks.Where(t => t.CreatedAt > fromDate).Where(t => t.CreatedAt < toDate)
+                     .Where(t => t.UserId == userId).ToList())
+            tasks.Add(ConvertModelToTask(task));
 
-            return tasks;
+        return tasks;
         // }
         // catch (Exception e)
         // {
-            // throw InternalError;
+        // throw InternalError;
         // }    
     }
-    public Domain.Entities.User GetUser(int userId)
+
+    public User GetUser(int userId)
     {
         try
         {
             var model = Connection.Users.First(u => u.Id == userId);
-            return new Domain.Entities.User()
+            return new User
             {
                 Id = model.Id,
                 Name = model.Name,
@@ -181,7 +176,7 @@ public class Tasks : IDatabase
                 CompanyLevel = model.CompanyLevel,
                 CreatedAt = model.CreatedAt,
                 LastName = model.Lastname,
-                SkillLevel = model.SkillLevel,
+                SkillLevel = model.SkillLevel
             };
         }
         catch (Exception e)
@@ -190,6 +185,7 @@ public class Tasks : IDatabase
             throw InternalError;
         }
     }
+
     private void UpdateTask(Model.Task task)
     {
         Connection.Tasks.Update(task);
@@ -230,5 +226,12 @@ public class Tasks : IDatabase
         }
 
         return task;
+    }
+
+    public class TasksDatabaseDependencies
+    {
+        public wttContext Connection;
+        public IErrorReporter ErrorReporter;
+        public InternalError InternalError;
     }
 }
