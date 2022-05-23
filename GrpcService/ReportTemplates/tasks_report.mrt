@@ -10,10 +10,14 @@
     <DataSources isList="true" count="2">
       <dt Ref="2" type="DataTableSource" isKey="true">
         <Alias>dt</Alias>
-        <Columns isList="true" count="3">
+        <Columns isList="true" count="7">
           <value>ORIGINAL,Id,Id,Id,System.Int32,f725cb141dac4483bb8e9dac9d4797bc</value>
-          <value>Start,System.String</value>
-          <value>End,System.String</value>
+          <value>StartTime,System.String</value>
+          <value>Points,System.Int32</value>
+          <value>Title,System.String</value>
+          <value>Description,System.String</value>
+          <value>Status,System.String</value>
+          <value>WorkLocation,System.String</value>
         </Columns>
         <Dictionary isRef="1" />
         <Key>d8919cba5e014f47a65e001b844b7744</Key>
@@ -150,24 +154,27 @@
       <Alias>Page 2</Alias>
       <Border>None;Black;2;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
-      <Components isList="true" count="5">
+      <Components isList="true" count="6">
         <Panel1 Ref="8" type="Panel" isKey="true">
-          <Brush>Transparent</Brush>
-          <ClientRectangle>0,370,1020,1250</ClientRectangle>
+          <Border>None;Black;2;Solid;False;4;[0:0:0:0]</Border>
+          <Brush>EmptyBrush</Brush>
+          <ClientRectangle>-5,359,1030,1270</ClientRectangle>
           <Components isList="true" count="1">
             <Tabledt Ref="9" type="Stimulsoft.Report.Components.Table.StiTable" isKey="true">
-              <Border>All;Black;1;Solid;False;4;Black</Border>
-              <Brush>Transparent</Brush>
+              <AutoWidth>Table</AutoWidth>
+              <AutoWidthType>FullTable</AutoWidthType>
+              <Border>None;Black;1;None;False;1;Black</Border>
+              <Brush>EmptyBrush</Brush>
               <BusinessObjectGuid isNull="true" />
-              <ClientRectangle>0,20,1020,60</ClientRectangle>
-              <ColumnCount>3</ColumnCount>
-              <Components isList="true" count="6">
+              <ClientRectangle>0,20,1030,60</ClientRectangle>
+              <ColumnCount>7</ColumnCount>
+              <Components isList="true" count="14">
                 <Tabledt_Cell1 Ref="10" type="TableCell" isKey="true">
                   <Brush>[180:35:159:217]</Brush>
-                  <ClientRectangle>0,0,260,30</ClientRectangle>
+                  <ClientRectangle>0,0,70,30</ClientRectangle>
                   <Conditions isList="true" count="0" />
                   <Expressions isList="true" count="0" />
-                  <Font>Arial,14,Bold</Font>
+                  <Font>Arial,12,Bold</Font>
                   <HorAlignment>Center</HorAlignment>
                   <ID>0</ID>
                   <JoinCells isList="true" count="0" />
@@ -176,17 +183,16 @@
                   <Page isRef="7" />
                   <Parent isRef="9" />
                   <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <Text>شماره حضور</Text>
+                  <Text>Id</Text>
                   <TextBrush>[255:255:255]</TextBrush>
-                  <Type>Expression</Type>
                   <VertAlignment>Center</VertAlignment>
                 </Tabledt_Cell1>
                 <Tabledt_Cell2 Ref="11" type="TableCell" isKey="true">
                   <Brush>[180:35:159:217]</Brush>
-                  <ClientRectangle>260,0,260,30</ClientRectangle>
+                  <ClientRectangle>70,0,150,30</ClientRectangle>
                   <Conditions isList="true" count="0" />
                   <Expressions isList="true" count="0" />
-                  <Font>Arial,14,Bold</Font>
+                  <Font>Arial,12,Bold</Font>
                   <HorAlignment>Center</HorAlignment>
                   <ID>1</ID>
                   <JoinCells isList="true" count="0" />
@@ -195,17 +201,16 @@
                   <Page isRef="7" />
                   <Parent isRef="9" />
                   <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <Text>شروع حضور</Text>
+                  <Text>StartTime</Text>
                   <TextBrush>[255:255:255]</TextBrush>
-                  <Type>Expression</Type>
                   <VertAlignment>Center</VertAlignment>
                 </Tabledt_Cell2>
                 <Tabledt_Cell3 Ref="12" type="TableCell" isKey="true">
                   <Brush>[180:35:159:217]</Brush>
-                  <ClientRectangle>520,0,500,30</ClientRectangle>
+                  <ClientRectangle>220,0,80,30</ClientRectangle>
                   <Conditions isList="true" count="0" />
                   <Expressions isList="true" count="0" />
-                  <Font>Arial,14,Bold</Font>
+                  <Font>Arial,12,Bold</Font>
                   <HorAlignment>Center</HorAlignment>
                   <ID>2</ID>
                   <JoinCells isList="true" count="0" />
@@ -214,18 +219,16 @@
                   <Page isRef="7" />
                   <Parent isRef="9" />
                   <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <Text>پایان حضور</Text>
+                  <Text>Points</Text>
                   <TextBrush>[255:255:255]</TextBrush>
-                  <Type>Expression</Type>
                   <VertAlignment>Center</VertAlignment>
                 </Tabledt_Cell3>
                 <Tabledt_Cell4 Ref="13" type="TableCell" isKey="true">
-                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
-                  <Brush>[180:178:178:178]</Brush>
-                  <ClientRectangle>0,30,260,30</ClientRectangle>
+                  <Brush>[180:35:159:217]</Brush>
+                  <ClientRectangle>300,0,140,30</ClientRectangle>
                   <Conditions isList="true" count="0" />
                   <Expressions isList="true" count="0" />
-                  <Font>Arial,14</Font>
+                  <Font>Arial,12,Bold</Font>
                   <HorAlignment>Center</HorAlignment>
                   <ID>3</ID>
                   <JoinCells isList="true" count="0" />
@@ -234,17 +237,16 @@
                   <Page isRef="7" />
                   <Parent isRef="9" />
                   <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <Text>{dt.Id}</Text>
-                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <Text>Title</Text>
+                  <TextBrush>[255:255:255]</TextBrush>
                   <VertAlignment>Center</VertAlignment>
                 </Tabledt_Cell4>
                 <Tabledt_Cell5 Ref="14" type="TableCell" isKey="true">
-                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
-                  <Brush>[180:178:178:178]</Brush>
-                  <ClientRectangle>260,30,260,30</ClientRectangle>
+                  <Brush>[180:35:159:217]</Brush>
+                  <ClientRectangle>440,0,190,30</ClientRectangle>
                   <Conditions isList="true" count="0" />
                   <Expressions isList="true" count="0" />
-                  <Font>Arial,14</Font>
+                  <Font>Arial,10</Font>
                   <HorAlignment>Center</HorAlignment>
                   <ID>4</ID>
                   <JoinCells isList="true" count="0" />
@@ -253,17 +255,16 @@
                   <Page isRef="7" />
                   <Parent isRef="9" />
                   <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <Text>{dt.Start}</Text>
-                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <Text>Description</Text>
+                  <TextBrush>[255:255:255]</TextBrush>
                   <VertAlignment>Center</VertAlignment>
                 </Tabledt_Cell5>
                 <Tabledt_Cell6 Ref="15" type="TableCell" isKey="true">
-                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
-                  <Brush>[180:178:178:178]</Brush>
-                  <ClientRectangle>520,30,500,30</ClientRectangle>
+                  <Brush>[180:35:159:217]</Brush>
+                  <ClientRectangle>630,0,180,30</ClientRectangle>
                   <Conditions isList="true" count="0" />
                   <Expressions isList="true" count="0" />
-                  <Font>Arial,14</Font>
+                  <Font>Arial,12,Bold</Font>
                   <HorAlignment>Center</HorAlignment>
                   <ID>5</ID>
                   <JoinCells isList="true" count="0" />
@@ -272,10 +273,164 @@
                   <Page isRef="7" />
                   <Parent isRef="9" />
                   <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <Text>{dt.End}</Text>
-                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <Text>Status</Text>
+                  <TextBrush>[255:255:255]</TextBrush>
                   <VertAlignment>Center</VertAlignment>
                 </Tabledt_Cell6>
+                <Tabledt_Cell7 Ref="16" type="TableCell" isKey="true">
+                  <Brush>[180:35:159:217]</Brush>
+                  <ClientRectangle>810,0,220,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>Arial,12,Bold</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>6</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Tabledt_Cell7</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="9" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>WorkLocation</Text>
+                  <TextBrush>[255:255:255]</TextBrush>
+                  <Type>Expression</Type>
+                  <VertAlignment>Center</VertAlignment>
+                </Tabledt_Cell7>
+                <Tabledt_Cell8 Ref="17" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>0,30,70,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>Arial,10</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>7</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Tabledt_Cell8</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="9" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>{dt.Id}</Text>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <VertAlignment>Center</VertAlignment>
+                </Tabledt_Cell8>
+                <Tabledt_Cell9 Ref="18" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>70,30,150,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>Arial,10</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>8</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Tabledt_Cell9</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="9" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>{dt.StartTime}</Text>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <VertAlignment>Center</VertAlignment>
+                </Tabledt_Cell9>
+                <Tabledt_Cell10 Ref="19" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>220,30,80,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>Arial,10</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>9</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Tabledt_Cell10</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="9" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>{dt.Points}</Text>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <VertAlignment>Center</VertAlignment>
+                </Tabledt_Cell10>
+                <Tabledt_Cell11 Ref="20" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>300,30,140,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>Arial,10</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>10</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Tabledt_Cell11</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="9" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>{dt.Title}</Text>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <VertAlignment>Center</VertAlignment>
+                </Tabledt_Cell11>
+                <Tabledt_Cell12 Ref="21" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>440,30,190,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>Bahij Nazanin,12</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>11</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Tabledt_Cell12</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="9" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>{Persian(dt.Description)}</Text>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <Type>DataColumn</Type>
+                  <VertAlignment>Center</VertAlignment>
+                </Tabledt_Cell12>
+                <Tabledt_Cell13 Ref="22" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>630,30,180,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>Arial,10</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>12</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Tabledt_Cell13</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="9" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>{dt.Status}</Text>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <VertAlignment>Center</VertAlignment>
+                </Tabledt_Cell13>
+                <Tabledt_Cell14 Ref="23" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>810,30,220,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>Arial,10</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>13</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Tabledt_Cell14</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="9" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>{dt.WorkLocation}</Text>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <Type>Expression</Type>
+                  <VertAlignment>Center</VertAlignment>
+                </Tabledt_Cell14>
               </Components>
               <Conditions isList="true" count="0" />
               <DataSourceName>dt</DataSourceName>
@@ -284,12 +439,12 @@
               <HeaderRowsCount>1</HeaderRowsCount>
               <MinHeight>20</MinHeight>
               <Name>Tabledt</Name>
-              <NumberID>6</NumberID>
+              <NumberID>14</NumberID>
               <Page isRef="7" />
               <Parent isRef="8" />
               <RowCount>2</RowCount>
               <Sort isList="true" count="0" />
-              <TableStyleFX Ref="16" type="Stimulsoft.Report.Components.Table.StiTable21StyleFX" isKey="true">
+              <TableStyleFX Ref="24" type="Stimulsoft.Report.Components.Table.StiTable21StyleFX" isKey="true">
                 <AlternatingDataColor>238, 238, 238</AlternatingDataColor>
                 <AlternatingDataForeground>34, 34, 34</AlternatingDataForeground>
                 <BackColor>White</BackColor>
@@ -314,316 +469,18 @@
           <Page isRef="7" />
           <Parent isRef="7" />
         </Panel1>
-        <Panel2 Ref="17" type="Panel" isKey="true">
+        <Image1 Ref="25" type="Image" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>0,230,1020,110</ClientRectangle>
-          <Components isList="true" count="1">
-            <Table1 Ref="18" type="Stimulsoft.Report.Components.Table.StiTable" isKey="true">
-              <Brush>Transparent</Brush>
-              <ClientRectangle>0,20,1020,80</ClientRectangle>
-              <ColumnCount>4</ColumnCount>
-              <Components isList="true" count="12">
-                <Table1_Cell1 Ref="19" type="TableCell" isKey="true">
-                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
-                  <Brush>[180:178:178:178]</Brush>
-                  <ClientRectangle>0,0,190,30</ClientRectangle>
-                  <Conditions isList="true" count="0" />
-                  <Expressions isList="true" count="0" />
-                  <Font>Arial,11</Font>
-                  <HorAlignment>Center</HorAlignment>
-                  <ID>0</ID>
-                  <JoinCells isList="true" count="0" />
-                  <Margins>0,0,0,0</Margins>
-                  <Name>Table1_Cell1</Name>
-                  <Page isRef="7" />
-                  <Parent isRef="18" />
-                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <Text>نام</Text>
-                  <TextBrush>[180:38:68:120]</TextBrush>
-                  <Type>Expression</Type>
-                  <VertAlignment>Center</VertAlignment>
-                </Table1_Cell1>
-                <Table1_Cell2 Ref="20" type="TableCell" isKey="true">
-                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
-                  <Brush>[180:178:178:178]</Brush>
-                  <ClientRectangle>190,0,190,30</ClientRectangle>
-                  <Conditions isList="true" count="0" />
-                  <Expressions isList="true" count="0" />
-                  <Font>Arial,11</Font>
-                  <HorAlignment>Center</HorAlignment>
-                  <ID>1</ID>
-                  <JoinCells isList="true" count="0" />
-                  <Margins>0,0,0,0</Margins>
-                  <Name>Table1_Cell2</Name>
-                  <Page isRef="7" />
-                  <Parent isRef="18" />
-                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <Text>{ReportInfo.Name}</Text>
-                  <TextBrush>[180:38:68:120]</TextBrush>
-                  <Type>Expression</Type>
-                  <VertAlignment>Center</VertAlignment>
-                </Table1_Cell2>
-                <Table1_Cell3 Ref="21" type="TableCell" isKey="true">
-                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
-                  <Brush>[180:178:178:178]</Brush>
-                  <ClientRectangle>380,0,190,30</ClientRectangle>
-                  <Conditions isList="true" count="0" />
-                  <Expressions isList="true" count="0" />
-                  <Font>Arial,11</Font>
-                  <HorAlignment>Center</HorAlignment>
-                  <ID>2</ID>
-                  <JoinCells isList="true" count="0" />
-                  <Margins>0,0,0,0</Margins>
-                  <Name>Table1_Cell3</Name>
-                  <Page isRef="7" />
-                  <Parent isRef="18" />
-                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <Text>نام خانوادگی</Text>
-                  <TextBrush>[180:38:68:120]</TextBrush>
-                  <Type>Expression</Type>
-                  <VertAlignment>Center</VertAlignment>
-                </Table1_Cell3>
-                <Table1_Cell4 Ref="22" type="TableCell" isKey="true">
-                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
-                  <Brush>[180:178:178:178]</Brush>
-                  <ClientRectangle>570,0,450,30</ClientRectangle>
-                  <Conditions isList="true" count="0" />
-                  <Expressions isList="true" count="0" />
-                  <Font>Arial,11</Font>
-                  <HorAlignment>Center</HorAlignment>
-                  <ID>3</ID>
-                  <JoinCells isList="true" count="0" />
-                  <Margins>0,0,0,0</Margins>
-                  <Name>Table1_Cell4</Name>
-                  <Page isRef="7" />
-                  <Parent isRef="18" />
-                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <Text>{ReportInfo.Lastname}</Text>
-                  <TextBrush>[180:38:68:120]</TextBrush>
-                  <Type>Expression</Type>
-                  <VertAlignment>Center</VertAlignment>
-                </Table1_Cell4>
-                <Table1_Cell5 Ref="23" type="TableCell" isKey="true">
-                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
-                  <Brush>[180:178:178:178]</Brush>
-                  <ClientRectangle>0,30,190,30.01</ClientRectangle>
-                  <Conditions isList="true" count="0" />
-                  <Expressions isList="true" count="0" />
-                  <Font>Arial,11</Font>
-                  <HorAlignment>Center</HorAlignment>
-                  <ID>5</ID>
-                  <JoinCells isList="true" count="0" />
-                  <Margins>0,0,0,0</Margins>
-                  <Name>Table1_Cell5</Name>
-                  <Page isRef="7" />
-                  <Parent isRef="18" />
-                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <Text>از تاریخ</Text>
-                  <TextBrush>[180:38:68:120]</TextBrush>
-                  <Type>Expression</Type>
-                  <VertAlignment>Center</VertAlignment>
-                </Table1_Cell5>
-                <Table1_Cell6 Ref="24" type="TableCell" isKey="true">
-                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
-                  <Brush>[180:178:178:178]</Brush>
-                  <ClientRectangle>190,30,190,30.01</ClientRectangle>
-                  <Conditions isList="true" count="0" />
-                  <Expressions isList="true" count="0" />
-                  <Font>Arial,11</Font>
-                  <HorAlignment>Center</HorAlignment>
-                  <ID>6</ID>
-                  <JoinCells isList="true" count="0" />
-                  <Margins>0,0,0,0</Margins>
-                  <Name>Table1_Cell6</Name>
-                  <Page isRef="7" />
-                  <Parent isRef="18" />
-                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <Text>{ReportInfo.FromDate}</Text>
-                  <TextBrush>[180:38:68:120]</TextBrush>
-                  <Type>Expression</Type>
-                  <VertAlignment>Center</VertAlignment>
-                </Table1_Cell6>
-                <Table1_Cell7 Ref="25" type="TableCell" isKey="true">
-                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
-                  <Brush>[180:178:178:178]</Brush>
-                  <ClientRectangle>380,30,190,30.01</ClientRectangle>
-                  <Conditions isList="true" count="0" />
-                  <Expressions isList="true" count="0" />
-                  <Font>Arial,11</Font>
-                  <HorAlignment>Center</HorAlignment>
-                  <ID>7</ID>
-                  <JoinCells isList="true" count="0" />
-                  <Margins>0,0,0,0</Margins>
-                  <Name>Table1_Cell7</Name>
-                  <Page isRef="7" />
-                  <Parent isRef="18" />
-                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <Text>تا تاریخ</Text>
-                  <TextBrush>[180:38:68:120]</TextBrush>
-                  <Type>Expression</Type>
-                  <VertAlignment>Center</VertAlignment>
-                </Table1_Cell7>
-                <Table1_Cell8 Ref="26" type="TableCell" isKey="true">
-                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
-                  <Brush>[180:178:178:178]</Brush>
-                  <ClientRectangle>570,30,450,30.01</ClientRectangle>
-                  <Conditions isList="true" count="0" />
-                  <Expressions isList="true" count="0" />
-                  <Font>Arial,11</Font>
-                  <HorAlignment>Center</HorAlignment>
-                  <ID>8</ID>
-                  <JoinCells isList="true" count="0" />
-                  <Margins>0,0,0,0</Margins>
-                  <Name>Table1_Cell8</Name>
-                  <Page isRef="7" />
-                  <Parent isRef="18" />
-                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <Text>{ReportInfo.ToDate}</Text>
-                  <TextBrush>[180:38:68:120]</TextBrush>
-                  <Type>Expression</Type>
-                  <VertAlignment>Center</VertAlignment>
-                </Table1_Cell8>
-                <Table1_Cell9 Ref="27" type="TableCell" isKey="true">
-                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
-                  <Brush>[180:178:178:178]</Brush>
-                  <ClientRectangle>0,60,190,30</ClientRectangle>
-                  <Conditions isList="true" count="0" />
-                  <Expressions isList="true" count="0" />
-                  <Font>Arial,11</Font>
-                  <HorAlignment>Center</HorAlignment>
-                  <ID>10</ID>
-                  <JoinCells isList="true" count="0" />
-                  <Margins>0,0,0,0</Margins>
-                  <Name>Table1_Cell9</Name>
-                  <Page isRef="7" />
-                  <Parent isRef="18" />
-                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <Text>تاریخ تولید گزارش</Text>
-                  <TextBrush>[180:38:68:120]</TextBrush>
-                  <Type>Expression</Type>
-                  <VertAlignment>Center</VertAlignment>
-                </Table1_Cell9>
-                <Table1_Cell10 Ref="28" type="TableCell" isKey="true">
-                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
-                  <Brush>[180:178:178:178]</Brush>
-                  <ClientRectangle>190,60,190,30</ClientRectangle>
-                  <Conditions isList="true" count="0" />
-                  <Expressions isList="true" count="0" />
-                  <Font>Arial,11</Font>
-                  <HorAlignment>Center</HorAlignment>
-                  <ID>11</ID>
-                  <JoinCells isList="true" count="0" />
-                  <Margins>0,0,0,0</Margins>
-                  <Name>Table1_Cell10</Name>
-                  <Page isRef="7" />
-                  <Parent isRef="18" />
-                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <Text>{ReportInfo.GeneratedAt}</Text>
-                  <TextBrush>[180:38:68:120]</TextBrush>
-                  <Type>Expression</Type>
-                  <VertAlignment>Center</VertAlignment>
-                </Table1_Cell10>
-                <Table1_Cell11 Ref="29" type="TableCell" isKey="true">
-                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
-                  <Brush>[180:178:178:178]</Brush>
-                  <ClientRectangle>380,60,190,30</ClientRectangle>
-                  <Conditions isList="true" count="0" />
-                  <Expressions isList="true" count="0" />
-                  <Font>Arial,11</Font>
-                  <HorAlignment>Center</HorAlignment>
-                  <ID>12</ID>
-                  <JoinCells isList="true" count="0" />
-                  <Margins>0,0,0,0</Margins>
-                  <Name>Table1_Cell11</Name>
-                  <Page isRef="7" />
-                  <Parent isRef="18" />
-                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <TextBrush>[180:38:68:120]</TextBrush>
-                  <VertAlignment>Center</VertAlignment>
-                </Table1_Cell11>
-                <Table1_Cell12 Ref="30" type="TableCell" isKey="true">
-                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
-                  <Brush>[180:178:178:178]</Brush>
-                  <ClientRectangle>570,60,450,30</ClientRectangle>
-                  <Conditions isList="true" count="0" />
-                  <Expressions isList="true" count="0" />
-                  <Font>Arial,11</Font>
-                  <HorAlignment>Center</HorAlignment>
-                  <ID>13</ID>
-                  <JoinCells isList="true" count="0" />
-                  <Margins>0,0,0,0</Margins>
-                  <Name>Table1_Cell12</Name>
-                  <Page isRef="7" />
-                  <Parent isRef="18" />
-                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-                  <TextBrush>[180:38:68:120]</TextBrush>
-                  <VertAlignment>Center</VertAlignment>
-                </Table1_Cell12>
-              </Components>
-              <Conditions isList="true" count="0" />
-              <Expressions isList="true" count="0" />
-              <Filters isList="true" count="0" />
-              <MinHeight>30</MinHeight>
-              <Name>Table1</Name>
-              <NumberID>25</NumberID>
-              <Page isRef="7" />
-              <Parent isRef="17" />
-              <RowCount>3</RowCount>
-              <Sort isList="true" count="0" />
-              <TableStyleFX Ref="31" type="Stimulsoft.Report.Components.Table.StiTable21StyleFX" isKey="true">
-                <AlternatingDataColor>238, 238, 238</AlternatingDataColor>
-                <AlternatingDataForeground>34, 34, 34</AlternatingDataForeground>
-                <BackColor>White</BackColor>
-                <Conditions isList="true" count="0" />
-                <DataColor>180, 178, 178, 178</DataColor>
-                <DataForeground>180, 38, 68, 120</DataForeground>
-                <FooterColor>180, 35, 159, 217</FooterColor>
-                <FooterForeground>255, 255, 255</FooterForeground>
-                <GridColor>255, 255, 255</GridColor>
-                <HeaderColor>180, 35, 159, 217</HeaderColor>
-                <HeaderForeground>255, 255, 255</HeaderForeground>
-                <HotHeaderColor>Transparent</HotHeaderColor>
-                <Name />
-                <SelectedDataColor>52, 152, 219</SelectedDataColor>
-                <SelectedDataForeground>White</SelectedDataForeground>
-              </TableStyleFX>
-            </Table1>
-          </Components>
+          <ClientRectangle>0,0,0,0</ClientRectangle>
           <Conditions isList="true" count="0" />
           <Expressions isList="true" count="0" />
-          <Name>Panel2</Name>
-          <Page isRef="7" />
-          <Parent isRef="7" />
-        </Panel2>
-        <Text1 Ref="32" type="Text" isKey="true">
-          <Brush>Transparent</Brush>
-          <ClientRectangle>480,10,90,30</ClientRectangle>
-          <Conditions isList="true" count="0" />
-          <Expressions isList="true" count="0" />
-          <Font>Arial,20</Font>
+          <IconColor>68, 114, 196</IconColor>
           <Margins>0,0,0,0</Margins>
-          <Name>Text1</Name>
+          <Name>Image1</Name>
           <Page isRef="7" />
           <Parent isRef="7" />
-          <Text>به نام خدا</Text>
-          <TextBrush>Black</TextBrush>
-          <Type>Expression</Type>
-        </Text1>
-        <Text2 Ref="33" type="Text" isKey="true">
-          <Brush>Transparent</Brush>
-          <ClientRectangle>450,40,160,40</ClientRectangle>
-          <Conditions isList="true" count="0" />
-          <Expressions isList="true" count="0" />
-          <Font>Arial,14</Font>
-          <Margins>0,0,0,0</Margins>
-          <Name>Text2</Name>
-          <Page isRef="7" />
-          <Parent isRef="7" />
-          <Text>گزارش حضور و غیاب</Text>
-          <TextBrush>[84:141:212]</TextBrush>
-          <Type>Expression</Type>
-        </Text2>
-        <Image1 Ref="34" type="Image" isKey="true">
+        </Image1>
+        <Image2 Ref="26" type="Image" isKey="true">
           <Brush>Transparent</Brush>
           <ClientRectangle>760,10,250,140</ClientRectangle>
           <Conditions isList="true" count="0" />
@@ -808,10 +665,323 @@ vLi+Lk5OITdstb4E3jDDVp0HGf7dRpNRFM1Yj/A1jE94MTg4Qi4sCZ3+SU11id12N4PAPw0PdCOj
 4xgd8YhKQ1azCRkUivF8C4dwiUjcC12hUKycuJqMUygUsUEJXaG4CVBCVyhuApTQFYqbACV0heIm
 QAldobgJUEJXKBIe4P8DXc72F7l9WqYAAAAASUVORK5CYII=</ImageBytes>
           <Margins>0,0,0,0</Margins>
-          <Name>Image1</Name>
+          <Name>Image2</Name>
           <Page isRef="7" />
           <Parent isRef="7" />
-        </Image1>
+        </Image2>
+        <Text11 Ref="27" type="Text" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>460,10,90,30</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Arial,20</Font>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text11</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+          <Text>به نام خدا</Text>
+          <TextBrush>Black</TextBrush>
+          <Type>Expression</Type>
+        </Text11>
+        <Panel2 Ref="28" type="Panel" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,190,1020,120</ClientRectangle>
+          <Components isList="true" count="1">
+            <Table1 Ref="29" type="Stimulsoft.Report.Components.Table.StiTable" isKey="true">
+              <AutoWidth>Table</AutoWidth>
+              <AutoWidthType>FullTable</AutoWidthType>
+              <Border>All;Black;3;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,20,1020,90</ClientRectangle>
+              <ColumnCount>4</ColumnCount>
+              <Components isList="true" count="12">
+                <Table1_Cell1 Ref="30" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>0,0,140,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>B Nazanin,14</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>0</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Table1_Cell1</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="29" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>{Persian("نام")}</Text>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <Type>Expression</Type>
+                  <VertAlignment>Center</VertAlignment>
+                </Table1_Cell1>
+                <Table1_Cell2 Ref="31" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>140,0,230,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>Arial,14</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>1</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Table1_Cell2</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="29" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>{ReportInfo.Name}</Text>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <Type>Expression</Type>
+                  <VertAlignment>Center</VertAlignment>
+                </Table1_Cell2>
+                <Table1_Cell3 Ref="32" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>370,0,120,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>B Nazanin,14</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>2</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Table1_Cell3</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="29" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>{Persian("نام خانوادگی")}</Text>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <Type>Expression</Type>
+                  <VertAlignment>Center</VertAlignment>
+                </Table1_Cell3>
+                <Table1_Cell4 Ref="33" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>490,0,530,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>Arial,14</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>3</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Table1_Cell4</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="29" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>{ReportInfo.Lastname}</Text>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <Type>Expression</Type>
+                  <VertAlignment>Center</VertAlignment>
+                </Table1_Cell4>
+                <Table1_Cell5 Ref="34" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>0,30,140,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>B Nazanin,14</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>25</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Table1_Cell5</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="29" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>{Persian("از تاریخ")}</Text>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <Type>Expression</Type>
+                  <VertAlignment>Center</VertAlignment>
+                </Table1_Cell5>
+                <Table1_Cell6 Ref="35" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>140,30,230,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>Arial,14</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>26</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Table1_Cell6</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="29" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>{ReportInfo.FromDate}</Text>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <Type>Expression</Type>
+                  <VertAlignment>Center</VertAlignment>
+                </Table1_Cell6>
+                <Table1_Cell7 Ref="36" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>370,30,120,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>B Nazanin,14</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>27</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Table1_Cell7</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="29" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>{Persian("تا تاریخ")}</Text>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <Type>Expression</Type>
+                  <VertAlignment>Center</VertAlignment>
+                </Table1_Cell7>
+                <Table1_Cell8 Ref="37" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>490,30,530,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>Arial,14</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>28</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Table1_Cell8</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="29" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>{ReportInfo.ToDate}</Text>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <Type>Expression</Type>
+                  <VertAlignment>Center</VertAlignment>
+                </Table1_Cell8>
+                <Table1_Cell9 Ref="38" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>0,60,140,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>B Nazanin,14</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>29</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Table1_Cell9</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="29" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>{Persian("تاریخ تولید گزارش")}</Text>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <TextQuality>Wysiwyg</TextQuality>
+                  <Type>Expression</Type>
+                  <VertAlignment>Center</VertAlignment>
+                </Table1_Cell9>
+                <Table1_Cell10 Ref="39" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>140,60,230,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>Arial,14</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>30</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Table1_Cell10</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="29" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <Text>{ReportInfo.GeneratedAt}</Text>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                  <Type>Expression</Type>
+                  <VertAlignment>Center</VertAlignment>
+                </Table1_Cell10>
+                <Table1_Cell11 Ref="40" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>370,60,120,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>Arial,14</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>31</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Table1_Cell11</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="29" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                </Table1_Cell11>
+                <Table1_Cell12 Ref="41" type="TableCell" isKey="true">
+                  <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+                  <Brush>[180:178:178:178]</Brush>
+                  <ClientRectangle>490,60,530,30</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Expressions isList="true" count="0" />
+                  <Font>Arial,14</Font>
+                  <HorAlignment>Center</HorAlignment>
+                  <ID>32</ID>
+                  <JoinCells isList="true" count="0" />
+                  <Margins>0,0,0,0</Margins>
+                  <Name>Table1_Cell12</Name>
+                  <Page isRef="7" />
+                  <Parent isRef="29" />
+                  <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+                  <TextBrush>[180:38:68:120]</TextBrush>
+                </Table1_Cell12>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Filters isList="true" count="0" />
+              <MinHeight>30</MinHeight>
+              <Name>Table1</Name>
+              <NumberID>33</NumberID>
+              <Page isRef="7" />
+              <Parent isRef="28" />
+              <RowCount>3</RowCount>
+              <Sort isList="true" count="0" />
+              <TableStyleFX Ref="42" type="Stimulsoft.Report.Components.Table.StiTable21StyleFX" isKey="true">
+                <AlternatingDataColor>238, 238, 238</AlternatingDataColor>
+                <AlternatingDataForeground>34, 34, 34</AlternatingDataForeground>
+                <BackColor>White</BackColor>
+                <Conditions isList="true" count="0" />
+                <DataColor>180, 178, 178, 178</DataColor>
+                <DataForeground>180, 38, 68, 120</DataForeground>
+                <FooterColor>180, 35, 159, 217</FooterColor>
+                <FooterForeground>255, 255, 255</FooterForeground>
+                <GridColor>255, 255, 255</GridColor>
+                <HeaderColor>180, 35, 159, 217</HeaderColor>
+                <HeaderForeground>255, 255, 255</HeaderForeground>
+                <HotHeaderColor>Transparent</HotHeaderColor>
+                <Name />
+                <SelectedDataColor>52, 152, 219</SelectedDataColor>
+                <SelectedDataForeground>White</SelectedDataForeground>
+              </TableStyleFX>
+            </Table1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>Panel2</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+        </Panel2>
+        <Text1 Ref="43" type="Text" isKey="true">
+          <Border>All;[255:255:255];1;Solid;False;4;[255:255:255]</Border>
+          <Brush>EmptyBrush</Brush>
+          <ClientRectangle>450,50,110,30</ClientRectangle>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Font>Arial,14</Font>
+          <HorAlignment>Center</HorAlignment>
+          <Margins>0,0,0,0</Margins>
+          <Name>Text1</Name>
+          <Page isRef="7" />
+          <Parent isRef="7" />
+          <Text>گزارش وظایف</Text>
+          <TextBrush>[180:38:68:120]</TextBrush>
+          <Type>Expression</Type>
+        </Text1>
       </Components>
       <Conditions isList="true" count="0" />
       <Expressions isList="true" count="0" />
@@ -837,11 +1007,11 @@ QAldobgJUEJXKBIe4P8DXc72F7l9WqYAAAAASUVORK5CYII=</ImageBytes>
   </ReferencedAssemblies>
   <ReportAlias>Invoice</ReportAlias>
   <ReportAuthor>Stimulsoft</ReportAuthor>
-  <ReportChanged>5/22/2022 3:02:58 PM</ReportChanged>
+  <ReportChanged>5/23/2022 9:21:46 AM</ReportChanged>
   <ReportCreated>5/19/2016 4:32:36 PM</ReportCreated>
   <ReportDescription>The sample demonstrates how to create the invoice with bank details</ReportDescription>
-  <ReportFile>S:\wtt\Solution1\GrpcService\ReportTemplates\presentation_report.mrt</ReportFile>
-  <ReportGuid>a8464e16681441f4989be94427eb12ad</ReportGuid>
+  <ReportFile>S:\wtt\Solution1\GrpcService\ReportTemplates\tasks_report.mrt</ReportFile>
+  <ReportGuid>1a284a49020e45c8889765de432de419</ReportGuid>
   <ReportName>Invoice</ReportName>
   <ReportUnit>HundredthsOfInch</ReportUnit>
   <ReportVersion>2022.2.5.0</ReportVersion>
@@ -870,262 +1040,262 @@ namespace Reports
 </Script>
   <ScriptLanguage>CSharp</ScriptLanguage>
   <Styles isList="true" count="80">
-    <Black_x0020_Data_x0020_Even Ref="35" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Black_x0020_Data_x0020_Even Ref="44" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[43:43:43];1;Solid;False;4;Black</Border>
       <Brush>[236:240:241]</Brush>
       <CollectionName>Black</CollectionName>
       <Conditions isList="true" count="1">
-        <Item33 Ref="36" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item42 Ref="45" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Data</ComponentName>
           <Placement>DataEvenStyle</Placement>
-        </Item33>
+        </Item42>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Black Data Even</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Black_x0020_Data_x0020_Even>
-    <Black_x0020_Primitive_x0020_Line Ref="37" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Black_x0020_Primitive_x0020_Line Ref="46" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;White;5;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Black</CollectionName>
       <Conditions isList="true" count="1">
-        <Item35 Ref="38" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item44 Ref="47" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>HorizontalLinePrimitive</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item35>
+        </Item44>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Black Primitive Line</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Black_x0020_Primitive_x0020_Line>
-    <Black_x0020_Company_x0020_Name Ref="39" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Black_x0020_Company_x0020_Name Ref="48" type="Stimulsoft.Report.StiStyle" isKey="true">
       <AllowUseHorAlignment>True</AllowUseHorAlignment>
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Black</CollectionName>
       <Conditions isList="true" count="1">
-        <Item37 Ref="40" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item46 Ref="49" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text01</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Placement>PageHeader</Placement>
           <Type>ComponentName</Type>
-        </Item37>
+        </Item46>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Regular,Point,False,204</Font>
       <Name>Black Company Name</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Black_x0020_Company_x0020_Name>
-    <Black_x0020_Company_x0020_Info Ref="41" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Black_x0020_Company_x0020_Info Ref="50" type="Stimulsoft.Report.StiStyle" isKey="true">
       <AllowUseBorderFormatting>False</AllowUseBorderFormatting>
       <AllowUseBorderSides>False</AllowUseBorderSides>
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Black</CollectionName>
       <Conditions isList="true" count="1">
-        <Item39 Ref="42" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item48 Ref="51" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text1</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item39>
+        </Item48>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
       <Name>Black Company Info</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Black_x0020_Company_x0020_Info>
-    <Black_x0020_Bill_x0020_To Ref="43" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Black_x0020_Bill_x0020_To Ref="52" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>Left;White;1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Black</CollectionName>
       <Conditions isList="true" count="1">
-        <Item41 Ref="44" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item50 Ref="53" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text2</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Placement>ReportTitle</Placement>
           <Type>ComponentName</Type>
-        </Item41>
+        </Item50>
       </Conditions>
       <Font>Microsoft Sans Serif,14.25,Bold,Point,False,0</Font>
       <Name>Black Bill To</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Black_x0020_Bill_x0020_To>
-    <Black_x0020_Bill_x0020_To_x0020_Info Ref="45" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Black_x0020_Bill_x0020_To_x0020_Info Ref="54" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Black</CollectionName>
       <Conditions isList="true" count="1">
-        <Item43 Ref="46" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item52 Ref="55" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text3</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item43>
+        </Item52>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
       <Name>Black Bill To Info</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Black_x0020_Bill_x0020_To_x0020_Info>
-    <Black_x0020_Requisites Ref="47" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Black_x0020_Requisites Ref="56" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Black</CollectionName>
       <Conditions isList="true" count="1">
-        <Item45 Ref="48" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item54 Ref="57" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text8</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Placement>ReportTitle</Placement>
           <Type>ComponentName</Type>
-        </Item45>
+        </Item54>
       </Conditions>
       <Font>Microsoft Sans Serif,14.25,Bold,Point,False,204</Font>
       <Name>Black Requisites</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>Black</TextBrush>
     </Black_x0020_Requisites>
-    <Black_x0020_Title Ref="49" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Black_x0020_Title Ref="58" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Black</CollectionName>
       <Conditions isList="true" count="1">
-        <Item47 Ref="50" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item56 Ref="59" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text02</ComponentName>
           <Placement>ReportTitle</Placement>
           <Type>ComponentName</Type>
-        </Item47>
+        </Item56>
       </Conditions>
       <Font>Microsoft Sans Serif,36,Bold,Point,False,204</Font>
       <Name>Black Title</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Black_x0020_Title>
-    <Black_x0020_Data Ref="51" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Black_x0020_Data Ref="60" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[43:43:43];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Black</CollectionName>
       <Conditions isList="true" count="1">
-        <Item49 Ref="52" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item58 Ref="61" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text5</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item49>
+        </Item58>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Black Data</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Black_x0020_Data>
-    <Black_x0020_Contact_x0020_Name Ref="53" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Black_x0020_Contact_x0020_Name Ref="62" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black;True</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Black</CollectionName>
       <Conditions isList="true" count="1">
-        <Item51 Ref="54" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item60 Ref="63" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text6</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item51>
+        </Item60>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Bold,Point,False,0</Font>
       <Name>Black Contact Name</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Black_x0020_Contact_x0020_Name>
-    <Black_x0020_subtotals Ref="55" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Black_x0020_subtotals Ref="64" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>Left;White;1;Solid;False;4;Black</Border>
       <Brush>[213:218:222]</Brush>
       <CollectionName>Black</CollectionName>
       <Conditions isList="true" count="1">
-        <Item53 Ref="56" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item62 Ref="65" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text4</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item53>
+        </Item62>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Bold,Point,False,204</Font>
       <Name>Black subtotals</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>White</TextBrush>
     </Black_x0020_subtotals>
-    <Black_x0020_Discount Ref="57" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Black_x0020_Discount Ref="66" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[145:145:145];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Black</CollectionName>
       <Conditions isList="true" count="1">
-        <Item55 Ref="58" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item64 Ref="67" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text05</ComponentName>
           <Type>ComponentName</Type>
-        </Item55>
+        </Item64>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Black Discount</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Black_x0020_Discount>
-    <Black_x0020_Total Ref="59" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Black_x0020_Total Ref="68" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black;True</Border>
       <Brush>[43:43:43]</Brush>
       <CollectionName>Black</CollectionName>
       <Conditions isList="true" count="1">
-        <Item57 Ref="60" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item66 Ref="69" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text7</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item57>
+        </Item66>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Bold,Point,False,204</Font>
       <Name>Black Total</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>White</TextBrush>
     </Black_x0020_Total>
-    <Black_x0020_Thanks Ref="61" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Black_x0020_Thanks Ref="70" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[43:43:43];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Black</CollectionName>
       <Conditions isList="true" count="1">
-        <Item59 Ref="62" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item68 Ref="71" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text03</ComponentName>
           <Type>ComponentName</Type>
-        </Item59>
+        </Item68>
       </Conditions>
       <Font>Microsoft Sans Serif,27.75,Regular,Point,False,204</Font>
       <Name>Black Thanks</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Black_x0020_Thanks>
-    <Black_x0020_Notes Ref="63" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Black_x0020_Notes Ref="72" type="Stimulsoft.Report.StiStyle" isKey="true">
       <AllowUseBorderFormatting>False</AllowUseBorderFormatting>
       <AllowUseBorderSides>False</AllowUseBorderSides>
       <Border>None;[155:155:155];1;Solid;False;4;Black;True</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Black</CollectionName>
       <Conditions isList="true" count="1">
-        <Item61 Ref="64" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item70 Ref="73" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text04</ComponentName>
           <Type>ComponentName</Type>
-        </Item61>
+        </Item70>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Black Notes</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Black_x0020_Notes>
-    <Lime_x0020_Company_x0020_Name Ref="65" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Lime_x0020_Company_x0020_Name Ref="74" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Lime</CollectionName>
       <Conditions isList="true" count="1">
-        <Item63 Ref="66" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item72 Ref="75" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text01</ComponentName>
           <Location>MiddleLeft</Location>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Placement>PageHeader</Placement>
           <Type>ComponentName</Type>
-        </Item63>
+        </Item72>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Regular,Point,False,204</Font>
       <HorAlignment>Center</HorAlignment>
@@ -1133,238 +1303,238 @@ namespace Reports
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>Black</TextBrush>
     </Lime_x0020_Company_x0020_Name>
-    <Lime_x0020_Data_x0020_Even Ref="67" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Lime_x0020_Data_x0020_Even Ref="76" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[43:43:43];1;Solid;False;4;Black</Border>
       <Brush>[236:240:241]</Brush>
       <CollectionName>Lime</CollectionName>
       <Conditions isList="true" count="1">
-        <Item65 Ref="68" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item74 Ref="77" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Data</ComponentName>
           <Placement>DataEvenStyle</Placement>
-        </Item65>
+        </Item74>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Lime Data Even</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Lime_x0020_Data_x0020_Even>
-    <Lime_x0020_Company_x0020_Info Ref="69" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Lime_x0020_Company_x0020_Info Ref="78" type="Stimulsoft.Report.StiStyle" isKey="true">
       <AllowUseBorderFormatting>False</AllowUseBorderFormatting>
       <AllowUseBorderSides>False</AllowUseBorderSides>
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Lime</CollectionName>
       <Conditions isList="true" count="1">
-        <Item67 Ref="70" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item76 Ref="79" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text1</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item67>
+        </Item76>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Lime Company Info</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>Black</TextBrush>
     </Lime_x0020_Company_x0020_Info>
-    <Lime_x0020_Bill_x0020_To Ref="71" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Lime_x0020_Bill_x0020_To Ref="80" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>Left;White;1;Solid;False;4;Black</Border>
       <Brush>[145:200:83]</Brush>
       <CollectionName>Lime</CollectionName>
       <Conditions isList="true" count="1">
-        <Item69 Ref="72" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item78 Ref="81" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text2</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item69>
+        </Item78>
       </Conditions>
       <Font>Microsoft Sans Serif,14.25,Bold,Point,False,0</Font>
       <Name>Lime Bill To</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>White</TextBrush>
     </Lime_x0020_Bill_x0020_To>
-    <Lime_x0020_Bill_x0020_To_x0020_Info Ref="73" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Lime_x0020_Bill_x0020_To_x0020_Info Ref="82" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Lime</CollectionName>
       <Conditions isList="true" count="1">
-        <Item71 Ref="74" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item80 Ref="83" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text3</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item71>
+        </Item80>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
       <Name>Lime Bill To Info</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[60:63:70]</TextBrush>
     </Lime_x0020_Bill_x0020_To_x0020_Info>
-    <Lime_x0020_Requisites Ref="75" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Lime_x0020_Requisites Ref="84" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;White;1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Lime</CollectionName>
       <Conditions isList="true" count="1">
-        <Item73 Ref="76" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item82 Ref="85" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text8</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item73>
+        </Item82>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Bold,Point,False,0</Font>
       <Name>Lime Requisites</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[145:200:83]</TextBrush>
     </Lime_x0020_Requisites>
-    <Lime_x0020_Title Ref="77" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Lime_x0020_Title Ref="86" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Lime</CollectionName>
       <Conditions isList="true" count="1">
-        <Item75 Ref="78" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item84 Ref="87" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text02</ComponentName>
           <Type>ComponentName</Type>
-        </Item75>
+        </Item84>
       </Conditions>
       <Font>Microsoft Sans Serif,36,Bold,Point,False,204</Font>
       <Name>Lime Title</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[145:200:83]</TextBrush>
     </Lime_x0020_Title>
-    <Lime_x0020_Headers Ref="79" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Lime_x0020_Headers Ref="88" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>Left;White;1;Solid;False;4;Black</Border>
       <Brush>[60:63:70]</Brush>
       <CollectionName>Lime</CollectionName>
       <Conditions isList="true" count="1">
-        <Item77 Ref="80" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item86 Ref="89" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text4</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item77>
+        </Item86>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Bold,Point,False,0</Font>
       <Name>Lime Headers</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>White</TextBrush>
     </Lime_x0020_Headers>
-    <Lime_x0020_Data Ref="81" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Lime_x0020_Data Ref="90" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[145:145:145];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Lime</CollectionName>
       <Conditions isList="true" count="1">
-        <Item79 Ref="82" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item88 Ref="91" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text5</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item79>
+        </Item88>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Lime Data</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[120:120:120]</TextBrush>
     </Lime_x0020_Data>
-    <Lime_x0020_Contact_x0020_Name Ref="83" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Lime_x0020_Contact_x0020_Name Ref="92" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black;True</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Lime</CollectionName>
       <Conditions isList="true" count="1">
-        <Item81 Ref="84" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item90 Ref="93" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text6</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item81>
+        </Item90>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Bold,Point,False,0</Font>
       <Name>Lime Contact Name</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>Black</TextBrush>
     </Lime_x0020_Contact_x0020_Name>
-    <Lime_x0020_Discount Ref="85" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Lime_x0020_Discount Ref="94" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[145:145:145];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Lime</CollectionName>
       <Conditions isList="true" count="1">
-        <Item83 Ref="86" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item92 Ref="95" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text05</ComponentName>
           <Type>ComponentName</Type>
-        </Item83>
+        </Item92>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Lime Discount</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[130:191:62]</TextBrush>
     </Lime_x0020_Discount>
-    <Lime_x0020_Total Ref="87" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Lime_x0020_Total Ref="96" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black;True</Border>
       <Brush>[145:200:83]</Brush>
       <CollectionName>Lime</CollectionName>
       <Conditions isList="true" count="1">
-        <Item85 Ref="88" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item94 Ref="97" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text7</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item85>
+        </Item94>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Bold,Point,False,204</Font>
       <Name>Lime Total</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>White</TextBrush>
     </Lime_x0020_Total>
-    <Lime_x0020_Thanks Ref="89" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Lime_x0020_Thanks Ref="98" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Lime</CollectionName>
       <Conditions isList="true" count="1">
-        <Item87 Ref="90" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item96 Ref="99" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text03</ComponentName>
           <Type>ComponentName</Type>
-        </Item87>
+        </Item96>
       </Conditions>
       <Font>Microsoft Sans Serif,27.75,Regular,Point,False,204</Font>
       <Name>Lime Thanks</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[130:191:62]</TextBrush>
     </Lime_x0020_Thanks>
-    <Lime_x0020_Primitive Ref="91" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Lime_x0020_Primitive Ref="100" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;White;5;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Lime</CollectionName>
       <Conditions isList="true" count="1">
-        <Item89 Ref="92" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item98 Ref="101" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>HorizontalLinePrimitive</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item89>
+        </Item98>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Lime Primitive</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Lime_x0020_Primitive>
-    <Lime_x0020_Notes Ref="93" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Lime_x0020_Notes Ref="102" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black;True</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Lime</CollectionName>
       <Conditions isList="true" count="1">
-        <Item91 Ref="94" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item100 Ref="103" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text04</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item91>
+        </Item100>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Lime Notes</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>Black</TextBrush>
     </Lime_x0020_Notes>
-    <Aqua_x0020_Company_x0020_Name Ref="95" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Aqua_x0020_Company_x0020_Name Ref="104" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Aqua</CollectionName>
       <Conditions isList="true" count="1">
-        <Item93 Ref="96" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item102 Ref="105" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text01</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item93>
+        </Item102>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Regular,Point,False,204</Font>
       <HorAlignment>Center</HorAlignment>
@@ -1372,702 +1542,702 @@ namespace Reports
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>Gray</TextBrush>
     </Aqua_x0020_Company_x0020_Name>
-    <Aqua_x0020_Primitive Ref="97" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Aqua_x0020_Primitive Ref="106" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;White;5;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Aqua</CollectionName>
       <Conditions isList="true" count="1">
-        <Item95 Ref="98" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item104 Ref="107" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>HorizontalLinePrimitive</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item95>
+        </Item104>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Aqua Primitive</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Aqua_x0020_Primitive>
-    <Aqua_x0020_Data_x0020_Even Ref="99" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Aqua_x0020_Data_x0020_Even Ref="108" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[43:43:43];1;Solid;False;4;Black</Border>
       <Brush>[236:240:241]</Brush>
       <CollectionName>Aqua</CollectionName>
       <Conditions isList="true" count="1">
-        <Item97 Ref="100" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item106 Ref="109" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Data</ComponentName>
           <Placement>DataEvenStyle</Placement>
-        </Item97>
+        </Item106>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Aqua Data Even</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Aqua_x0020_Data_x0020_Even>
-    <Aqua_x0020_Company_x0020_Info Ref="101" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Aqua_x0020_Company_x0020_Info Ref="110" type="Stimulsoft.Report.StiStyle" isKey="true">
       <AllowUseBorderFormatting>False</AllowUseBorderFormatting>
       <AllowUseBorderSides>False</AllowUseBorderSides>
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Aqua</CollectionName>
       <Conditions isList="true" count="1">
-        <Item99 Ref="102" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item108 Ref="111" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text1</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item99>
+        </Item108>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Aqua Company Info</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>Gray</TextBrush>
     </Aqua_x0020_Company_x0020_Info>
-    <Aqua_x0020_Bill_x0020_To Ref="103" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Aqua_x0020_Bill_x0020_To Ref="112" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>Left;White;1;Solid;False;4;Black</Border>
       <Brush>[123:215:238]</Brush>
       <CollectionName>Aqua</CollectionName>
       <Conditions isList="true" count="1">
-        <Item101 Ref="104" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item110 Ref="113" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text2</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item101>
+        </Item110>
       </Conditions>
       <Font>Microsoft Sans Serif,14.25,Bold,Point,False,0</Font>
       <Name>Aqua Bill To</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>White</TextBrush>
     </Aqua_x0020_Bill_x0020_To>
-    <Aqua_x0020_Bill_x0020_To_x0020_Info Ref="105" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Aqua_x0020_Bill_x0020_To_x0020_Info Ref="114" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Aqua</CollectionName>
       <Conditions isList="true" count="1">
-        <Item103 Ref="106" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item112 Ref="115" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text3</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item103>
+        </Item112>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
       <Name>Aqua Bill To Info</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>Gray</TextBrush>
     </Aqua_x0020_Bill_x0020_To_x0020_Info>
-    <Aqua_x0020_Requisites Ref="107" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Aqua_x0020_Requisites Ref="116" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;White;1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Aqua</CollectionName>
       <Conditions isList="true" count="1">
-        <Item105 Ref="108" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item114 Ref="117" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text8</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item105>
+        </Item114>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Bold,Point,False,0</Font>
       <Name>Aqua Requisites</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[123:215:238]</TextBrush>
     </Aqua_x0020_Requisites>
-    <Aqua_x0020_Title Ref="109" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Aqua_x0020_Title Ref="118" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Aqua</CollectionName>
       <Conditions isList="true" count="1">
-        <Item107 Ref="110" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item116 Ref="119" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text02</ComponentName>
           <Type>ComponentName</Type>
-        </Item107>
+        </Item116>
       </Conditions>
       <Font>Microsoft Sans Serif,36,Bold,Point,False,204</Font>
       <Name>Aqua Title</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[123:215:238]</TextBrush>
     </Aqua_x0020_Title>
-    <Aqua_x0020_Headers Ref="111" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Aqua_x0020_Headers Ref="120" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>Left;White;1;Solid;False;4;Black</Border>
       <Brush>Gray</Brush>
       <CollectionName>Aqua</CollectionName>
       <Conditions isList="true" count="1">
-        <Item109 Ref="112" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item118 Ref="121" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text4</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item109>
+        </Item118>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Bold,Point,False,0</Font>
       <Name>Aqua Headers</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>White</TextBrush>
     </Aqua_x0020_Headers>
-    <Aqua_x0020_Data Ref="113" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Aqua_x0020_Data Ref="122" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[145:145:145];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Aqua</CollectionName>
       <Conditions isList="true" count="1">
-        <Item111 Ref="114" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item120 Ref="123" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text5</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item111>
+        </Item120>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Aqua Data</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[120:120:120]</TextBrush>
     </Aqua_x0020_Data>
-    <Aqua_x0020_Contact_x0020_Name Ref="115" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Aqua_x0020_Contact_x0020_Name Ref="124" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black;True</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Aqua</CollectionName>
       <Conditions isList="true" count="1">
-        <Item113 Ref="116" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item122 Ref="125" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text6</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item113>
+        </Item122>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Bold,Point,False,0</Font>
       <Name>Aqua Contact Name</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>Gray</TextBrush>
     </Aqua_x0020_Contact_x0020_Name>
-    <Aqua_x0020_Discount Ref="117" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Aqua_x0020_Discount Ref="126" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[145:145:145];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Aqua</CollectionName>
       <Conditions isList="true" count="1">
-        <Item115 Ref="118" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item124 Ref="127" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text05</ComponentName>
           <Type>ComponentName</Type>
-        </Item115>
+        </Item124>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Aqua Discount</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[123:215:238]</TextBrush>
     </Aqua_x0020_Discount>
-    <Aqua_x0020_Total Ref="119" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Aqua_x0020_Total Ref="128" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black;True</Border>
       <Brush>[123:215:238]</Brush>
       <CollectionName>Aqua</CollectionName>
       <Conditions isList="true" count="1">
-        <Item117 Ref="120" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item126 Ref="129" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text7</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item117>
+        </Item126>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Bold,Point,False,204</Font>
       <Name>Aqua Total</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>White</TextBrush>
     </Aqua_x0020_Total>
-    <Aqua_x0020_Thanks Ref="121" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Aqua_x0020_Thanks Ref="130" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Aqua</CollectionName>
       <Conditions isList="true" count="1">
-        <Item119 Ref="122" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item128 Ref="131" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text03</ComponentName>
           <Type>ComponentName</Type>
-        </Item119>
+        </Item128>
       </Conditions>
       <Font>Microsoft Sans Serif,27.75,Regular,Point,False,204</Font>
       <Name>Aqua Thanks</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[123:215:238]</TextBrush>
     </Aqua_x0020_Thanks>
-    <Aqua_x0020_Notes Ref="123" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Aqua_x0020_Notes Ref="132" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black;True</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Aqua</CollectionName>
       <Conditions isList="true" count="1">
-        <Item121 Ref="124" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item130 Ref="133" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text04</ComponentName>
           <Type>ComponentName</Type>
-        </Item121>
+        </Item130>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Aqua Notes</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>Gray</TextBrush>
     </Aqua_x0020_Notes>
-    <PeachPuff_x0020_Company_x0020_Name Ref="125" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <PeachPuff_x0020_Company_x0020_Name Ref="134" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>PeachPuff</CollectionName>
       <Conditions isList="true" count="1">
-        <Item123 Ref="126" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item132 Ref="135" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text01</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item123>
+        </Item132>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Regular,Point,False,204</Font>
       <Name>PeachPuff Company Name</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[60:63:70]</TextBrush>
     </PeachPuff_x0020_Company_x0020_Name>
-    <PeachPuff_x0020_Primitive Ref="127" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <PeachPuff_x0020_Primitive Ref="136" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;White;5;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>PeachPuff</CollectionName>
       <Conditions isList="true" count="1">
-        <Item125 Ref="128" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item134 Ref="137" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>HorizontalLinePrimitive</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item125>
+        </Item134>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>PeachPuff Primitive</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </PeachPuff_x0020_Primitive>
-    <PeachPuff_x0020_Data_x0020_Even Ref="129" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <PeachPuff_x0020_Data_x0020_Even Ref="138" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[43:43:43];1;Solid;False;4;Black</Border>
       <Brush>[236:240:241]</Brush>
       <CollectionName>PeachPuff</CollectionName>
       <Conditions isList="true" count="1">
-        <Item127 Ref="130" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item136 Ref="139" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Data</ComponentName>
           <Placement>DataEvenStyle</Placement>
-        </Item127>
+        </Item136>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>PeachPuff Data Even</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </PeachPuff_x0020_Data_x0020_Even>
-    <PeachPuff_x0020_Company_x0020_Info Ref="131" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <PeachPuff_x0020_Company_x0020_Info Ref="140" type="Stimulsoft.Report.StiStyle" isKey="true">
       <AllowUseBorderFormatting>False</AllowUseBorderFormatting>
       <AllowUseBorderSides>False</AllowUseBorderSides>
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>PeachPuff</CollectionName>
       <Conditions isList="true" count="1">
-        <Item129 Ref="132" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item138 Ref="141" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text1</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item129>
+        </Item138>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>PeachPuff Company Info</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[60:63:70]</TextBrush>
     </PeachPuff_x0020_Company_x0020_Info>
-    <PeachPuff_x0020_Bill_x0020_To Ref="133" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <PeachPuff_x0020_Bill_x0020_To Ref="142" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>Left;White;1;Solid;False;4;Black</Border>
       <Brush>[241:145:94]</Brush>
       <CollectionName>PeachPuff</CollectionName>
       <Conditions isList="true" count="1">
-        <Item131 Ref="134" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item140 Ref="143" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text2</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item131>
+        </Item140>
       </Conditions>
       <Font>Microsoft Sans Serif,14.25,Bold,Point,False,0</Font>
       <Name>PeachPuff Bill To</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>White</TextBrush>
     </PeachPuff_x0020_Bill_x0020_To>
-    <PeachPuff_x0020_Bill_x0020_To_x0020_Info Ref="135" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <PeachPuff_x0020_Bill_x0020_To_x0020_Info Ref="144" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>PeachPuff</CollectionName>
       <Conditions isList="true" count="1">
-        <Item133 Ref="136" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item142 Ref="145" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text3</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item133>
+        </Item142>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
       <Name>PeachPuff Bill To Info</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[60:63:70]</TextBrush>
     </PeachPuff_x0020_Bill_x0020_To_x0020_Info>
-    <PeachPuff_x0020_Requisites Ref="137" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <PeachPuff_x0020_Requisites Ref="146" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;White;1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>PeachPuff</CollectionName>
       <Conditions isList="true" count="1">
-        <Item135 Ref="138" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item144 Ref="147" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text8</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item135>
+        </Item144>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Bold,Point,False,0</Font>
       <Name>PeachPuff Requisites</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[241:145:94]</TextBrush>
     </PeachPuff_x0020_Requisites>
-    <PeachPuff_x0020_Title Ref="139" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <PeachPuff_x0020_Title Ref="148" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>PeachPuff</CollectionName>
       <Conditions isList="true" count="1">
-        <Item137 Ref="140" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item146 Ref="149" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text02</ComponentName>
           <Type>ComponentName</Type>
-        </Item137>
+        </Item146>
       </Conditions>
       <Font>Microsoft Sans Serif,36,Bold,Point,False,204</Font>
       <Name>PeachPuff Title</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[241:145:94]</TextBrush>
     </PeachPuff_x0020_Title>
-    <PeachPuff_x0020_Headers Ref="141" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <PeachPuff_x0020_Headers Ref="150" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>Left;[236:240:241];1;Solid;False;4;Black</Border>
       <Brush>[213:218:222]</Brush>
       <CollectionName>PeachPuff</CollectionName>
       <Conditions isList="true" count="1">
-        <Item139 Ref="142" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item148 Ref="151" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text4</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item139>
+        </Item148>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Bold,Point,False,0</Font>
       <Name>PeachPuff Headers</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>White</TextBrush>
     </PeachPuff_x0020_Headers>
-    <PeachPuff_x0020_Data Ref="143" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <PeachPuff_x0020_Data Ref="152" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[241:145:94];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>PeachPuff</CollectionName>
       <Conditions isList="true" count="1">
-        <Item141 Ref="144" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item150 Ref="153" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text5</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item141>
+        </Item150>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>PeachPuff Data</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[120:120:120]</TextBrush>
     </PeachPuff_x0020_Data>
-    <PeachPuff_x0020_Contacts_x0020_Name Ref="145" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <PeachPuff_x0020_Contacts_x0020_Name Ref="154" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black;True</Border>
       <Brush>Transparent</Brush>
       <CollectionName>PeachPuff</CollectionName>
       <Conditions isList="true" count="1">
-        <Item143 Ref="146" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item152 Ref="155" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text6</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item143>
+        </Item152>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Bold,Point,False,0</Font>
       <Name>PeachPuff Contacts Name</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[60:63:70]</TextBrush>
     </PeachPuff_x0020_Contacts_x0020_Name>
-    <PeachPuff_x0020_Discount Ref="147" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <PeachPuff_x0020_Discount Ref="156" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[145:145:145];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>PeachPuff</CollectionName>
       <Conditions isList="true" count="1">
-        <Item145 Ref="148" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item154 Ref="157" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text05</ComponentName>
           <Type>ComponentName</Type>
-        </Item145>
+        </Item154>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>PeachPuff Discount</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[241:145:94]</TextBrush>
     </PeachPuff_x0020_Discount>
-    <PeachPuff_x0020_Totals Ref="149" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <PeachPuff_x0020_Totals Ref="158" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black;True</Border>
       <Brush>[241:145:94]</Brush>
       <CollectionName>PeachPuff</CollectionName>
       <Conditions isList="true" count="1">
-        <Item147 Ref="150" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item156 Ref="159" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text7</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item147>
+        </Item156>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Bold,Point,False,204</Font>
       <Name>PeachPuff Totals</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>White</TextBrush>
     </PeachPuff_x0020_Totals>
-    <PeachPuff_x0020_Thanks Ref="151" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <PeachPuff_x0020_Thanks Ref="160" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[60:63:70];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>PeachPuff</CollectionName>
       <Conditions isList="true" count="1">
-        <Item149 Ref="152" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item158 Ref="161" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text03</ComponentName>
           <Type>ComponentName</Type>
-        </Item149>
+        </Item158>
       </Conditions>
       <Font>Microsoft Sans Serif,27.75,Regular,Point,False,204</Font>
       <Name>PeachPuff Thanks</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[241:145:94]</TextBrush>
     </PeachPuff_x0020_Thanks>
-    <PeachPuff_x0020_Notes Ref="153" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <PeachPuff_x0020_Notes Ref="162" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black;True</Border>
       <Brush>Transparent</Brush>
       <CollectionName>PeachPuff</CollectionName>
       <Conditions isList="true" count="1">
-        <Item151 Ref="154" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item160 Ref="163" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text04</ComponentName>
           <Type>ComponentName</Type>
-        </Item151>
+        </Item160>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>PeachPuff Notes</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[60:63:70]</TextBrush>
     </PeachPuff_x0020_Notes>
-    <Red_x0020_Company_x0020_Name Ref="155" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Red_x0020_Company_x0020_Name Ref="164" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Red</CollectionName>
       <Conditions isList="true" count="1">
-        <Item153 Ref="156" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item162 Ref="165" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text01</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item153>
+        </Item162>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Regular,Point,False,204</Font>
       <Name>Red Company Name</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[60:63:70]</TextBrush>
     </Red_x0020_Company_x0020_Name>
-    <Red_x0020_Primitive Ref="157" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Red_x0020_Primitive Ref="166" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;White;5;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Red</CollectionName>
       <Conditions isList="true" count="1">
-        <Item155 Ref="158" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item164 Ref="167" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>HorizontalLinePrimitive</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item155>
+        </Item164>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Red Primitive</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Red_x0020_Primitive>
-    <Red_x0020_Data_x0020_Even Ref="159" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Red_x0020_Data_x0020_Even Ref="168" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[43:43:43];1;Solid;False;4;Black</Border>
       <Brush>[236:240:241]</Brush>
       <CollectionName>Red</CollectionName>
       <Conditions isList="true" count="1">
-        <Item157 Ref="160" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item166 Ref="169" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Data</ComponentName>
           <Placement>DataEvenStyle</Placement>
-        </Item157>
+        </Item166>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Red Data Even</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[43:43:43]</TextBrush>
     </Red_x0020_Data_x0020_Even>
-    <Red_x0020_Company_x0020_Info Ref="161" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Red_x0020_Company_x0020_Info Ref="170" type="Stimulsoft.Report.StiStyle" isKey="true">
       <AllowUseBorderFormatting>False</AllowUseBorderFormatting>
       <AllowUseBorderSides>False</AllowUseBorderSides>
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Red</CollectionName>
       <Conditions isList="true" count="1">
-        <Item159 Ref="162" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item168 Ref="171" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text1</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item159>
+        </Item168>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Red Company Info</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[60:63:70]</TextBrush>
     </Red_x0020_Company_x0020_Info>
-    <Red_x0020_Bill_x0020_To Ref="163" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Red_x0020_Bill_x0020_To Ref="172" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>Left;White;1;Solid;False;4;Black</Border>
       <Brush>[238:121:108]</Brush>
       <CollectionName>Red</CollectionName>
       <Conditions isList="true" count="1">
-        <Item161 Ref="164" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item170 Ref="173" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text2</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item161>
+        </Item170>
       </Conditions>
       <Font>Microsoft Sans Serif,14.25,Bold,Point,False,0</Font>
       <Name>Red Bill To</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>White</TextBrush>
     </Red_x0020_Bill_x0020_To>
-    <Red_x0020_Bill_x0020_To_x0020_Info Ref="165" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Red_x0020_Bill_x0020_To_x0020_Info Ref="174" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Red</CollectionName>
       <Conditions isList="true" count="1">
-        <Item163 Ref="166" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item172 Ref="175" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text3</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item163>
+        </Item172>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,204</Font>
       <Name>Red Bill To Info</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[60:63:70]</TextBrush>
     </Red_x0020_Bill_x0020_To_x0020_Info>
-    <Red_x0020_Requisites Ref="167" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Red_x0020_Requisites Ref="176" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;White;1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Red</CollectionName>
       <Conditions isList="true" count="1">
-        <Item165 Ref="168" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item174 Ref="177" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text8</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item165>
+        </Item174>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Bold,Point,False,0</Font>
       <Name>Red Requisites</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[232:76:61]</TextBrush>
     </Red_x0020_Requisites>
-    <Red_x0020_Title Ref="169" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Red_x0020_Title Ref="178" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Red</CollectionName>
       <Conditions isList="true" count="1">
-        <Item167 Ref="170" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item176 Ref="179" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text02</ComponentName>
           <Type>ComponentName</Type>
-        </Item167>
+        </Item176>
       </Conditions>
       <Font>Microsoft Sans Serif,36,Bold,Point,False,204</Font>
       <Name>Red Title</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[232:76:61]</TextBrush>
     </Red_x0020_Title>
-    <Red_x0020_Headers Ref="171" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Red_x0020_Headers Ref="180" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>Left;White;1;Solid;False;4;Black</Border>
       <Brush>[208:213:216]</Brush>
       <CollectionName>Red</CollectionName>
       <Conditions isList="true" count="1">
-        <Item169 Ref="172" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item178 Ref="181" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text4</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item169>
+        </Item178>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Bold,Point,False,0</Font>
       <Name>Red Headers</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>White</TextBrush>
     </Red_x0020_Headers>
-    <Red_x0020_Data Ref="173" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Red_x0020_Data Ref="182" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[232:76:61];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Red</CollectionName>
       <Conditions isList="true" count="1">
-        <Item171 Ref="174" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item180 Ref="183" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text5</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item171>
+        </Item180>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Red Data</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[120:120:120]</TextBrush>
     </Red_x0020_Data>
-    <Red_x0020_Contacts_x0020_Name Ref="175" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Red_x0020_Contacts_x0020_Name Ref="184" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black;True</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Red</CollectionName>
       <Conditions isList="true" count="1">
-        <Item173 Ref="176" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item182 Ref="185" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text6</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item173>
+        </Item182>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Bold,Point,False,0</Font>
       <Name>Red Contacts Name</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[60:63:70]</TextBrush>
     </Red_x0020_Contacts_x0020_Name>
-    <Red_x0020_Discount Ref="177" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Red_x0020_Discount Ref="186" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[145:145:145];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Red</CollectionName>
       <Conditions isList="true" count="1">
-        <Item175 Ref="178" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item184 Ref="187" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text05</ComponentName>
           <Type>ComponentName</Type>
-        </Item175>
+        </Item184>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Red Discount</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[232:76:61]</TextBrush>
     </Red_x0020_Discount>
-    <Red_x0020_Totals Ref="179" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Red_x0020_Totals Ref="188" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black;True</Border>
       <Brush>[232:76:61]</Brush>
       <CollectionName>Red</CollectionName>
       <Conditions isList="true" count="1">
-        <Item177 Ref="180" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item186 Ref="189" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text7</ComponentName>
           <OperationComponentName>BeginningWith</OperationComponentName>
           <Type>ComponentName</Type>
-        </Item177>
+        </Item186>
       </Conditions>
       <Font>Microsoft Sans Serif,12,Bold,Point,False,204</Font>
       <Name>Red Totals</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>White</TextBrush>
     </Red_x0020_Totals>
-    <Red_x0020_Thanks Ref="181" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Red_x0020_Thanks Ref="190" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[60:63:70];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Red</CollectionName>
       <Conditions isList="true" count="1">
-        <Item179 Ref="182" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item188 Ref="191" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text03</ComponentName>
           <Type>ComponentName</Type>
-        </Item179>
+        </Item188>
       </Conditions>
       <Font>Microsoft Sans Serif,27.75,Regular,Point,False,204</Font>
       <Name>Red Thanks</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[232:76:61]</TextBrush>
     </Red_x0020_Thanks>
-    <Red_x0020_Notes Ref="183" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Red_x0020_Notes Ref="192" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[155:155:155];1;Solid;False;4;Black;True</Border>
       <Brush>Transparent</Brush>
       <CollectionName>Red</CollectionName>
       <Conditions isList="true" count="1">
-        <Item181 Ref="184" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
+        <Item190 Ref="193" type="Stimulsoft.Report.StiStyleCondition" isKey="true">
           <ComponentName>Text04</ComponentName>
           <Type>ComponentName</Type>
-        </Item181>
+        </Item190>
       </Conditions>
       <Font>Microsoft Sans Serif,9.75,Regular,Point,False,0</Font>
       <Name>Red Notes</Name>
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[60:63:70]</TextBrush>
     </Red_x0020_Notes>
-    <BlackSample Ref="185" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <BlackSample Ref="194" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Brush>[43:43:43]</Brush>
       <Conditions isList="true" count="0" />
       <Description>Black</Description>
@@ -2076,7 +2246,7 @@ namespace Reports
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>Black</TextBrush>
     </BlackSample>
-    <LimeSample Ref="186" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <LimeSample Ref="195" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Brush>[145:200:83]</Brush>
       <Conditions isList="true" count="0" />
       <Description>Lime</Description>
@@ -2085,7 +2255,7 @@ namespace Reports
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>Black</TextBrush>
     </LimeSample>
-    <AquaSample Ref="187" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <AquaSample Ref="196" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Brush>[123:215:238]</Brush>
       <Conditions isList="true" count="0" />
       <Description>Aqua</Description>
@@ -2094,7 +2264,7 @@ namespace Reports
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>Black</TextBrush>
     </AquaSample>
-    <PeachPuffSample Ref="188" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <PeachPuffSample Ref="197" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Brush>[241:145:94]</Brush>
       <Conditions isList="true" count="0" />
       <Description>Peach Puff</Description>
@@ -2103,7 +2273,7 @@ namespace Reports
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>Black</TextBrush>
     </PeachPuffSample>
-    <RedSample Ref="189" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <RedSample Ref="198" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Brush>[232:76:61]</Brush>
       <Conditions isList="true" count="0" />
       <Description>Red</Description>

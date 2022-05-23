@@ -1,6 +1,7 @@
 ﻿#region
 
 using GrpcService1.App.Excel;
+using GrpcService1.App.Pdf;
 using GrpcService1.Domain.Errors;
 
 #endregion
@@ -13,6 +14,7 @@ public class Core
     private readonly InternalError InternalError;
     private readonly OperationSuccessful OperationSuccessful;
     private IExcel Excel;
+    private IPdf Pdf;
 
     public string ApprovedTaskCode;
     public string RejectedTaskCode;
@@ -29,6 +31,7 @@ public class Core
         Excel = dependencies.Excel;
 
         Database = dependencies.Database;
+        Pdf = dependencies.Pdf;
     }
 
     public bool CheckTaskOwnership(int taskId, int userId)
@@ -190,6 +193,28 @@ public class Core
         }
     }
 
+    public IPdfBase.IPdfFile GeneratePdf(DateTime fromDate, DateTime toDate, int userId)
+    {
+        // try
+        // {
+            var presentations = Database.GetUserTasks(fromDate, toDate, userId);
+            var user = Database.GetUser(userId);
+            presentations[0].Description = "این یک پیام تست فارسی است";
+            return Pdf.NewPdfFile(presentations, new IPdf.ReportInfo()
+            {
+                FromDate = fromDate.ToString(),
+                GeneratedAt = DateTime.Now.ToString(),
+                ToDate = toDate.ToString(),
+                Lastname = user.LastName,
+                Name = user.Name,
+            });
+        // }
+        // catch (Exception)
+        // {
+            // throw InternalError;
+        // }
+    }
+
     public class TasksCoreConfigs
     {
         public string ApprovedTaskCode;
@@ -203,5 +228,6 @@ public class Core
     {
         public IDatabase Database;
         public IExcel Excel;
+        public IPdf Pdf;
     }
 }

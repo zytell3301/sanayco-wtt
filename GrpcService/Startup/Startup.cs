@@ -185,6 +185,7 @@ public class Startup
             {
                 Database = Dependencies.DBDependencies.TasksDB,
                 Excel = new Excel(),
+                Pdf = new App.Pdf.Tasks.Pdf(),
             }, new Core.TasksCoreConfigs
             {
                 OperationSuccessfulMessage = "OperationSuccessfulMessage",

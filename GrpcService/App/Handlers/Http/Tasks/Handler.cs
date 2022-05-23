@@ -424,6 +424,31 @@ public class Handler : BaseHandler
         }
     }
 
+    [HttpGet("get-pdf-report/{fromDate}/{toDate}")]
+    public IActionResult GetPdfFile(int fromDate, int toDate)
+    {
+        try
+        {
+            // Authenticate();
+        }
+        catch (Exception)
+        {
+            return StatusCode(401, ResponseToJson(AuthenticationFailedResponse()));
+        }
+
+        // try
+        // {
+            var pdf = Core.GeneratePdf(DateTime.UnixEpoch.AddSeconds(fromDate),
+                DateTime.UnixEpoch.AddSeconds(toDate),
+                1);
+            return File(pdf.GetPdfBytes(), "application/pdf");
+        // }
+        // catch (Exception)
+        // {
+            // return StatusCode(500, ResponseToJson(InternalErrorResponse()));
+        // }
+    }
+    
     private class GetTaskRangeResponse : Response
     {
         public List<Domain.Entities.Task> tasks { get; set; }

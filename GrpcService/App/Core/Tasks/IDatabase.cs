@@ -16,4 +16,6 @@ public interface IDatabase
         string workLocation);
 
     public List<Domain.Entities.Task> GetUserTasks(DateTime fromDate, DateTime toDate, int userId);
+    
+    public Domain.Entities.User GetUser(int userId);
 }

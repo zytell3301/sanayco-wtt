@@ -153,21 +153,43 @@ public class Tasks : IDatabase
 
     public List<Domain.Entities.Task> GetUserTasks(DateTime fromDate, DateTime toDate, int userId)
     {
-        try
-        {
+        // try
+        // {
             var tasks = new List<Domain.Entities.Task>();
             foreach (var task in Connection.Tasks.Where(t => t.CreatedAt > fromDate).Where(t => t.CreatedAt < toDate)
                          .Where(t => t.UserId == userId).ToList())
                 tasks.Add(ConvertModelToTask(task));
 
             return tasks;
+        // }
+        // catch (Exception e)
+        // {
+            // throw InternalError;
+        // }    
+    }
+    public Domain.Entities.User GetUser(int userId)
+    {
+        try
+        {
+            var model = Connection.Users.First(u => u.Id == userId);
+            return new Domain.Entities.User()
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Password = model.Password,
+                Username = model.Username,
+                CompanyLevel = model.CompanyLevel,
+                CreatedAt = model.CreatedAt,
+                LastName = model.Lastname,
+                SkillLevel = model.SkillLevel,
+            };
         }
         catch (Exception e)
         {
+            ErrorReporter.ReportException(e);
             throw InternalError;
         }
     }
-
     private void UpdateTask(Model.Task task)
     {
         Connection.Tasks.Update(task);
